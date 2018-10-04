@@ -1,0 +1,12 @@
+{
+	"segments": [
+		"username",
+		"hostname",
+		"ssh",
+		"cwd",
+		"root"
+  	],
+	"cwd" : {
+		"max_depth":1
+   	}
+}

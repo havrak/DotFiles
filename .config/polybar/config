@@ -1,0 +1,236 @@
+[bar/default]
+width = 100%
+height = 19
+radius = 0
+fixed-center = true
+
+background = #282a2e
+foreground = #c6c8c5
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = misc fixed:pixelsize=10;1
+
+modules-left = i3 
+modules-center = date
+modules-right = cpu temperature volume screen xkeyboard battery wlan eth powermenu
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode-padding = 1
+label-mode-foreground = #c5c8c6
+label-mode-background = #282a2e
+
+label-focused = %index%
+label-focused-background = #c5c8c6
+label-focused-foreground = #282a2e
+label-focused-padding = 1
+
+label-unfocused = %index%
+label-unfocused-background = #282a2e
+label-unfocused-foreground = #c5c8c6
+label-unfocused-padding = 1
+
+label-visible = %index%
+label-visible-background = #282a2e
+label-visible-foreground = #c5c8c6
+label-visible-padding = 1
+ 
+label-urgent = %index% 
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+label-urgent-background = #BA2922
+label-urgent-padding = 1
+
+[module/wlan]
+type = internal/network
+interface = wlo1
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-background = #282a2e
+format-connected-foreground = #c5c8c6
+format-connected-padding = 1
+;label-connected = Wi-Fi: %essid% UP: %upspeed% DW: %downspeed%
+label-connected = Wi-Fi: %essid%
+
+format-disconnected =
+
+[module/eth]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+
+format-connected-background = #282a2e
+format-connected-foreground = #c5c8c6
+format-connected-padding = 1
+label-connected = ETH UP: %upspeed% DW: %downspeed%
+
+format-disconnected =
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %d.%m."
+
+time = %H:%M
+
+format-foreground = #c5c8c6
+format-background = #282a2e
+format-padding = 0
+
+label =  %time% %date%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+label-layout = KEY: %layout%
+format-foreground = #c5c8c6
+format-background = #282a2e
+format-padding = 1
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format-foreground = #c5c8c6
+format-background = #282a2e
+label = CPU: %percentage%%
+format-padding = 1
+
+[module/memory]
+type = internal/memory
+interval = 1
+format-foreground = #c5c8c6
+format-background = #282a2e
+label = MEM: %percentage_used%%
+format-padding = 1
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <label>
+format-foreground = #c5c8c6
+format-background = #282a2e
+format-padding = 1
+
+format-warn = <label-warn>
+format-warn-foreground = #e57373
+format-warn-background = #282a2e
+format-warn-padding = 1
+
+label = TEMP: %temperature-c%
+label-warn = TEMP: %temperature-c%
+
+[module/volume]
+type = internal/alsa
+format-volume = <label-volume>
+format-volume-foreground = #c5c8c6
+format-volume-background = #282a2e
+format-volume-padding = 1
+label-volume = VOL: %percentage%%
+format-muted = <label-muted>
+format-muted-foreground = #c5c8c6
+format-muted-background = #282a2e
+format-muted-padding = 1
+label-muted = VOL: 00%
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 99
+
+format-charging = <label-charging> 
+format-charging-foreground = #81C784
+format-charging-background = #282a2e
+format-charging-padding = 1
+
+format-full = BAT: 100%
+format-full-foreground = #c5c8c6
+format-full-background = #282a2e
+format-full-padding = 1
+
+format-discharging = <label-discharging>
+format-discharging-foreground = #c5c8c6
+format-discharging-background = #282a2e
+format-discharging-padding = 1
+
+label-charging = BAT: %percentage%%
+label-discharging = BAT: %percentage%%
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 0
+
+label-open = O
+label-open-foreground = #c5c8c6
+label-open-background = #282a2e
+label-open-padding = 1
+label-close = <-|
+label-close-foreground = #c5c8c6
+label-close-background = #282a2e
+label-separator = " "
+label-separator-foreground = #c5c8c6
+label-separator-background = #282a2e
+
+menu-0-0 = Reboot
+menu-0-0-exec = menu-open-1
+menu-0-0-background = #282a2e
+menu-0-1 = Shutdown
+menu-0-1-exec = menu-open-2
+menu-0-1-background = #282a2e
+menu-0-2 = Log off
+menu-0-2-exec = menu-open-3
+menu-0-2-background = #282a2e
+
+menu-1-0 = Click to reboot
+menu-1-0-exec = reboot
+menu-1-0-background = #282a2e
+
+menu-2-0 = Click to shutdown
+menu-2-0-exec = poweroff
+menu-2-0-background = #282a2e
+
+menu-3-0 = Click to log off
+menu-3-0-exec = pkill -KILL -u $USER
+menu-3-0-background = #282a2e
+
+[module/screen]
+type = custom/script
+interval = 0.2
+exec = ~/.config/polybar/backlight.sh
+
+scroll-up = exec light -A 5
+scroll-down = exec light -U 5
+
+label = BRTH: %output%%
+label-foreground = #c5c8c6
+label-background = #282a2e
+label-padding = 1
+
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
