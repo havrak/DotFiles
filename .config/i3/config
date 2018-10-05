@@ -193,16 +193,6 @@ bindsym $sup+l exec libreoffice
 bindsym Print exec scrot
 bindsym Shift+Print exec scrot -u
 
-# Terminal running Python
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 800 300
-for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 2
-exec --no-startup-id termite --name=math -e python
-
-bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
-
-
 # Terminal runnig python
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
