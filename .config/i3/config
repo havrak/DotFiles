@@ -210,8 +210,10 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
 exec --no-startup-id termite --name=math -e python
 
+bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
+
 # General purpose terminal
-bindsym $mod+a [instance="gpt"] scratchpad show; [instance="math"] move position centerr_window [instance="math"] floating enable
+for_window [instance="gpt"] floating enable
 for_window [instance="gpt"] resize set 800 500
 for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 1
