@@ -1,15 +1,16 @@
-﻿
-set $sup Mod4
-set $mod Mod1
+﻿# vim:filetype=i3
+# Mod1 = alt; Mod4=super
+
 
 new_window pixel 1
 new_float normal
 
-hide_edge_borders none
+hide_edge_borders smart
+
+set $sup Mod4
+set $mod Mod1
 
 font xft:misc fixed:pixelsize=10;1
-
-floating_modifier $mod
 
 # Open terminal
 bindsym $mod+Ctrl+t exec termite
@@ -17,8 +18,11 @@ bindsym $mod+Ctrl+t exec termite
 # Window kill command
 bindsym $mod+Shift+q kill
 
-# Start program launcher
+# Start command launcher
 bindsym $mod+d exec --no-startup-id rofi -show run
+
+# Start application launcher
+bindsym $mod+g exec --no-startup-id rofi -show drun
 
 # Change focus
 bindsym $mod+Left focus left
@@ -59,6 +63,7 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
+set $ws10 10
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -70,19 +75,9 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
-# Move focused container to workspace
-bindsym $mod+Ctrl+1 move container to workspace $ws1
-bindsym $mod+Ctrl+2 move container to workspace $ws2
-bindsym $mod+Ctrl+3 move container to workspace $ws3
-bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace $ws5
-bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace $ws7
-bindsym $mod+Ctrl+8 move container to workspace $ws8
-bindsym $mod+Ctrl+9 move container to workspace $ws9
-
-# Move to workspace with focused container
+# Move program to specific workspace
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -92,31 +87,21 @@ bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open specific applications in specific workspace
 assign [class="Firefox"] $ws1
-assign [class="Pragha"] $ws9
+assign [class="Pragha"] $ws10
 
 # Open specific applications in floating mode
-for_window [title="Alsamixer"] floating enable border normal
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
 for_window [class="Gnome-calculator"] floating enable border normal
 for_window [class="Nitrogen"] floating enable enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
-for_window [class="qt5ct"] floating enable enable border normal
-for_window [class="Qtconfig-qt4"] floating enable enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable border normal
 
-# Switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# Restart i3
 bindsym $mod+Shift+r restart
 
 # Lock i3, suspends+locks i3
@@ -124,34 +109,24 @@ bindsym $mod+Shift+x exec ./.config/i3/i3exit.sh lock
 bindsym $mod+Shift+s exec ./.config/i3/i3exit.sh suspend
 
 # Resize window
-bindsym $mod+r mode "resize"
-mode "resize" {
-        bindsym Left resize shrink width 3 px or 3 ppt
-        bindsym Down resize grow height 3 px or 3 ppt
-        bindsym Up resize shrink height 3 px or 3 ppt
-        bindsym Right resize grow width 3 px or 3 ppt
+bindsym $sup+Left resize shrink width 3px or 3ppt
+bindsym $sup+Down resize grow height 3px or 3ppt
+bindsym $sup+Up resize shrink height 3px or 3ppt
+bindsym $sup+Right resize grow width 3px or 3ppt
 
-        bindsym Escape mode "default"
-}
-
-# Autostart applications 
+# Commands to run on i3 start
 exec --no-startup-id nitrogen --restore; sleep 1; 
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+exec --no-startup-id setxkbmap -option caps:escape
 
 # Enable tap to click   
 # Run $ xinput list and $ xinput list-props <device id> to get info
 exec xinput set-prop 11 303 1
 
-#swap caps and space
-setxkbmap -option caps:escape
-
-# Start application on specific workspace during boot
+# Start application on specific workspace on i3 start
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 10; exec /usr/bin/pragha'
 
@@ -164,24 +139,19 @@ client.placeholder              #707880         #1d1f21         #707880         
 client.background               #1d1f21
 
 # Gaps
-gaps inner 8
+gaps inner 10
 gaps outer 0
 
 smart_gaps on
 
-# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+# Press $mod+Shift+g to enter change gap size, mod+t to set gaps to 0, mod+y to set gaps to 10
+set $mode_gaps change with -, +, 0
+
+bindsym $mod+t gaps inner current set 0; gaps outer current set 0
+bindsym $mod+y gaps inner current set 10; gaps outer current set 0
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_inner" {
         bindsym plus  gaps inner current plus 5
         bindsym minus gaps inner current minus 5
         bindsym 0     gaps inner current set 0
@@ -190,19 +160,6 @@ mode "$mode_gaps_inner" {
         bindsym Shift+minus gaps inner all minus 5
         bindsym Shift+0     gaps inner all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
@@ -221,6 +178,9 @@ bindsym XF86HomePage exec gnome-calculator
 # Change keyboard layout
 exec_always "setxkbmap -option 'grp:sclk_toggle' -layout us,cz -variant ,qwerty" 
 
+# Mute audio and make "fake" workspace
+bindsym $mod+Shift+Delete exec pactl set-sink-mute 0 1 ; workspace 0; exec termite -e "vim Documents/commands" ; exec termite -e ranger
+
 # Launch programs with super key
 bindsym $sup+t exec thunar
 bindsym $sup+f exec firefox
@@ -228,3 +188,33 @@ bindsym $sup+p exec pragha
 bindsym $sup+g exec geany
 bindsym $sup+s exec subl3
 bindsym $sup+l exec libreoffice
+
+# Take screenshot of desktop/focused window
+bindsym Print exec scrot
+bindsym Shift+Print exec scrot -u
+
+# Terminal running Python
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 2
+exec --no-startup-id termite --name=math -e python
+
+bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
+
+
+# Terminal runnig python
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 1
+exec --no-startup-id termite --name=math -e python
+
+# General purpose terminal
+bindsym $mod+a [instance="gpt"] scratchpad show; [instance="math"] move position centerr_window [instance="math"] floating enable
+for_window [instance="gpt"] resize set 800 500
+for_window [instance="gpt"] move scratchpad
+for_window [instance="gpt"] border pixel 1
+exec --no-startup-id termite --name=gpt
+
+bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
