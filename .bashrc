@@ -17,12 +17,12 @@ EDITOR=/usr/bin/vim
 #aliases
 alias p="sudo pacman"
 alias v="vim"
-alias orphans="pacman -Qdt"
-alias sdn="sudo shutdown now"
+alias orphans="pacman -Qqtd"
 alias sr="sudo ranger"
 alias r="ranger"
 alias hd="cd ~"
 alias c="clear"
+alias sv="sudo vim"
 
 function _update_ps1() {
     PS1=$(powerline-shell $?)
