@@ -1,7 +1,7 @@
 [options]
 #allow_bold = true
 #audible_bell = false
-#clickable_url = true
+clickable_url = true
 #dynamic_title = true
 font = Monospace 10
 #fullscreen = true
@@ -24,7 +24,7 @@ hyperlinks = true
 #cursor_blink = system
 
 # "block", "underline" or "ibeam"
-cursor_shape = ibeam
+cursor_shape = block
 
 # Hide links that are no longer valid in url select overlay mode
 #filter_unmatched_urls = true
@@ -44,7 +44,7 @@ cursor_shape = ibeam
 # special
 foreground      = #f8f8f2
 foreground_bold = #f8f8f2
-cursor          = #f8f8f2
+cursor          = #90A4AE
 background      = #121212
 
 # black
@@ -78,18 +78,5 @@ color14 = #64B5F6
 # white
 color7  = #bfbfbf
 color15 = #e6e6e6
-
-
-
-[hints]
-#font = Monospace 12
-#foreground = #dcdccc
-#background = #3f3f3f
-#active_foreground = #e68080
-#active_backaround = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0
 
 # vim: ft=dosini cms=#%s
