@@ -11,6 +11,8 @@ In this repository are my personal dotfiles used un my HP Elitebook 8740p, but a
 + bash
 + rofi
 
-# Programs needed for full functionality
+# "Dependencies"
 + light
 + i3lock
++ font misc
++ font siji
