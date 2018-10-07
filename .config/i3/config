@@ -37,8 +37,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Split orientation
-bindsym $mod+h split v;exec notify-send 'tile horizontally'
-bindsym $mod+v split h;exec notify-send 'tile vertically'
+# ;exec notify-send 'tile horizontally'
+bindsym $mod+h split v
+bindsym $mod+v split h
+
 
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -185,7 +187,6 @@ bindsym $mod+Shift+Delete exec pactl set-sink-mute 0 1 ; workspace 0; exec termi
 bindsym $sup+t exec thunar
 bindsym $sup+f exec firefox
 bindsym $sup+p exec pragha
-bindsym $sup+g exec geany
 bindsym $sup+s exec subl3
 bindsym $sup+l exec libreoffice
 
@@ -200,6 +201,7 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
 exec --no-startup-id termite --name=math -e python
 
+bindsym $sup+F10 [instance="math"] kill ; exec termite --name=math -e python
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 
 # General purpose terminal
@@ -209,4 +211,7 @@ for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 1
 exec --no-startup-id termite --name=gpt
 
+bindsym $sup+F12 [instance="gpt"] kill ; exec termite --name=gpt
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
+
+
