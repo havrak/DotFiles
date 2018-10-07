@@ -24,6 +24,7 @@ alias hd="cd ~"
 alias c="clear"
 alias sv="sudo vim"
 alias pushconfig="git push git@github.com:havrak/DotFiles.git"
+alias music="ncmpcpp"
 
 function _update_ps1() {
     PS1=$(powerline-shell $?)

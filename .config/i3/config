@@ -130,7 +130,7 @@ exec xinput set-prop 11 303 1
 
 # Start application on specific workspace on i3 start
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
-exec --no-startup-id i3-msg 'workspace 10; exec /usr/bin/pragha'
+exec --no-startup-id i3-msg 'workspace 10; exec termite -e ncmpcpp'
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
@@ -169,6 +169,11 @@ mode "$mode_gaps" {
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0  -3%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0  +3%
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+
+bindsym $sup+n exec mpc next
+bindsym $sup+b exec mpc prev
+bindsym $sup+q exec mpc toggle
+bindsym $sup+w exec termite -e "ncmpcpp -s visualizer"
 
 # Brightness control
 bindsym XF86MonBrightnessUp exec light -A 2
