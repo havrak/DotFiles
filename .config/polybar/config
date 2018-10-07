@@ -1,6 +1,8 @@
+; vim:ft=dosini
+
 [bar/default]
 width = 100%
-height = 19
+height = 16
 radius = 0
 fixed-center = true
 
@@ -13,14 +15,16 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = misc fixed:pixelsize=10;1
+font-0 = misc fixed:pixelsize=9;1
+font-1 = Wuncon Siji:pixelsize=9;1
 
-modules-left = powermenu i3
+modules-left = powermenu i3 mpd
 modules-center = date
 modules-right = memory cpu temperature volume screen xkeyboard battery wlan eth
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+monitor = ${env:MONITOR:LVDS}
 
 [module/i3]
 type = internal/i3
@@ -64,8 +68,8 @@ format-connected = <label-connected>
 format-connected-background = #282a2e
 format-connected-foreground = #c5c8c6
 format-connected-padding = 1
-;label-connected = Wi-Fi: %essid% UP: %upspeed% DW: %downspeed%
-label-connected = Wi-Fi: %essid%
+label-connected =  %essid% %downspeed% %upspeed%
+
 
 format-disconnected =
 
@@ -77,7 +81,7 @@ interval = 3.0
 format-connected-background = #282a2e
 format-connected-foreground = #c5c8c6
 format-connected-padding = 1
-label-connected = ETH UP: %upspeed% DW: %downspeed%
+label-connected = %local_ip% %downspeed% %upspeed%
 
 format-disconnected =
 
@@ -85,9 +89,9 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date = " %d.%m."
+date = "%d.%m."
 
-time = %H:%M
+time = %H:%M
 
 format-foreground = #c5c8c6
 format-background = #282a2e
@@ -98,7 +102,7 @@ label =  %time% %date%
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
-label-layout = KEY: %layout%
+label-layout =  %layout%
 format-foreground = #c5c8c6
 format-background = #282a2e
 format-padding = 1
@@ -108,7 +112,8 @@ type = internal/cpu
 interval = 1
 format-foreground = #c5c8c6
 format-background = #282a2e
-label = CPU: %percentage%%
+format-prefix=""
+label = %percentage%%
 format-padding = 1
 
 [module/memory]
@@ -116,7 +121,8 @@ type = internal/memory
 interval = 1
 format-foreground = #c5c8c6
 format-background = #282a2e
-label = MEM: %percentage_used%%
+format-prefix = ""
+label = %percentage_used%%
 format-padding = 1
 
 [module/temperature]
@@ -128,14 +134,15 @@ format = <label>
 format-foreground = #c5c8c6
 format-background = #282a2e
 format-padding = 1
+format-prefix = ""
 
 format-warn = <label-warn>
 format-warn-foreground = #e57373
 format-warn-background = #282a2e
 format-warn-padding = 1
-
-label = TEMP: %temperature-c%
-label-warn = TEMP: %temperature-c%
+format-warm-prefix = ""
+label = %temperature-c%
+label-warn = %temperature-c%
 
 [module/volume]
 type = internal/alsa
@@ -143,12 +150,15 @@ format-volume = <label-volume>
 format-volume-foreground = #c5c8c6
 format-volume-background = #282a2e
 format-volume-padding = 1
-label-volume = VOL: %percentage%%
+format-volume-prefix = ""
+label-volume = %percentage%%
+
 format-muted = <label-muted>
 format-muted-foreground = #c5c8c6
 format-muted-background = #282a2e
 format-muted-padding = 1
-label-muted = VOL: 00%
+format-muted-prefix = ""
+label-muted = 00%
 
 [module/battery]
 type = internal/battery
@@ -156,23 +166,45 @@ battery = BAT0
 adapter = AC0
 full-at = 99
 
+format-charging-prefix = " "
 format-charging = <label-charging> 
 format-charging-foreground = #81C784
 format-charging-background = #282a2e
 format-charging-padding = 1
 
-format-full = BAT: 100%
+format-full-prefix = " "
+format-full = 100%
 format-full-foreground = #c5c8c6
 format-full-background = #282a2e
 format-full-padding = 1
 
+format-discharging-prefix = " "
 format-discharging = <label-discharging>
 format-discharging-foreground = #c5c8c6
 format-discharging-background = #282a2e
 format-discharging-padding = 1
 
-label-charging = BAT: %percentage%%
-label-discharging = BAT: %percentage%%
+label-charging = %percentage%%
+label-discharging = %percentage%%
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song> <label-time>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+;bar-progress-width = 45
+;bar-progress-indicator = |
+;bar-progress-fill = -
+;bar-progress-empty = -
+
+label-song =  %artist% - %title%
+label-song-maxlen = 70
+label-song-ellipsis = true
 
 [module/powermenu]
 type = custom/menu
@@ -181,11 +213,11 @@ expand-right = true
 
 format-spacing = 0
 
-label-open = RSL
+label-open = 
 label-open-foreground = #c5c8c6
 label-open-background = #282a2e
 label-open-padding = 1
-label-close = " <-"
+label-close = " "
 label-close-foreground = #c5c8c6
 label-close-background = #282a2e
 label-separator = " : "
@@ -222,7 +254,7 @@ exec = ~/.config/polybar/backlight.sh
 scroll-up = exec light -A 5
 scroll-down = exec light -U 5
 
-label = BRTH: %output%%
+label = %output%%
 label-foreground = #c5c8c6
 label-background = #282a2e
 label-padding = 1
