@@ -103,9 +103,6 @@ for_window [class="Nitrogen"] floating enable enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 
-# Restart i3
-bindsym $mod+Shift+r restart
-
 # Lock i3, suspends+locks i3
 bindsym $mod+Shift+x exec ./.config/i3/i3exit.sh lock
 bindsym $mod+Shift+s exec ./.config/i3/i3exit.sh suspend
@@ -117,7 +114,7 @@ bindsym $sup+Up resize shrink height 3px or 3ppt
 bindsym $sup+Right resize grow width 3px or 3ppt
 
 # Commands to run on i3 start
-exec --no-startup-id nitrogen --restore; sleep 1; 
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b 
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -174,13 +171,17 @@ bindsym $sup+n exec mpc next
 bindsym $sup+b exec mpc prev
 bindsym $sup+q exec mpc toggle
 bindsym $sup+w exec termite -e "ncmpcpp -s visualizer"
+bindsym $sup+minus exec mpc volume -5
+bindsym $sup+plus exec mpc volume +5
 
 # Brightness control
 bindsym XF86MonBrightnessUp exec light -A 2
 bindsym XF86MonBrightnessDown exec light -U 2
 
-# Open calculator via "internet" key
-bindsym XF86HomePage exec gnome-calculator
+# Other
+bindsym XF86HomePage restart
+bindsym XF86Sleep exec $HOME/Scripts/Battery.sh
+bindsym XF86Display exec $HOME/Scripts/Battery.sh
 
 # Change keyboard layout
 exec_always "setxkbmap -option 'grp:sclk_toggle' -layout us,cz -variant ,qwerty" 
@@ -199,19 +200,19 @@ bindsym $sup+l exec libreoffice
 bindsym Print exec scrot
 bindsym Shift+Print exec scrot -u
 
-# Terminal runnig python
+# Terminal runnig mathomatic
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
-exec --no-startup-id termite --name=math -e python
+exec --no-startup-id termite --name=math -e mathomatic
 
-bindsym $sup+F10 [instance="math"] kill ; exec termite --name=math -e python
+bindsym $sup+F10 [instance="math"] kill ; exec termite --name=math -e mathomatic
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 
 # General purpose terminal
 for_window [instance="gpt"] floating enable
-for_window [instance="gpt"] resize set 800 500
+for_window [instance="gpt"] resize set 750 600
 for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 1
 exec --no-startup-id termite --name=gpt

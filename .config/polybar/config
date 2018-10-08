@@ -2,7 +2,7 @@
 
 [bar/default]
 width = 100%
-height = 16
+height = 18
 radius = 0
 fixed-center = true
 
@@ -15,12 +15,12 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = misc fixed:pixelsize=9;1
-font-1 = Wuncon Siji:pixelsize=9;1
+font-0 = misc fixed:pixelsize=10;1
+font-1 = Wuncon Siji:pixelsize=10;1
 
-modules-left = powermenu i3 mpd
-modules-center = date
-modules-right = memory cpu temperature volume screen xkeyboard battery wlan eth
+modules-left = i3 mpd
+modules-center = 
+modules-right = memory cpu temperature volume screen xkeyboard battery wlan eth date powermenu
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -36,22 +36,22 @@ label-mode-padding = 1
 label-mode-foreground = #c5c8c6
 label-mode-background = #282a2e
 
-label-focused = %index%
+label-focused = %name%
 label-focused-background = #c5c8c6
 label-focused-foreground = #282a2e
 label-focused-padding = 1
 
-label-unfocused = %index%
+label-unfocused = %name%
 label-unfocused-background = #282a2e
 label-unfocused-foreground = #c5c8c6
 label-unfocused-padding = 1
 
-label-visible = %index%
+label-visible = %name%
 label-visible-background = #282a2e
 label-visible-foreground = #c5c8c6
 label-visible-padding = 1
  
-label-urgent = %index% 
+label-urgent = %name% 
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -69,7 +69,6 @@ format-connected-background = #282a2e
 format-connected-foreground = #c5c8c6
 format-connected-padding = 1
 label-connected =  %essid% %downspeed% %upspeed%
-
 
 format-disconnected =
 
@@ -89,9 +88,9 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date = "%d.%m."
+date = " %d.%m."
 
-time = %H:%M
+time =  %H:%M
 
 format-foreground = #c5c8c6
 format-background = #282a2e
@@ -112,7 +111,7 @@ type = internal/cpu
 interval = 1
 format-foreground = #c5c8c6
 format-background = #282a2e
-format-prefix=""
+format-prefix=" "
 label = %percentage%%
 format-padding = 1
 
@@ -121,7 +120,7 @@ type = internal/memory
 interval = 1
 format-foreground = #c5c8c6
 format-background = #282a2e
-format-prefix = ""
+format-prefix = " "
 label = %percentage_used%%
 format-padding = 1
 
@@ -134,13 +133,13 @@ format = <label>
 format-foreground = #c5c8c6
 format-background = #282a2e
 format-padding = 1
-format-prefix = ""
+format-prefix = " "
 
 format-warn = <label-warn>
 format-warn-foreground = #e57373
 format-warn-background = #282a2e
 format-warn-padding = 1
-format-warm-prefix = ""
+format-warn-prefix = " "
 label = %temperature-c%
 label-warn = %temperature-c%
 
@@ -150,14 +149,14 @@ format-volume = <label-volume>
 format-volume-foreground = #c5c8c6
 format-volume-background = #282a2e
 format-volume-padding = 1
-format-volume-prefix = ""
+format-volume-prefix = " "
 label-volume = %percentage%%
 
 format-muted = <label-muted>
 format-muted-foreground = #c5c8c6
 format-muted-background = #282a2e
 format-muted-padding = 1
-format-muted-prefix = ""
+format-muted-prefix = " "
 label-muted = 00%
 
 [module/battery]
@@ -189,7 +188,7 @@ label-discharging = %percentage%%
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song> <label-time> <icon-pause> <icon-play>
+format-online = <label-song> <label-time> <icon-prev> <icon-pause> <icon-play> <icon-next>
 format-online-padding = 1
 
 icon-prev = 
@@ -212,32 +211,32 @@ label-open = 
 label-open-foreground = #c5c8c6
 label-open-background = #282a2e
 label-open-padding = 1
-label-close = " "
+label-close = " "   
 label-close-foreground = #c5c8c6
 label-close-background = #282a2e
-label-separator = " : "
+label-separator = "|"
 label-separator-foreground = #c5c8c6
 label-separator-background = #282a2e
 
-menu-0-0 = Reboot
+menu-0-0 = 
 menu-0-0-exec = menu-open-1
 menu-0-0-background = #282a2e
-menu-0-1 = Shutdown
+menu-0-1 = 
 menu-0-1-exec = menu-open-2
 menu-0-1-background = #282a2e
-menu-0-2 = Log off
+menu-0-2 = " "
 menu-0-2-exec = menu-open-3
 menu-0-2-background = #282a2e
 
-menu-1-0 = Click to reboot
+menu-1-0 = " "
 menu-1-0-exec = reboot
 menu-1-0-background = #282a2e
 
-menu-2-0 = Click to shutdown
+menu-2-0 = "  "
 menu-2-0-exec = poweroff
 menu-2-0-background = #282a2e
 
-menu-3-0 = Click to log off
+menu-3-0 = " "
 menu-3-0-exec = pkill -KILL -u $USER
 menu-3-0-background = #282a2e
 
@@ -249,11 +248,10 @@ exec = ~/.config/polybar/backlight.sh
 scroll-up = exec light -A 5
 scroll-down = exec light -U 5
 
-label = %output%%
+label =  %output%%
 label-foreground = #c5c8c6
 label-background = #282a2e
 label-padding = 1
-
 
 [settings]
 screenchange-reload = true
