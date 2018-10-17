@@ -97,6 +97,8 @@ for_window [class="Gnome-calculator"] floating enable border normal
 for_window [class="Nitrogen"] floating enable enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="GraphDrawing.jar"] floating enable border normal
+for_window [class="jetbrains-toolbox"] floating enable border normal
 
 # Lock i3, suspends+locks i3, logoff, shutdown, reboot 
 bindsym $mod+Shift+x exec ./.config/i3/i3exit.sh lock
@@ -107,13 +109,13 @@ bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'You pressed the reboot shor
 bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown?' -b 'Yes, Shutdown' 'poweroff'"
 
 # Resize window
-bindsym $mod+s+Shift+Left resize shrink width 3px or 3ppt
-bindsym $mod+s+Shift+Down resize grow height 3px or 3ppt
-bindsym $mod+s+Shift+Up resize shrink height 3px or 3ppt
-bindsym $mod+s+Shift+Right resize grow width 3px or 3ppt
+bindsym $sup+Left resize shrink width 3px or 3ppt
+bindsym $sup+Down resize grow height 3px or 3ppt
+bindsym $sup+Up resize shrink height 3px or 3ppt
+bindsym $sup+Right resize grow width 3px or 3ppt
 
 # Commands to run on i3 start
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b ; mpd
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -123,8 +125,10 @@ exec --no-startup-id setxkbmap -option caps:escape
 # Enable tap to click   
 exec --no-startup-id xinput set-prop 11 303 1
 
-# Change keyboard layout
+# Keyboard layout
 exec_always --no-startup-id  "setxkbmap -option 'grp:sclk_toggle' -layout us,cz -variant ,qwerty" 
+
+exec_always --no-startup-id  "setxkbmap -option 'caps:escape" 
 
 # Start application on specific workspace on i3 start
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
@@ -183,10 +187,10 @@ bindsym XF86Display exec $HOME/.scripts/i3Battery.sh
 bindsym $mod+Pause exec $HOME/.scripts/i3ComptonRestart.sh
 
 # Lauch application
-bindsym $mod+Ctrl+t exec thunar
-bindsym $mod+Ctrl+f exec firefox
-bindsym $mod+Ctrl+s exec subl3
-bindsym $mod+Ctrl+l exec libreoffice
+bindsym $sup+t exec thunar
+bindsym $sup+f exec firefox
+bindsym $sup+s exec subl3
+bindsym $sup+l exec libreoffice
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot
