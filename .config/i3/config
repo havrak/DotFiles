@@ -101,8 +101,8 @@ for_window [class="GraphDrawing.jar"] floating enable border normal
 for_window [class="jetbrains-toolbox"] floating enable border normal
 
 # Lock i3, suspends+locks i3, logoff, shutdown, reboot 
-bindsym $mod+Shift+x exec ./.config/i3/i3exit.sh lock
-bindsym $mod+Shift+F3 exec ./.config/i3/i3exit.sh suspend
+bindsym $mod+Shift+F3 exec --no-startup-id $HOME/.scripts/i3suspend.sh
+bindsym $mod+Shift+x exec --no-startup-id $HOME/.scripts/i3lock.sh 1
 
 bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to logoff?' -b 'Yes, Logoff' 'i3-msg exit'"
 bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, Reboot' 'reboot'"
@@ -123,11 +123,11 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id setxkbmap -option caps:escape
 
 # Enable tap to click   
-exec --no-startup-id xinput set-prop 11 303 1
+exec --no-startup-id xinput set-prop 11 302 1
 
 # Keyboard layout
 exec_always --no-startup-id  "setxkbmap -option 'grp:sclk_toggle' -layout us,cz -variant ,qwerty" 
-
+exec_always --no-startup-id sleep 1
 exec_always --no-startup-id  "setxkbmap -option 'caps:escape" 
 
 # Start application on specific workspace on i3 start
