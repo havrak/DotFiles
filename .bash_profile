@@ -9,7 +9,7 @@
 
 export PATH="$PATH:$HOME/.scripts"
 export EDITOR="vim"
-export TERMINAL="st"
+export TERMINAL="termite"
 export BROWSER="linkhandler"
 export TRUEBROWSER="firefox"
 
