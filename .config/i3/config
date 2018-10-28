@@ -1,8 +1,8 @@
 ﻿# vim:filetype=i3
 # Mod1 = alt; Mod4=super
 
-new_window pixel 1
-new_float pixel 1
+new_window pixel 2  
+new_float pixel 2
 
 hide_edge_borders smart
 
@@ -126,9 +126,7 @@ exec --no-startup-id setxkbmap -option caps:escape
 exec --no-startup-id xinput set-prop 11 302 1
 
 # Keyboard layout
-exec_always --no-startup-id  "setxkbmap -option 'grp:sclk_toggle' -layout us,cz -variant ,qwerty" 
-exec_always --no-startup-id sleep 1
-exec_always --no-startup-id  "setxkbmap -option 'caps:escape" 
+exec_always --no-startup-id  $HOME/.scripts/keyboardLayout.sh  
 
 # Start application on specific workspace on i3 start
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
@@ -185,6 +183,7 @@ bindsym XF86MonBrightnessDown exec light -U 2
 bindsym XF86HomePage restart
 bindsym XF86Display exec $HOME/.scripts/i3Battery.sh
 bindsym $mod+Pause exec $HOME/.scripts/i3ComptonRestart.sh
+bindsym $mod+F10 exec $HOME/.scripts/toggleCompton.sh
 
 # Lauch application
 bindsym $sup+t exec thunar
@@ -203,7 +202,7 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 1
 exec --no-startup-id termite --name=math -e mathomatic
 
-bindsym $mod+F10 [instance="math"] kill ; exec termite --name=math -e mathomatic
+bindsym $mod+F11 [instance="math"] kill ; exec termite --name=math -e mathomatic
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 
 # General purpose terminal
