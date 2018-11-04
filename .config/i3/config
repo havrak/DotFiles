@@ -88,7 +88,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # Open specific applications in specific workspace
 assign [class="Firefox"] $ws1
-assign [class="Pragha"] $ws10
 
 # Open specific applications in floating mode
 for_window [class="Clipgrab"] floating enable border normal
@@ -146,11 +145,9 @@ gaps outer 0
 
 smart_gaps on
 
-# Press $mod+Shift+g to enter change gap size, mod+t to set gaps to 0, mod+y to set gaps to 10
 set $mode_gaps change with -, +, 0
 
-bindsym $mod+t gaps inner current set 0; gaps outer current set 0
-bindsym $mod+y gaps inner current set 10; gaps outer current set 0
+bindsym $mod+t exec --no-startup-id $HOME/.scripts/i3borders.sh
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
