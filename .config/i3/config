@@ -51,16 +51,28 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 # Workspaces
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
-set $ws10 10
+set $ws1 1:
+set $ws2 2:
+set $ws3 3:
+set $ws4 4:
+set $ws5 5:
+set $ws6 6:
+set $ws7 7:
+set $ws8 8:
+set $ws9 9:
+set $ws10 10:
+
+# Assig to monitors
+# workspace $ws1 output DP-1
+# workspace $ws2 output DP-1
+# workspace $ws3 output DP-1
+# workspace $ws4 output DP-1
+# workspace $ws5 output DP-1
+# workspace $ws6 output DP-1
+# workspace $ws7 output HDMI-1
+# workspace $ws8 output HDMI-1
+# workspace $ws9 output DVI-I-1
+# workspace $ws10 output DVI-I-1
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -120,6 +132,7 @@ exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id setxkbmap -option caps:escape
+# exec --no-startup-id ./.config/i3/screen.sh
 
 # Enable tap to click   
 exec --no-startup-id xinput set-prop 11 302 1
@@ -196,7 +209,7 @@ bindsym Shift+Print exec scrot -u
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 1
+for_window [instance="math"] border pixel 2
 exec --no-startup-id termite --name=math -e mathomatic
 
 bindsym $mod+F11 [instance="math"] kill ; exec termite --name=math -e mathomatic
@@ -206,7 +219,7 @@ bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move positio
 for_window [instance="gpt"] floating enable
 for_window [instance="gpt"] resize set 750 600
 for_window [instance="gpt"] move scratchpad
-for_window [instance="gpt"] border pixel 1
+for_window [instance="gpt"] border pixel 2
 exec --no-startup-id termite --name=gpt
 
 bindsym $mod+F12 [instance="gpt"] kill ; exec termite --name=gpt

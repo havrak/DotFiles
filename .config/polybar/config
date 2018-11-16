@@ -15,12 +15,12 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = misc fixed:pixelsize=10;1
-font-1 = Wuncon Siji:pixelsize=10;1
+font-0 = misc fixed:pixelsize=11;1
+font-1 = Wuncon Siji:pixelsize=11;1
 
 modules-left = i3 mpd
 modules-center = 
-modules-right = memory cpu temperature volume screen xkeyboard battery wlan eth date
+modules-right = filesystem memory cpu temperature volume screen xkeyboard battery wlan eth date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -86,11 +86,11 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 date = " %d.%m."
 
-time =  %H:%M
+time =  %H:%M:%S
 
 format-foreground = #c5c8c6
 format-background = #282a2e
@@ -152,12 +152,13 @@ format-volume-padding = 1
 format-volume-prefix = " "
 label-volume = %percentage%%
 
+
 format-muted = <label-muted>
 format-muted-foreground = #c5c8c6
 format-muted-background = #282a2e
 format-muted-padding = 1
 format-muted-prefix = " "
-label-muted = 00%
+label-muted = 0%
 
 [module/battery]
 type = internal/battery
@@ -165,7 +166,7 @@ battery = BAT0
 adapter = AC0
 full-at = 99
 
-format-charging-prefix = " "
+format-charging-prefix = " "
 format-charging = <label-charging> 
 format-charging-foreground = #81C784
 format-charging-background = #282a2e
@@ -189,57 +190,11 @@ label-discharging = %percentage%%
 [module/mpd]
 type = internal/mpd
 format-online = <label-song> <label-time> 
-;<icon-prev> <icon-pause> <icon-play> <icon-next>
 format-online-padding = 1
 
-icon-prev = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song =  %artist% - %title%
+label-song = %title%
 label-song-maxlen = 70
 label-song-ellipsis = true
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 0
-
-label-open = 
-label-open-foreground = #c5c8c6
-label-open-background = #282a2e
-label-open-padding = 1
-label-close = " "   
-label-close-foreground = #c5c8c6
-label-close-background = #282a2e
-label-separator = "|"
-label-separator-foreground = #c5c8c6
-label-separator-background = #282a2e
-
-menu-0-0 = 
-menu-0-0-exec = menu-open-1
-menu-0-0-background = #282a2e
-menu-0-1 = 
-menu-0-1-exec = menu-open-2
-menu-0-1-background = #282a2e
-menu-0-2 = ""
-menu-0-2-exec = menu-open-3
-menu-0-2-background = #282a2e
-
-menu-1-0 = " "
-menu-1-0-exec = reboot
-menu-1-0-background = #282a2e
-
-menu-2-0 = "  "
-menu-2-0-exec = poweroff
-menu-2-0-background = #282a2e
-
-menu-3-0 = ""
-menu-3-0-exec = pkill -KILL -u $USER
-menu-3-0-background = #282a2e
 
 [module/screen]
 type = custom/script
@@ -253,6 +208,18 @@ label =  %output%%
 label-foreground = #c5c8c6
 label-background = #282a2e
 label-padding = 1
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+interval = 30
+fixed-values = true 
+
+format-mounted = <label-mounted>
+label-mounted =  %total%
+label-mounted-foreground = #c5c8c6
+label-mounted-background = #282a2e
+format-mounted-padding = 1
 
 [settings]
 screenchange-reload = true
