@@ -216,7 +216,7 @@ interval = 30
 fixed-values = true 
 
 format-mounted = <label-mounted>
-label-mounted =  %total%
+label-mounted =  %free%
 label-mounted-foreground = #c5c8c6
 label-mounted-background = #282a2e
 format-mounted-padding = 1

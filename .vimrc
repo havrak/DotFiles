@@ -41,8 +41,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-set runtimepath+=~/.vim_runtime
-
+set runtimepath+=~/.vim_runtime  
 source ~/.vim_runtime/vimrcs/basic.vim
 source ~/.vim_runtime/vimrcs/filetypes.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
@@ -55,5 +54,5 @@ endtry
 
 set number
 set mouse=a
-
-
+vnoremap <C-c> "+y
+map <C-v> "+P
