@@ -20,3 +20,4 @@ In this repository are my personal dotfiles used on my HP Elitebook 8740p, but a
 + font misc
 + font siji
 + mathomatic (running in dropdrown terminal)
++ mpc

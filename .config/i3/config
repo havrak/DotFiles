@@ -1,5 +1,9 @@
-﻿# vim:filetype=i3
-# Mod1 = alt; Mod4=super
+﻿#  _ _____                    __ _       
+# (_)___ /    ___ ___  _ __  / _(_) __ _ 
+# | | |_ \   / __/ _ \| '_ \| |_| |/ _` |
+# | |___) | | (_| (_) | | | |  _| | (_| |
+# |_|____/   \___\___/|_| |_|_| |_|\__, |
+#                                  |___/ 
 
 new_window pixel 2  
 new_float pixel 2
@@ -36,7 +40,6 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+h split v
 bindsym $mod+v split h
 
-
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
@@ -51,16 +54,16 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 # Workspaces
-set $ws1 1:
-set $ws2 2:
-set $ws3 3:
-set $ws4 4:
-set $ws5 5:
-set $ws6 6:
-set $ws7 7:
-set $ws8 8:
-set $ws9 9:
-set $ws10 10:
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+set $ws10 10
 
 # Assig to monitors
 # workspace $ws1 output DP-1
@@ -112,8 +115,8 @@ for_window [class="GraphDrawing.jar"] floating enable border normal
 for_window [class="jetbrains-toolbox"] floating enable border normal
 
 # Lock i3, suspends+locks i3, logoff, shutdown, reboot 
-bindsym $mod+Shift+F3 exec --no-startup-id $HOME/.scripts/i3suspend.sh
-bindsym $mod+Shift+x exec --no-startup-id $HOME/.scripts/i3lock.sh 1
+bindsym $mod+Shift+F3 exec --no-startup-id $HOME/.scripts/suspend
+bindsym $mod+Shift+x exec --no-startup-id $HOME/.scripts/i3lock 1
 
 bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to logoff?' -b 'Yes, Logoff' 'i3-msg exit'"
 bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, Reboot' 'reboot'"
@@ -138,11 +141,7 @@ exec --no-startup-id setxkbmap -option caps:escape
 exec --no-startup-id xinput set-prop 11 302 1
 
 # Keyboard layout
-exec_always --no-startup-id  $HOME/.scripts/keyboardLayout.sh  
-
-# Start application on specific workspace on i3 start
-exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
-exec --no-startup-id i3-msg 'workspace 10; exec termite -e ncmpcpp'
+exec_always --no-startup-id  $HOME/.scripts/keyboardLayout 
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
@@ -151,29 +150,6 @@ client.unfocused                #707880         #1d1f21         #707880         
 client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
 client.placeholder              #707880         #1d1f21         #707880         #282a2e         #282a2e
 client.background               #1d1f21
-
-# Gaps
-gaps inner 10
-gaps outer 0
-
-smart_gaps on
-
-set $mode_gaps change with -, +, 0
-
-bindsym $mod+t exec --no-startup-id $HOME/.scripts/i3borders.sh
-bindsym $mod+Shift+g mode "$mode_gaps"
-
-mode "$mode_gaps" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Escape mode "default"
-}
 
 # Audio control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0  -3%
@@ -190,10 +166,9 @@ bindsym XF86MonBrightnessUp exec light -A 2
 bindsym XF86MonBrightnessDown exec light -U 2
 
 # Other
-bindsym XF86HomePage restart
-bindsym XF86Display exec $HOME/.scripts/i3Battery.sh
-bindsym $mod+Pause exec $HOME/.scripts/i3ComptonRestart.sh
-bindsym $mod+F10 exec $HOME/.scripts/toggleCompton.sh
+bindsym $mod+Shift+r restart
+bindsym XF86Display exec $HOME/.scripts/batteryNotification
+bindsym $mod+F10 exec $HOME/.scripts/toggleCompton
 
 # Lauch application
 bindsym $sup+t exec thunar

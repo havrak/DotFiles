@@ -1,5 +1,3 @@
-; vim:ft=dosini
-
 [bar/default]
 width = 100%
 height = 18
@@ -15,8 +13,8 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = misc fixed:pixelsize=11;1
-font-1 = Wuncon Siji:pixelsize=11;1
+font-0 = misc fixed:pixelsize=10;1
+font-1 = Wuncon Siji:pixelsize=10;1
 
 modules-left = i3 mpd
 modules-center = 
@@ -158,7 +156,7 @@ format-muted-foreground = #c5c8c6
 format-muted-background = #282a2e
 format-muted-padding = 1
 format-muted-prefix = " "
-label-muted = 0%
+label-muted = 00%
 
 [module/battery]
 type = internal/battery
