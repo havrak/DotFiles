@@ -4,17 +4,18 @@ height = 18
 radius = 0
 fixed-center = true
 
-background = #282a2e
-foreground = #c6c8c5
-
 padding-left = 0
 padding-right = 0
+
+background = ${colors.background}
+separator = " | "
 
 module-margin-left = 0
 module-margin-right = 0
 
 font-0 = misc fixed:pixelsize=10;1
 font-1 = Wuncon Siji:pixelsize=10;1
+
 
 modules-left = i3 mpd
 modules-center = 
@@ -23,6 +24,13 @@ modules-right = filesystem memory cpu temperature volume screen xkeyboard batter
 cursor-click = pointer
 cursor-scroll = ns-resize
 monitor = ${env:MONITOR:LVDS-1}
+;monitor = ${env:MONITOR:DP-1}
+
+[colors]
+foreground = #c4c8c6
+background = #282a2e
+green = #81c784
+red = #e57373
 
 [module/i3]
 type = internal/i3
@@ -31,22 +39,22 @@ index-sort = true
 wrapping-scroll = false
 
 label-mode-padding = 1
-label-mode-foreground = #c5c8c6
-label-mode-background = #282a2e
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.background}
 
 label-focused = %name%
-label-focused-background = #c5c8c6
-label-focused-foreground = #282a2e
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
 label-focused-padding = 1
 
 label-unfocused = %name%
-label-unfocused-background = #282a2e
-label-unfocused-foreground = #c5c8c6
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
 label-unfocused-padding = 1
 
 label-visible = %name%
-label-visible-background = #282a2e
-label-visible-foreground = #c5c8c6
+label-visible-background = ${colors.background}
+label-visible-foreground = ${colors.foreground}
 label-visible-padding = 1
  
 label-urgent = %name% 
@@ -55,7 +63,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 label-urgent-background = #BA2922
-label-urgent-padding = 1
+label-urgent-padding = 0
 
 [module/wlan]
 type = internal/network
@@ -63,10 +71,11 @@ interface = wlo1
 interval = 5.0
 
 format-connected = <label-connected>
-format-connected-background = #282a2e
-format-connected-foreground = #c5c8c6
-format-connected-padding = 1
-label-connected =  %essid% %downspeed% %upspeed%
+format-connected-background = ${colors.background}
+format-connected-foreground = ${colors.foreground}
+format-connected-padding = 0
+;label-connected =  %essid% %downspeed% %upspeed%
+label-connected =  %essid%
 
 format-disconnected =
 
@@ -75,10 +84,11 @@ type = internal/network
 interface = enp0s25
 interval = 5.0
 
-format-connected-background = #282a2e
-format-connected-foreground = #c5c8c6
-format-connected-padding = 1
-label-connected = %local_ip% %downspeed% %upspeed%
+format-connected-background = ${colors.background}
+format-connected-foreground = ${colors.foreground}
+format-connected-padding = 0
+;label-connected = %local_ip% %downspeed% %upspeed%
+label-connected = %local_ip%
 
 format-disconnected =
 
@@ -86,13 +96,13 @@ format-disconnected =
 type = internal/date
 interval = 1
 
-date = " %d.%m."
+date = " %d.%m.  "
 
 time =  %H:%M:%S
 
-format-foreground = #c5c8c6
-format-background = #282a2e
-format-padding = 1
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-padding = 0
 
 label =  %time% %date%
 
@@ -100,27 +110,27 @@ label =  %time% %date%
 type = internal/xkeyboard
 blacklist-0 = num lock
 label-layout =  %layout%
-format-foreground = #c5c8c6
-format-background = #282a2e
-format-padding = 1
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-padding = 0
 
 [module/cpu]
 type = internal/cpu
 interval = 1
-format-foreground = #c5c8c6
-format-background = #282a2e
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
 format-prefix=" "
 label = %percentage%%
-format-padding = 1
+format-padding = 0
 
 [module/memory]
 type = internal/memory
 interval = 1
-format-foreground = #c5c8c6
-format-background = #282a2e
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
 format-prefix = " "
 label = %percentage_used%%
-format-padding = 1
+format-padding = 0
 
 [module/temperature]
 type = internal/temperature
@@ -128,15 +138,15 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <label>
-format-foreground = #c5c8c6
-format-background = #282a2e
-format-padding = 1
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-padding = 0
 format-prefix = " "
 
 format-warn = <label-warn>
-format-warn-foreground = #e57373
-format-warn-background = #282a2e
-format-warn-padding = 1
+format-warn-foreground = ${colors.red}
+format-warn-background = ${colors.background}
+format-warn-padding = 0
 format-warn-prefix = " "
 label = %temperature-c%
 label-warn = %temperature-c%
@@ -144,17 +154,17 @@ label-warn = %temperature-c%
 [module/volume]
 type = internal/alsa
 format-volume = <label-volume>
-format-volume-foreground = #c5c8c6
-format-volume-background = #282a2e
-format-volume-padding = 1
+format-volume-foreground = ${colors.foreground}
+format-volume-background = ${colors.background}
+format-volume-padding = 0
 format-volume-prefix = " "
 label-volume = %percentage%%
 
 
 format-muted = <label-muted>
-format-muted-foreground = #c5c8c6
-format-muted-background = #282a2e
-format-muted-padding = 1
+format-muted-foreground = ${colors.red}
+format-muted-background = ${colors.background}
+format-muted-padding = 0
 format-muted-prefix = " "
 label-muted = 00%
 
@@ -166,46 +176,47 @@ full-at = 99
 
 format-charging-prefix = " "
 format-charging = <label-charging> 
-format-charging-foreground = #81C784
-format-charging-background = #282a2e
-format-charging-padding = 1
+format-charging-foreground = ${colors.green}
+format-charging-background = ${colors.background}
+format-charging-padding = 0
 
 format-full-prefix = " "
 format-full = 100%
-format-full-foreground = #c5c8c6
-format-full-background = #282a2e
-format-full-padding = 1
+format-full-foreground = ${colors.foreground}
+format-full-background = ${colors.background}
+format-full-padding = 0
 
 format-discharging-prefix = " "
 format-discharging = <label-discharging>
-format-discharging-foreground = #c5c8c6
-format-discharging-background = #282a2e
-format-discharging-padding = 1
+format-discharging-foreground = ${colors.foreground}
+format-discharging-background = ${colors.background}
+format-discharging-padding = 0
 
 label-charging = %percentage%%
 label-discharging = %percentage%%
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song> <label-time> 
-format-online-padding = 1
-
-label-song = %title%
+format-online =  <label-song> <label-time> 
+format-online-padding = 0
+format-online-foreground = ${colors.foreground}
+format-online-background = ${colors.background}
+label-song = %title% 
 label-song-maxlen = 70
 label-song-ellipsis = true
 
 [module/screen]
 type = custom/script
-interval = 0.2
-exec = ~/.config/polybar/backlight.sh
+interval = 0.5
+exec = polybarBacklight
 
 scroll-up = exec light -A 5
 scroll-down = exec light -U 5
 
 label =  %output%%
-label-foreground = #c5c8c6
-label-background = #282a2e
-label-padding = 1
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
+label-padding = 0
 
 [module/filesystem]
 type = internal/fs
@@ -215,9 +226,9 @@ fixed-values = true
 
 format-mounted = <label-mounted>
 label-mounted =  %free%
-label-mounted-foreground = #c5c8c6
-label-mounted-background = #282a2e
-format-mounted-padding = 1
+label-mounted-foreground = ${colors.foreground}
+label-mounted-background = ${colors.background}
+label-mounted-padding = 0
 
 [settings]
 screenchange-reload = true
@@ -225,3 +236,4 @@ screenchange-reload = true
 [global/wm]
 margin-top = 0
 margin-bottom = 0
+margin-left = 4

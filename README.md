@@ -13,6 +13,7 @@ In this repository are my personal dotfiles used on my HP Elitebook 8740p, but a
 + mpd
 + ncmpcpp
 + compton
++ ranger
 
 # "Dependencies"
 + light
