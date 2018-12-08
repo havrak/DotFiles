@@ -1,11 +1,10 @@
 # GNU/LINUX Dotfiles
 
-In this repository are my personal dotfiles used on my HP Elitebook 8740p, but all dotfiles should work fine across different devices. Configs are used on Antergos, but i don't think using them on any other distro would be a problem. All configs use termite as default terminal emulator.
+In this repository are my personal dotfiles used on my laptop and desktop (does not work out of the box for desktop, needs few changes inn configs - polybar, i3). Configs are used on Antergos, but i don't think using them on any other distro would be a problem. All configs use termite as default terminal emulator, which is hardcoded so changing $TERMINAL variable wont do much.
 
 # Programs that have configs in this repo
 + i3-gaps
 + vim
-+ powerline-shell
 + polybar
 + termite
 + bash
@@ -16,8 +15,10 @@ In this repository are my personal dotfiles used on my HP Elitebook 8740p, but a
 + ranger
 
 # "Dependencies"
-+ light
-+ i3lock - imagemagic, scrot 
++ light - you can use xbacklight for polybar, but module for it isn't configured
++ i3lock
++ imagemagic (used for background of i3lock) 
++ scrot (used for background of i3lock) 
 + font misc
 + font siji
 + mathomatic (running in dropdrown terminal)
