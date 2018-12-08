@@ -208,7 +208,7 @@ label-song-ellipsis = true
 [module/screen]
 type = custom/script
 interval = 0.5
-exec = polybarBacklight
+exec = /home/havra/.scripts/polybarBacklight
 
 scroll-up = exec light -A 5
 scroll-down = exec light -U 5
