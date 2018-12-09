@@ -2,7 +2,7 @@
 width = 100%
 height = 18
 radius = 0
-fixed-center = true
+fixed-center = false
 
 padding-left = 0
 padding-right = 0
@@ -96,7 +96,7 @@ format-disconnected =
 type = internal/date
 interval = 1
 
-date = " %d.%m.  "
+date = " %d.%m. "
 
 time =  %H:%M:%S
 
@@ -208,7 +208,7 @@ label-song-ellipsis = true
 [module/screen]
 type = custom/script
 interval = 0.5
-exec = /home/havra/.scripts/polybarBacklight
+exec = ~/.scripts/polybarBacklight
 
 scroll-up = exec light -A 5
 scroll-down = exec light -U 5
@@ -236,4 +236,3 @@ screenchange-reload = true
 [global/wm]
 margin-top = 0
 margin-bottom = 0
-margin-left = 4
