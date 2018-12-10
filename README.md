@@ -1,6 +1,6 @@
 # GNU/LINUX Dotfiles
 
-In this repository are my personal dotfiles used on my laptop and desktop (does not work out of the box for desktop, needs few changes inn configs - polybar, i3). Configs are used on Antergos, but i don't think using them on any other distro would be a problem. All configs use termite as default terminal emulator, which is hardcoded so changing $TERMINAL variable wont do much.
+In this repository are my personal dotfiles used on my laptop and desktop (does not work out of the box for desktop, needs few changes in configs - polybar, i3). Configs are used on Antergos, but i don't think using them on any other distro would be a problem. All configs use termite as default terminal emulator, which is hardcoded so changing $TERMINAL variable wont do much.
 
 # Programs that have configs in this repo
 + i3-gaps
@@ -13,6 +13,7 @@ In this repository are my personal dotfiles used on my laptop and desktop (does 
 + ncmpcpp
 + compton
 + ranger
++ zathura
 
 # "Dependencies"
 + light - you can use xbacklight for polybar, but module for it isn't configured
