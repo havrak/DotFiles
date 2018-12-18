@@ -39,10 +39,10 @@
 
 ! Rofi
 rofi.color-enabled: true
-rofi.color-window: #1d1f21, #c6c8c5, #c6c8c5
-rofi.color-normal: #1d1f21, #707880, #1d1f21, #1d1f21, #c6c8c5
-rofi.color-active: #1d1f21, #707880, #1d1f21, #1d1f21, #c6c8c5
-rofi.color-urgent: #1d1f21, #707880, #1d1f21, #1d1f21, #c6c8c5
+rofi.color-window: #242424, #c6c8c5, #c6c8c5
+rofi.color-normal: #242424, #707880, #242424, #242424, #c6c8c5
+rofi.color-active: #242424, #707880, #242424, #242424, #c6c8c5
+rofi.color-urgent: #242424, #707880, #242424, #242424, #c6c8c5
 
 rofi.separator-style: solid
 rofi.sidebar-mode: false

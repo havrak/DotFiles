@@ -8,6 +8,7 @@ padding-left = 0
 padding-right = 0
 
 background = ${colors.background}
+;background = #00000000
 foreground = ${colors.foreground} 
 
 
@@ -27,8 +28,10 @@ monitor = ${env:MONITOR:LVDS-1}
 ;monitor = ${env:MONITOR:DP-1}
 
 [colors]
-foreground = #c4c8c6
+foreground = #e0e0e0
 background = #242424
+;background = #00000000
+;foreground = #242424
 green = #81c784
 red = #e57373
 blue = #2979FF
@@ -44,8 +47,9 @@ label-mode-foreground = ${colors.foreground}
 label-mode-background = ${colors.background}
 
 label-focused = %name%
-label-focused-background = ${colors.foreground}
-label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.background} 
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.blue}
 label-focused-padding = 1
 
 label-unfocused = %name%
@@ -65,6 +69,7 @@ cursor-scroll = ns-resize
 
 label-urgent-background = ${colors.background}
 label-urgent-padding = 1
+label-urgent-underline = ${colors.red}
 
 [module/wlan]
 type = internal/network
@@ -183,7 +188,7 @@ label-muted = 00%
 type = internal/battery
 battery = BAT0
 adapter = AC0
-full-at = 99
+full-at = 100
 
 format-charging-prefix = " "
 format-charging = <label-charging> 

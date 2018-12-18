@@ -101,9 +101,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
-# Open specific applications in specific workspace
-assign [class="Firefox"] $ws1
-
 # Open specific applications in floating mode
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
@@ -131,6 +128,7 @@ bindsym $sup+Right resize grow width 3px or 3ppt
 # Commands to run on i3 start
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id nm-applet
+exec --no-startup-id mpd
 exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
@@ -175,6 +173,7 @@ bindsym $sup+t exec thunar
 bindsym $sup+f exec firefox
 bindsym $sup+s exec subl3
 bindsym $sup+l exec libreoffice
+bindsym $sup+w exec nitrogen --set-zoom-fill --random Pictures/
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot
