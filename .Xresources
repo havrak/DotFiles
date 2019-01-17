@@ -5,36 +5,36 @@
 *background      : #121212
 
 ! black
-.color0  : #000000
-.color8  : #121212
+*.color0  : #212121
+*.color8  : #121212
 
 ! red
-.color1  : #ff5555
-.color9  : #ff6e67
+*.color1  : #ff5555
+*.color9  : #ff6e67
 
 ! green
-.color2  : #50fa7b
-.color10 : #5af78e
+*.color2  : #50fa7b
+*.color10 : #5af78e
 
 ! yellow
-.color3  : #f1fa8c
-.color11 : #f4f99d
+*.color3  : #f1fa8c
+*.color11 : #f4f99d
 
 ! blue
-.color4  : #EEEEEE
-.color12 : #EEEEEE
+*.color4  : #0D47A1
+*.color12 : #81D4FA
 
 ! magenta
-.color5  : #ff79c6
-.color13 : #ff92d0
+*.color5  : #ff79c6
+*.color13 : #ff92d0
 
 ! cyan
-.color6  : #64B5F6
-.color14 : #64B5F6
+*.color6  : #64B5F6
+*.color14 : #00B8D4	
 
 ! white
-.color7  : #bfbfbf
-.color15 : #e6e6e6
+*.color7  : #bfbfbf
+*.color15 : #e6e6e6
 
 
 ! Rofi

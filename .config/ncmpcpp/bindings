@@ -454,8 +454,8 @@
 #def_key "a"
 #  add_selected_items
 #
-#def_key "c"
-#  clear_playlist
+def_key "c"
+  clear_playlist
 #
 #def_key "c"
 #  clear_main_playlist
@@ -547,7 +547,7 @@ def_key "f"
 def_key "f"
     find_item_forward
 
-def_key "+"
+def_key "9"
     show_clock
 def_key "="
     volume_up

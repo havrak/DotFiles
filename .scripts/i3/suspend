@@ -1,4 +1,4 @@
 #!/bin/sh
-$HOME/.scripts/i3lock 0
+$HOME/.scripts/i3pixelLock 0
 
 systemctl suspend

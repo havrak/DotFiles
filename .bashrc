@@ -7,26 +7,27 @@ stty -ixon #disable ctrl+s; ctrl+q
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-export PATH="$PATH:$HOME/.scripts"
-BROWSER=/usr/bin/firefox
-EDITOR=vim
-VISUAL=$EDITOR
-export EDITOR VISUAL
+export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
+export BROWSER=/usr/bin/firefox
+export EDITOR="nvim"
+export TERMINAL="st"
+export BROWSER="firefox"
+export READER="zathura"
+export FILE="ranger"
+export VISUAL="nvim"
 
 
 #aliases
-alias p="sudo pacman"
+alias p="sudo yaourt"
 alias v="vim"
-alias orphans="pacman -Qqtd"
+alias orphans="yaourt -Qqtd"
 alias sr="sudo ranger"
 alias r="ranger"
 alias c="clear"
 alias sv="sudoedit"
 alias pushconfig="git push git@github.com:havrak/DotFiles.git"
 alias music="ncmpcpp"
-alias s="subl3"
-alias pi3="ssh -Y pi@192.168.1.9"
-alias zathura="nohup zathura"
+alias zathura="zathura --fork"
 
 if [ "$EUID" -ne 0 ]
 	then export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"

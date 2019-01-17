@@ -16,7 +16,7 @@ set $mod Mod1
 font xft:misc fixed:pixelsize=10;1
 
 # Open terminal
-bindsym $mod+Ctrl+t exec termite
+bindsym $mod+Ctrl+t exec st
 
 # Window kill command
 bindsym $mod+Shift+q kill
@@ -126,20 +126,17 @@ bindsym $sup+Up resize shrink height 3px or 3ppt
 bindsym $sup+Right resize grow width 3px or 3ppt
 
 # Commands to run on i3 start
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-exec --no-startup-id nm-applet
+exec --no-startup-id compton -b
+exec --no-startup-id setbg
 exec --no-startup-id mpd
-exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id setxkbmap -option caps:escape
 # exec --no-startup-id ./.scripts/screenArandr
 
-# Enable tap to click   
-exec --no-startup-id xinput set-prop 11 302 1
-
 # Keyboard layout
-exec_always --no-startup-id  $HOME/.scripts/keyboardLayout 
+exec_always --no-startup-id  $HOME/.scripts/keyboardLayout.sh 
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
@@ -148,6 +145,14 @@ client.unfocused                #707880         #1d1f21         #707880         
 client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
 client.placeholder              #707880         #1d1f21         #707880         #282a2e         #282a2e
 client.background               #1d1f21
+
+# Gaps
+gaps inner 10
+gaps outer -3
+
+smart_gaps on
+
+bindsym $mod+t exec --no-startup-id $HOME/.scripts/i3borders
 
 # Audio control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0  -3%
@@ -165,7 +170,6 @@ bindsym XF86MonBrightnessDown exec light -U 2
 
 # Other
 bindsym $mod+Shift+r restart
-bindsym XF86Display exec $HOME/.scripts/batteryNotification
 bindsym $mod+F10 exec $HOME/.scripts/toggleCompton
 
 # Lauch application
@@ -173,7 +177,6 @@ bindsym $sup+t exec thunar
 bindsym $sup+f exec firefox
 bindsym $sup+s exec subl3
 bindsym $sup+l exec libreoffice
-bindsym $sup+w exec nitrogen --set-zoom-fill --random Pictures/
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot
@@ -184,9 +187,9 @@ for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 2
-exec --no-startup-id termite --name=math -e mathomatic
+exec --no-startup-id st -n math -e mathomatic
 
-bindsym $mod+F11 [instance="math"] kill ; exec termite --name=math -e mathomatic
+bindsym $mod+F11 [instance="math"] kill ; exec st -n math -e mathomatic
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 
 # General purpose terminal
@@ -194,7 +197,7 @@ for_window [instance="gpt"] floating enable
 for_window [instance="gpt"] resize set 750 600
 for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 2
-exec --no-startup-id termite --name=gpt
+exec --no-startup-id st -n gpt
 
-bindsym $mod+F12 [instance="gpt"] kill ; exec termite --name=gpt
+bindsym $mod+F12 [instance="gpt"] kill ; exec st -n gpt
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
