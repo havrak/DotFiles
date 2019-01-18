@@ -9,19 +9,19 @@
 *.color8  : #121212
 
 ! red
-*.color1  : #ff5555
+*.color1  : #e57373
 *.color9  : #ff6e67
 
 ! green
-*.color2  : #50fa7b
+*.color2  : #81c784
 *.color10 : #5af78e
 
 ! yellow
-*.color3  : #f1fa8c
+*.color3  : #f1c40f
 *.color11 : #f4f99d
 
 ! blue
-*.color4  : #0D47A1
+*.color4  : #2979FF
 *.color12 : #81D4FA
 
 ! magenta
@@ -30,7 +30,7 @@
 
 ! cyan
 *.color6  : #64B5F6
-*.color14 : #00B8D4	
+*.color14 : #00B8D4
 
 ! white
 *.color7  : #bfbfbf
