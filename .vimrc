@@ -1,3 +1,4 @@
+
 "        _
 " __   _(_)_ __ ___  _ __ ___
 " \ \ / / | '_ ` _ \| '__/ __|
@@ -190,12 +191,6 @@ call plug#end()
 	autocmd FileType html inoremap ò &ograve;
 	autocmd FileType html inoremap ù &ugrave;
 
-
-""".bib
-	autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
-	autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
-	autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
-
 "MARKDOWN
 	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
 	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
@@ -212,8 +207,4 @@ call plug#end()
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
-
-""".xml
-	autocmd FileType xml inoremap ,e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
-	autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
 
