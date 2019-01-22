@@ -26,11 +26,11 @@ line-color = ${colors.foreground}
 
 modules-left = i3 mpd
 modules-center =
-modules-right = memory cpu temperature volume screen xkeyboard battery wlan eth date
+modules-right = memory cpu temperature volume screen xkeyboard battery battery2 wlan eth date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
-monitor = ${env:MONITOR:LVDS}
+monitor = ${env:MONITOR:eDP-1}
 
 [colors]
 foreground = #e0e0e0
@@ -77,8 +77,8 @@ label-urgent-underline = ${colors.red}
 
 [module/wlan]
 type = internal/network
-interface = wlo1
-;interface = wlp3s0
+;interface = wlo1
+interface = wlp3s0
 interval = 5.0
 
 format-connected = <label-connected>

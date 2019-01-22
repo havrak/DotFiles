@@ -15,6 +15,7 @@ is hardcoded to i3 config.
 + compton
 + ranger
 + zathura
++ sxiv
 
 # "Dependencies"
 + light - you can use xbacklight for polybar, but module for it isn't configured
