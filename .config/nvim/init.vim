@@ -1,3 +1,4 @@
+
 "        _
 " __   _(_)_ __ ___  _ __ ___
 " \ \ / / | '_ ` _ \| '__/ __|
@@ -8,15 +9,15 @@ let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
-Plug 'LukeSmithxyz/vimling'
-Plug 'vimwiki/vimwiki'
 Plug 'wincent/command-t'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " Some basics:
-	color peachpuff
 	set nocompatible
 	filetype plugin on
 	syntax on
@@ -31,29 +32,21 @@ call plug#end()
 " Goyo plugin makes text more readable when writing prose:
 	map <leader>f :Goyo \| set linebreak<CR>
 
-" Spell-check set to <leader>o, 'o' for 'orthography':
+" Spell-check
 	map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitbelow splitright
-
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
 
-" Check file in shellcheck:
-	map <leader>s :!clear && shellcheck %<CR>
-
-" Open my bibliography file in split
-	map <leader>b :vsp<space>$BIB<CR>
-	map <leader>r :vsp<space>$REFER<CR>
-
 " Replace all is aliased to S.
 	nnoremap S :%s//g<Left><Left>
 
-" Compile document, be it groff/LaTeX/markdown/etc.
+" Compile document
 	map <leader>c :w! \| !compiler <c-r>%<CR><CR>
 
 " Open corresponding .pdf/.html or preview
@@ -63,7 +56,6 @@ call plug#end()
 	autocmd VimLeave *.tex !texclear %
 
 " Ensure files are read as what I want:
-	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
@@ -71,12 +63,9 @@ call plug#end()
 " Readmes autowrap text:
 	autocmd BufRead,BufNewFile *.md set tw=79
 
-" Use urlscan to choose and open a url:
-	:noremap <leader>u :w<Home> !urlscan -r 'linkhandler {}'<CR>
-	:noremap ,, !urlscan -r 'linkhandler {}'<CR>
-
-" Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
+" Copy selected text to system clipboard
 	vnoremap <C-c> "+y
+	map <C-x> "+x
 	map <C-p> "+P
 
 " Enable Goyo by default for mutt writting
@@ -98,7 +87,25 @@ call plug#end()
 	vnoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
 	map <Space><Tab> <Esc>/<++><Enter>"_c4l
 
- "____        _                  _
+" Open a NERDTree automatically when vim starts up if no files were specified and toggle NERDTree
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+	map <leader>t :NERDTreeToggle<CR>
+	let NERDTreeShowHidden=1
+
+" Vim-airline configuration
+	let g:airline_powerline_fonts = 1
+	if !exists('g:airline_symbols')
+	    let g:airline_symbols = {}
+    	endif
+
+	let g:airline_theme='atomic'
+	let g:airline_left_sep = '▶'
+  	let g:airline_right_sep = '◀'
+	let g:airline_symbols.maxlinenr = ''
+	let g:Powerline_symbols = 'fancy'
+
+"____        _                  _
 "/ ___| _ __ (_)_ __  _ __   ___| |_ ___
 "\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
  "___) | | | | | |_) | |_) |  __/ |_\__ \
@@ -190,12 +197,6 @@ call plug#end()
 	autocmd FileType html inoremap ò &ograve;
 	autocmd FileType html inoremap ù &ugrave;
 
-
-""".bib
-	autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
-	autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
-	autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
-
 "MARKDOWN
 	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
 	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
@@ -212,8 +213,3 @@ call plug#end()
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
-
-""".xml
-	autocmd FileType xml inoremap ,e <item><Enter><title><++></title><Enter><guid<space>isPermaLink="false"><++></guid><Enter><pubDate><Esc>:put<Space>=strftime('%a, %d %b %Y %H:%M:%S %z')<Enter>kJA</pubDate><Enter><link><++></link><Enter><description><![CDATA[<++>]]></description><Enter></item><Esc>?<title><enter>cit
-	autocmd FileType xml inoremap ,a <a href="<++>"><++></a><++><Esc>F"ci"
-
