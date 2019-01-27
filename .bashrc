@@ -2,13 +2,13 @@
 # ~/.bashrc
 #
 
-stty -ixon #disable ctrl+s; ctrl+q
+#disable ctrl+s
+stty -ixon
 
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
 export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
-export BROWSER=/usr/bin/firefox
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"
