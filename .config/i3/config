@@ -127,7 +127,7 @@ bindsym $sup+Right resize grow width 3px or 3ppt
 
 # Commands to run on i3 start
 exec --no-startup-id compton -b
-exec --no-startup-id setbg $HOME/.config/wall.png
+exec --no-startup-id $HOME/.scripts/i3/setbg
 exec --no-startup-id mpd
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
@@ -171,6 +171,8 @@ bindsym XF86MonBrightnessDown exec light -U 2
 bindsym $mod+Shift+r restart
 bindsym $mod+F10 exec $HOME/.scripts/i3/toggleCompton
 bindsym $mod+w exec st -e nmtui
+bindsym $mod+m exec $HOME/.scripts/tools/rofiMount
+bindsym $mod+Shift+m exec $HOME/.scripts/tools/rofiUmount
 
 # Lauch application
 bindsym $sup+t exec thunar
