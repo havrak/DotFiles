@@ -5,9 +5,7 @@
 # |_|____/   \___\___/|_| |_|_| |_|\__, |
 #                                  |___/
 
-new_window pixel 2
-new_float pixel 2
-
+for_window [class="^.*"] border pixel 2
 hide_edge_borders smart
 
 set $sup Mod4
@@ -37,8 +35,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Split orientation
-bindsym $mod+h split v
-bindsym $mod+v split h
+bindsym $mod+t split toggle
 
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -66,12 +63,12 @@ set $ws9 9
 set $ws10 10
 
 # Assig to monitors
-# workspace $ws1 output DP-1
-# workspace $ws2 output DP-1
-# workspace $ws3 output DP-1
-# workspace $ws4 output DP-1
-# workspace $ws5 output DP-1
-# workspace $ws6 output DP-1
+# workspace $ws1 output HDMI-1
+# workspace $ws2 output HDMI-1
+# workspace $ws3 output HDMI-1
+# workspace $ws4 output HDMI-1
+# workspace $ws5 output HDMI-1
+# workspace $ws6 output HDMI-1
 # workspace $ws7 output HDMI-1
 # workspace $ws8 output HDMI-1
 # workspace $ws9 output DVI-I-1
@@ -101,29 +98,40 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
+#                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
+client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
+client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #282a2e
+client.unfocused                #707880         #1d1f21         #707880         #282a2e         #282a2e
+client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
+client.background               #1d1f21
+
+# Gaps
+gaps inner 10
+gaps outer -3
+
+smart_gaps on
+
+bindsym $mod+b exec --no-startup-id $HOME/.scripts/i3/i3borders
+
 # Open specific applications in floating mode
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
-for_window [class="Gnome-calculator"] floating enable border normal
-for_window [class="Nitrogen"] floating enable enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="GraphDrawing.jar"] floating enable border normal
 for_window [class="jetbrains-toolbox"] floating enable border normal
 
 # Lock i3, suspends+locks i3, logoff, shutdown, reboot
 bindsym $mod+Shift+F3 exec --no-startup-id .scripts/i3/suspend
 bindsym $mod+Shift+x exec --no-startup-id .scripts/i3/i3pixelLock 1
 
-bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to logoff?' -b 'Yes, Logoff' 'i3-msg exit'"
-bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot?' -b 'Yes, Reboot' 'reboot'"
-bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'You pressed the shutdown shortcut. Do you really want to shutdown?' -b 'Yes, Shutdown' 'poweroff'"
+bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
+bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
+bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
 
 # Resize window
-bindsym $sup+Left resize shrink width 3px or 3ppt
-bindsym $sup+Down resize grow height 3px or 3ppt
-bindsym $sup+Up resize shrink height 3px or 3ppt
-bindsym $sup+Right resize grow width 3px or 3ppt
+bindsym $sup+Left resize shrink width 5px or 5ppt
+bindsym $sup+Down resize grow height 5px or 5ppt
+bindsym $sup+Up resize shrink height 5px or 5ppt
+bindsym $sup+Right resize grow width 5px or 5ppt
 
 # Commands to run on i3 start
 exec --no-startup-id compton -b
@@ -137,28 +145,12 @@ exec --no-startup-id setxkbmap -option caps:escape
 # Keyboard layout
 exec_always --no-startup-id  $HOME/.scripts/i3/keyboardLayout.sh
 
-#                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
-client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
-client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.unfocused                #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.placeholder              #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.background               #1d1f21
-
-# Gaps
-gaps inner 10
-gaps outer -3
-
-smart_gaps on
-
-bindsym $mod+t exec --no-startup-id $HOME/.scripts/i3/i3borders
-
-# Audio control
+# Audio / mpd control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0  -3%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0  +3%
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
-bindsym $mod+n exec mpc next
-bindsym $mod+b exec mpc prev
+bindsym $mod+greater exec mpc next
+bindsym $mod+less exec mpc prev
 bindsym $mod+e exec mpc toggle
 bindsym $mod+minus exec mpc volume -5
 bindsym $mod+plus exec mpc volume +5
@@ -177,8 +169,6 @@ bindsym $mod+Shift+m exec $HOME/.scripts/tools/rofiUmount
 # Lauch application
 bindsym $sup+t exec thunar
 bindsym $sup+f exec firefox
-bindsym $sup+s exec subl3
-bindsym $sup+l exec libreoffice
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot
@@ -191,7 +181,7 @@ for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 2
 exec --no-startup-id st -n math -e mathomatic
 
-bindsym $mod+F11 [instance="math"] kill ; exec st -n math -e mathomatic
+bindsym $sup+F12 [instance="math"] kill ; exec st -n math -e mathomatic
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 
 # General purpose terminal
@@ -201,5 +191,5 @@ for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 2
 exec --no-startup-id st -n gpt
 
-bindsym $mod+F12 [instance="gpt"] kill ; exec st -n gpt
+bindsym $sup+F11 [instance="gpt"] kill ; exec st -n gpt
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
