@@ -7,7 +7,7 @@ stty -ixon
 
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias ls='ls --group-directories-first --color=auto'
 export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
 export EDITOR="nvim"
 export TERMINAL="st"
@@ -25,9 +25,11 @@ alias sr="sudo ranger"
 alias r="ranger"
 alias c="clear"
 alias sv="sudoedit"
-alias pushconfig="git push git@github.com:havrak/DotFiles.git"
+alias gitpush="git remote | xargs -L1 git push --all"
+alias g="git"
 alias music="ncmpcpp"
 alias zathura="zathura --fork"
+alias s="sxiv"
 
 if [ "$EUID" -ne 0 ]
 	then export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
