@@ -4,7 +4,7 @@
 
 #disable ctrl+s
 stty -ixon
-i
+
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 
