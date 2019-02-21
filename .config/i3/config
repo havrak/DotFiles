@@ -128,10 +128,21 @@ bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboo
 bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
 
 # Resize window
-bindsym $sup+Left resize shrink width 5px or 5ppt
-bindsym $sup+Down resize grow height 5px or 5ppt
-bindsym $sup+Up resize shrink height 5px or 5ppt
-bindsym $sup+Right resize grow width 5px or 5ppt
+bindsym $sup+Left resize shrink width 20px or 5ppt
+bindsym $sup+Down resize grow height 20px or 5ppt
+bindsym $sup+Up resize shrink height 20px or 5ppt
+bindsym $sup+Right resize grow width 20px or 5ppt
+
+set $displayMode "Set display mode [l]aptop [w]idescreen [d]ual"
+
+bindsym $mod+m mode $displayMode
+
+mode $displayMode {
+	bindsym l exec $HOME/.scripts/i3/randrLaptop.sh; mode "default"
+	bindsym w exec $HOME/.scripts/i3/randrWidescreen.sh; mode "default"
+	bindsym d exec $HOME/.scripts/i3/randrDualScreen.sh; mode "default"
+	bindsym Escape mode "default"
+}
 
 # Commands to run on i3 start
 exec --no-startup-id compton -b
@@ -163,33 +174,25 @@ bindsym XF86MonBrightnessDown exec light -U 2
 bindsym $mod+Shift+r restart
 bindsym $mod+F10 exec $HOME/.scripts/i3/toggleCompton
 bindsym $mod+w exec st -e nmtui
-bindsym $mod+m exec $HOME/.scripts/tools/rofiMount
+bindsym $mod+i exec $HOME/.scripts/tools/rofiMount
 bindsym $mod+Shift+m exec $HOME/.scripts/tools/rofiUmount
-
-# Lauch application
-bindsym $sup+t exec thunar
-bindsym $sup+f exec firefox
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot
 bindsym Shift+Print exec scrot -u
 
-# Terminal runnig mathomatic
+# Dropdown terminals
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 2
 exec --no-startup-id st -n math -e mathomatic
-
-bindsym $sup+F12 [instance="math"] kill ; exec st -n math -e mathomatic
-bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
-
-# General purpose terminal
 for_window [instance="gpt"] floating enable
 for_window [instance="gpt"] resize set 750 600
 for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 2
 exec --no-startup-id st -n gpt
 
-bindsym $sup+F11 [instance="gpt"] kill ; exec st -n gpt
+bindsym $sup+F12 [instance="math"] kill ; exec st -n math -e mathomatic ; [instance="gpt"] kill ; exec st -n gpt
+bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
