@@ -4,14 +4,13 @@
 # | |___) | | (_| (_) | | | |  _| | (_| |
 # |_|____/   \___\___/|_| |_|_| |_|\__, |
 #                                  |___/
-
-for_window [class="^.*"] border pixel 2
-hide_edge_borders smart
+font pango:monospace 10
 
 set $sup Mod4
 set $mod Mod1
 
-font xft:misc fixed:pixelsize=10;1
+for_window [class="^.*"] border pixel 2
+hide_edge_borders smart
 
 # Open terminal
 bindsym $mod+Ctrl+t exec st
@@ -20,7 +19,7 @@ bindsym $mod+Ctrl+t exec st
 bindsym $mod+Shift+q kill
 
 # Start command launcher
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec rofi -show run
 
 # Change focus
 bindsym $mod+Left focus left
@@ -35,15 +34,14 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Split orientation
-bindsym $mod+t split toggle
+bindsym $mod+Shift+s split toggle
 
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# Toggle tiling / floating
+# floating windows
 bindsym $mod+Shift+space floating toggle
-
-# Change focus between tiling / floating windows
+floating_modifier $mod
 bindsym $mod+space focus mode_toggle
 
 # Navigate workspaces next / previous
@@ -51,28 +49,16 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 # Workspaces
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
-set $ws10 10
-
-# Assig to monitors
-# workspace $ws1 output HDMI-1
-# workspace $ws2 output HDMI-1
-# workspace $ws3 output HDMI-1
-# workspace $ws4 output HDMI-1
-# workspace $ws5 output HDMI-1
-# workspace $ws6 output HDMI-1
-# workspace $ws7 output HDMI-1
-# workspace $ws8 output HDMI-1
-# workspace $ws9 output DVI-I-1
-# workspace $ws10 output DVI-I-1
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -111,21 +97,22 @@ gaps outer -3
 
 smart_gaps on
 
-bindsym $mod+b exec --no-startup-id $HOME/.scripts/i3/i3borders
+bindsym $mod+b exec i3borders
 
-# Open specific applications in floating mode
+# Special app beheaviour
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
 for_window [class="jetbrains-toolbox"] floating enable border normal
+for_window [class="Firefox"] move container to workspace 1
 
 # Lock i3, suspends+locks i3, logoff, shutdown, reboot
-bindsym $mod+Shift+F3 exec --no-startup-id .scripts/i3/suspend
-bindsym $mod+Shift+x exec --no-startup-id .scripts/i3/i3pixelLock 1
+bindsym $mod+Shift+F3 exec suspend
+bindsym $mod+Shift+x exec i3pixelLock 1
 
-bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
-bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
-bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
+#bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
+#bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
+#bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
 
 # Resize window
 bindsym $sup+Left resize shrink width 20px or 5ppt
@@ -133,28 +120,26 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-set $displayMode "Set display mode [l]aptop [w]idescreen [d]ual"
+set $displayMode "Set display mode [l]aptop [e]xternal [d]ual"
 
 bindsym $mod+m mode $displayMode
 
 mode $displayMode {
-	bindsym l exec $HOME/.scripts/i3/randrLaptop.sh; mode "default"
-	bindsym w exec $HOME/.scripts/i3/randrWidescreen.sh; mode "default"
-	bindsym d exec $HOME/.scripts/i3/randrDualScreen.sh; mode "default"
+	bindsym l exec randrLaptop.sh; mode "default"
+	bindsym e exec randrExternal.sh; mode "default"
+	bindsym d exec randrDualScreen.sh; mode "default"
 	bindsym Escape mode "default"
 }
 
 # Commands to run on i3 start
 exec --no-startup-id compton -b
-exec --no-startup-id $HOME/.scripts/i3/setbg
+exec --no-startup-id setbg
 exec --no-startup-id mpd
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
-exec --no-startup-id setxkbmap -option caps:escape
+exec --no-startup-id dunst
+exec --no-startup-id remap.sh
 # exec --no-startup-id ./.scripts/screenArandr
-
-# Keyboard layout
-exec_always --no-startup-id  $HOME/.scripts/i3/keyboardLayout.sh
 
 # Audio / mpd control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0  -3%
@@ -172,10 +157,9 @@ bindsym XF86MonBrightnessDown exec light -U 2
 
 # Other
 bindsym $mod+Shift+r restart
-bindsym $mod+F10 exec $HOME/.scripts/i3/toggleCompton
+bindsym $mod+F10 exec toggleCompton
 bindsym $mod+w exec st -e nmtui
-bindsym $mod+i exec $HOME/.scripts/tools/rofiMount
-bindsym $mod+Shift+m exec $HOME/.scripts/tools/rofiUmount
+bindsym $mod+s exec ducksearch
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot
@@ -193,6 +177,6 @@ for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 2
 exec --no-startup-id st -n gpt
 
-bindsym $sup+F12 [instance="math"] kill ; exec st -n math -e mathomatic ; [instance="gpt"] kill ; exec st -n gpt
+bindsym $mod+F12 [instance="math"] kill ; exec st -n math -e mathomatic ; [instance="gpt"] kill ; exec st -n gpt
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
