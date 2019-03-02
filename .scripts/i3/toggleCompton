@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TOGGLE=$HOME/.scripts/.toggleTmp
+TOGGLE=/tmp/.toggleTmp
 
 if [ ! -e $TOGGLE ]; then
     touch $TOGGLE

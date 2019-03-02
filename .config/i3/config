@@ -4,51 +4,28 @@
 # | |___) | | (_| (_) | | | |  _| | (_| |
 # |_|____/   \___\___/|_| |_|_| |_|\__, |
 #                                  |___/
-font pango:monospace 10
 
+# ==================
+# ---Basic config---
+# ==================
 set $sup Mod4
 set $mod Mod1
-
+font pango:monospace 10
 for_window [class="^.*"] border pixel 2
 hide_edge_borders smart
+smart_gaps on
+gaps inner 10
+gaps outer -3
 
-# Open terminal
-bindsym $mod+Ctrl+t exec st
+#                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
+client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
+client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #282a2e
+client.unfocused                #707880         #1d1f21         #707880         #282a2e         #282a2e
+client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
 
-# Window kill command
-bindsym $mod+Shift+q kill
-
-# Start command launcher
-bindsym $mod+d exec rofi -show run
-
-# Change focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# Move focused window
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# Split orientation
-bindsym $mod+Shift+s split toggle
-
-# Toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# floating windows
-bindsym $mod+Shift+space floating toggle
-floating_modifier $mod
-bindsym $mod+space focus mode_toggle
-
-# Navigate workspaces next / previous
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
-
-# Workspaces
+# ================
+# ---Workspaces---
+# ================
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -60,7 +37,6 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -72,7 +48,6 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
-# Move program to specific workspace
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -84,44 +59,77 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
-#                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
-client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
-client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.unfocused                #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.background               #1d1f21
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
 
-# Gaps
-gaps inner 10
-gaps outer -3
-
-smart_gaps on
-
-bindsym $mod+b exec i3borders
-
-# Special app beheaviour
+# ==================
+# ---Applications---
+# ==================
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
-for_window [class="jetbrains-toolbox"] floating enable border normal
 for_window [class="Firefox"] move container to workspace 1
 
-# Lock i3, suspends+locks i3, logoff, shutdown, reboot
-bindsym $mod+Shift+F3 exec suspend
-bindsym $mod+Shift+x exec i3pixelLock 1
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 2
+for_window [instance="gpt"] floating enable
+for_window [instance="gpt"] resize set 750 600
+for_window [instance="gpt"] move scratchpad
+for_window [instance="gpt"] border pixel 2
 
-#bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
-#bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
-#bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
-# Resize window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+s split toggle
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Shift+space floating toggle
+floating_modifier $mod
+bindsym $mod+space focus mode_toggle
+
 bindsym $sup+Left resize shrink width 20px or 5ppt
 bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-set $displayMode "Set display mode [l]aptop [e]xternal [d]ual"
+bindsym $mod+F12 [instance="math"] kill ; exec st -n math -e mathomatic ; [instance="gpt"] kill ; exec st -n gpt
+bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
+bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 
+exec --no-startup-id compton -b
+exec --no-startup-id setbg
+exec --no-startup-id mpd
+exec --no-startup-id polybarLaunch
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+exec --no-startup-id dunst
+exec --no-startup-id remap.sh
+exec --no-startup-id st -n math -e mathomatic
+exec --no-startup-id st -n gpt
+
+# ==================
+# ---Key bindings---
+# ==================
+bindsym $mod+Ctrl+t exec st
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Shift+r restart
+
+bindsym $mod+Shift+x exec pixelLock 1
+bindsym $mod+Shift+F3 exec pixelLock 1 ; exec systemctl suspend
+bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
+bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
+bindsym $modiShift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
+
+set $displayMode "Set display mode [l]aptop [e]xternal [d]ual"
 bindsym $mod+m mode $displayMode
 
 mode $displayMode {
@@ -130,16 +138,6 @@ mode $displayMode {
 	bindsym d exec randrDualScreen.sh; mode "default"
 	bindsym Escape mode "default"
 }
-
-# Commands to run on i3 start
-exec --no-startup-id compton -b
-exec --no-startup-id setbg
-exec --no-startup-id mpd
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
-exec --no-startup-id dunst
-exec --no-startup-id remap.sh
-# exec --no-startup-id ./.scripts/screenArandr
 
 # Audio / mpd control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0  -3%
@@ -156,27 +154,12 @@ bindsym XF86MonBrightnessUp exec light -A 2
 bindsym XF86MonBrightnessDown exec light -U 2
 
 # Other
-bindsym $mod+Shift+r restart
 bindsym $mod+F10 exec toggleCompton
+bindsym $mod+b exec toggleGaps
 bindsym $mod+w exec st -e nmtui
 bindsym $mod+s exec ducksearch
 
 # Take screenshot of desktop/focused window
-bindsym Print exec  scrot
-bindsym Shift+Print exec scrot -u
+bindsym Print exec  scrot -e 'mv $f ~/Pictures/'
+bindsym Shift+Print exec scrot -u -e 'mv $f ~/Pictures/'
 
-# Dropdown terminals
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 800 300
-for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 2
-exec --no-startup-id st -n math -e mathomatic
-for_window [instance="gpt"] floating enable
-for_window [instance="gpt"] resize set 750 600
-for_window [instance="gpt"] move scratchpad
-for_window [instance="gpt"] border pixel 2
-exec --no-startup-id st -n gpt
-
-bindsym $mod+F12 [instance="math"] kill ; exec st -n math -e mathomatic ; [instance="gpt"] kill ; exec st -n gpt
-bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
