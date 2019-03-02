@@ -16,6 +16,7 @@ is hardcoded to i3 config.
 + ranger
 + zathura
 + sxiv
++ dunst
 
 # "Dependencies"
 + light - you can use xbacklight for polybar, but module for it isn't configured
@@ -27,3 +28,5 @@ is hardcoded to i3 config.
 + mathomatic (running in dropdrown terminal)
 + mpc
 + st
++ xclip
++ simple-mtpfs
