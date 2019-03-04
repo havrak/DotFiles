@@ -19,16 +19,16 @@ export VISUAL="nvim"
 
 #aliases
 alias p="sudo yaourt"
-alias v="vim"
+alias v="nvim"
 alias orphans="yaourt -Qqtd"
 alias sr="sudo ranger"
 alias r="ranger"
 alias c="clear"
 alias sv="sudoedit"
-alias gitpush="git remote | xargs -L1 git push --all"
+alias grp="git remote | xargs -L1 git push --all"
 alias g="git"
 alias music="ncmpcpp"
-alias zathura="zathura --fork"
+alias z="zathura --fork"
 alias s="sxiv"
 
 if [ "$EUID" -ne 0 ]
