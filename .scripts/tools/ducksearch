@@ -4,11 +4,13 @@
 # Without input, will open DuckDuckGo.com.
 # URLs will be directly handed to the browser.
 # Anything else, it search it.
+
+
 browser=${BROWSER:-firefox}
 
 pgrep -x dmenu && exit
 
-choice=$(echo "	 	" | rofi -dmenu -i -p "Search DuckDuckGo:") || exit 1
+choice=$(echo "	 	" | rofi -dmenu -i -p "Search DuckDuckGo") || exit 1
 
 if [ "$choice" = "	 	"  ]; then
     $browser "https://duckduckgo.com"
@@ -23,3 +25,4 @@ else
     	i3-msg workspace 1
 	fi
 fi
+
