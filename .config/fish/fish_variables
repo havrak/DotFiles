@@ -12,7 +12,7 @@ SETUVAR _fish_abbr_p:yaourt
 SETUVAR _fish_abbr_r:ranger
 SETUVAR _fish_abbr_s:sxiv
 SETUVAR _fish_abbr_sr:sudo\x20ranger
-SETUVAR _fish_abbr_sv:sudoedit
+SETUVAR _fish_abbr_sv:sudo\x20nvim
 SETUVAR _fish_abbr_v:nvim
 SETUVAR _fish_abbr_z:zathura\x20\x2d\x2dfork
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
