@@ -9,6 +9,7 @@ is hardcoded to i3 config.
 + vim
 + polybar
 + bash
++ fish
 + rofi
 + mpd
 + ncmpcpp
