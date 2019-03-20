@@ -35,7 +35,7 @@ cursor-scroll = ns-resize
 
 [colors]
 foreground = #e0e0e0
-background = #88121212
+background = #bf282828
 green = #b8bb26
 red = #cc241d
 grey = #83A598
@@ -266,8 +266,7 @@ label-song-ellipsis = true
 [module/screen]
 type = custom/script
 interval = 0.5
-exec = ~/.scripts/i3/polybarBacklight
-
+exec = echo "$(light | cut -d. -f1)"
 scroll-up = exec light -A 5
 scroll-down = exec light -U 5
 

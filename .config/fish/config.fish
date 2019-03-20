@@ -42,5 +42,5 @@ abbr z "zathura --fork"
 abbr s "sxiv"
 abbr java8jar "/usr/lib/jvm/java-8-jdk/jre/bin/java -jar"
 abbr java8 "/usr/lib/jvm/java-8-jdk/jre/bin/java"
-
+abbr yt "youtube-dl --add-metadata -i -o 'YT-%(title)s'"
 
