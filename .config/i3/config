@@ -89,7 +89,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+Shift+s split toggle
+bindsym $mod+s split toggle
 bindsym $mod+f fullscreen toggle
 
 bindsym $mod+Shift+space floating toggle
@@ -108,6 +108,7 @@ bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position 
 exec --no-startup-id compton -b
 exec --no-startup-id setbg
 exec --no-startup-id mpd
+exec --no-startup-id xrdb .Xresources
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id dunst
@@ -120,11 +121,11 @@ exec --no-startup-id st -n gpt
 # ==================
 bindsym $mod+Ctrl+t exec st
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show run -theme .config/rofi/rofi.rasi
 bindsym $mod+Shift+r restart
 
-bindsym $mod+Shift+x exec pixelLock 1
-bindsym $mod+Shift+F3 exec pixelLock 1 ; exec systemctl suspend
+bindsym $mod+Shift+x exec pixelLock
+bindsym $mod+Shift+F3 exec pixelLock; exec systemctl suspend
 bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
 bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
 bindsym $modiShift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
@@ -140,9 +141,9 @@ mode $displayMode {
 }
 
 # Audio / mpd control
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0  -3%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0  +3%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -3%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +3%
+bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
 bindsym $mod+greater exec mpc next
 bindsym $mod+less exec mpc prev
 bindsym $mod+e exec mpc toggle
@@ -157,7 +158,6 @@ bindsym XF86MonBrightnessDown exec light -U 2
 bindsym $mod+F10 exec toggleCompton
 bindsym $mod+b exec toggleGaps
 bindsym $mod+w exec st -e nmtui
-bindsym $mod+s exec ducksearch
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot -e 'mv $f ~/Pictures/'

@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
-
-LOCK_IMG=/tmp/pixellock.png
-SNAPSHOT_CMD="scrot $LOCK_IMG"
-[ ! "$BLUR" ] && BLUR=${1:-2}
-
-if [[ $BLUR -eq 0 || $BLUR -eq 1 ]] ; then
-SCALE1="10%" SCALE2="1000%"
-elif [ $BLUR -eq 2 ] ; then
-SCALE1="20%" SCALE2="500%"
-elif [ $BLUR -eq 3 ]; then
-SCALE1="40%" SCALE2="250%"
+scrot /tmp/screen.png
+convert /tmp/screen.png -scale 5% -scale 2000% /tmp/screen.png
+ICON=$HOME/.scripts/files/lock.png
+if [ ! -e $ICON ]; then
+	[[ -f $1 ]] && convert /tmp/screen.png $1 -gravity center -composite -matte /tmp/screen.png
+else
+	convert /tmp/screen.png /home/havra/.scripts/files/lock.png -gravity NorthWest -composite -matte /tmp/screen.png
 fi
-
-$SNAPSHOT_CMD
-convert $LOCK_IMG -scale $SCALE1 -scale $SCALE2 $LOCK_IMG
-i3lock -i $LOCK_IMG
-rm $LOCK_IMG
+mpc pause
+i3lock -i /tmp/screen.png
+rm /tmp/screen.png
