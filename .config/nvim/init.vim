@@ -20,31 +20,41 @@ call plug#end()
 " Some basics:
 	set nocompatible
 	filetype plugin on
-	set ts=4
+    set tabstop=4 shiftwidth=4
 	syntax on
 	set encoding=utf-8
-	set number relativenumber
-	colorscheme darcula
+	set number
+	set clipboard=unnamedplus
+    colorscheme darcula
+	set mouse=a
 " Enable autocompletion:
 	set wildmode=longest,list,full
 " Disables automatic commenting on newline:
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 " Goyo plugin makes text more readable when writing prose:
 	map <leader>f :Goyo \| set linebreak<CR>
-
 " Typing
 	map <leader>o :setlocal spell! spelllang=en_us<CR>
 	map <leader>i :setlocal spell! spelllang=cs<CR>
 	map <leader>l :set linebreak <CR>
 
+	set dictionary+=~/.config/nvim/dict/english_words
+	set dictionary+=~/.config/nvim/dict/czech_words
+	set complete+=k
+	inoremap <C-space> <C-X><C-K>
+
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
+	set splitright splitbelow
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
 	map <C-k> <C-w>k
 	map <C-l> <C-w>l
+
+	map <C-Left> <C-w>h
+	map <C-Down> <C-w>j
+	map <C-Up> <C-w>k
+	map <C-Right> <C-w>l
 
 " Replace all is aliased to S.
 	nnoremap S :%s//<Left>
@@ -61,12 +71,9 @@ call plug#end()
 " Ensure files are read as what I want:
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
-
-" Readmes autowrap text:
-	autocmd BufRead,BufNewFile *.md set tw=79
-
+	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 " Copy selected text to system clipboard
-	vnoremap <C-c> "+y
+	map <C-c> "+y
 	map <C-x> "+x
 	map <C-p> "+P
 
@@ -196,7 +203,7 @@ call plug#end()
 
 "MARKDOWN
 	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
-"	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
+	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
 	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
 	autocmd Filetype markdown,rmd inoremap ,e **<++><Esc>F*i
@@ -207,7 +214,6 @@ call plug#end()
 	autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-	autocmd Filetype markdown,rmd inoremap ,n <P style="page-break-before: always">
 
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO

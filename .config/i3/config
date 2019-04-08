@@ -121,7 +121,7 @@ exec --no-startup-id st -n gpt
 # ==================
 bindsym $mod+Ctrl+t exec st
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec rofi -show run -theme .config/rofi/rofi.rasi
+bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+r restart
 
 bindsym $mod+Shift+x exec pixelLock

@@ -89,7 +89,6 @@ format-connected-background = ${colors.background}
 format-connected-foreground = ${colors.foreground}
 format-connected-padding = 1
 format-connected-underline = ${colors.foreground}
-;label-connected =  %essid% %downspeed% %upspeed%
 label-connected =  %essid%
 
 format-disconnected =
@@ -103,7 +102,6 @@ format-connected-background = ${colors.background}
 format-connected-foreground = ${colors.foreground}
 format-connected-padding = 1
 format-connected-underline = ${colors.foreground}
-;label-connected = %local_ip% %downspeed% %upspeed%
 label-connected = %local_ip%
 
 format-disconnected =

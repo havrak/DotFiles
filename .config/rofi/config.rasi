@@ -83,8 +83,7 @@
 	columns: 5;
 }
 #element selected  normal {
-    background-color: @lightwhite;
-    text-color: @lightblack;
+    text-color: @lightred;
 }
 #element normal active {
     text-color: @lightblue;
