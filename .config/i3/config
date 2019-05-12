@@ -8,20 +8,21 @@
 # ==================
 # ---Basic config---
 # ==================
+for_window [class="^.*"] border pixel 2
 set $sup Mod4
 set $mod Mod1
-font pango:monospace 10
-for_window [class="^.*"] border pixel 2
+font pango:mono 10
 hide_edge_borders smart
-smart_gaps on
 gaps inner 10
 gaps outer -3
+smart_gaps on
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
 client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #282a2e
 client.unfocused                #707880         #1d1f21         #707880         #282a2e         #282a2e
 client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
+
 
 # ================
 # ---Workspaces---
@@ -101,38 +102,35 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 [instance="math"] kill ; exec st -n math -e mathomatic ; [instance="gpt"] kill ; exec st -n gpt
+bindsym $mod+F12 [instance="math"] kill ; exec st -n math -e python; [instance="gpt"] kill ; exec st -n gpt
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 
 exec --no-startup-id compton -b
 exec --no-startup-id setbg
 exec --no-startup-id mpd
-exec --no-startup-id xrdb .Xresources
+exec --no-startup-id xrdb .Xresources ; exec st -n math -e python; exec -n -gpt
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id dunst
 exec --no-startup-id remap.sh
-exec --no-startup-id st -n math -e mathomatic
-exec --no-startup-id st -n gpt
 
 # ==================
 # ---Key bindings---
 # ==================
 bindsym $mod+Ctrl+t exec st
+bindsym $mod+Ctrl+r exec st -e ranger
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+r restart
 
 bindsym $mod+Shift+x exec pixelLock
-bindsym $mod+Shift+F3 exec pixelLock; exec systemctl suspend
+bindsym $mod+Shift+F3 exec suspendLock
 bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
 bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
-bindsym $modiShift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
+bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
 
 set $displayMode "Set display mode [l]aptop [e]xternal [d]ual"
-bindsym $mod+m mode $displayMode
-
 mode $displayMode {
 	bindsym l exec randrLaptop.sh; mode "default"
 	bindsym e exec randrExternal.sh; mode "default"
@@ -141,9 +139,10 @@ mode $displayMode {
 }
 
 # Audio / mpd control
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -3%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +3%
-bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
 bindsym $mod+greater exec mpc next
 bindsym $mod+less exec mpc prev
 bindsym $mod+e exec mpc toggle
@@ -158,6 +157,15 @@ bindsym XF86MonBrightnessDown exec light -U 2
 bindsym $mod+F10 exec toggleCompton
 bindsym $mod+b exec toggleGaps
 bindsym $mod+w exec st -e nmtui
+bindsym $mod+F9 exec fanSpeedControl
+bindsym XF86Display mode $displayMode
+bindsym $mod+m mode $displayMode
+bindsym XF86Search exec duckSearch
+bindsym $sup+m exec rofiMount
+bindsym $sup+Shift+m exec rofiUmount
+# bindsym XF86Tools
+# bindsym XF86LaunchA
+
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot -e 'mv $f ~/Pictures/'

@@ -1,4 +1,3 @@
-
 "        _
 " __   _(_)_ __ ___  _ __ ___
 " \ \ / / | '_ ` _ \| '__/ __|
@@ -9,6 +8,7 @@ let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/goyo.vim'
+Plug 'dylanaraps/wal.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
@@ -25,7 +25,7 @@ call plug#end()
 	set encoding=utf-8
 	set number
 	set clipboard=unnamedplus
-    colorscheme darcula
+	colorscheme darcula
 	set mouse=a
 " Enable autocompletion:
 	set wildmode=longest,list,full
@@ -38,10 +38,10 @@ call plug#end()
 	map <leader>i :setlocal spell! spelllang=cs<CR>
 	map <leader>l :set linebreak <CR>
 
-	set dictionary+=~/.config/nvim/dict/english_words
-	set dictionary+=~/.config/nvim/dict/czech_words
-	set complete+=k
-	inoremap <C-space> <C-X><C-K>
+"	set dictionary+=~/.config/nvim/dict/english_words
+"	set dictionary+=~/.config/nvim/dict/czech_words
+"	set complete+=k
+"	inoremap <C-space> <C-X><C-K>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitright splitbelow
@@ -71,10 +71,10 @@ call plug#end()
 " Ensure files are read as what I want:
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
-	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+
 " Copy selected text to system clipboard
-	map <C-c> "+y
-	map <C-x> "+x
+	map <C-c> "*y :let @+=@*<CR>
+	map <C-x> "*x :let @+=@*<CR>
 	map <C-p> "+P
 
 " Automatically deletes all trailing whitespace on save.
@@ -155,6 +155,8 @@ call plug#end()
 	autocmd FileType tex inoremap ,nu $\varnothing$
 	autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
 	autocmd FileType tex inoremap ,rn (\ref{})<++><Esc>F}i
+	autocmd FileType tex inoremap ,, \<++>{<++>}
+
 
 """HTML
 	autocmd FileType html inoremap ,b <b></b><Space><++><Esc>FbT>i

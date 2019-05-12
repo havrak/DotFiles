@@ -1,5 +1,6 @@
 #!/usr/bin/fish
 
+
 set PATH (du "$HOME/.scripts/" | cut -f2 | tr '\n' ':') $PATH
 set -x READER zathura
 set -x EDITOR nvim
@@ -34,7 +35,8 @@ abbr orphans "yaourt -Qqtd"
 abbr sr "sudo ranger"
 abbr r "ranger"
 abbr c "clear"
-abbr sv "sudo nvim"
+abbr n "neomutt"
+abbr sv "sudoedit"
 abbr grp "git remote | xargs -L1 git push --all"
 abbr g "git"
 abbr music "ncmpcpp"
@@ -42,5 +44,9 @@ abbr z "zathura --fork"
 abbr s "sxiv"
 abbr java8jar "/usr/lib/jvm/java-8-jdk/jre/bin/java -jar"
 abbr java8 "/usr/lib/jvm/java-8-jdk/jre/bin/java"
-abbr yt "youtube-dl --add-metadata -i -o 'YT-%(title)s'"
+abbr yt "youtube-dl --add-metadata -i -o '%(title)s'"
+abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
+abbr sc "sudo systemctl"
+abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
+
 

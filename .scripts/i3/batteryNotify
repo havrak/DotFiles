@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# not charging
+battery_level=$(acpi -b | awk 'NR==1' |grep -P -o '[0-9]+(?=%)')
+battery_status=$(acpi -b | awk 'NR==2' |awk -v FS=' ' '{print substr($3,0,length($3)-1)}')
+
+
+if [ $battery_level -le 10 ] && [ "$battery_status" == "Discharging" ]; then
+    notify-send "Battery low" "Battery level is ${battery_level}%!"
+fi

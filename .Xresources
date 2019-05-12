@@ -2,7 +2,8 @@
 *foreground      : #f8f8f2
 *foreground_bold : #f8f8f2
 *cursor          : #90A4AE
-*background      : #121212
+*background      : #000000
+!*background      : #121212
 
 ! Black + DarkGrey
 *color0:  #202020
@@ -29,7 +30,6 @@
 *color7:  #a89984
 *color15: #e0e0e0
 
-! Rofi
 rofi.color-enabled: true
 rofi.color-window: #242424, #c6c8c5, #c6c8c5
 rofi.color-normal: #242424, #707880, #242424, #242424, #c6c8c5
@@ -45,4 +45,6 @@ rofi.columns: 2
 rofi.padding: 7
 rofi.fixed-num-lines: true
 rofi.hide-scrollbar: true
+
+*.font:	Mono:pixelsize=12:antialias=true:autohint=true;
 

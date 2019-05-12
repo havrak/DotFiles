@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pixelLock
+sleep 0.1
+systemctl suspend

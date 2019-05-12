@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 scrot /tmp/screen.png
-convert /tmp/screen.png -scale 5% -scale 2000% /tmp/screen.png
+convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
 ICON=$HOME/.scripts/files/lock.png
 if [ ! -e $ICON ]; then
 	[[ -f $1 ]] && convert /tmp/screen.png $1 -gravity center -composite -matte /tmp/screen.png
