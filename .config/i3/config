@@ -15,7 +15,7 @@ font pango:mono 10
 hide_edge_borders smart
 gaps inner 10
 gaps outer -3
-smart_gaps on
+smart_gaps off
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
