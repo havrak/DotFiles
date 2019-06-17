@@ -1,8 +1,8 @@
 #!/bin/sh
 name=$(iwgetid -r)
 
-if [ ${#name} -ge 10 ]; then
-    echo "${name:0:10}"
+if [ ${#name} -ge 12 ]; then
+    echo "${name:0:12}"
     exit
 else
     echo "$name"

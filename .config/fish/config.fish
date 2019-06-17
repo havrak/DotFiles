@@ -2,6 +2,8 @@
 
 
 set PATH (du "$HOME/.scripts/" | cut -f2 | tr '\n' ':') $PATH
+set PATH "$HOME/esp/xtensa-esp32-elf/bin/" $PATH
+export IDF_PATH="$HOME/esp/esp-idf"
 set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox

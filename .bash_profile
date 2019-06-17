@@ -10,6 +10,8 @@ stty -ixon
 
 alias ls='ls --color=auto'
 export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
+export PATH="$HOME/esp/xtensa-esp32-elf/bin:$PATH"
+export IDF_PATH="$HOME/esp/esp-idf"
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"

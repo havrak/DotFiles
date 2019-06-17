@@ -15,12 +15,14 @@ Plug 'jreybert/vimagit'
 Plug 'wincent/command-t'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 " Some basics:
 	set nocompatible
 	filetype plugin on
-    set tabstop=4 shiftwidth=4
+    set t_Co=256
+	set tabstop=4 shiftwidth=4
 	syntax on
 	set encoding=utf-8
 	set number
@@ -109,6 +111,10 @@ call plug#end()
 	let g:airline_symbols.maxlinenr = ''
 	let g:Powerline_symbols = 'fancy'
 
+
+
+	let g:ycm_use_clangd = 1
+	let g:ycm_clangd_binary_path = "/usr/bin/clangd"
 "____        _                  _
 "/ ___| _ __ (_)_ __  _ __   ___| |_ ___
 "\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
@@ -155,7 +161,8 @@ call plug#end()
 	autocmd FileType tex inoremap ,nu $\varnothing$
 	autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
 	autocmd FileType tex inoremap ,rn (\ref{})<++><Esc>F}i
-	autocmd FileType tex inoremap ,, \<++>{<++>}
+	autocmd FileType tex inoremap ,, \
+	autocmd FileType tex inoremap ,) \{}
 
 
 """HTML
@@ -216,6 +223,7 @@ call plug#end()
 	autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
+	autocmd Filetype markdown,rmd inoremap ,, +<Space>
 
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO

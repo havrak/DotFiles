@@ -13,8 +13,10 @@ set $sup Mod4
 set $mod Mod1
 font pango:mono 10
 hide_edge_borders smart
-gaps inner 10
-gaps outer -3
+gaps inner 8
+gaps outer 0
+gaps top 0
+
 smart_gaps off
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
@@ -109,7 +111,7 @@ bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position 
 exec --no-startup-id compton -b
 exec --no-startup-id setbg
 exec --no-startup-id mpd
-exec --no-startup-id xrdb .Xresources ; exec st -n math -e python; exec -n -gpt
+exec --no-startup-id xrdb .Xresources
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id dunst
@@ -139,10 +141,10 @@ mode $displayMode {
 }
 
 # Audio / mpd control
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -3%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +3%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pavucontrol pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+greater exec mpc next
 bindsym $mod+less exec mpc prev
 bindsym $mod+e exec mpc toggle
@@ -155,7 +157,6 @@ bindsym XF86MonBrightnessDown exec light -U 2
 
 # Other
 bindsym $mod+F10 exec toggleCompton
-bindsym $mod+b exec toggleGaps
 bindsym $mod+w exec st -e nmtui
 bindsym $mod+F9 exec fanSpeedControl
 bindsym XF86Display mode $displayMode
@@ -165,7 +166,6 @@ bindsym $sup+m exec rofiMount
 bindsym $sup+Shift+m exec rofiUmount
 # bindsym XF86Tools
 # bindsym XF86LaunchA
-
 
 # Take screenshot of desktop/focused window
 bindsym Print exec  scrot -e 'mv $f ~/Pictures/'
