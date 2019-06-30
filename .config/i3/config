@@ -132,19 +132,11 @@ bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logof
 bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
 bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
 
-set $displayMode "Set display mode [l]aptop [e]xternal [d]ual"
-mode $displayMode {
-	bindsym l exec randrLaptop.sh; mode "default"
-	bindsym e exec randrExternal.sh; mode "default"
-	bindsym d exec randrDualScreen.sh; mode "default"
-	bindsym Escape mode "default"
-}
-
 # Audio / mpd control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -3%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +3%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pavucontrol pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+greater exec mpc next
 bindsym $mod+less exec mpc prev
 bindsym $mod+e exec mpc toggle
@@ -159,8 +151,8 @@ bindsym XF86MonBrightnessDown exec light -U 2
 bindsym $mod+F10 exec toggleCompton
 bindsym $mod+w exec st -e nmtui
 bindsym $mod+F9 exec fanSpeedControl
-bindsym XF86Display mode $displayMode
-bindsym $mod+m mode $displayMode
+bindsym XF86Display exec arandr
+bindsym $mod+m exec screenChooser
 bindsym XF86Search exec duckSearch
 bindsym $sup+m exec rofiMount
 bindsym $sup+Shift+m exec rofiUmount
@@ -168,6 +160,6 @@ bindsym $sup+Shift+m exec rofiUmount
 # bindsym XF86LaunchA
 
 # Take screenshot of desktop/focused window
-bindsym Print exec  scrot -e 'mv $f ~/Pictures/'
+bindsym Print exec scrot -e 'mv $f ~/Pictures/'
 bindsym Shift+Print exec scrot -u -e 'mv $f ~/Pictures/'
 
