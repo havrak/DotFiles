@@ -11,19 +11,13 @@
 for_window [class="^.*"] border pixel 2
 set $sup Mod4
 set $mod Mod1
-font pango:mono 10
 hide_edge_borders smart
-gaps inner 8
-gaps outer 0
-gaps top 0
-
-smart_gaps off
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
-client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.unfocused                #707880         #1d1f21         #707880         #282a2e         #282a2e
-client.urgent                   #707880         #1d1f21         #707880         #282a2e         #282a2e
+client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #458588
+client.unfocused                #707880         #1d1f21         #707880         #282a2e         #458588
+client.urgent                   #707880         #1d1f21         #707880         #282a2e         #458588
 
 
 # ================
@@ -162,4 +156,3 @@ bindsym $sup+Shift+m exec rofiUmount
 # Take screenshot of desktop/focused window
 bindsym Print exec scrot -e 'mv $f ~/Pictures/'
 bindsym Shift+Print exec scrot -u -e 'mv $f ~/Pictures/'
-

@@ -2,8 +2,8 @@
 
 
 set PATH (du "$HOME/.scripts/" | cut -f2 | tr '\n' ':') $PATH
-set PATH "$HOME/esp/xtensa-esp32-elf/bin/" $PATH
-export IDF_PATH="$HOME/esp/esp-idf"
+set PATH "$HOME/Programming/ESP/xtensa-esp32-elf/bin/" $PATH
+export IDF_PATH="$HOME/Programming/ESP/esp-idf"
 set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox
@@ -31,6 +31,8 @@ function fish_prompt
 	printf '\033[?1h\033=' >/dev/tty
 end
 
+abbr esp8266flash "arduino-cli upload -p /dev/ttyUSB0 --fqbn esp8266:esp8266:nodemcuv2"
+abbr esp8266copile "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2"
 abbr p "yaourt"
 abbr v "nvim"
 abbr orphans "yaourt -Qqtd"

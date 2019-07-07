@@ -1,8 +1,0 @@
-#!/bin/sh
-
-temp=$(du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | sed -n '$=')$(cat /tmp/imapsyncicon_$USER 2>/dev/null)
-if [[ $temp ]]; then
-    echo " $temp"
-else
-    echo " 0"
-fi

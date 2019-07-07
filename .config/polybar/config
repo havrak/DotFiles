@@ -6,14 +6,8 @@
 # |_|            |___/                                          |___/
 [bar/default]
 width = 100%
-height = 22
+height = 17
 fixed-center = true
-border-right-size = 8
-border-left-size = 8
-border-top-size = 8
-border-bottom-size = 0
-border-color = #00000000
-radius = 5.0
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -25,16 +19,15 @@ line-size = 3
 line-color = ${colors.foreground}
 
 modules-left = i3 mpd
-modules-center = date
-modules-right = mail cpu temperature volume screen xkeyboard battery battery2 wlan eth
+modules-center =
+modules-right = mail temperature volume screen xkeyboard battery battery2 wlan eth date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 [colors]
 foreground = #e0e0e0
-;background = #55060744
-background = #bb282828
+background = #d11d2021
 green = #b8bb26
 red = #cc241d
 grey = #83A598
@@ -77,17 +70,29 @@ label-urgent-background = ${colors.background}
 label-urgent-padding = 1
 label-urgent-underline = ${colors.red}
 
+;[module/wlan]
+;type = custom/script
+;exec = polybarEssid
+;interval = 5.0
+
+;format-background = ${colors.background}
+;format-foreground = ${colors.foreground}
+;format-padding = 1
+;format-underline = ${colors.foreground}
+;label =  %output%
+
 [module/wlan]
-type = custom/script
-exec = polybarEssid
+type = internal/network
+;interface = wlo1
+interface = wlp3s0
 interval = 5.0
 
-format-background = ${colors.background}
-format-foreground = ${colors.foreground}
-format-padding = 1
-format-underline = ${colors.foreground}
-label =  %output%
-
+format-connected = <label-connected>
+format-connected-background = ${colors.background}
+format-connected-foreground = ${colors.foreground}
+format-connected-padding = 1
+format-connected-underline = ${colors.foreground}
+label-connected =  %signal%%
 
 [module/eth]
 type = internal/network
@@ -98,7 +103,7 @@ format-connected-background = ${colors.background}
 format-connected-foreground = ${colors.foreground}
 format-connected-padding = 1
 format-connected-underline = ${colors.foreground}
-label-connected = %local_ip%
+label-connected = 
 
 format-disconnected =
 
@@ -295,19 +300,6 @@ label-foreground = ${colors.foreground}
 label-background = ${colors.background}
 label-padding = 1
 format-underline = ${colors.darkGrey}
-
-[module/mpcVol]
-type = custom/script
-interval = 0.2
-exec = echo "$(mpc | grep volume | cut -d ':' -f 2 | awk '{print $1}')"
-scroll-up = exec mpc volume +5
-scroll-down = exec mpc volume -5
-
-label = -  %output%
-label-foreground = ${colors.foreground}
-label-background = ${colors.background}
-label-padding-right = 1
-format-underline = ${colors.foreground}
 
 [settings]
 screenchange-reload = true

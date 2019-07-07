@@ -3,7 +3,7 @@
  *
  */
 * {
-	font: "misc fixed 9.5";
+	font: "mono 9.3";
 
     text-color:  #ffeedd;
     background-color:  rgba(0,0,0,0);

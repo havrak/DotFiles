@@ -8,13 +8,13 @@ let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/goyo.vim'
-Plug 'dylanaraps/wal.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'wincent/command-t'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
@@ -98,6 +98,7 @@ call plug#end()
 	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 	map <leader>t :NERDTreeToggle<CR>
 	let NERDTreeShowHidden=1
+	map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 " Vim-airline configuration
 	let g:airline_powerline_fonts = 1
@@ -111,10 +112,10 @@ call plug#end()
 	let g:airline_symbols.maxlinenr = ''
 	let g:Powerline_symbols = 'fancy'
 
+let g:ycm_use_clangd=1
+let g:ycm_clangd_binary_path = "/usr/bin/clangd"
 
 
-	let g:ycm_use_clangd = 1
-	let g:ycm_clangd_binary_path = "/usr/bin/clangd"
 "____        _                  _
 "/ ___| _ __ (_)_ __  _ __   ___| |_ ___
 "\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
