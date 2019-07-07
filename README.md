@@ -18,16 +18,5 @@ is hardcoded to i3 config.
 + zathura
 + sxiv
 + dunst
-
-# "Dependencies"
-+ light - you can use xbacklight for polybar, but module for it isn't configured
-+ i3lock
-+ imagemagic (used for background of i3lock)
-+ scrot (used for background of i3lock)
-+ font misc
-+ font siji
-+ mathomatic (running in dropdrown terminal)
-+ mpc
-+ st
-+ xclip
-+ simple-mtpfs
++ firefox (chrome only)
++ Xresources
