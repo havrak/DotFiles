@@ -31,8 +31,10 @@ function fish_prompt
 	printf '\033[?1h\033=' >/dev/tty
 end
 
-abbr esp8266flash "arduino-cli upload -p /dev/ttyUSB0 --fqbn esp8266:esp8266:nodemcuv2"
-abbr esp8266copile "arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2"
+abbr esp32normflash ">esptool.py --port /dev/ttyUSB0 write_flash 0x10000"
+abbr esp32normcopile "arduino-cli compile --fqbn esp32:esp32:lolin32"
+abbr esp32olimexflash ">esptool.py --port /dev/ttyUSB1 write_flash 0x10000"
+abbr esp32olimexcompile "arduino-cli compile --fqbn esp32:esp32:esp32-gateway"
 abbr p "yaourt"
 abbr v "nvim"
 abbr orphans "yaourt -Qqtd"
@@ -45,7 +47,7 @@ abbr grp "git remote | xargs -L1 git push --all"
 abbr g "git"
 abbr music "ncmpcpp"
 abbr z "zathura --fork"
-abbr s "sxiv"
+abbr s "sensors"
 abbr java8jar "/usr/lib/jvm/java-8-jdk/jre/bin/java -jar"
 abbr java8 "/usr/lib/jvm/java-8-jdk/jre/bin/java"
 abbr yt "youtube-dl --add-metadata -i -o '%(title)s'"

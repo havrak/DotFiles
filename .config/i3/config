@@ -98,7 +98,7 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 [instance="math"] kill ; exec st -n math -e python; [instance="gpt"] kill ; exec st -n gpt
+bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 
@@ -110,11 +110,16 @@ exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id dunst
 exec --no-startup-id remap.sh
+exec --no-startup-id exec pactl set-source-mute @DEFAULT_SOURCE@ 1
+# Disable camera
+exec --no-startup-id xinput set-prop 9 164 0
 
 # ==================
 # ---Key bindings---
 # ==================
 bindsym $mod+Ctrl+t exec st
+bindsym $mod+Ctrl+n exec st -e neomutt
+bindsym $mod+Ctrl+m exec st -e ncmpcpp
 bindsym $mod+Ctrl+r exec st -e ranger
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
