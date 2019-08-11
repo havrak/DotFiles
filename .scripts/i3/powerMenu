@@ -1,0 +1,20 @@
+#!/bin/sh
+choose=$(printf "poweroff\\nreboot\\nlogoff" | rofi -dmenu -i -p "What do you wish to do?")
+echo $choose
+case "$choose" in
+	"poweroff")
+		if [ $(printf "yes\\nno" | rofi -dmenu -i-p "confirm") == "yes" ]; then
+			poweroff
+		fi
+		;;
+	"reboot")
+		if [ $(printf "yes\\nno" | rofi -dmenu -i-p "confirm") == "yes" ]; then
+			reboot
+		fi
+		;;
+	"logoff")
+		if [ $(printf "yes\\nno" | rofi -dmenu -i-p "confirm") == "yes" ]; then
+			i3-msg exit
+		fi
+		;;
+esac

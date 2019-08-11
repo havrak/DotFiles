@@ -65,7 +65,6 @@ bindsym $mod+Ctrl+Left workspace prev
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
-for_window [class="Firefox"] move container to workspace 1
 
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
@@ -110,7 +109,6 @@ exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id dunst
 exec --no-startup-id remap.sh
-exec --no-startup-id exec pactl set-source-mute @DEFAULT_SOURCE@ 1
 # Disable camera
 exec --no-startup-id xinput set-prop 9 164 0
 
@@ -126,10 +124,9 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+r restart
 
 bindsym $mod+Shift+x exec pixelLock
+bindsym $mod+Shift+F2 exec systemctl suspend
 bindsym $mod+Shift+F3 exec suspendLock
-bindsym $mod+Shift+F4 exec "i3-nagbar -t warning -m 'Do you really want to logoff?' -b 'Yes' 'i3-msg exit'"
-bindsym $mod+Shift+F5 exec "i3-nagbar -t warning -m 'Do you really want to reboot?' -b 'Yes' 'reboot'"
-bindsym $mod+Shift+F6 exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes' 'poweroff'"
+bindsym $mod+Shift+F4 exec powerMenu
 
 # Audio / mpd control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -3%
@@ -152,9 +149,9 @@ bindsym $mod+w exec st -e nmtui
 bindsym $mod+F9 exec fanSpeedControl
 bindsym XF86Display exec arandr
 bindsym $mod+m exec screenChooser
-bindsym XF86Search exec duckSearch
 bindsym $sup+m exec rofiMount
 bindsym $sup+Shift+m exec rofiUmount
+# bindsym XF86Search
 # bindsym XF86Tools
 # bindsym XF86LaunchA
 

@@ -29,7 +29,7 @@ cursor-scroll = ns-resize
 [colors]
 foreground = #e0e0e0
 background = #d11d2021
-;background = #1d2021
+;background = #000000
 green = #b8bb26
 red = #cc241d
 grey = #83A598
