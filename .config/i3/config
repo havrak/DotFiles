@@ -66,6 +66,8 @@ bindsym $mod+Ctrl+Left workspace prev
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600
+for_window [window_role="GtkFileChooserDialog"] move position center
 
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 800 300
@@ -151,10 +153,10 @@ bindsym $sup+Shift+m exec rofiUmount
 # bindsym XF86LaunchA
 
 # Power managment
-bindsym $mod+Shift+x exec pixelLock
-bindsym $mod+Shift+F2 exec systemctl suspend
-bindsym $mod+Shift+F3 exec suspendLock
-bindsym $mod+Shift+F4 exec powerMenu
+bindsym $mod+Shift+F1 exec pixelLock
+bindsym $mod+Shift+F2 exec powerMenu -s
+bindsym $mod+Shift+F3 exec powerMenu -l
+bindsym $mod+Shift+F4 exec powerMenu -p
 
 # Audio / mpd control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -3%
@@ -175,3 +177,4 @@ bindsym $sup+n exec netbeans ; exec notify-send "Starting Netbeans"
 bindsym $sup+a exec arduino ; exec notify-send "Starting Arduino"
 bindsym $sup+p exec putty ; exec notify-send "Starting Putty"
 bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
+bindsym $sup+e exec picard ; exec notify-send "Starting Picard"

@@ -1294,17 +1294,14 @@ hbox#sidebar-search-container textbox#search-box {
     }
   }
 }
-input:not(.urlbar-input):not(.textbox-input):not(.form-control):not([type='checkbox']):not([type='radio']), textarea, select {
-    -moz-appearance: none !important;
-    background-color: #eee;
-    color: #111;
-}
-
 #statuspanel #statuspanel-label,
 statuspanel .statuspanel-label {
   background-color: var(--in-content-category-header-background)!important;
   color: var(--in-content-page-color)!important;
   border: none!important
+}
+.tab-line[selected=true] {
+  background-color: var(--in-content-border-focus)!important
 }
 .tab-line[selected=true] {
   background-color: var(--in-content-border-focus)!important
@@ -1319,3 +1316,4 @@ statuspanel .statuspanel-label {
 #sidebar-header { display: none; }
 #statuspanel #statuspanel-label,
 statuspanel[type="status"] .statuspanel-label {display:none!important;}
+

@@ -1,20 +1,39 @@
 #!/bin/sh
-choose=$(printf "poweroff\\nreboot\\nlogoff" | rofi -dmenu -i -p "What do you wish to do?")
-echo $choose
-case "$choose" in
-	"poweroff")
-		if [ $(printf "yes\\nno" | rofi -dmenu -i-p "confirm") == "yes" ]; then
-			poweroff
+if [ $# != 1 ]; then
+	echo "Must enter one flag"
+	exit
+fi
+case "$1" in
+	"-s")
+		if [ $(printf "yes\\nno" | rofi -dmenu -i -p "Do you wish to suspend") == "yes" ]; then
+			systemctl suspend
 		fi
 		;;
-	"reboot")
-		if [ $(printf "yes\\nno" | rofi -dmenu -i-p "confirm") == "yes" ]; then
-			reboot
+	"-l")
+		if [ $(printf "yes\\nno" | rofi -dmenu -i -p "Do you wish to lock and suspend") == "yes" ]; then
+			pixelLock
+			systemctl suspend
 		fi
 		;;
-	"logoff")
-		if [ $(printf "yes\\nno" | rofi -dmenu -i-p "confirm") == "yes" ]; then
-			i3-msg exit
-		fi
+	"-p")
+		choose=$(printf "poweroff\\nreboot\\nlogoff" | rofi -dmenu -i -p "What do you wish to do?")
+		echo $choose
+		case "$choose" in
+			"poweroff")
+				if [ $(printf "yes\\nno" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+					poweroff
+				fi
+				;;
+			"reboot")
+				if [ $(printf "yes\\nno" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+					reboot
+				fi
+				;;
+			"logoff")
+				if [ $(printf "yes\\nno" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+					i3-msg exit
+				fi
+				;;
+		esac
 		;;
 esac

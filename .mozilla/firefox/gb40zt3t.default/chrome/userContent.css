@@ -1702,8 +1702,8 @@ html#feedHandler .enclosures {
 }
 /*! Pop Up Background Fixes */
 @-moz-document url-prefix("moz-extension://{7fc8ef53-24ec-4205-87a4-1e745953bb0d}/popup.html"),
-url-prefix("moz-extension://https-everywhere@eff.org/pages/popup"),
-url-prefix("moz-extension://jid1-BoFifL9Vbdl2zQ@jetpack/pages/popup"),
+url-prefix("moz-extension://98c88bd0-4c3e-455a-ac60-86484ad8deee/pages/popup"),
+url-prefix("moz-extension://b0e3e8ef-803d-4c80-a341-279d5e099331/pages/popup"),
 url-prefix("moz-extension://{b3e677f4-1150-4387-8629-da738260a48e}/data/data/popup.html"),
 url-prefix("moz-extension://renametabtitle@mozilla.org/popup/popup.html"),
 url-prefix("moz-extension://{6f5f4891-9637-41f9-9ee5-3a0ac02cf254}/popup"),
@@ -1738,10 +1738,10 @@ url-prefix("moz-extension://neaturl@hugsmile.eu/"),
 url-prefix("moz-extension://smart-referer@meh.paranoid.pk/"),
 url-prefix("moz-extension://{e225ac78-5e83-484b-a16b-b6ed0924212f}/"),
 url-prefix("moz-extension://{7fc8ef53-24ec-4205-87a4-1e745953bb0d}/"),
-url-prefix("moz-extension://https-everywhere@eff.org/"),
+url-prefix("moz-extension://98c88bd0-4c3e-455a-ac60-86484ad8deee/"),
 url-prefix("moz-extension://skipredirect@sblask/"),
 url-prefix("moz-extension://{174b2d58-b983-4501-ab4b-07e71203cb43}/"),
-url-prefix("moz-extension://jid1-BoFifL9Vbdl2zQ@jetpack/"),
+url-prefix("moz-extension://b0e3e8ef-803d-4c80-a341-279d5e099331/"),
 url-prefix("moz-extension://{b3e677f4-1150-4387-8629-da738260a48e}/"),
 url-prefix("moz-extension://jid0-HYNmqxA9zQGfJADREri4n2AHKSI@jetpack/options/options"),
 url-prefix("moz-extension://treestyletab@piro.sakura.ne.jp/options/options"),
@@ -1844,8 +1844,8 @@ url-prefix("moz-extension://generic_styling_5") {
   }
 }
 /*! Code Mirror */
-@-moz-document url-prefix("moz-extension://{aecec67f-0d10-4fa7-b7c7-609a2db280cf}/"),
-url-prefix("moz-extension://uBlock0@raymondhill.net/"),
+@-moz-document url-prefix("moz-extension://a84d5d4d-0402-4d23-8f5f-fd68976bac08/"),
+url-prefix("moz-extension://f8faf414-f7ea-44e2-b922-50e80d25df1a/"),
 url-prefix("moz-extension://uMatrix@raymondhill.net/"),
 url-prefix("moz-extension://{e4a8a97b-f2ed-450b-b12d-ee082ba24781}/src/content/edit-user-script") {
   .CodeMirror {
@@ -2474,7 +2474,7 @@ toolbarbutton#toggle-button--redirectoreinaregilssoncom-redirector[image*=disabl
 }
 /*! Alters the webextension uBlock Origin
   IMPORTANT: change the Internal UUID */
-@-moz-document url-prefix("moz-extension://uBlock0@raymondhill.net/") {
+@-moz-document url-prefix("moz-extension://f8faf414-f7ea-44e2-b922-50e80d25df1a/") {
   button.custom {
     background-color: var(--in-content-page-background)!important;
     background-image: none!important;
@@ -2770,7 +2770,7 @@ body.colorBlind #netFilteringDialog > .panes > .details > div[data-status="2"],
   /*! COLORBLIND MODE END */
 
 }
-@-moz-document url-prefix("moz-extension://uBlock0@raymondhill.net/logger-ui") {
+@-moz-document url-prefix("moz-extension://f8faf414-f7ea-44e2-b922-50e80d25df1a/logger-ui") {
   .fa-icon > svg,
   .ubo-icon > svg {
     fill: var(--in-content-page-color)!important
@@ -3393,7 +3393,7 @@ body.colorBlind #netFilteringDialog > .panes > .details > div[data-status="2"],
 }
 /*! Alters the webextension Vim Vixen
   IMPORTANT: change the Internal UUID */
-@-moz-document url-prefix("moz-extension://vim-vixen@i-beam.org/") {
+@-moz-document url-prefix("moz-extension://9acbb3b7-cd63-4364-90bc-d47bbbc909e6/") {
   .vimvixen-console-command-wrapper {
     border-top: 1px solid!important
   }
@@ -3439,7 +3439,7 @@ body.colorBlind #netFilteringDialog > .panes > .details > div[data-status="2"],
 }
 /*! Alters the webextension Violentmonkey
   IMPORTANT: change the Internal UUID */
-@-moz-document url-prefix("moz-extension://{aecec67f-0d10-4fa7-b7c7-609a2db280cf}/") {
+@-moz-document url-prefix("moz-extension://a84d5d4d-0402-4d23-8f5f-fd68976bac08/") {
   .edit-settings,
   .tab,
   section > h3 {
