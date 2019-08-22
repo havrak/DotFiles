@@ -7,13 +7,13 @@ unmountusb() {
 	[ -z "$drives" ] && exit
 	chosen=$(printf $(echo "$drives" | rofi -dmenu -i -p "Unmount which drive?" | awk '{print $1}'))
 	[ -z "$chosen" ] && exit
-	sudo -A umount "$chosen" && notify-send "💻 USB unmounting" "$chosen unmounted."
+	umount "$chosen" && notify-send "💻 USB unmounting" "$chosen unmounted."
 	}
 
 unmountandroid() { \
 	chosen=$(awk '/simple-mtpfs/ {print $2}' /etc/mtab | rofi -dmenu -i -p "Unmount which device?")
 	[ -z "$chosen" ] && exit
-	sudo -A umount -l "$chosen" && notify-send "🤖 Android unmounting" "$chosen unmounted."
+	umount -l "$chosen" && notify-send "🤖 Android unmounting" "$chosen unmounted."
 	}
 
 asktype() { \
