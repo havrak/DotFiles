@@ -48,7 +48,6 @@
     orientation: vertical;
     children: [mainbox];
 }
-
 #sidebar {
     border: 2px 0px 0px 0px;
     background-color: #282828bf;
@@ -61,6 +60,7 @@
 #entry {
     width: 80em;
 	expand: false;
+	text-color: #282828;
 }
 #inputbar {
     text-color: @lightgreen;

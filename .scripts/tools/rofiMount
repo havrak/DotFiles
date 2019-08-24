@@ -26,7 +26,7 @@ mountusb() { \
 
 mountandroid() { \
 	chosen=$(echo "$anddrives" | rofi -dmenu -i -p "Which Android device?" | cut -d : -f 1)
-	simple-mtpfs --device "$chosen" $HOME/Android
+	simple-mtpfs --device "$chosen" $HOME/Mount
 	notify-send "🤖 Android Mounting" "Android device mounted to ~/Android."
 	}
 
