@@ -1582,7 +1582,7 @@ html#feedHandler .enclosures {
 }
 /*! Alters the webextension Cookie AutoDelete
   IMPORTANT: change the Internal UUID */
-@-moz-document url-prefix("moz-extension://CookieAutoDelete@kennydo.com/") {
+@-moz-document url-prefix("moz-extension://7e45cc9f-501b-4bd7-b339-8939477e6dd0/") {
   a {
     color: var(--accent-1)
   }

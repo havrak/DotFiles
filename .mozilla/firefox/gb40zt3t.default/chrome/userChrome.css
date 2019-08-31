@@ -1303,9 +1303,6 @@ statuspanel .statuspanel-label {
 .tab-line[selected=true] {
   background-color: var(--in-content-border-focus)!important
 }
-.tab-line[selected=true] {
-  background-color: var(--in-content-border-focus)!important
-}
 #main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
   opacity: 0;
   pointer-events: none;
@@ -1316,4 +1313,5 @@ statuspanel .statuspanel-label {
 #sidebar-header { display: none; }
 #statuspanel #statuspanel-label,
 statuspanel[type="status"] .statuspanel-label {display:none!important;}
+
 
