@@ -2,25 +2,28 @@
 choose=$(printf "speed 1\\nspeed 2\\nspeed 3\\nspeed 4\\nspeed 5\\nspeed auto" | rofi -dmenu -i -p "Choose fan speed")
 
 pass=$(echo "" | rofi -dmenu -config $HOME/.config/rofi/colorLess.rasi -i -p "Enter sudo password")
+echo $pass
 if [ "$pass" != "" ]; then
 	case "$choose" in
 		"speed 1")
-			echo $pass | echo level 1| sudo tee /proc/acpi/ibm/fan
+			echo $pass | sudo echo level 1| sudo tee /proc/acpi/ibm/fan
 			;;
 		"speed 2")
-			echo $pass | echo level 2| sudo tee /proc/acpi/ibm/fan
+			echo $pass | sudo echo level 2| sudo tee /proc/acpi/ibm/fan
 			;;
 		"speed 3")
-			echo $pass | echo level 3| sudo tee /proc/acpi/ibm/fan
+			echo $pass | sudo echo level 3| sudo tee /proc/acpi/ibm/fan
 			;;
 		"speed 4")
-			echo $pass | echo level 4| sudo tee /proc/acpi/ibm/fan
+			echo $pass | sudo echo level 4| sudo tee /proc/acpi/ibm/fan
 			;;
 		"speed 5")
-			echo $pass | echo level 5| sudo tee /proc/acpi/ibm/fan
+			echo $pass | sudo echo level 5| sudo tee /proc/acpi/ibm/fan
 			;;
 		"speed auto")
-			echo $pass | echo level auto| sudo tee /proc/acpi/ibm/fan
+			echo $pass | sudo echo level auto| sudo tee /proc/acpi/ibm/fan
 			;;
 	esac
+	level=$(cat /proc/acpi/ibm/fan | grep level | awk '{print $2}' | sed 1q)
+	notify-send "Fan speed changed to $level"
 fi

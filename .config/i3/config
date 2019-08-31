@@ -104,12 +104,11 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec st -n notes -e vim ~/Documents/Other/notes.md
+bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec st -n notes -e vim -p ~/Documents/Other/notes.md ~/Arduino/ProjectFiles/notes.md
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
-exec --no-startup-id compton -b
 exec --no-startup-id setbg
 exec --no-startup-id mpd
 exec --no-startup-id xrdb .Xresources
@@ -144,10 +143,10 @@ bindsym Shift+Print exec scrot -u -e 'mv $f ~/Pictures/'
 
 bindsym $mod+F10 exec toggleCompton
 bindsym $mod+F9 exec fanSpeedControl
-bindsym XF86Display exec arandr
-bindsym $mod+m exec screenChooser
-bindsym $sup+m exec rofiMount
-bindsym $sup+Shift+m exec rofiUmount
+bindsym XF86Display exec screenChooser
+bindsym $mod+r exec screenChooser
+bindsym $mod+m exec rofiMount
+bindsym $mod+Shift+m exec rofiUmount
 # bindsym XF86Search
 # bindsym XF86Tools
 # bindsym XF86LaunchA
@@ -179,3 +178,4 @@ bindsym $sup+p exec putty ; exec notify-send "Starting Putty"
 bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
 bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
 bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
+bindsym $sup+r exec retroarch; exec notify-send "Starting Retroarch"

@@ -15,14 +15,14 @@ Plug 'wincent/command-t'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 " Some basics:
 	set nocompatible
 	filetype plugin on
     set t_Co=256
-	set tabstop=4 shiftwidth=4
+	set tabstop=2 shiftwidth=2
 	syntax on
 	set encoding=utf-8
 	set number
@@ -35,9 +35,12 @@ call plug#end()
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Goyo plugin makes text more readable when writing prose:
 	map <leader>f :Goyo \| set linebreak<CR>
+" Enable Goyo by default for mutt writting
+	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 " Typing
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
-	map <leader>i :setlocal spell! spelllang=cs<CR>
+	map <leader>o :setlocal spell! spelllang=en_us \| set linebreak <CR>
+	map <leader>i :setlocal spell! spelllang=cs \| set linebreak <CR>
 	map <leader>l :set linebreak <CR>
 
 "	set dictionary+=~/.config/nvim/dict/english_words
@@ -112,8 +115,8 @@ call plug#end()
 	let g:airline_symbols.maxlinenr = ''
 	let g:Powerline_symbols = 'fancy'
 
-let g:ycm_use_clangd=1
-let g:ycm_clangd_binary_path = "/usr/bin/clangd"
+" let g:ycm_use_clangd=1
+" let g:ycm_clangd_binary_path = "/usr/bin/clangd"
 
 
 "____        _                  _

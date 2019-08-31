@@ -58,7 +58,7 @@
     text-color: @lightred;
 }
 #entry {
-    width: 80em;
+  width: 60em;
 	expand: false;
 	text-color: #282828;
 }
