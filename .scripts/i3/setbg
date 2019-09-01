@@ -2,4 +2,4 @@
 # Made by Luke Smith: //github.com/LukeSmithxyz
 
 [ ! -z "$1" ] && cp "$1" ~/.scripts/files/wall.png && notify-send -i "$HOME/.script/files/wall.png" "Wallpaper changed."
-xwallpaper --zoom ~/.config/wall.png
+xwallpaper --zoom ~/.scripts/files/wall.png
