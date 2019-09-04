@@ -24,6 +24,6 @@ if [ "$pass" != "" ]; then
 			echo $pass | sudo -S -k echo level auto| sudo -S tee /proc/acpi/ibm/fan
 			;;
 	esac
-	level=$(cat /proc/acpi/ibm/fan | grep level | awk '{print $2}' | sed 1q)
+	level=$(cat /proc/acpi/ibm/fan | grep level: | awk '{print $2}')
 	notify-send "Fan speed changed to $level"
 fi

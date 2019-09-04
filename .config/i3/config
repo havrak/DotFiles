@@ -109,6 +109,7 @@ bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move positio
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
+exec --no-startup-id compton -b
 exec --no-startup-id setbg
 exec --no-startup-id mpd
 exec --no-startup-id xrdb .Xresources
@@ -130,13 +131,14 @@ bindsym $mod+Ctrl+n exec st -e neomutt
 bindsym $mod+Ctrl+m exec st -e ncmpcpp
 bindsym $mod+Ctrl+r exec st -e ranger
 bindsym $mod+Ctrl+w exec st -e nmtui
+bindsym $mod+Ctrl+f exec st -e newsboat
 
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+r restart
 
-bindsym XF86MonBrightnessUp exec light -A 2
-bindsym XF86MonBrightnessDown exec light -U 2
+bindsym XF86MonBrightnessUp exec sudo light -A 2
+bindsym XF86MonBrightnessDown exec sudo light -U 2
 
 bindsym Print exec scrot -e 'mv $f ~/Pictures/'
 bindsym Shift+Print exec scrot -u -e 'mv $f ~/Pictures/'
@@ -179,3 +181,5 @@ bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
 bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
 bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
 bindsym $sup+r exec retroarch; exec notify-send "Starting Retroarch"
+bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
+

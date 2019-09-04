@@ -38,12 +38,12 @@
     highlight:     bold #ffffff;
 }
 #window {
-    location: north;
-    anchor:   north;
-	width: 1366;
-	margin: 8px 8px 0px 8px;
-	border:  2px 2px 2px 2px;
-	border-color: @lightwhite;
+		location: north;
+  	anchor:   north;
+		width: 1000;
+		margin: 8px 8px 0px 8px;
+		border:  2px 2px 2px 2px;
+		border-color: @lightwhite;
     text-color: @lightwhite;
     orientation: vertical;
     children: [mainbox];
@@ -58,7 +58,7 @@
     text-color: @lightred;
 }
 #entry {
-  width: 60em;
+  width: 40em;
 	expand: false;
 	text-color: #282828;
 }
