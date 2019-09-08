@@ -74,7 +74,7 @@ for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 2
 for_window [instance="notes"] floating enable
-for_window [instance="notes"] resize set 500 600
+for_window [instance="notes"] resize set 600 700
 for_window [instance="notes"] move scratchpad
 for_window [instance="notes"] border pixel 2
 for_window [instance="gpt"] floating enable
@@ -109,7 +109,6 @@ bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move positio
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
-exec --no-startup-id compton -b
 exec --no-startup-id setbg
 exec --no-startup-id mpd
 exec --no-startup-id xrdb .Xresources
@@ -154,6 +153,7 @@ bindsym $mod+Shift+m exec rofiUmount
 # bindsym XF86LaunchA
 
 # Power managment
+bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
 bindsym $mod+Shift+F1 exec pixelLock
 bindsym $mod+Shift+F2 exec powerMenu -s
 bindsym $mod+Shift+F3 exec powerMenu -l
@@ -180,6 +180,5 @@ bindsym $sup+p exec putty ; exec notify-send "Starting Putty"
 bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
 bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
 bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
-bindsym $sup+r exec retroarch; exec notify-send "Starting Retroarch"
 bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
 

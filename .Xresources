@@ -2,7 +2,7 @@
 *foreground:		#ebdbb2
 *foreground_bold:	#ebdbb2
 *cursor:			#90A4AE
-*background:		#1d2021
+*background:		#000000
 
 ! Black + DarkGrey
 *color0:  #282828

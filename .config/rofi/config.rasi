@@ -1,7 +1,3 @@
-/**
- * User: havra
- *
- */
 * {
 	font: "mono 9.3";
 
@@ -40,10 +36,10 @@
 #window {
     location: north;
     anchor:   north;
-	width: 1000;
-	margin: 8px 8px 0px 8px;
-	border:  2px 2px 2px 2px;
-	border-color: @lightwhite;
+		width: 1000;
+		margin: 0px 0px 0px 0px;
+		border:  2px 2px 2px 2px;
+		border-color: @lightwhite;
     text-color: @lightwhite;
     orientation: vertical;
     children: [mainbox];
@@ -73,12 +69,12 @@
     spacing: 0.3em;
 }
 #listview {
-	layout: vertical;
+	  layout: vertical;
     padding: 0em 0.4em 0.4em 1em;
     spacing: 5px;
-	dynamic: false;
+	  dynamic: false;
     lines: 3;
-	columns: 5;
+		columns: 5;
 }
 #element selected  normal {
     text-color: @lightred;

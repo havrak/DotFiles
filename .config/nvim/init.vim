@@ -21,7 +21,7 @@ call plug#end()
 " Some basics:
 	set nocompatible
 	filetype plugin on
-    set t_Co=256
+  set t_Co=256
 	set tabstop=2 shiftwidth=2
 	syntax on
 	set encoding=utf-8
@@ -109,7 +109,7 @@ call plug#end()
 	    let g:airline_symbols = {}
     	endif
 
-	let g:airline_theme='atomic'
+	let g:airline_theme='qwq'
 	let g:airline_left_sep = '▶'
   	let g:airline_right_sep = '◀'
 	let g:airline_symbols.maxlinenr = ''

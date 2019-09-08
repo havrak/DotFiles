@@ -33,9 +33,9 @@ function compgen --description 'Print a list of documented fish commands'
     bash -c "compgen $argv"
 end
 
-abbr esp32normflash ">esptool.py --port /dev/ttyUSB0 write_flash 0x10000"
+abbr esp32normflash "esptool.py --port /dev/ttyUSB0 write_flash 0x10000"
 abbr esp32normcopile "arduino-cli compile --fqbn esp32:esp32:lolin32"
-abbr esp32olimexflash ">esptool.py --port /dev/ttyUSB1 write_flash 0x10000"
+abbr esp32olimexflash "esptool.py --port /dev/ttyUSB1 write_flash 0x10000"
 abbr esp32olimexcompile "arduino-cli compile --fqbn esp32:esp32:esp32-gateway"
 abbr p "yaourt"
 abbr v "nvim"
