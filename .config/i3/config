@@ -13,7 +13,6 @@ set $sup Mod4
 set $mod Mod1
 hide_edge_borders smart
 font pango:mono 9
-
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
 client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #458588
@@ -104,7 +103,7 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec st -n notes -e vim -p ~/Documents/Other/notes.md ~/Arduino/ProjectFiles/notes.md
+bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec st -n notes -e vim -p ~/Documents/Other/notes.md ~/Programming/Arduino/ProjectFiles/notes.md
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
@@ -118,7 +117,7 @@ exec --no-startup-id dunst
 exec --no-startup-id remap.sh
 exec --no-startup-id st -n math -e python
 exec --no-startup-id st -n gpt
-exec --no-startup-id st -n notes -e vim ~/Documents/Other/notes.md
+exec --no-startup-id st -n notes -e vim ~/Documents/Other/notes.md ~/Programming/Arduino/ProjectFiles/notes.md
 
 # ==================
 # ---Key bindings---
@@ -181,4 +180,5 @@ bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
 bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
 bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
 bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
+bindsym $sup+c exec calibre; exec notify-send "Starting Calibre"
 

@@ -45,7 +45,7 @@
 }
 #sidebar {
     border: 2px 0px 0px 0px;
-    background-color: #282828;
+    background-color: #000000;
     padding: 0em 0.4em 0.1em 1em;
     color: @lightwhite;
 }
@@ -55,7 +55,7 @@
 #entry {
   width: 40em;
 	expand: false;
-	text-color: #282828;
+	text-color: #000000;
 }
 #inputbar {
     text-color: @lightgreen;
@@ -64,7 +64,7 @@
 }
 #mainbox {
     expand: false;
-    background-color: #282828;
+    background-color: #000000;
     spacing: 0.3em;
 }
 #listview {

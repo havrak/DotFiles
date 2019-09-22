@@ -70,6 +70,9 @@ call plug#end()
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
 
+" Open dmenu to ease finding directories
+	map <leader>s :!fish -c tx <CR><CR>
+
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
 

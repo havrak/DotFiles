@@ -3,19 +3,19 @@ choose=$(printf "laptop\\nexternal\\ndual\\ntemp\\nmanual" | rofi -dmenu -i -p "
 
 case "$choose" in
 	"laptop")
-		xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output eDP-1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output DP-2 --off
+		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output DP2 --off
 		sleep 1
 		setbg
 		remap.sh
 		;;
 	"external")
-		xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --mode 2560x1080 --pos 0x0 --rotate normal --output eDP-1 --off --output DP-2 --off
+		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --mode 2560x1080 --pos 0x0 --rotate normal --output eDP1 --off --output DP2 --off
 		sleep 1
 		setbg
 		remap.sh
 		;;
 	"dual")
-		xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output eDP-1 --mode 1366x768 --pos 2560x432 --rotate normal --output DP-2 --off
+		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output eDP1 --mode 1366x768 --pos 2560x432 --rotate normal --output DP2 --off
 		sleep 1
 		setbg
 		remap.sh
@@ -27,7 +27,7 @@ case "$choose" in
 		remap.sh
 		;;
 	"temp")
-		xrandr --output eDP-1 --off --output DP-1 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off
+		xrandr --output eDP1 --off --output DP1 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI1 --off --output DP2 --off --output HDMI2 --off
 		sleep 1
 		setbg
 		remap.sh

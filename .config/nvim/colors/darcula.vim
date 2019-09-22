@@ -199,5 +199,5 @@ hi TabLine ctermfg=146 ctermbg=NONE cterm=NONE guifg=#a9b7c6 guibg=#2b2b2b gui=N
 hi TabLineSel ctermfg=146 ctermbg=59 cterm=NONE guifg=#a9b7c6 guibg=#515658 gui=NONE
 
 " User added
-hi LineNr ctermfg=244 ctermbg=NONE cterm=NONE guifg=#8e9292 guibg=NONE gui=NONE
+hi LineNr ctermfg=146 ctermbg=NONE cterm=NONE guifg=#8e9292 guibg=NONE gui=NONE
 
