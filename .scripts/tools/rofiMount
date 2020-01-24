@@ -7,7 +7,7 @@
 
 mountusb() { \
 	chosen="$(echo "$usbdrives" | rofi -dmenu -i -p "Mount which drive?" | awk '{print $1}')"
-	sudo -A mount "$chosen" && notify-send "💻 USB mounting" "$chosen mounted." && exit 0
+	udisksctl mount "$chosen" && notify-send "💻 USB mounting" "$chosen mounted." && exit 0
 	partitiontype="$(lsblk -no "fstype" "$chosen")"
 	case "$partitiontype" in
 		"vfat") udisksctl mount -t vfat -b "$chosen" && notify-send "💻 USB mounting" "Mounted to. /usr/bin/media" ;;

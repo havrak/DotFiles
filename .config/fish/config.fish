@@ -10,6 +10,7 @@ fish_vi_key_bindings
 function fish_mode_prompt
 end
 function fish_greeting
+	clear
 end
 function fish_prompt
 	set_color yellow --bold
@@ -33,10 +34,10 @@ function compgen --description 'Print a list of documented fish commands'
     bash -c "compgen $argv"
 end
 
-abbr esp32normflash "esptool.py --port /dev/ttyUSB0 write_flash 0x10000"
-abbr esp32normcopile "arduino-cli compile --fqbn esp32:esp32:lolin32"
-abbr esp32olimexflash "esptool.py --port /dev/ttyUSB1 write_flash 0x10000"
-abbr esp32olimexcompile "arduino-cli compile --fqbn esp32:esp32:esp32-gateway"
+abbr esp32norm "arduino-cli compile --fqbn esp32:esp32:lolin32 && esptool.py --port /dev/ttyUSB1 write_flash 0x10000"
+abbr esp32normc "arduino-cli compile --fqbn esp32:esp32:lolin32"
+abbr esp32olimex "arduino-cli compile --fqbn esp32:esp32:esp32-gateway && esptool.py --port /dev/ttyUSB0 write_flash 0x10000"
+abbr esp32olimc "arduino-cli compile --fqbn esp32:esp32:esp32-gateway"
 abbr p "yaourt"
 abbr v "nvim"
 abbr orphans "yaourt -Qqtd"
@@ -49,23 +50,27 @@ abbr g "git"
 abbr music "ncmpcpp"
 abbr z "zathura --fork"
 abbr s "sensors"
-abbr java8jar "/usr/lib/jvm/java-8-jdk/jre/bin/java -jar"
-abbr java8 "/usr/lib/jvm/java-8-jdk/jre/bin/java"
+abbr java "/usr/lib/jvm/java-8-jdk/jre/bin/java"
 abbr yt "youtube-dl --add-metadata -i -o '%(title)s'"
 abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
 abbr sc "sudo systemctl"
+abbr pyserver "python3 -m http.server"
 abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
 
 function dircd
-	cd (find ~/.config ~/.local ~/.scripts ~/* -type d | fzf)
+	cd (find ~/.config ~/.local ~/.scripts ~/* -type d | fzf -i)
 end
 
 function filecd
-	cd (dirname (find ~/.config ~/.local ~/.scripts ~/* -type f | fzf))
+	cd (dirname (find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i))
+end
+
+function bookcd
+	cd (dirname (find ~/Documents/Bookshelf -type f | fzf -i))
 end
 
 function fileedit
-	find ~/.config ~/.local ~/.scripts ~/* -type f | fzf | xargs -r $EDITOR
+	find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i | xargs -r $EDITOR
 end
 
 function tx

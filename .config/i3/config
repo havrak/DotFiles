@@ -13,6 +13,7 @@ set $sup Mod4
 set $mod Mod1
 hide_edge_borders smart
 font pango:mono 9
+
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
 client.focused_inactive         #707880         #1d1f21         #707880         #282a2e         #458588
@@ -103,21 +104,18 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec st -n notes -e vim -p ~/Documents/Other/notes.md ~/Programming/Arduino/ProjectFiles/notes.md
+bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec st -n notes -e vim -p ~/Documents/Other/notes.md ~/Arduino/ProjectFiles/notes.md
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
 exec --no-startup-id setbg
-exec --no-startup-id mpd
+# exec --no-startup-id mpd
 exec --no-startup-id xrdb .Xresources
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id dunst
 exec --no-startup-id remap.sh
-exec --no-startup-id st -n math -e python
-exec --no-startup-id st -n gpt
-exec --no-startup-id st -n notes -e vim ~/Documents/Other/notes.md ~/Programming/Arduino/ProjectFiles/notes.md
 
 # ==================
 # ---Key bindings---
@@ -138,8 +136,8 @@ bindsym $mod+Shift+r restart
 bindsym XF86MonBrightnessUp exec sudo light -A 2
 bindsym XF86MonBrightnessDown exec sudo light -U 2
 
-bindsym Print exec scrot -e 'mv $f ~/Pictures/'
-bindsym Shift+Print exec scrot -u -e 'mv $f ~/Pictures/'
+bindsym Print exec scrot -e 'mv $f ~/Temp/'
+bindsym Shift+Print exec scrot -u -e 'mv $f ~/Temp/'
 
 bindsym $mod+F10 exec toggleCompton
 bindsym $mod+F9 exec fanSpeedControl
@@ -147,6 +145,7 @@ bindsym XF86Display exec screenChooser
 bindsym $mod+r exec screenChooser
 bindsym $mod+m exec rofiMount
 bindsym $mod+Shift+m exec rofiUmount
+bindsym $mod+t exec clipboardText.sh
 # bindsym XF86Search
 # bindsym XF86Tools
 # bindsym XF86LaunchA
@@ -181,4 +180,6 @@ bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
 bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
 bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
 bindsym $sup+c exec calibre; exec notify-send "Starting Calibre"
+bindsym $sup+k exec kcc; exec notify-send "Starting KCC"
+bindsym $sup+h exec hakuneko-desktop; exec notify-send "Starting HakuNeko"
 

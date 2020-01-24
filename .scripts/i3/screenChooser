@@ -1,5 +1,5 @@
 #!/bin/sh
-choose=$(printf "laptop\\nexternal\\ndual\\ntemp\\nmanual" | rofi -dmenu -i -p "Choose monitor setup")
+choose=$(printf "laptop\\nexternal\\ndual\\nschool\\ntemp\\nmanual" | rofi -dmenu -i -p "Choose monitor setup")
 
 case "$choose" in
 	"laptop")
@@ -20,14 +20,20 @@ case "$choose" in
 		setbg
 		remap.sh
 		;;
-	"manual")
-		arandr
+	"school")
+		xrandr --output eDP1 --off --output DP1 --off --output DP2 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
 		sleep 1
 		setbg
 		remap.sh
 		;;
 	"temp")
-		xrandr --output eDP1 --off --output DP1 --mode 1920x1200 --pos 0x0 --rotate normal --output HDMI1 --off --output DP2 --off --output HDMI2 --off
+		xrandr --output eDP1 --off --output DP1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output DP2 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
+		sleep 1
+		setbg
+		remap.sh
+		;;
+	"manual")
+		arandr
 		sleep 1
 		setbg
 		remap.sh

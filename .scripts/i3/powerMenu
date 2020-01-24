@@ -5,12 +5,12 @@ if [ $# != 1 ]; then
 fi
 case "$1" in
 	"-s")
-		if [ $(printf "yes\\nno" | rofi -dmenu -i -p "Do you wish to suspend") == "yes" ]; then
+		if [ $(printf "no\\nyes" | rofi -dmenu -i -p "Do you wish to suspend") == "yes" ]; then
 			systemctl suspend
 		fi
 		;;
 	"-l")
-		if [ $(printf "yes\\nno" | rofi -dmenu -i -p "Do you wish to lock and suspend") == "yes" ]; then
+		if [ $(printf "no\\nyes" | rofi -dmenu -i -p "Do you wish to lock and suspend") == "yes" ]; then
 			pixelLock
 			systemctl suspend
 		fi
@@ -20,17 +20,17 @@ case "$1" in
 		echo $choose
 		case "$choose" in
 			"poweroff")
-				if [ $(printf "yes\\nno" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | rofi -dmenu -i -p "confirm") == "yes" ]; then
 					poweroff
 				fi
 				;;
 			"reboot")
-				if [ $(printf "yes\\nno" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | rofi -dmenu -i -p "confirm") == "yes" ]; then
 					reboot
 				fi
 				;;
 			"logoff")
-				if [ $(printf "yes\\nno" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | rofi -dmenu -i -p "confirm") == "yes" ]; then
 					i3-msg exit
 				fi
 				;;

@@ -78402,6 +78402,12 @@ ff02::3 ip6-allhosts
 # 'example.com':
 
 # 0.0.0.0 example.com
+0.0.0.0 boards.4channel.org
+0.0.0.0 4channel.org
+0.0.0.0 engine.4chan-ads.org
+0.0.0.0 4chan.org
+0.0.0.0 boards.4chan.org
+0.0.0.0 boards.4chan.org
 
 127.0.0.1 localhost.localdomain localhost
 ::1 localhost6.localdomain6 localhost6
@@ -78409,3 +78415,4 @@ ff02::3 ip6-allhosts
 192.168.1.1 www.asusnetwork.net
 192.168.121.70 ntp01.mvp.tivibu.com.tr
 192.168.121.71 ntp02.mvp.tivibu.com.tr
+
