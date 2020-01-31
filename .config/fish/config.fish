@@ -34,10 +34,6 @@ function compgen --description 'Print a list of documented fish commands'
     bash -c "compgen $argv"
 end
 
-abbr esp32norm "arduino-cli compile --fqbn esp32:esp32:lolin32 && esptool.py --port /dev/ttyUSB1 write_flash 0x10000"
-abbr esp32normc "arduino-cli compile --fqbn esp32:esp32:lolin32"
-abbr esp32olimex "arduino-cli compile --fqbn esp32:esp32:esp32-gateway && esptool.py --port /dev/ttyUSB0 write_flash 0x10000"
-abbr esp32olimc "arduino-cli compile --fqbn esp32:esp32:esp32-gateway"
 abbr p "yaourt"
 abbr v "nvim"
 abbr orphans "yaourt -Qqtd"
@@ -57,24 +53,24 @@ abbr sc "sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
 
-function dircd
-	cd (find ~/.config ~/.local ~/.scripts ~/* -type d | fzf -i)
+function fzfdircd
+	cd (dirname (locate home media | fzf -i -e))
 end
 
-function filecd
-	cd (dirname (find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i))
+function fzfevrycd
+	cd (dirname (locate / | fzf -i -e))
 end
 
-function bookcd
-	cd (dirname (find ~/Documents/Bookshelf -type f | fzf -i))
+function fzffilecd
+	cd (dirname (find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i -e))
 end
 
-function fileedit
-	find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i | xargs -r $EDITOR
+function fzfbookcd
+	cd (dirname (find ~/Documents/Bookshelf -type f | fzf -i -e))
 end
 
-function tx
-	find ~/.config ~/.local ~/.scripts ~/* | dmenu -i -l 20 | tr -d '\n' | xclip -selection clipboard
+function fzffileedit
+	find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i -e | xargs -r $EDITOR
 end
 
 function ramuse

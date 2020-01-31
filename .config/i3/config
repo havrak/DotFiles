@@ -110,7 +110,7 @@ bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position 
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
 exec --no-startup-id setbg
-# exec --no-startup-id mpd
+exec --no-startup-id mpd
 exec --no-startup-id xrdb .Xresources
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &

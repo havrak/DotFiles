@@ -1,5 +1,5 @@
 * {
-	font: "mono 9.3";
+	font: "mono 9";
 
     text-color:  #ffeedd;
     background-color:  rgba(0,0,0,0);
