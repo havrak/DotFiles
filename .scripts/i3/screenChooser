@@ -1,5 +1,5 @@
 #!/bin/sh
-choose=$(printf "laptop\\nexternal\\ndual\\nschool\\ntemp\\nmanual" | rofi -dmenu -i -p "Choose monitor setup")
+choose=$(printf "laptop\\nexternal\\ndual\\nschool\\ntemp\\nmanual" | dmenu -i -p "Choose monitor setup")
 
 case "$choose" in
 	"laptop")

@@ -73,8 +73,8 @@ call plug#end()
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
 
-" Open dmenu to ease finding directories
-	map <leader>s :!fish -c tx <CR><CR>
+" Open dmen
+	map <leader>s :!copyDir <CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
@@ -99,13 +99,12 @@ call plug#end()
 	vnoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
 	map <Space><Tab> <Esc>/<++><Enter>"_c4l
 
-" Open a NERDTree automatically when vim starts up if no files were specified and toggle NERDTree
-	autocmd StdinReadPre * let s:std_in=1
-	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" NERDTree configuration
 	map <leader>t :NERDTreeToggle<CR>
 	let NERDTreeShowHidden=1
 	map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
+" Airline configuration
 	let g:airline_powerline_fonts = 1
 	let g:airline_theme='qwq'
 	let g:airline_left_sep = '▶'
@@ -124,7 +123,7 @@ call plug#end()
 	" Word count:
 	autocmd FileType tex map <leader><leader>o :w !detex \| wc -w<CR>
 	" Code snippets
-	autocmd FileType tex inoremap ,fr \frame{<Enter>\frametitle{}<Enter>\itemize{begin}<Enter>\item<++><Enter>\itemize{end}<Enter>}<Enter><Enter><++><Esc>6kf}i
+	autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\itemize{begin}<Enter>\item<++><Enter>\itemize{end}<Enter>}<Enter><Enter><++><Esc>6kf}i
 	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 	autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
 	autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i

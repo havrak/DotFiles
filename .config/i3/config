@@ -130,7 +130,7 @@ bindsym $mod+Ctrl+w exec st -e nmtui
 bindsym $mod+Ctrl+f exec exec st -e newsboat
 
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec dmenu_run
 bindsym $mod+Shift+r restart
 
 bindsym XF86MonBrightnessUp exec sudo light -A 2
@@ -143,9 +143,9 @@ bindsym $mod+F10 exec toggleCompton
 bindsym $mod+F9 exec fanSpeedControl
 bindsym XF86Display exec screenChooser
 bindsym $mod+r exec screenChooser
-bindsym $mod+m exec rofiMount
-bindsym $mod+Shift+m exec rofiUmount
-bindsym $mod+t exec clipboardText.sh
+bindsym $mod+m exec dmenuMount
+bindsym $mod+Shift+m exec dmenuUmount
+bindsym $mod+t exec clipboardText
 
 # Power managment
 bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
@@ -170,11 +170,14 @@ bindsym $sup+f exec firefox ; exec notify-send "Starting Firefox"
 bindsym $sup+t exec transmission-gtk ; exec notify-send "Starting transmission-gtk"
 bindsym $sup+n exec netbeans ; exec notify-send "Starting Netbeans"
 bindsym $sup+a exec arduino ; exec notify-send "Starting Arduino"
-bindsym $sup+p exec putty ; exec notify-send "Starting Putty"
+bindsym $sup+Shift+p exec putty ; exec notify-send "Starting Putty"
+bindsym $sup+p exec poznavacka ; exec notify-send "Starting Poznavazka"
 bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
 bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
-bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
+bindsym $sup+Shift+s exec sm ""; exec notify-send "Starting Screen-message"
+bindsym $sup+s exec steam; exec notify-send "Starting Steam"
 bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
 bindsym $sup+c exec calibre; exec notify-send "Starting Calibre"
-bindsym $sup+k exec kcc; exec notify-send "Starting KCC"
+bindsym $sup+Shift+k exec kcc; exec notify-send "Starting KCC"
+bindsym $sup+k exec klavaro; exec notify-send "Starting Klavaro"
 bindsym $sup+h exec hakuneko-desktop; exec notify-send "Starting HakuNeko"

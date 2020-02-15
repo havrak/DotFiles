@@ -1,0 +1,6 @@
+#!/bin/sh
+
+text=$(cat $HOME/.scripts/files/clipboardText | dmenu -l 20 -p "Choose text to save to clipboard")
+
+echo $text | xclip -selection clipboard
+echo $text | xclip

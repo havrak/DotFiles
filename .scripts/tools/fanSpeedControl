@@ -1,7 +1,5 @@
 #!/bin/sh
-choose=$(printf "speed 1\\nspeed 2\\nspeed 3\\nspeed 4\\nspeed 5\\nspeed auto" | rofi -dmenu -i -p "Choose fan speed")
-
-pass=$(echo "" | rofi -dmenu -config $HOME/.config/rofi/colorLess.rasi -i -p "Enter sudo password")
+choose=$(printf "speed 1\\nspeed 2\\nspeed 3\\nspeed 4\\nspeed 5\\nspeed auto" | dmenu -i -p "Choose fan speed")
 
 if [ "$pass" != "" ]; then
 	case "$choose" in

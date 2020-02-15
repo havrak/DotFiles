@@ -1,12 +1,12 @@
 #!/bin/sh
-# Gives a rofi -dmenu prompt to mount unmounted drives.
+# Gives a dmenu prompt to mount unmounted drives.
 # If they're in /etc/fstab, they'll be mounted automatically.
 # Otherwise, you'll be prompted to give a mountpoint from already existsing directories.
 # If you input a novel directory, it will prompt you to create that directory.
 
 
 mountusb() { \
-	chosen="$(echo "$usbdrives" | rofi -dmenu -i -p "Mount which drive?" | awk '{print $1}')"
+	chosen="$(echo "$usbdrives" | dmenu -i -p "Mount which drive?" | awk '{print $1}')"
 	udisksctl mount "$chosen" && notify-send "💻 USB mounting" "$chosen mounted." && exit 0
 	partitiontype="$(lsblk -no "fstype" "$chosen")"
 	case "$partitiontype" in
@@ -16,7 +16,7 @@ mountusb() { \
 	}
 
 mountandroid() { \
-	chosen=$(echo "$anddrives" | rofi -dmenu -i -p "Which Android device?" | cut -d : -f 1)
+	chosen=$(echo "$anddrives" | dmenu -i -p "Which Android device?" | cut -d : -f 1)
 	simple-mtpfs --device "$chosen" $HOME/Mount
 	notify-send "🤖 Android Mounting" "Android device mounted to ~/Android."
 	}

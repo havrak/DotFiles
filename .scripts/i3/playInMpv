@@ -1,0 +1,18 @@
+#!/bin/sh
+address=$(echo "" | dmenu -i -p "Enter link")
+
+echo $address
+if [ "$address" == "" ]; then
+	notify-send "No link provided"
+else
+	yn=$(printf "yes\\nno" | dmenu -i -p "Play with video?")
+
+	case $yn in
+		"yes")
+			mpv "$address"
+			;;
+		"no")
+			st -e mpv "$address" --no-video
+			;;
+	esac
+fi

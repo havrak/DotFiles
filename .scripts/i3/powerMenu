@@ -5,32 +5,32 @@ if [ $# != 1 ]; then
 fi
 case "$1" in
 	"-s")
-		if [ $(printf "no\\nyes" | rofi -dmenu -i -p "Do you wish to suspend") == "yes" ]; then
+		if [ $(printf "no\\nyes" | dmenu -i -p "Do you wish to suspend") == "yes" ]; then
 			systemctl suspend
 		fi
 		;;
 	"-l")
-		if [ $(printf "no\\nyes" | rofi -dmenu -i -p "Do you wish to lock and suspend") == "yes" ]; then
+		if [ $(printf "no\\nyes" | dmenu -i -p "Do you wish to lock and suspend") == "yes" ]; then
 			pixelLock
 			systemctl suspend
 		fi
 		;;
 	"-p")
-		choose=$(printf "poweroff\\nreboot\\nlogoff" | rofi -dmenu -i -p "What do you wish to do?")
+		choose=$(printf "poweroff\\nreboot\\nlogoff" | dmenu -i -p "What do you wish to do?")
 		echo $choose
 		case "$choose" in
 			"poweroff")
-				if [ $(printf "no\\nyes" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | dmenu  -i -p "confirm") == "yes" ]; then
 					poweroff
 				fi
 				;;
 			"reboot")
-				if [ $(printf "no\\nyes" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | dmenu -i -p "confirm") == "yes" ]; then
 					reboot
 				fi
 				;;
 			"logoff")
-				if [ $(printf "no\\nyes" | rofi -dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | dmenu -i -p "confirm") == "yes" ]; then
 					i3-msg exit
 				fi
 				;;
