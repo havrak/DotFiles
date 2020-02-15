@@ -6,7 +6,7 @@
 # |_|            |___/                                          |___/
 [bar/default]
 width = 100%
-height = 15
+height = 12
 fixed-center = true
 bottom = true
 
@@ -16,7 +16,7 @@ foreground = ${colors.foreground}
 font-0 = misc fixed:pixelsize=10;1
 font-1 = Siji:pixelsize=9;1
 
-line-size = 3
+line-size = 0
 line-color = ${colors.foreground}
 
 modules-left = i3 mpd
@@ -45,8 +45,8 @@ label-mode-foreground = ${colors.foreground}
 label-mode-background = ${colors.background}
 
 label-focused = %name%
-label-focused-background = ${colors.background}
-label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
 label-focused-underline = ${colors.foreground}
 label-focused-padding = 1
 
@@ -67,8 +67,8 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 label-urgent-background = ${colors.background}
+label-urgent-foreground = ${colors.red}
 label-urgent-padding = 1
-label-urgent-underline = ${colors.red}
 
 
 [module/wlan]
@@ -159,7 +159,7 @@ format-warn-foreground = ${colors.foreground}
 format-warn-background = ${colors.background}
 format-warn-underline = ${colors.red}
 format-warn-padding = 1
-format-warn-prefix = " "
+format-warn-prefix = "! "
 label = %temperature-c%
 label-warn = %temperature-c%
 
