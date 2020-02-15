@@ -15,7 +15,7 @@ Plug 'wincent/command-t'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'lervag/vimtex'
 call plug#end()
 
 " Some basics:
@@ -29,6 +29,11 @@ call plug#end()
 	set clipboard=unnamedplus
 	colorscheme darcula
 	set mouse=a
+" Some bindings to get to cmdline, I need to switch czech a us layout so
+	nmap ; :
+	nmap ů :
+	imap <F2> <Esc>:
+	nmap te :tabedit <c-r>
 " Enable autocompletion:
 	set wildmode=longest,list,full
 " Disables automatic commenting on newline:
@@ -42,11 +47,6 @@ call plug#end()
 	map <leader>o :setlocal spell! spelllang=en_us \| set linebreak <CR>
 	map <leader>i :setlocal spell! spelllang=cs \| set linebreak <CR>
 	map <leader>l :set linebreak <CR>
-
-"	set dictionary+=~/.config/nvim/dict/english_words
-"	set dictionary+=~/.config/nvim/dict/czech_words
-"	set complete+=k
-"	inoremap <C-space> <C-X><C-K>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitright splitbelow
@@ -66,6 +66,9 @@ call plug#end()
 
 " Compile document
 	map <leader>c :w! \| !compiler <c-r>%<CR><CR>
+
+	" Compile document
+	map <leader>r :!texclear <c-r>%<CR><CR>
 
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
@@ -88,9 +91,6 @@ call plug#end()
 " Automatically deletes all trailing whitespace on save.
 	autocmd BufWritePre * %s/\s\+$//e
 
-" When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost ~/.bm* !shortcuts
-
 " Run xrdb whenever Xdefaults or Xresources are updated.
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 
@@ -106,22 +106,13 @@ call plug#end()
 	let NERDTreeShowHidden=1
 	map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
-" Vim-airline configuration
 	let g:airline_powerline_fonts = 1
-	if !exists('g:airline_symbols')
-	    let g:airline_symbols = {}
-    	endif
-
 	let g:airline_theme='qwq'
 	let g:airline_left_sep = '▶'
-  	let g:airline_right_sep = '◀'
-	let g:airline_symbols.maxlinenr = ''
-	let g:Powerline_symbols = 'fancy'
+  let g:airline_right_sep = '◀'
+	let g:airline#extensions#tabline#enabled = 1
 
-" let g:ycm_use_clangd=1
-" let g:ycm_clangd_binary_path = "/usr/bin/clangd"
-
-
+	autocmd VimEnter * AirlineToggleWhitespace
 "____        _                  _
 "/ ___| _ __ (_)_ __  _ __   ___| |_ ___
 "\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
@@ -133,15 +124,20 @@ call plug#end()
 	" Word count:
 	autocmd FileType tex map <leader><leader>o :w !detex \| wc -w<CR>
 	" Code snippets
-	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
+	autocmd FileType tex inoremap ,fr \frame{<Enter>\frametitle{}<Enter>\itemize{begin}<Enter>\item<++><Enter>\itemize{end}<Enter>}<Enter><Enter><++><Esc>6kf}i
 	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 	autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
 	autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
+	autocmd FileType tex inoremap ,fn \footnote{}<++><Esc>T{i
+	autocmd FileType tex inoremap ,fm \footnotemark <++><Esc>T{i
+	autocmd FileType tex inoremap ,ft \footnotetext{}<++><Esc>T{i
+
 	autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
 	autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
+	autocmd FileType tex inoremap ,cf \footnote{c.<space>d.<space>\cite{<++>}:<space><++>}
 	autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
 	autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
 	autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
@@ -169,8 +165,8 @@ call plug#end()
 	autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
 	autocmd FileType tex inoremap ,rn (\ref{})<++><Esc>F}i
 	autocmd FileType tex inoremap ,, \
-	autocmd FileType tex inoremap ,) \{}
-
+	autocmd FileType tex inoremap ,) \<++>{<++>}<++>
+	autocmd FileType tex inoremap ,( \<++>[<++>]{<++>}<++>
 
 """HTML
 	autocmd FileType html inoremap ,b <b></b><Space><++><Esc>FbT>i

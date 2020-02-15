@@ -20,7 +20,6 @@ client.focused_inactive         #707880         #1d1f21         #707880         
 client.unfocused                #707880         #1d1f21         #707880         #282a2e         #458588
 client.urgent                   #707880         #1d1f21         #707880         #282a2e         #458588
 
-
 # ================
 # ---Workspaces---
 # ================
@@ -60,6 +59,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
+
 # ==================
 # ---Applications---
 # ==================
@@ -74,7 +74,7 @@ for_window [instance="math"] resize set 800 300
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 2
 for_window [instance="notes"] floating enable
-for_window [instance="notes"] resize set 600 700
+for_window [instance="notes"] resize set 800 700
 for_window [instance="notes"] move scratchpad
 for_window [instance="notes"] border pixel 2
 for_window [instance="gpt"] floating enable
@@ -104,13 +104,13 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec st -n notes -e vim -p ~/Documents/Other/notes.md ~/Arduino/ProjectFiles/notes.md
+bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec exec st -n notes -e nvim -p ~/Documents/Other/notes.md ~/Arduino/ProjectFiles/notes.md ~/Documents/Bookshelf/bookList.tex
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
+# exec --no-startup-id mpd
 exec --no-startup-id setbg
-exec --no-startup-id mpd
 exec --no-startup-id xrdb .Xresources
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
@@ -127,7 +127,7 @@ bindsym $mod+Ctrl+n exec st -e neomutt
 bindsym $mod+Ctrl+m exec st -e ncmpcpp
 bindsym $mod+Ctrl+r exec st -e ranger
 bindsym $mod+Ctrl+w exec st -e nmtui
-bindsym $mod+Ctrl+f exec st -e newsboat
+bindsym $mod+Ctrl+f exec exec st -e newsboat
 
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show run
@@ -146,9 +146,6 @@ bindsym $mod+r exec screenChooser
 bindsym $mod+m exec rofiMount
 bindsym $mod+Shift+m exec rofiUmount
 bindsym $mod+t exec clipboardText.sh
-# bindsym XF86Search
-# bindsym XF86Tools
-# bindsym XF86LaunchA
 
 # Power managment
 bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
@@ -168,7 +165,6 @@ bindsym $mod+e exec mpc toggle
 bindsym $mod+minus exec mpc volume -5
 bindsym $mod+plus exec mpc volume +5
 
-
 # Launch programms
 bindsym $sup+f exec firefox ; exec notify-send "Starting Firefox"
 bindsym $sup+t exec transmission-gtk ; exec notify-send "Starting transmission-gtk"
@@ -182,4 +178,3 @@ bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
 bindsym $sup+c exec calibre; exec notify-send "Starting Calibre"
 bindsym $sup+k exec kcc; exec notify-send "Starting KCC"
 bindsym $sup+h exec hakuneko-desktop; exec notify-send "Starting HakuNeko"
-
