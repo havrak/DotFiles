@@ -116,6 +116,7 @@ exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id dunst
 exec --no-startup-id remap.sh
+exec --no-startup-id parcellite
 
 # ==================
 # ---Key bindings---
@@ -146,6 +147,7 @@ bindsym $mod+r exec screenChooser
 bindsym $mod+m exec dmenuMount
 bindsym $mod+Shift+m exec dmenuUmount
 bindsym $mod+t exec clipboardText
+bindsym $mod+y exec copyDir
 
 # Power managment
 bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""

@@ -29,10 +29,11 @@ call plug#end()
 	set clipboard=unnamedplus
 	colorscheme darcula
 	set mouse=a
-" Some bindings to get to cmdline, I need to switch czech a us layout so
+" Bindings to get to cmdline, I need to switch Czech a US layout so
 	nmap ; :
 	nmap ů :
 	imap <F2> <Esc>:
+
 	nmap te :tabedit <c-r>
 " Enable autocompletion:
 	set wildmode=longest,list,full
@@ -129,7 +130,7 @@ call plug#end()
 	autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,fn \footnote{}<++><Esc>T{i
-	autocmd FileType tex inoremap ,fm \footnotemark <++><Esc>T{i
+	autocmd FileType tex inoremap ,fm \footnotemark <++>
 	autocmd FileType tex inoremap ,ft \footnotetext{}<++><Esc>T{i
 
 	autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a

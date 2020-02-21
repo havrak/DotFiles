@@ -6,11 +6,9 @@ set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox
 
-fish_vi_key_bindings
 function fish_mode_prompt
 end
 function fish_greeting
-	clear
 end
 function fish_prompt
 	set_color yellow --bold
@@ -80,3 +78,11 @@ function ramuse
                 proc_list[proc "," 1],proc); }}' | sort -n | tail -n 10 | sort -rn \
                 | awk '{$1/=1024;printf "%.0fMB\t",$1}{print $2}'
 end
+
+# Start X at login
+if status is-login
+    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+        exec startx -- -keeptty
+    end
+end
+

@@ -4,6 +4,7 @@
 *cursor:			#90A4AE
 *background:		#000000
 
+
 ! Black + DarkGrey
 *color0:  #282828
 *color8:  #928374
@@ -28,6 +29,3 @@
 ! LightGrey + White
 *color7:  #a89984
 *color15: #ebdbb2
-
-st.font:Mono:pixelsize=12:antialias=true:autohint=true;
-
