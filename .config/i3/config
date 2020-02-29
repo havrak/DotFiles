@@ -137,8 +137,8 @@ bindsym $mod+Shift+r restart
 bindsym XF86MonBrightnessUp exec sudo light -A 2
 bindsym XF86MonBrightnessDown exec sudo light -U 2
 
-bindsym Print exec scrot -e 'mv $f ~/Temp/'
-bindsym Shift+Print exec scrot -u -e 'mv $f ~/Temp/'
+bindsym Print exec scrot -e 'mv $f ~/Temp/Screenshots/'
+bindsym Shift+Print exec scrot -u -e 'mv $f ~/Temp/Screenshots/'
 
 bindsym $mod+F10 exec toggleCompton
 bindsym $mod+F9 exec fanSpeedControl
