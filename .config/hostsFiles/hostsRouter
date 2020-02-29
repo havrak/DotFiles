@@ -80726,3 +80726,11 @@ ff02::3 ip6-allhosts
 0.0.0.0 g2a.com
 0.0.0.0 snapchat.com
 0.0.0.0 www.snapchat.com
+
+
+127.0.0.1 localhost.localdomain localhost
+::1 localhost6.localdomain6 localhost6
+192.168.1.1 router.asus.com
+192.168.1.1 www.asusnetwork.net
+192.168.121.70 ntp01.mvp.tivibu.com.tr
+192.168.121.71 ntp02.mvp.tivibu.com.tr
