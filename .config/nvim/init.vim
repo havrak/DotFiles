@@ -17,7 +17,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'lervag/vimtex'
 call plug#end()
-
 " Some basics:
 	set nocompatible
 	filetype plugin on
@@ -25,7 +24,7 @@ call plug#end()
 	set tabstop=2 shiftwidth=2
 	syntax on
 	set encoding=utf-8
-	set number
+	set relativenumber number
 	set clipboard=unnamedplus
 	colorscheme darcula
 	set mouse=a
@@ -129,6 +128,7 @@ call plug#end()
 	autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
 	autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
+	autocmd FileType tex inoremap ,uv \uv{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,fn \footnote{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,fm \footnotemark <++>
 	autocmd FileType tex inoremap ,ft \footnotetext{}<++><Esc>T{i

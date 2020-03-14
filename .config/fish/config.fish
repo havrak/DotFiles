@@ -50,6 +50,7 @@ abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
 abbr sc "sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
+abbr mpd ""
 
 function fzfdircd
 	cd (dirname (locate home media | fzf -i -e))

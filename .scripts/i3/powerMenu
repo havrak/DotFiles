@@ -4,14 +4,8 @@ if [ $# != 1 ]; then
 	exit
 fi
 case "$1" in
-	"-s")
-		if [ $(printf "no\\nyes" | dmenu -i -p "Do you wish to suspend") == "yes" ]; then
-			systemctl suspend
-		fi
-		;;
 	"-l")
 		if [ $(printf "no\\nyes" | dmenu -i -p "Do you wish to lock and suspend") == "yes" ]; then
-			pixelLock
 			systemctl suspend
 		fi
 		;;
