@@ -100,19 +100,19 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec exec st -n notes -e nvim -p ~/Documents/Other/notes.md ~/Arduino/ProjectFiles/notes.md ~/Documents/Bookshelf/bookList.tex
+bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec exec st -n notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex
 bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
-exec --no-startup-id mpd
 exec --no-startup-id setbg
 exec --no-startup-id xrdb .Xresources
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
-exec --no-startup-id dunst
 exec --no-startup-id remap.sh
-exec --no-startup-id parcellite
+exec --no-startup-id sudo light -S 20
+exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50%
+exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
 
 # ==================
 # ---Key bindings---
@@ -130,11 +130,11 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run
 bindsym $mod+Shift+r restart
 
-bindsym XF86MonBrightnessUp exec sudo light -A 2
-bindsym XF86MonBrightnessDown exec sudo light -U 2
+bindsym XF86MonBrightnessUp exec sudo light -A 5
+bindsym XF86MonBrightnessDown exec sudo light -U 5
 
-bindsym Print exec scrot -e 'mv $f ~/Temp/Screenshots/'
-bindsym Shift+Print exec scrot -u -e 'mv $f ~/Temp/Screenshots/'
+bindsym Print exec scrot -e 'mv $f ~/tmp/screen/'
+bindsym Shift+Print exec scrot -u -e 'mv $f ~/tmp/screen/'
 
 bindsym $mod+F10 exec toggleCompton
 bindsym $mod+F9 exec fanSpeedControl
@@ -152,8 +152,8 @@ bindsym $mod+Shift+F2 exec powerMenu -l
 bindsym $mod+Shift+F3 exec powerMenu -p
 
 # Audio / mpd control
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -3%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +3%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+greater exec mpc next
@@ -171,8 +171,7 @@ bindsym $sup+p exec poznavacka ; exec notify-send "Starting Poznavazka"
 bindsym $sup+Shift+p exec putty ; exec notify-send "Starting Putty"
 bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
 bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
-bindsym $sup+s exec steam; exec notify-send "Starting Steam"
-bindsym $sup+Shift+s exec sm ""; exec notify-send "Starting Screen-message"
+bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
 bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
 bindsym $sup+c exec calibre; exec notify-send "Starting Calibre"
 bindsym $sup+k exec klavaro; exec notify-send "Starting Klavaro"

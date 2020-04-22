@@ -45,12 +45,16 @@ abbr music "ncmpcpp"
 abbr z "zathura --fork"
 abbr s "sensors"
 abbr java "/usr/lib/jvm/java-8-jdk/jre/bin/java"
-abbr yt "youtube-dl --add-metadata -i -o '%(title)s'"
+abbr yt "youtube-dl"
 abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
 abbr sc "sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
 abbr mpd ""
+abbr su ""
+abbr bash ""
+abbr netres "sudo modprobe -r e1000e && sudo modprobe e1000e"
+abbr prm "sudo rm -rf /var/cache/pacman/"
 
 function fzfdircd
 	cd (dirname (locate home media | fzf -i -e))
@@ -65,7 +69,7 @@ function fzffilecd
 end
 
 function fzfbookcd
-	cd (dirname (find ~/Documents/Bookshelf -type f | fzf -i -e))
+	cd (dirname (find ~/dox/Bookshelf -type f | fzf -i -e))
 end
 
 function fzffileedit
@@ -81,9 +85,9 @@ function ramuse
 end
 
 # Start X at login
-if status is-login
-    if test -z "$DISPLAY" -a $XDG_VTNR = 1
-        exec startx -- -keeptty
-    end
-end
+#if status is-login
+#    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+#        exec startx -- -keeptty
+#    end
+#end
 

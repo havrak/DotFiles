@@ -187,9 +187,9 @@ class fzf_locate_dokument(Command):
     def execute(self):
         import subprocess
         if self.quantifier:
-            command="find ~/Documents/The\ Dokument -type f | fzf -e -i"
+            command="find ~/dox/the\ dokument -type f | fzf -e -i"
         else:
-            command="find ~/Documents/The\ Dokument -type f | fzf -e -i"
+            command="find ~/dox/the\ dokument -type f | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
@@ -211,9 +211,9 @@ class fzf_locate_book(Command):
     def execute(self):
         import subprocess
         if self.quantifier:
-            command="find ~/Documents/Bookshelf -type f | fzf -e -i"
+            command="find ~/dox/bookshelf -type f | fzf -e -i"
         else:
-            command="find ~/Documents/Bookshelf -type f | fzf -e -i"
+            command="find ~/dox/bookshelf -type f | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:

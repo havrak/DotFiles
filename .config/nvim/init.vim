@@ -44,8 +44,7 @@ call plug#end()
 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
 	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 " Typing
-	map <leader>o :setlocal spell! spelllang=en_us \| set linebreak <CR>
-	map <leader>i :setlocal spell! spelllang=cs \| set linebreak <CR>
+	map <leader>o :setlocal spell! spelllang=en_us,cs,de \| set linebreak <CR>
 	map <leader>l :set linebreak <CR>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.

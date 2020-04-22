@@ -1,0 +1,14 @@
+# My personal host file which I have on PiHole among other files.
+
+0.0.0.0 m.youtube.com
+0.0.0.0 humblebundle.com
+0.0.0.0 fanatical.com
+0.0.0.0 boards.4channel.org
+0.0.0.0 4channel.org
+0.0.0.0 soundcloud.com
+0.0.0.0 murdochmurdoch.net
+0.0.0.0 rapeable.com
+0.0.0.0 store.steampowered.com
+0.0.0.0 steamcommunity.com
+0.0.0.0 lbry.tv
+
