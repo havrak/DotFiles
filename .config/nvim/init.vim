@@ -16,6 +16,7 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'lervag/vimtex'
+Plug 'morhetz/gruvbox'
 call plug#end()
 " Some basics:
 	set nocompatible
@@ -26,7 +27,9 @@ call plug#end()
 	set encoding=utf-8
 	set relativenumber number
 	set clipboard=unnamedplus
-	colorscheme darcula
+	let g:gruvbox_contrast_dark='hard'
+	let g:gruvbox_italic=1
+	colorscheme gruvbox
 	set mouse=a
 " Bindings to get to cmdline, I need to switch Czech a US layout so
 	nmap ; :
@@ -105,12 +108,12 @@ call plug#end()
 
 " Airline configuration
 	let g:airline_powerline_fonts = 1
-	let g:airline_theme='qwq'
+	let g:airline_theme='gruvbox'
 	let g:airline_left_sep = '▶'
   let g:airline_right_sep = '◀'
 	let g:airline#extensions#tabline#enabled = 1
 
-	autocmd VimEnter * AirlineToggleWhitespace
+	autocmd VimEnter * :silent AirlineToggleWhitespace
 "____        _                  _
 "/ ___| _ __ (_)_ __  _ __   ___| |_ ___
 "\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|

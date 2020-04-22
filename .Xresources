@@ -1,10 +1,16 @@
-! special
-*foreground:		#ebdbb2
-*foreground_bold:	#ebdbb2
-*cursor:			#90A4AE
-*background:		#000000
+! -----------------------------------------------------------------------------
+! File: gruvbox-dark.xresources
+! Description: Retro groove colorscheme generalized
+! Author: morhetz <morhetz@gmail.com>
+! Source: https://github.com/morhetz/gruvbox-generalized
+! Last Modified: 6 Sep 2014
+! -----------------------------------------------------------------------------
 
-
+! hard contrast:
+*background: #1f1f1f
+!*background: #282828
+! soft contrast: *background: #32302f
+*foreground: #ebdbb2
 ! Black + DarkGrey
 *color0:  #282828
 *color8:  #928374
