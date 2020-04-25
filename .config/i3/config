@@ -110,7 +110,7 @@ exec --no-startup-id xrdb .Xresources
 exec --no-startup-id polybarLaunch
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec --no-startup-id remap.sh
-exec --no-startup-id sudo light -S 20
+exec --no-startup-id sudo light -S 21
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50%
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
 
@@ -124,6 +124,7 @@ bindsym $mod+Ctrl+n exec st -e neomutt
 bindsym $mod+Ctrl+m exec st -e ncmpcpp
 bindsym $mod+Ctrl+r exec st -e ranger
 bindsym $mod+Ctrl+w exec st -e nmtui
+bindsym $mod+Ctrl+g exec st -e transmission-remote-cli
 bindsym $mod+Ctrl+f exec exec st -e newsboat
 
 bindsym $mod+Shift+q kill

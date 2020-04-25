@@ -27,8 +27,9 @@ call plug#end()
 	set encoding=utf-8
 	set relativenumber number
 	set clipboard=unnamedplus
-	let g:gruvbox_contrast_dark='hard'
+	let g:gruvbox_contrast_light='hard'
 	let g:gruvbox_italic=1
+	set background=light
 	colorscheme gruvbox
 	set mouse=a
 " Bindings to get to cmdline, I need to switch Czech a US layout so

@@ -11,18 +11,22 @@ end
 function fish_greeting
 end
 function fish_prompt
-	set_color yellow --bold
-	printf "%s" "$USER"
-	set_color green
-	printf "@"
-	set_color blue
-	printf "%s" "$hostname"
-	set_color magenta
-	printf ":"
+#	set_color yellow --bold
+#	printf "%s" "$USER"
+#	set_color green
+#	printf "@"
+#	set_color blue
+#	printf "%s" "$hostname"
+#	set_color magenta
+#	printf ":"
+#	printf (basename $PWD)
+#	set_color red
+#	printf "-"
+#	printf ">"
+	set_color blue --bold
 	printf (basename $PWD)
-	set_color red
-	printf "-"
-	printf ">"
+	set_color red --bold
+	printf " >"
 	set_color normal
 	# del key does not work properly by itself
 	printf '\033[?1h\033=' >/dev/tty
@@ -50,9 +54,6 @@ abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
 abbr sc "sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
-abbr mpd ""
-abbr su ""
-abbr bash ""
 abbr netres "sudo modprobe -r e1000e && sudo modprobe e1000e"
 abbr prm "sudo rm -rf /var/cache/pacman/"
 

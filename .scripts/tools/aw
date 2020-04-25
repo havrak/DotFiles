@@ -1,0 +1,8 @@
+#!/bin/sh
+address="$(ls /usr/share/doc/arch-wiki/html/en | fzf)"
+#address="$(ls /usr/share/doc/arch-wiki/html/en | dmenu -l 20 -p "select wiki")"
+if [ -z "$address" ]; then
+	exit
+fi
+address="/usr/share/doc/arch-wiki/html/en/$address"
+firefox $address
