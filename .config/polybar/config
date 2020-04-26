@@ -6,11 +6,10 @@
 # |_|            |___/                                          |___/
 [bar/default]
 width = 100%
-height = 12
+height = 13
 fixed-center = true
 bottom = true
-enable-ipc = true
-
+separator = " "
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -21,16 +20,14 @@ line-size = 0
 line-color = ${colors.foreground}
 
 modules-left = i3 mpd
-modules-right = torrents mail temperature volume screen xkeyboard battery battery2 wlan eth date
+modules-right = torrents mail temperature volume screen battery battery2 wlan eth xkeyboard date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 [colors]
 foreground = #ffffd7
-#background = #e0e0e0
 background = #1c1c1c
-#background = #000000
 green = #b8bb26
 red = #cc241d
 grey = #83A598
@@ -39,13 +36,10 @@ yellow = #fabd2f
 
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 
 label-mode-padding = 1
-label-mode-foreground = ${colors.foreground}
-label-mode-background = ${colors.background}
 
 label-focused = %name%
 label-focused-background = ${colors.foreground}
@@ -54,35 +48,24 @@ label-focused-underline = ${colors.foreground}
 label-focused-padding = 1
 
 label-unfocused = %name%
-label-unfocused-background = ${colors.background}
-label-unfocused-foreground = ${colors.foreground}
 label-unfocused-underline = ${colors.background}
 label-unfocused-padding = 1
 
 label-visible = %name%
-label-visible-background = ${colors.background}
-label-visible-foreground = ${colors.foreground}
 label-visible-padding = 1
 
 label-urgent = %name%
+label-urgent-foreground = ${colors.red}
+label-urgent-padding = 1
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-label-urgent-background = ${colors.background}
-label-urgent-foreground = ${colors.red}
-label-urgent-padding = 1
 
 [module/wlan]
 type = internal/network
-;interface = wlo1
 interface = wlp3s0
 interval = 5.0
-
-format-connected = <label-connected>
-format-connected-background = ${colors.background}
-format-connected-foreground = ${colors.foreground}
-format-connected-padding = 1
 format-connected-underline = ${colors.foreground}
 label-connected =  %local_ip%
 
@@ -90,83 +73,51 @@ label-connected =  %local_ip%
 type = internal/network
 interface = enp0s25
 interval = 5.0
-
-format-connected-background = ${colors.background}
-format-connected-foreground = ${colors.foreground}
-format-connected-padding = 1
 format-connected-underline = ${colors.foreground}
 label-connected =  %local_ip%
-
-format-disconnected =
 
 [module/date]
 type = internal/date
 interval = 1
-
 date =  %d.%m.
-
 time =  %H:%M
-
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
 format-underline =${colors.darkGrey}
-
-format-padding = 1
-
-label =  %time% %date%
+label ="// %time% %date%"
 
 [module/torrents]
-type = custom/ipc
-hook-0 = i3torrents
-click-left = $TERMINAL -e transmission-remote-cli &
-initial = 1
+type = custom/script
+exec = polybarTorrents
+click-left = st -e transmission-remote-cli &
+interval = 1
+format-underline = ${colors.grey}
+label = %output%
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 label-layout =  %layout%
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-format-padding = 1
 format-underline = ${colors.darkGrey}
-
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <label>
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
 format-underline = ${colors.green}
-format-padding = 1
-format-prefix = "  "
-
-format-warn = <label-warn>
-format-warn-foreground = ${colors.foreground}
-format-warn-background = ${colors.background}
-format-warn-underline = ${colors.red}
-format-warn-padding = 1
-format-warn-prefix = " ! "
+format-prefix = " "
 label = %temperature-c%
+
+format-warn-underline = ${colors.red}
+format-warn-prefix = "! "
 label-warn = %temperature-c%
 
 [module/volume]
 type = internal/pulseaudio
-format-volume = <label-volume>
-format-volume-foreground = ${colors.foreground}
-format-volume-background = ${colors.background}
 format-volume-underline = ${colors.green}
-format-volume-padding = 1
 format-volume-prefix = " "
 label-volume = %percentage%%
 
-format-muted = <label-muted>
-format-muted-foreground = ${colors.foreground}
-format-muted-background = ${colors.background}
 format-muted-underline = ${colors.red}
-format-muted-padding = 1
 format-muted-prefix = " "
 label-muted = 00%
 
@@ -177,25 +128,14 @@ adapter = AC0
 full-at = 100
 
 format-charging-prefix = " "
-format-charging = <label-charging>
-format-charging-foreground = ${colors.foreground}
-format-charging-background = ${colors.background}
 format-charging-underline = ${colors.green}
-format-charging-padding = 1
 
 format-full-prefix = " "
 format-full = 100%
-format-full-foreground = ${colors.foreground}
-format-full-background = ${colors.background}
 format-full-underline = ${colors.grey}
-format-full-padding = 1
 
 format-discharging-prefix = " "
-format-discharging = <label-discharging>
-format-discharging-foreground = ${colors.foreground}
-format-discharging-background = ${colors.background}
 format-discharging-underline = ${colors.red}
-format-discharging-padding = 1
 
 label-charging = %percentage%%
 label-discharging = %percentage%%
@@ -207,25 +147,14 @@ adapter = AC0
 full-at = 100
 
 format-charging-prefix = " "
-format-charging = <label-charging>
-format-charging-foreground = ${colors.foreground}
-format-charging-background = ${colors.background}
 format-charging-underline = ${colors.green}
-format-charging-padding = 1
 
 format-full-prefix = " "
 format-full = 100%
-format-full-foreground = ${colors.foreground}
-format-full-background = ${colors.background}
 format-full-underline = ${colors.grey}
-format-full-padding = 1
 
 format-discharging-prefix = " "
-format-discharging = <label-discharging>
-format-discharging-foreground = ${colors.foreground}
-format-discharging-background = ${colors.background}
 format-discharging-underline = ${colors.red}
-format-discharging-padding = 1
 
 label-charging = %percentage%%
 label-discharging = %percentage%%
@@ -234,11 +163,9 @@ label-discharging = %percentage%%
 type = internal/mpd
 format-online =  <label-song> <label-time>
 format-online-padding = 1
-format-online-foreground = ${colors.foreground}
-format-online-background = ${colors.background}
 format-online-underline = ${colors.darkGrey}
 label-song = %artist% - %title%
-label-song-maxlen = 70
+label-song-maxlen = 50
 label-song-ellipsis = true
 
 [module/screen]
@@ -249,9 +176,6 @@ scroll-up = exec sudo light -A 5
 scroll-down = exec sudo light -U 5
 
 label =  %output%%
-label-foreground = ${colors.foreground}
-label-background = ${colors.background}
-label-padding = 1
 format-underline = ${colors.yellow}
 
 [module/mail]
@@ -262,9 +186,6 @@ click-right = export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; expo
 click-left = exec st -e neomutt &
 
 label = %output%
-label-foreground = ${colors.foreground}
-label-background = ${colors.background}
-label-padding = 1
 format-underline = ${colors.darkGrey}
 
 [settings]
