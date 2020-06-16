@@ -15,12 +15,13 @@ foreground = ${colors.foreground}
 
 font-0 = misc fixed:pixelsize=11;1
 font-1 = Siji:pixelsize=10;1
+font-2 = sazanami mincho:pixelsize88;1
 
 line-size = 0
 line-color = ${colors.foreground}
 
 modules-left = i3 mpd
-modules-right = torrents mail temperature volume screen battery battery2 wlan eth xkeyboard date
+modules-right = torrents mail temperature volume screen batt wlan eth xkeyboard date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -82,12 +83,12 @@ interval = 1
 date =  %d.%m.
 time =  %H:%M
 format-underline =${colors.darkGrey}
-label ="// %time% %date%"
+label =%time% %date%
 
 [module/torrents]
 type = custom/script
 exec = polybarTorrents
-click-left = st -e transmission-remote-cli &
+click-left = st -e torque &
 interval = 1
 format-underline = ${colors.grey}
 label = %output%
@@ -121,51 +122,13 @@ format-muted-underline = ${colors.red}
 format-muted-prefix = " "
 label-muted = 00%
 
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = AC0
-full-at = 100
-
-format-charging-prefix = " "
-format-charging-underline = ${colors.green}
-
-format-full-prefix = " "
-format-full = 100%
-format-full-underline = ${colors.grey}
-
-format-discharging-prefix = " "
-format-discharging-underline = ${colors.red}
-
-label-charging = %percentage%%
-label-discharging = %percentage%%
-
-[module/battery2]
-type = internal/battery
-battery = BAT1
-adapter = AC0
-full-at = 100
-
-format-charging-prefix = " "
-format-charging-underline = ${colors.green}
-
-format-full-prefix = " "
-format-full = 100%
-format-full-underline = ${colors.grey}
-
-format-discharging-prefix = " "
-format-discharging-underline = ${colors.red}
-
-label-charging = %percentage%%
-label-discharging = %percentage%%
-
 [module/mpd]
 type = internal/mpd
 format-online =  <label-song> <label-time>
 format-online-padding = 1
 format-online-underline = ${colors.darkGrey}
 label-song = %artist% - %title%
-label-song-maxlen = 50
+label-song-maxlen = 70
 label-song-ellipsis = true
 
 [module/screen]
@@ -176,6 +139,13 @@ scroll-up = exec sudo light -A 5
 scroll-down = exec sudo light -U 5
 
 label =  %output%%
+
+[module/batt]
+type = custom/script
+interval = 15
+exec = battery-combined-shell
+
+label = %output%
 format-underline = ${colors.yellow}
 
 [module/mail]
@@ -187,6 +157,8 @@ click-left = exec st -e neomutt &
 
 label = %output%
 format-underline = ${colors.darkGrey}
+
+
 
 [settings]
 screenchange-reload = true

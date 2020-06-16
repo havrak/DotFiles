@@ -6,23 +6,9 @@ set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox
 
-function fish_mode_prompt
-end
 function fish_greeting
 end
 function fish_prompt
-#	set_color yellow --bold
-#	printf "%s" "$USER"
-#	set_color green
-#	printf "@"
-#	set_color blue
-#	printf "%s" "$hostname"
-#	set_color magenta
-#	printf ":"
-#	printf (basename $PWD)
-#	set_color red
-#	printf "-"
-#	printf ">"
 	set_color blue --bold
 	printf (basename $PWD)
 	set_color red --bold
@@ -48,6 +34,8 @@ abbr g "git"
 abbr music "ncmpcpp"
 abbr z "zathura --fork"
 abbr s "sensors"
+abbr su ""
+abbr ga "git add"
 abbr java "/usr/lib/jvm/java-8-jdk/jre/bin/java"
 abbr yt "youtube-dl"
 abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
@@ -56,6 +44,7 @@ abbr pyserver "python3 -m http.server"
 abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
 abbr netres "sudo modprobe -r e1000e && sudo modprobe e1000e"
 abbr prm "sudo rm -rf /var/cache/pacman/"
+abbr smloadr "smloadr -p /home/havra/dw/deezloader/ -q FLAC"
 
 function fzfdircd
 	cd (dirname (locate home media | fzf -i -e))
@@ -84,6 +73,8 @@ function ramuse
                 proc_list[proc "," 1],proc); }}' | sort -n | tail -n 10 | sort -rn \
                 | awk '{$1/=1024;printf "%.0fMB\t",$1}{print $2}'
 end
+
+fish_vi_key_bindings
 
 # Start X at login
 #if status is-login

@@ -1,5 +1,5 @@
 #!/bin/sh
-choose=$(printf "laptop\\nexternal\\ndual\\nschool\\ntemp\\nmanual" | dmenu -i -p "Choose monitor setup")
+choose=$(printf "laptop\\nexternal\\nschool\\ntemp\\nmanual" | dmenu -i -p "Choose monitor setup")
 
 case "$choose" in
 	"laptop")
@@ -14,12 +14,6 @@ case "$choose" in
 		sleep 1
 		setbg
 		polybarLaunch
-		remap.sh
-		;;
-	"dual")
-		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output eDP1 --mode 1366x768 --pos 2560x432 --rotate normal --output DP2 --off
-		sleep 1
-		setbg
 		remap.sh
 		;;
 	"school")

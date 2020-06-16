@@ -12,42 +12,36 @@
 # config.h files: (For suckless utils) recompiles and installs program.
 # all others: run `sent` to show a presentation
 
+
 file=$(readlink -f "$1")
 dir=$(dirname "$file")
 base="${file%.*}"
-basename=$(echo $base| rev | awk -v FS='/' '{print $1}' | rev)
-shebang=$(sed -n 1p "$file")
 
 cd "$dir" || exit
 
-
-
-# uses biber
-textype() {
-	bibtex "$basename"
+textype() { \
 	command="pdflatex"
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
+	grep -i addbibresource "$file" >/dev/null &&
+	biber --input-directory "$dir" "$base" &&
 	$command --output-directory="$dir" "$base" &&
 	$command --output-directory="$dir" "$base"
 	}
 
-shebangtest() {
-	case "$shebang" in
-		\#\!*) "$file" ;;
-		*) sent "$file" 2>/dev/null & ;;
-	esac
-}
-
 case "$file" in
-	*\.ms) refer -PS -e "$file" | groff -me -ms -kejpt -T pdf > "$base".pdf ;;
-	*\.mom) refer -PS -e "$file" | groff -mom -kejpt -T pdf > "$base".pdf ;;
-	*\.rmd) echo "require(rmarkdown); render('$file')" | R -q --vanilla ;;
+	*\.ms) refer -PS -e "$file" | groff -me -ms -kept -T pdf > "$base".pdf ;;
+	*\.mom) refer -PS -e "$file" | groff -mom -kept -T pdf > "$base".pdf ;;
+	*\.[0-9]) refer -PS -e "$file" | groff -mandoc -T pdf > "$base".pdf ;;
+	*\.[rR]md) Rscript -e "rmarkdown::render('$file', quiet=TRUE)" ;;
 	*\.tex) textype "$file" ;;
-	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf </dev/null &>/dev/null &;;
-	*config.h) make && sudo make install ;;
+	*\.md) pandoc -s -f markdown "$file" -t pdf -o "$base".pdf ;;
+	*config.h) sudo make install ;;
         *\.c) cc "$file" -o "$base" && "$base" ;;
 	*\.py) python "$file" ;;
+	*\.m) octave "$file" ;;
+	*\.scad) openscad -o "$base".stl "$file" ;;
 	*\.go) go run "$file" ;;
-	*) shebangtest ;;
+	*\.sent) setsid sent "$file" 2>/dev/null & ;;
+	*) sed 1q "$file" | grep "^#!/" | sed "s/^#!//" | xargs -r -I % "$file" ;;
 esac

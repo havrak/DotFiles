@@ -55,6 +55,8 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Right workspace next
 
 # ==================
 # ---Applications---
@@ -112,8 +114,9 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id remap.sh
 exec --no-startup-id sudo light -S 21
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50%
+exec --no-startup-id mpc volume 100
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
-
+exec --no-startup-id xinput set-prop 22 166 0
 # ==================
 # ---Key bindings---
 # ==================
@@ -124,7 +127,7 @@ bindsym $mod+Ctrl+n exec st -e neomutt
 bindsym $mod+Ctrl+m exec st -e ncmpcpp
 bindsym $mod+Ctrl+r exec st -e ranger
 bindsym $mod+Ctrl+w exec st -e nmtui
-bindsym $mod+Ctrl+g exec st -e transmission-remote-cli
+bindsym $mod+Ctrl+g exec st -e tremc
 bindsym $mod+Ctrl+f exec exec st -e newsboat
 
 bindsym $mod+Shift+q kill
@@ -138,7 +141,6 @@ bindsym Print exec scrot -e 'mv $f ~/tmp/screen/'
 bindsym Shift+Print exec scrot -u -e 'mv $f ~/tmp/screen/'
 
 bindsym $mod+F10 exec toggleCompton
-bindsym $mod+F9 exec fanSpeedControl
 bindsym XF86Display exec arandr
 bindsym $mod+r exec screenChooser
 bindsym $mod+m exec dmenuMount
@@ -159,22 +161,20 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+greater exec mpc next
 bindsym $mod+less exec mpc prev
+bindsym $mod+Shift+greater exec mpc seek +15
+bindsym $mod+Shift+less exec mpc seek -15
 bindsym $mod+e exec mpc toggle
 bindsym $mod+minus exec mpc volume -5
 bindsym $mod+plus exec mpc volume +5
 
 # Launch programms
 bindsym $sup+f exec firefox ; exec notify-send "Starting Firefox"
-bindsym $sup+t exec transmission-gtk ; exec notify-send "Starting transmission-gtk"
 bindsym $sup+n exec netbeans ; exec notify-send "Starting Netbeans"
 bindsym $sup+a exec arduino ; exec notify-send "Starting Arduino"
-bindsym $sup+p exec poznavacka ; exec notify-send "Starting Poznavazka"
-bindsym $sup+Shift+p exec putty ; exec notify-send "Starting Putty"
+bindsym $sup+p exec pavucontrol ; exec notify-send "Starting Pavucontrol"
 bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
 bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
-bindsym $sup+s exec sm ""; exec notify-send "Starting Screen-message"
 bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
 bindsym $sup+c exec calibre; exec notify-send "Starting Calibre"
 bindsym $sup+k exec klavaro; exec notify-send "Starting Klavaro"
-bindsym $sup+Shift+k exec kcc; exec notify-send "Starting KCC"
-bindsym $sup+h exec hakuneko-desktop; exec notify-send "Starting HakuNeko"
+bindsym $sup+l exec libreoffice; exec notify-send "Starting Libreoffice"

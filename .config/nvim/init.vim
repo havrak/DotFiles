@@ -68,7 +68,7 @@ call plug#end()
 	nnoremap S :%s//<Left>
 
 " Compile document
-	map <leader>c :w! \| !compiler <c-r>%<CR><CR>
+	map <leader>c :w! \| !compiler <c-r>%<CR>
 
 	" Compile document
 	map <leader>r :!texclear <c-r>%<CR><CR>
@@ -115,12 +115,16 @@ call plug#end()
 	let g:airline#extensions#tabline#enabled = 1
 
 	autocmd VimEnter * :silent AirlineToggleWhitespace
-"____        _                  _
+
+	inoremap ,os ß
+
+	"____        _                  _
 "/ ___| _ __ (_)_ __  _ __   ___| |_ ___
 "\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
  "___) | | | | | |_) | |_) |  __/ |_\__ \
 "|____/|_| |_|_| .__/| .__/ \___|\__|___/
               "|_|   |_|
+
 
 """LATEX
 	" Word count:
