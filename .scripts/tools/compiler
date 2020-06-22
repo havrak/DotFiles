@@ -16,16 +16,16 @@
 file=$(readlink -f "$1")
 dir=$(dirname "$file")
 base="${file%.*}"
+basename=$(echo $base| rev | awk -v FS='/' '{print $1}' | rev)
 
 cd "$dir" || exit
 
 textype() { \
+	bibtex "$basename"
 	command="pdflatex"
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
 	grep -i addbibresource "$file" >/dev/null &&
-	biber --input-directory "$dir" "$base" &&
-	$command --output-directory="$dir" "$base" &&
 	$command --output-directory="$dir" "$base"
 	}
 

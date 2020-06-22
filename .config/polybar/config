@@ -10,15 +10,14 @@ height = 13
 fixed-center = true
 bottom = true
 separator = " "
+
 background = ${colors.background}
 foreground = ${colors.foreground}
 
 font-0 = misc fixed:pixelsize=11;1
 font-1 = Siji:pixelsize=10;1
-font-2 = sazanami mincho:pixelsize88;1
-
-line-size = 0
-line-color = ${colors.foreground}
+font-2 = sazanami mincho:pixelsize=8;1
+font-3 = NotoColorEmoji:scale=13;2
 
 modules-left = i3 mpd
 modules-right = torrents mail temperature volume screen batt wlan eth xkeyboard date
@@ -29,27 +28,19 @@ cursor-scroll = ns-resize
 [colors]
 foreground = #ffffd7
 background = #1c1c1c
-green = #b8bb26
 red = #cc241d
-grey = #83A598
-darkGrey = #9E9E9E
-yellow = #fabd2f
 
 [module/i3]
 type = internal/i3
 index-sort = true
 wrapping-scroll = false
 
-label-mode-padding = 1
-
 label-focused = %name%
 label-focused-background = ${colors.foreground}
 label-focused-foreground = ${colors.background}
-label-focused-underline = ${colors.foreground}
 label-focused-padding = 1
 
 label-unfocused = %name%
-label-unfocused-underline = ${colors.background}
 label-unfocused-padding = 1
 
 label-visible = %name%
@@ -67,58 +58,47 @@ cursor-scroll = ns-resize
 type = internal/network
 interface = wlp3s0
 interval = 5.0
-format-connected-underline = ${colors.foreground}
-label-connected =  %local_ip%
+label-connected = 
 
 [module/eth]
 type = internal/network
 interface = enp0s25
 interval = 5.0
-format-connected-underline = ${colors.foreground}
-label-connected =  %local_ip%
+label-connected = 
 
 [module/date]
 type = internal/date
 interval = 1
 date =  %d.%m.
 time =  %H:%M
-format-underline =${colors.darkGrey}
 label =%time% %date%
 
 [module/torrents]
 type = custom/script
 exec = polybarTorrents
-click-left = st -e torque &
+click-left = st -e tremc &
 interval = 1
-format-underline = ${colors.grey}
 label = %output%
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 label-layout =  %layout%
-format-underline = ${colors.darkGrey}
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
-
-format-underline = ${colors.green}
 format-prefix = " "
 label = %temperature-c%
-
-format-warn-underline = ${colors.red}
 format-warn-prefix = "! "
 label-warn = %temperature-c%
 
 [module/volume]
 type = internal/pulseaudio
-format-volume-underline = ${colors.green}
 format-volume-prefix = " "
 label-volume = %percentage%%
 
-format-muted-underline = ${colors.red}
 format-muted-prefix = " "
 label-muted = 00%
 
@@ -126,7 +106,6 @@ label-muted = 00%
 type = internal/mpd
 format-online =  <label-song> <label-time>
 format-online-padding = 1
-format-online-underline = ${colors.darkGrey}
 label-song = %artist% - %title%
 label-song-maxlen = 70
 label-song-ellipsis = true
@@ -136,17 +115,14 @@ type = custom/script
 interval = 0.5
 exec = echo "$(light | cut -d. -f1)"
 scroll-up = exec sudo light -A 5
-scroll-down = exec sudo light -U 5
-
+scroll-down =  exec sudo light -U 5
 label =  %output%%
 
 [module/batt]
 type = custom/script
 interval = 15
 exec = battery-combined-shell
-
 label = %output%
-format-underline = ${colors.yellow}
 
 [module/mail]
 type = custom/script
@@ -154,11 +130,7 @@ interval = 1
 exec = polybarEmail
 click-right = export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; export DISPLAY=:0; /home/havra/.config/mutt/bin/mailsync
 click-left = exec st -e neomutt &
-
 label = %output%
-format-underline = ${colors.darkGrey}
-
-
 
 [settings]
 screenchange-reload = true

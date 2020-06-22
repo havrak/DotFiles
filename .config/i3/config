@@ -147,6 +147,7 @@ bindsym $mod+m exec dmenuMount
 bindsym $mod+Shift+m exec dmenuUmount
 bindsym $mod+t exec clipboardText
 bindsym $mod+y exec copyDir
+bindsym $mod+w exec emojiPicker
 
 # Power managment
 bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
