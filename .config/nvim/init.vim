@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
+Plug 'kovetskiy/sxhkd-vim'
 call plug#end()
 " Some basics:
 	set nocompatible

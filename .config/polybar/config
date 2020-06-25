@@ -121,7 +121,7 @@ label =  %output%%
 [module/batt]
 type = custom/script
 interval = 15
-exec = battery-combined-shell
+exec = polybarBattery
 label = %output%
 
 [module/mail]
