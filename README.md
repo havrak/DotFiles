@@ -2,19 +2,22 @@
 
 In this repository are my personal dotfiles which I use on my arch system. Terminal is hardcoded to i3 config.
 
-# Programs that have configs in this repo
-+ i3-gaps
-+ vim
+# Dotfiles in this repo
++ i3wm
++ nvim
 + polybar
 + bash
 + fish
-+ rofi
++ dmenu
 + mpd
 + ncmpcpp
-+ compton
 + ranger
 + zathura
 + sxiv
 + dunst
-+ firefox (chrome only)
++ firefox
 + Xresources
++ mpv
++ vlc
++ youtube-dl
++ sxhkd
