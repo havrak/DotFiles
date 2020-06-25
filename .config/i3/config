@@ -1,9 +1,4 @@
-﻿#  _ _____                    __ _
-# (_)___ /    ___ ___  _ __  / _(_) __ _
-# | | |_ \   / __/ _ \| '_ \| |_| |/ _` |
-# | |___) | | (_| (_) | | | |  _| | (_| |
-# |_|____/   \___\___/|_| |_|_| |_|\__, |
-#                                  |___/
+# i3 config
 
 # ==================
 # ---Basic config---
@@ -12,7 +7,7 @@ for_window [class="^.*"] border pixel 2
 set $sup Mod4
 set $mod Mod1
 hide_edge_borders smart
-font pango:mono 9
+font pango:monospace 8
 
 #                               BORDER          BACKGROUND      TEXT            INDICATOR       DECORSTION_BORDER
 client.focused                  #707880         #1d1f21         #707880         #8c9440         #c6c8c5
@@ -61,6 +56,7 @@ bindsym $mod+Ctrl+Right workspace next
 # ==================
 # ---Applications---
 # ==================
+
 for_window [class="Clipgrab"] floating enable border normal
 for_window [title="File Transfer*"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable border normal
@@ -79,6 +75,15 @@ for_window [instance="gpt"] floating enable
 for_window [instance="gpt"] resize set 750 600
 for_window [instance="gpt"] move scratchpad
 for_window [instance="gpt"] border pixel 2
+
+bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec exec st -n notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex
+bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
+bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
+bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
+
+# =============
+# ---Windows---
+# =============
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -102,10 +107,9 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
-bindsym $mod+F12 exec i3-msg [instance="math"] kill ; exec st -n math -e python; exec i3-msg [instance="gpt"] kill ; exec st -n gpt ; exec i3-msg [instance="notes"] kill ; exec exec st -n notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex
-bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
-bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
+# ==============================
+# ---Commands to run on start---
+# ==============================
 
 exec --no-startup-id setbg
 exec --no-startup-id xrdb .Xresources
@@ -116,12 +120,12 @@ exec --no-startup-id sudo light -S 21
 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50%
 exec --no-startup-id mpc volume 100
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
-exec --no-startup-id xinput set-prop 22 166 0
+exec --no-startup-id xinput set-prop 12 166 0
+
 # ==================
 # ---Key bindings---
 # ==================
 
-# General
 bindsym $mod+Ctrl+t exec st
 bindsym $mod+Ctrl+n exec st -e neomutt
 bindsym $mod+Ctrl+m exec st -e ncmpcpp
@@ -140,7 +144,6 @@ bindsym XF86MonBrightnessDown exec sudo light -U 5
 bindsym Print exec scrot -e 'mv $f ~/tmp/screen/'
 bindsym Shift+Print exec scrot -u -e 'mv $f ~/tmp/screen/'
 
-bindsym $mod+F10 exec toggleCompton
 bindsym XF86Display exec arandr
 bindsym $mod+r exec screenChooser
 bindsym $mod+m exec dmenuMount
@@ -148,12 +151,6 @@ bindsym $mod+Shift+m exec dmenuUmount
 bindsym $mod+t exec clipboardText
 bindsym $mod+y exec copyDir
 bindsym $mod+w exec emojiPicker
-
-# Power managment
-bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
-bindsym $mod+Shift+F1 exec pixelLock
-bindsym $mod+Shift+F2 exec powerMenu -l
-bindsym $mod+Shift+F3 exec powerMenu -p
 
 # Audio / mpd control
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -167,6 +164,12 @@ bindsym $mod+Shift+less exec mpc seek -15
 bindsym $mod+e exec mpc toggle
 bindsym $mod+minus exec mpc volume -5
 bindsym $mod+plus exec mpc volume +5
+
+# Power managment
+bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
+bindsym $mod+Shift+F1 exec pixelLock
+bindsym $mod+Shift+F2 exec powerMenu -l
+bindsym $mod+Shift+F3 exec powerMenu -p
 
 # Launch programms
 bindsym $sup+f exec firefox ; exec notify-send "Starting Firefox"
