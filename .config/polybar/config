@@ -6,6 +6,8 @@ height = 13
 fixed-center = true
 bottom = true
 separator = " "
+wm-restack = bspwm
+override-redirect = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -15,7 +17,7 @@ font-1 = Siji:pixelsize=10;1
 font-2 = sazanami mincho:pixelsize=8;1
 font-3 = NotoColorEmoji:scale=13;2
 
-modules-left = i3 mpd
+modules-left = bspwm i3 mpd
 modules-right = torrents mail temperature volume screen batt wlan eth xkeyboard date
 
 cursor-click = pointer
@@ -54,6 +56,8 @@ cursor-scroll = ns-resize
 type = internal/bspwm
 enable-scroll = true
 
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
 label-focused = %name%
 label-focused-padding = 1
 

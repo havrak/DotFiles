@@ -1,35 +1,51 @@
 # i3wm
 
 alt + {0-9}
-	i3-msg workspace {10,1-9}
+	bspc desktop -f {10,1-9}
 
-alt + ctrl + {Left,Right}
-	i3-msg workspace {prev,next}
+alt + shift + {0-9}
+	bspwmMTW {10,1-9}
+
+#alt + ctrl + {Left,Right}
+#	bspc desktop -f {prev,next}
 
 alt + {Left,Right,Down,Up}
-	i3-msg focus {left,right,down,up}
+	bspc node -f {west,east,south,north}
 
-alt + shift + {Left,Right,Down,Up}
-	i3-msg move {left,right,down,up}
+alt + ctrl + {Left,Right
+	bspc node @parent -C {forward, backward}
 
-super + {Left,Right,Down,Up}
-	i3-msg resize {shrink width ,grow width,grow height,shrink height} 20px or 5ppt
+alt + shift + {Left,Down,Up,Right}
+  bspc node @parent -F {vertical,horizontal,horizontal,vertical}
 
-alt + {s,f}
-	i3-msg {split,fullscreen} toggle
 
-alt + space
-	i3-msg focus mode_toggle
+# expand vertically
+super + Up
+	bspc node -z top 0 -20; bspc node -z bottom 0 20
+# shrink vertically
+super + Down
+	bspc node -z top 0 20; bspc node -z bottom 0 -20
+# expand horizontally
+super + Left
+	bspc node -z left 20 0; bspc node -z right -20 0
+# shrink horizontally
+super + Right
+	bspc node -z left -20 0; bspc node -z right 20 0
+
+alt + f
+  bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
+
+alt + shift + space
+	bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
 
 alt + shift + q
-	i3-msg kill
+	bspc node -c
 
 alt + shift + r
-	i3-msg restart
+	bspc wm -r
 
 alt + shift + x
-  killall  sxhkd && notify-send "Config reloaded" && sxhkd &
-
+  killall sxhkd && sxhkd &
 
 # Dmenu stuff
 
