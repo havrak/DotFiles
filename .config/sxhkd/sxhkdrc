@@ -150,3 +150,6 @@ super + k
 super + l
 	notify-send "Starting Libreoffice" && libreoffice
 
+super + d
+	notify-send "Discord" && discord
+
