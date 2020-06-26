@@ -1,5 +1,52 @@
+# i3wm
+
+alt + {0-9}
+	i3-msg workspace {10,1-9}
+
+alt + ctrl + {Left,Right}
+	i3-msg workspace {prev,next}
+
+alt + {Left,Right,Down,Up}
+	i3-msg focus {left,right,down,up}
+
+alt + shift + {Left,Right,Down,Up}
+	i3-msg move {left,right,down,up}
+
+super + {Left,Right,Down,Up}
+	i3-msg resize {shrink width ,grow width,grow height,shrink height} 20px or 5ppt
+
+alt + {s,f}
+	i3-msg {split,fullscreen} toggle
+
+alt + space
+	i3-msg focus mode_toggle
+
+alt + shift + q
+	i3-msg kill
+
+alt + shift + r
+	i3-msg restart
+
+alt + shift + x
+  killall  sxhkd && notify-send "Config reloaded" && sxhkd &
+
+
+# Dmenu stuff
+
 alt + d
 	dmenu_run
+
+alt + r
+	screenChooser
+
+alt + {F9,F10}
+	{dmenuMount,dmenuUmount}
+
+alt + t
+	clipboardText
+
+alt + w
+	emojiPicker
 
 # Power managment
 alt + b  notify-send "🔋Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
@@ -30,26 +77,6 @@ Print
 
 shift+Print
 	scrot -u -e 'mv $f ~/tmp/screen/'
-
-# Other
-
-XF86Display
-	arandr
-
-alt + r
-	screenChooser
-
-alt + m
-	dmenuMount
-
-alt + shift + m
-	dmenuUmount
-
-alt + t
-	clipboardText
-
-alt + w
-	emojiPicker
 
 
 # Audio
