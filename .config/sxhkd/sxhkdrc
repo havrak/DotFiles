@@ -1,0 +1,109 @@
+alt + d
+	dmenu_run
+
+# Power managment
+alt + b  notify-send "🔋Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
+
+alt + shift + {F1,F2,F3}
+	{pixelLock, powerMenu -l, powerMenu -p}
+
+# Terminal
+
+alt + ctrl + t
+	st
+
+alt + ctrl + {n,m,r,g,f,w}
+	st -e {neomutt,ncmpcpp,ranger,tremc,newsboat,nmtui}
+
+# Brightness
+
+XF86MonBrightnessUp
+	sudo light -A 5
+
+XF86MonBrightnessDown
+	sudo light -U 5
+
+# Printscreen
+
+Print
+	scrot -e 'mv $f ~/tmp/screen/'
+
+shift+Print
+	scrot -u -e 'mv $f ~/tmp/screen/'
+
+# Other
+
+XF86Display
+	arandr
+
+alt + r
+	screenChooser
+
+alt + m
+	dmenuMount
+
+alt + shift + m
+	dmenuUmount
+
+alt + t
+	clipboardText
+
+alt + w
+	emojiPicker
+
+
+# Audio
+
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86AudioMicMute
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+alt + {comma,period}
+	mpc {prev,next}
+
+alt + {greater,less}
+	mpc seek {+15,-15}
+
+alt + e
+	mpc toggle
+
+alt + {minus,equal}
+	mpc volume {-5,+5}
+
+# Launch programms
+
+super + f
+	notify-send "Starting Firefox" && firefox
+
+super + n
+	notify-send "Starting Netbeans" && netbeans
+
+super + a
+	notify-send "Starting Arduino" && arduino
+
+super + p
+	notify-send "Starting Pavucontrol" && pavucontrol
+
+super + g
+	notify-send "Starting Gimp" && gimp
+
+super + e
+	notify-send "Starting Picard" && picard
+
+super + c
+	notify-send "Starting Calibre" && calibre
+
+super + k
+	notify-send "Starting Klavaro" && klavaro
+
+super + l
+	notify-send "Starting Libreoffice" && libreoffice
+

@@ -81,10 +81,6 @@ bindsym $mod+a [instance="math"] scratchpad show; [instance="math"] move positio
 bindsym $mod+x [instance="gpt"] scratchpad show; [instance="gpt"] move position center
 bindsym $mod+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
-# =============
-# ---Windows---
-# =============
-
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -107,6 +103,9 @@ bindsym $sup+Down resize grow height 20px or 5ppt
 bindsym $sup+Up resize shrink height 20px or 5ppt
 bindsym $sup+Right resize grow width 20px or 5ppt
 
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r restart
+
 # ==============================
 # ---Commands to run on start---
 # ==============================
@@ -121,64 +120,3 @@ exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50%
 exec --no-startup-id mpc volume 100
 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ 1
 exec --no-startup-id xinput set-prop 12 166 0
-
-# ==================
-# ---Key bindings---
-# ==================
-
-bindsym $mod+Ctrl+t exec st
-bindsym $mod+Ctrl+n exec st -e neomutt
-bindsym $mod+Ctrl+m exec st -e ncmpcpp
-bindsym $mod+Ctrl+r exec st -e ranger
-bindsym $mod+Ctrl+w exec st -e nmtui
-bindsym $mod+Ctrl+g exec st -e tremc
-bindsym $mod+Ctrl+f exec exec st -e newsboat
-
-bindsym $mod+Shift+q kill
-bindsym $mod+d exec dmenu_run
-bindsym $mod+Shift+r restart
-
-bindsym XF86MonBrightnessUp exec sudo light -A 5
-bindsym XF86MonBrightnessDown exec sudo light -U 5
-
-bindsym Print exec scrot -e 'mv $f ~/tmp/screen/'
-bindsym Shift+Print exec scrot -u -e 'mv $f ~/tmp/screen/'
-
-bindsym XF86Display exec arandr
-bindsym $mod+r exec screenChooser
-bindsym $mod+m exec dmenuMount
-bindsym $mod+Shift+m exec dmenuUmount
-bindsym $mod+t exec clipboardText
-bindsym $mod+y exec copyDir
-bindsym $mod+w exec emojiPicker
-
-# Audio / mpd control
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym $mod+greater exec mpc next
-bindsym $mod+less exec mpc prev
-bindsym $mod+Shift+greater exec mpc seek +15
-bindsym $mod+Shift+less exec mpc seek -15
-bindsym $mod+e exec mpc toggle
-bindsym $mod+minus exec mpc volume -5
-bindsym $mod+plus exec mpc volume +5
-
-# Power managment
-bindsym $mod+b exec notify-send "Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
-bindsym $mod+Shift+F1 exec pixelLock
-bindsym $mod+Shift+F2 exec powerMenu -l
-bindsym $mod+Shift+F3 exec powerMenu -p
-
-# Launch programms
-bindsym $sup+f exec firefox ; exec notify-send "Starting Firefox"
-bindsym $sup+n exec netbeans ; exec notify-send "Starting Netbeans"
-bindsym $sup+a exec arduino ; exec notify-send "Starting Arduino"
-bindsym $sup+p exec pavucontrol ; exec notify-send "Starting Pavucontrol"
-bindsym $sup+g exec gimp ; exec notify-send "Starting Gimp"
-bindsym $sup+e exec picard ; exec notify-send "Starting Picard"
-bindsym $sup+v exec vlc; exec notify-send "Starting VLC"
-bindsym $sup+c exec calibre; exec notify-send "Starting Calibre"
-bindsym $sup+k exec klavaro; exec notify-send "Starting Klavaro"
-bindsym $sup+l exec libreoffice; exec notify-send "Starting Libreoffice"
