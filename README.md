@@ -4,6 +4,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 
 # Dotfiles in this repo
 + i3wm
++ bspwm
 + nvim
 + polybar
 + bash
