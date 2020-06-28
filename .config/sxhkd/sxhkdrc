@@ -1,4 +1,4 @@
-# i3wm
+# bspwm
 
 alt + {0-9}
 	bspc desktop -f {10,1-9}
@@ -32,6 +32,8 @@ super + Left
 super + Right
 	bspc node -z left -20 0; bspc node -z right 20 0
 
+super + shift + {Left,Down,Up,Right}
+    xdotool getwindowfocus windowmove --relative %1 {-20 0, 0 +20, 0 -20, +20 0}
 alt + f
   bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
 
@@ -46,6 +48,9 @@ alt + shift + r
 
 alt + shift + x
   killall sxhkd && sxhkd &
+
+alt + {a,x,n}
+  scratchpad {math,gpt,notes}
 
 # Dmenu stuff
 
@@ -69,6 +74,9 @@ alt + b  notify-send "🔋Battery will last for "$(acpi | grep remaining | awk '
 
 alt + shift + {F1,F2,F3}
 	{pixelLock, powerMenu -l, powerMenu -p}
+
+alt + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
 
 # Terminal
 
@@ -122,34 +130,5 @@ alt + {minus,equal}
 	mpc volume {-5,+5}
 
 # Launch programms
-
-super + f
-	notify-send "Starting Firefox" && firefox
-
-super + n
-	notify-send "Starting Netbeans" && netbeans
-
-super + a
-	notify-send "Starting Arduino" && arduino
-
-super + p
-	notify-send "Starting Pavucontrol" && pavucontrol
-
-super + g
-	notify-send "Starting Gimp" && gimp
-
-super + e
-	notify-send "Starting Picard" && picard
-
-super + c
-	notify-send "Starting Calibre" && calibre
-
-super + k
-	notify-send "Starting Klavaro" && klavaro
-
-super + l
-	notify-send "Starting Libreoffice" && libreoffice
-
-super + d
-	notify-send "Discord" && discord
-
+super + {f,n,a,p,g,e,c,k,l,d}
+	startAndNotify {firefox,netbeans,arduino,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord}

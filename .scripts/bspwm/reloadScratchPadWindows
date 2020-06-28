@@ -1,0 +1,14 @@
+#!/bin/sh
+
+bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0 center=on
+bspc rule -a notes sticky=on state=floating hidden=on rectangle=800x700+0+0 center=on
+bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0 center=on
+
+killClass gpt
+killClass notes
+killClass math
+
+st -c gpt &
+st -c notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex &
+st -c math -e python &
+

@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+# kills all windows with class given in the argument
+
+notify-send killing "$1"
+pids=$(xdotool search --class ${1})
+echo $pids
+
+for pid in $pids; do
+	echo $pid
+	xdotool windowclose $pid
+done

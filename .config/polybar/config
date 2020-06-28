@@ -54,7 +54,7 @@ cursor-scroll = ns-resize
 
 [module/bspwm]
 type = internal/bspwm
-enable-scroll = true
+enable-scroll = false
 
 label-focused-background = ${colors.foreground}
 label-focused-foreground = ${colors.background}
@@ -71,9 +71,6 @@ label-urgent-padding = 1
 label-empty = %name%
 label-empty-foreground = ${colors.dark}
 label-empty-padding = 1
-
-scroll-up = bspwm-desknext
-scroll-down = bspwm-deskprev
 
 [module/wlan]
 type = internal/network
