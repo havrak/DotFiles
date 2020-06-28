@@ -75,9 +75,6 @@ alt + b  notify-send "🔋Battery will last for "$(acpi | grep remaining | awk '
 alt + shift + {F1,F2,F3}
 	{pixelLock, powerMenu -l, powerMenu -p}
 
-alt + button{1-3}
-    bspc pointer -g {move,resize_side,resize_corner}
-
 # Terminal
 
 alt + ctrl + t
