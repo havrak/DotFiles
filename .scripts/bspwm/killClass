@@ -3,9 +3,7 @@
 
 notify-send killing "$1"
 pids=$(xdotool search --class ${1})
-echo $pids
 
 for pid in $pids; do
-	echo $pid
 	xdotool windowclose $pid
 done
