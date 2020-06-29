@@ -33,7 +33,7 @@ super + Right
 	bspc node -z left -20 0; bspc node -z right 20 0
 
 super + shift + {Left,Down,Up,Right}
-    xdotool getwindowfocus windowmove --relative %1 {-20 0, 0 +20, 0 -20, +20 0}
+	xdotool getwindowfocus windowmove --relative %1 {-20 0, 0 +20, 0 -20, +20 0}
 alt + f
   bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
 

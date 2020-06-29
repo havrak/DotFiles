@@ -25,7 +25,7 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 bspc config click_to_focus true
-bspc config pointer_follows_focus true
+bspc config pointer_follows_focus false
 
 bspc config borderless_monocle true
 bspc config gapless_monocle true
@@ -57,5 +57,5 @@ bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 bspc rule -a notes sticky=on state=floating hidden=on rectangle=800x700+0+0
 bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
 
-reloadScratchPadWindows
+reloadScratchpadWindows
 
