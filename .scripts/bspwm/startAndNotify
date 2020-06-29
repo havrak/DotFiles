@@ -1,4 +1,4 @@
 #!/usr/bin/bash
 # kills all windows with class given in the argument
 
-notify-send "🈺 Starting "${1^}"" && eval "$1"
+notify-send "⭐ Starting "${1^}"" && eval "$1"

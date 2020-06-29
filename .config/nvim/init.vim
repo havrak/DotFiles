@@ -19,6 +19,7 @@ Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
 Plug 'kovetskiy/sxhkd-vim'
 call plug#end()
+
 " Some basics:
 	set nocompatible
 	filetype plugin on
@@ -30,7 +31,7 @@ call plug#end()
 	set clipboard=unnamedplus
 	let g:gruvbox_contrast_light='hard'
 	let g:gruvbox_italic=1
-	set background=light
+	set background=dark
 	colorscheme gruvbox
 	set mouse=a
 " Bindings to get to cmdline, I need to switch Czech a US layout so

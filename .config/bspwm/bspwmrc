@@ -12,7 +12,7 @@ pactl set-sink-volume @DEFAULT_SINK@ 50% &
 mpc volume 100 &
 pactl set-source-mute @DEFAULT_SOURCE@ 1 &
 xinput set-prop 12 166 0 &
-
+picom -b &
 
 ###---MONITORS---###
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
@@ -27,6 +27,7 @@ bspc config pointer_action3 resize_corner
 bspc config click_to_focus true
 bspc config pointer_follows_focus false
 
+bspc config single_monocle true
 bspc config borderless_monocle true
 bspc config gapless_monocle true
 bspc config focus_follows_pointer true

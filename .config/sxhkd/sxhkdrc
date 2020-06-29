@@ -12,7 +12,7 @@ alt + shift + {0-9}
 alt + {Left,Right,Down,Up}
 	bspc node -f {west,east,south,north}
 
-alt + ctrl + {Left,Right
+alt + ctrl + {Left,Right}
 	bspc node @parent -C {forward, backward}
 
 alt + shift + {Left,Down,Up,Right}
@@ -57,20 +57,13 @@ alt + {a,x,n}
 alt + d
 	dmenu_run
 
-alt + r
-	screenChooser
-
 alt + {F9,F10}
 	{dmenuMount,dmenuUmount}
 
-alt + t
-	clipboardText
-
-alt + w
-	emojiPicker
+alt + {r,t,w}
+	{screenChooser,clipboardText,emojiPicker}
 
 # Power managment
-alt + b  notify-send "🔋Battery will last for "$(acpi | grep remaining | awk '{print $5}')""
 
 alt + shift + {F1,F2,F3}
 	{pixelLock, powerMenu -l, powerMenu -p}

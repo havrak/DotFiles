@@ -12,6 +12,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 + dmenu
 + mpd
 + ncmpcpp
++ vlc
 + ranger
 + zathura
 + sxiv
@@ -22,3 +23,4 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 + vlc
 + youtube-dl
 + sxhkd
++ picom
