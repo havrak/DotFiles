@@ -24,3 +24,4 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 + youtube-dl
 + sxhkd
 + picom
++ transmission

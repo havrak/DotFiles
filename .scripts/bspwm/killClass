@@ -4,5 +4,5 @@
 pids=$(xdotool search --class ${1})
 
 for pid in $pids; do
-	xdotool windowclose $pid
+	xdo close $pid
 done

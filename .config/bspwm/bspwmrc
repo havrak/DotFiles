@@ -18,7 +18,7 @@ picom -b &
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 ###---Global Settings---###
-bspc config automatic_scheme alternate
+bspc config automatic_scheme longest_side
 
 bspc config pointer_modifier mod1
 bspc config pointer_action1 move
@@ -47,7 +47,7 @@ bspc config bottom_padding 13
 bspc config left_padding 0
 bspc config right_padding 0
 bspc config border_width 2
-bspc config window_gap 0
+bspc config window_gap 10
 
 
 ###---Rules---###
@@ -59,4 +59,3 @@ bspc rule -a notes sticky=on state=floating hidden=on rectangle=800x700+0+0
 bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
 
 reloadScratchpadWindows
-
