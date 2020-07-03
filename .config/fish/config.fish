@@ -22,7 +22,7 @@ function compgen --description 'Print a list of documented fish commands'
     bash -c "compgen $argv"
 end
 
-abbr p "yaourt"
+abbr p "yay"
 abbr v "nvim"
 abbr orphans "yaourt -Qqtd"
 abbr sr "sudo ranger"
