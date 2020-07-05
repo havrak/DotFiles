@@ -57,5 +57,6 @@ bspc rule -a Screenkey manage=off
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 bspc rule -a notes sticky=on state=floating hidden=on rectangle=800x700+0+0
 bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
+bspc rule -a GtkFileChooserDialog rectangle=800x600+0+0 center=on
 
 reloadScratchpadWindows

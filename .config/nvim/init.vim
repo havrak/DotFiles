@@ -34,7 +34,8 @@ call plug#end()
 	set background=dark
 	colorscheme gruvbox
 	set mouse=a
-" Bindings to get to cmdline, I need to switch Czech a US layout so
+
+	" Bindings to get to cmdline, I need to switch Czech a US layout so
 	nmap ; :
 	nmap ů :
 	imap <F2> <Esc>:
@@ -42,7 +43,7 @@ call plug#end()
 	nmap te :tabedit <c-r>
 " Enable autocompletion:
 	set wildmode=longest,list,full
-" Disables automatic commenting on newline:
+" Disables automatic cmmenting on newline:
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Goyo plugin makes text more readable when writing prose:
 	map <leader>f :Goyo \| set linebreak<CR>
@@ -239,4 +240,4 @@ call plug#end()
 
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
-	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kO
+	autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kOo

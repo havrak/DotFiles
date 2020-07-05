@@ -3,14 +3,14 @@ choose=$(printf "laptop\\nexternal\\nschool\\ntemp\\nmanual" | dmenu -i -p "Choo
 
 case "$choose" in
 	"laptop")
-		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output DP2 --off
+		xrandr --output eDP-1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output DP-1 --off --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off
 		sleep 1
 		setbg
 		polybarLaunch
 		remap.sh
 		;;
 	"external")
-		xrandr --output HDMI2 --off --output HDMI1 --off --output DP1 --mode 2560x1080 --pos 0x0 --rotate normal --output eDP1 --off --output DP2 --off
+		xrandr --output eDP-1 --off --output DP-1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-2 --off --output HDMI-2 --off
 		sleep 1
 		setbg
 		polybarLaunch
