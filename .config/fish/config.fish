@@ -24,7 +24,7 @@ end
 
 abbr p "yay"
 abbr v "nvim"
-abbr orphans "yaourt -Qqtd"
+abbr orphans "yay -Qqtd"
 abbr sr "sudo ranger"
 abbr r "ranger"
 abbr n "neomutt"
