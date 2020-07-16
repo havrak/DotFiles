@@ -91902,6 +91902,9 @@ ff02::3 ip6-allhosts
 
 0.0.0.0 humblebundle.com
 0.0.0.0 fanatical.com
+0.0.0.0 www.youtube.com
+0.0.0.0 youtube.com
+0.0.0.0 m.youtube.com
 0.0.0.0 boards.4channel.org
 0.0.0.0 4channel.org
 0.0.0.0 soundcloud.com

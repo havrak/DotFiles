@@ -3,49 +3,104 @@
 https://www.archlinux.org/feeds/news/
 https://www.securityfocus.com/rss/vulnerabilities.xml
 
+===Nyaa.si===
+
+https://nyaa.si/?page=rss&q=Re+Zero+kara+Hajimeru+Isekai+Seikatsu&c=1_2&f=0 "~Re Zero kara Hajimeru Isekai Seikatsu"
+https://nyaa.si/?page=rss&q=Yahari+Ore+no+Seishun+Love+Comedy+wa+Machigatteiru.+Kan&c=1_2&f=0 "~Yahari Ore no Seishun Love Comedy wa Machigatteiru. Kan"
+https://nyaa.si/?page=rss&q=The+God+of+High+School&c=1_2&f=0 "~The God of High School"
+https://nyaa.si/?page=rss&q=Great+Pretender&c=1_2&f=0 "~Great Pretender"
+https://nyaa.si/?page=rss&q=Kanojo%2C+Okarishimasu&c=1_2&f=0 "~Kanojo, Okarishimasu"
+https://nyaa.si/?page=rss&q=Shokugeki+no+Souma%3A+Gou+no+Sara&c=1_2&f=0 "~Shokugeki no Souma: Gou no Sara"
+
 ===Linux-YT===
-https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg
-https://www.youtube.com/feeds/videos.xml?user=MentalOutlawStudios
-https://www.youtube.com/feeds/videos.xml?user=OmegaDungeon
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA
 
-===VTubres-Subs===
+#"query:Meta feed:tags # \"lin\"" meta
 
-"query:Meta feed:tags # \"vts\"" meta
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg	lin
+https://www.youtube.com/feeds/videos.xml?user=MentalOutlawStudios 						lin
+https://www.youtube.com/feeds/videos.xml?user=OmegaDungeon										lin
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA 	lin
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UCK4adPCSc8U1mhaJYbzZ-7w vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCya1PA60eFentfXclcYOxQw vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCCaooRutmsPSKdSJS8D1W0w vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UC4Fh9OcvIEWK405Cvg25jDw vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCEW23fgjYA27kgQ0rqOdvDg vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UC8zpmQeA0Z_4R-EM7kIRcWw vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCwq_gUBsgrO-X-J8Z5e7q8g vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCsYcCwDqv6Sg8KMIIMF54SA vts
-https://www.youtube.com/feeds/videos.xml?user=nechanee vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCk8bCSSABc2Y_XVh1mFJPQw vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCPjJnxungJanXhWiQ_8ohTg vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UC4pRflMbspg-5JMMRWWu-9g vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCtej_QebTHk5Izz5aO577ow vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCTtUroUYrtBxDZyO7d2-hBg vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCdcKhwo8Fw54WRk7w_kiJrQ vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCS_T52AGs1f2GM6OJq7gFyw vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCYn1_-yGrxKJQYKrMl7CqZQ vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCaDyXwdL4eYDSJnszYeFMZA vts
-https://www.youtube.com/feeds/videos.xml?user=MultyBlack92 vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCg-5I4KD3L2zBTTbFKid91w vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCdiFfABsbEASId0mtQQWmww vts
-https://www.youtube.com/feeds/videos.xml?channel_id=UCsfho72y27BF4-98T3-SvSQ vts
+===/k/stuff===
 
-===VTubres-Original===
+#"query:Meta feed:tags # \"kst\"" meta
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UC1CfXB_kRs3C-zaeTG3oGyg
-https://www.youtube.com/feeds/videos.xml?channel_id=UChAnqc_AY5_I3Px5dig3X1Q
-https://www.youtube.com/feeds/videos.xml?channel_id=UCS9uQI-jC3DE0L4IpXyvr6w
-https://www.youtube.com/feeds/videos.xml?channel_id=UC-hM6YJuNYVAmUWxeIr9FeA
-https://www.youtube.com/feeds/videos.xml?channel_id=UCQ0UDLQCjY0rmuxCDE38FGg
-https://www.youtube.com/feeds/videos.xml?channel_id=UCdyqAaZDKHXg4Ahi7VENThQ
-https://www.youtube.com/feeds/videos.xml?channel_id=UC1DCedRgGHBdm81E1llLhOQ
-https://www.youtube.com/feeds/videos.xml?channel_id=UCOyYb1c43VlX9rc_lT6NKQw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCzMV_BNHRP71kMA7ZZ95MaA 	kst
+https://www.youtube.com/feeds/videos.xml?channel_id=UCANk4DCsImDX3wlXQ6M1Jdg 	kst
+https://www.youtube.com/feeds/videos.xml?channel_id=UCFWjEwhX6cSAKBQ28pufG3w 	kst
+https://www.youtube.com/feeds/videos.xml?user=ForgottenWeapons 								kst
+https://www.youtube.com/feeds/videos.xml?channel_id=UCKNCbBWiMiXBVXUmUuu_dsQ	kst
+
+===VTubres===
+
+"query:Fan subs:tags # \"vts\"" meta
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UCK4adPCSc8U1mhaJYbzZ-7w	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCya1PA60eFentfXclcYOxQw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCaooRutmsPSKdSJS8D1W0w	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UC4Fh9OcvIEWK405Cvg25jDw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCEW23fgjYA27kgQ0rqOdvDg	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UC8zpmQeA0Z_4R-EM7kIRcWw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCwq_gUBsgrO-X-J8Z5e7q8g	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCsYcCwDqv6Sg8KMIIMF54SA	vts !
+https://www.youtube.com/feeds/videos.xml?user=nechanee 												vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCk8bCSSABc2Y_XVh1mFJPQw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCPjJnxungJanXhWiQ_8ohTg	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UC4pRflMbspg-5JMMRWWu-9g	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtej_QebTHk5Izz5aO577ow	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCTtUroUYrtBxDZyO7d2-hBg	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCdcKhwo8Fw54WRk7w_kiJrQ	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCS_T52AGs1f2GM6OJq7gFyw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYn1_-yGrxKJQYKrMl7CqZQ	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCaDyXwdL4eYDSJnszYeFMZA	vts !
+https://www.youtube.com/feeds/videos.xml?user=MultyBlack92										vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCg-5I4KD3L2zBTTbFKid91w	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCdiFfABsbEASId0mtQQWmww	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCsfho72y27BF4-98T3-SvSQ	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCixoczbgjCbhSsim0k3xDnQ	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UC0nmBuvKsED4RbsZ7oBqEww	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCFyuO_tHQFTMQaakIALlmog	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9UitPGyhDhPXmAB2Ns_L7A	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2ygp39AY4xAz7K_zU2rdJw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCZohBcP4HL5UxV4xwY_81YA	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCnTIjR2biTlYBNxn_H2jXfw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCRpZj6eU5T_6U-uBgeLzpSw	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCKEamDKBFoEnOoIY9KgE5g	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCjFAcLZmgG_4tCvn3q1lw9g	vts !
+https://www.youtube.com/feeds/videos.xml?channel_id=UCc8suhQbSoSHuiuStu1o8GQ	vts !
+
+#"query:Meta feed:tags # \"vto\"" meta
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UCJFZiqLMntJufDCHc6bQixg	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UC1CfXB_kRs3C-zaeTG3oGyg	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UChAnqc_AY5_I3Px5dig3X1Q	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UCS9uQI-jC3DE0L4IpXyvr6w	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UC-hM6YJuNYVAmUWxeIr9FeA	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UCQ0UDLQCjY0rmuxCDE38FGg	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UCdyqAaZDKHXg4Ahi7VENThQ	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UC1DCedRgGHBdm81E1llLhOQ	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UCOyYb1c43VlX9rc_lT6NKQw	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UCEzsociuFqVwgZuMaZqaCsg	vto
+https://www.youtube.com/feeds/videos.xml?channel_id=UCvaTdHTWBGv3MKj3KVqJVCw	vto
+
+===Ludology===
+
+#"query:Meta feed:tags # \"lud\"" meta
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UC3_kehZbfRz-KrjXIqeIiPw	lud
+https://www.youtube.com/feeds/videos.xml?channel_id=UCqJ-Xo29CKyLTjn6z2XwYAw	lud
+https://www.youtube.com/feeds/videos.xml?channel_id=UC1JTQBa5QxZCpXrFSkMxmPw	lud
+https://www.youtube.com/feeds/videos.xml?user=bunnyhopshow										lud
+
+===Anitubers===
+
+#"query:Meta feed:tags # \"ant\"" meta
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UCuUm7Jx9g8NynC2pfhUmGfg	ant
+https://www.youtube.com/feeds/videos.xml?channel_id=UCBs2Y3i14e1NWQxOGliatmg	ant
+https://www.youtube.com/feeds/videos.xml?user=gigguk													ant
+https://www.youtube.com/feeds/videos.xml?channel_id=UCcmxOGYGF51T1XsqQLewGtQ	ant
+https://www.youtube.com/feeds/videos.xml?channel_id=UC1GNOke2DJrgPaE2QlWMEsQ	ant
 
 ===Other===
 

@@ -6,6 +6,6 @@ prog
 tmp
 mt
 dw
-.scripts/tremc
-.scripts/files/wall.png
+.local/bin/tremc
+.local/bin/files/wall.png
 .config/mpv/watch_later

@@ -3,8 +3,9 @@
 killClass gpt
 killClass notes
 killClass math
+killClass rss
 
 st -c gpt &
 st -c notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex &
 st -c math -e python &
-
+st -c rss -e newsboat

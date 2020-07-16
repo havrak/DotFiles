@@ -1,25 +1,24 @@
 #!/usr/bin/fish
 
 
-set PATH (du "$HOME/.scripts/" | cut -f2 | tr '\n' ':') $PATH
+set PATH (du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':') $PATH
 set -x READER zathura
 set -x EDITOR nvim
-set -x BROWSER firefox
+set -x BROWSER firefor
+set -x TERMINAL st
 
 function fish_greeting
 end
+
 function fish_prompt
 	set_color blue --bold
-	printf (basename $PWD)
+		printf (basename $PWD)
 	set_color red --bold
-	printf " >"
+		printf " >"
 	set_color normal
+
 	# del key does not work properly by itself
 	printf '\033[?1h\033=' >/dev/tty
-end
-
-function compgen --description 'Print a list of documented fish commands'
-    bash -c "compgen $argv"
 end
 
 abbr p "yay"
@@ -31,15 +30,13 @@ abbr n "neomutt"
 abbr sv "sudoedit"
 abbr grp "git remote | xargs -L1 git push --all"
 abbr g "git"
-abbr music "ncmpcpp"
+abbr mus "ncmpcpp"
 abbr z "zathura --fork"
 abbr s "sensors"
-abbr java "/usr/lib/jvm/java-8-jdk/jre/bin/java"
 abbr yt "youtube-dl"
 abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
 abbr sc "sudo systemctl"
 abbr pyserver "python3 -m http.server"
-abbr mpvol "mpv --input-ipc-server=/tmp/mpvsoc(date +%s) -quiet"
 abbr netres "sudo modprobe -r e1000e && sudo modprobe e1000e"
 abbr prm "sudo rm -rf /var/cache/pacman/"
 abbr smloadr "smloadr -p /home/havra/dw/deezloader/ -q FLAC"
@@ -73,11 +70,4 @@ function ramuse
 end
 
 fish_vi_key_bindings
-
-# Start X at login
-#if status is-login
-#    if test -z "$DISPLAY" -a $XDG_VTNR = 1
-#        exec startx -- -keeptty
-#    end
-#end
 

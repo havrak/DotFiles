@@ -38,12 +38,12 @@ battery_percent=$(("$battery_percent / $battery_max"))
 
 battery_charging=$(acpi -b | grep Charging)
 
-if [ $battery_percent -le 3 ]; then
-	notify-send "🔋 Low battery - $battery_percent%"
-fi
 
 if [ -n "$battery_charging" ]; then
 	echo " $battery_percent%"
 else
 	echo " $battery_percent%"
+	if [ $battery_percent -le 3 ]; then
+		notify-send "🔋 Low battery - $battery_percent%"
+	fi
 fi
