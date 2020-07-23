@@ -1,3 +1,0 @@
-#!/bin/sh
-
-/usr/lib/jvm/java-8-jdk/jre/bin/java -jar /home/havra/Programming/NetBeans/Poznavacka/dist/Poznavacka.jar

@@ -22,7 +22,7 @@ cd "$dir" || exit
 
 textype() { \
 	bibtex "$basename"
-	command="pdflatex"
+	command="pdflatex -file-line-error"
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
 	grep -i addbibresource "$file" >/dev/null &&

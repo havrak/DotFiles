@@ -17,8 +17,33 @@ font-1 = Siji:pixelsize=10;1
 font-2 = sazanami mincho:pixelsize=8;1
 font-3 = NotoColorEmoji:scale=13;2
 
-modules-left = bspwm mpd
-modules-right = torrents mail temperature volume screen batt wlan eth xkeyboard date
+modules-left = bspwm
+modules-center=title
+modules-right = torrents mail temperature volume screen batt xkeyboard date
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/topBar]
+width = 100%
+height = 13
+offset-y = 13
+fixed-center = true
+separator = " "
+bottom=true
+wm-restack = bspwm
+override-redirect = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = misc fixed:pixelsize=11;1
+font-1 = Siji:pixelsize=10;1
+font-2 = sazanami mincho:pixelsize=8;1
+font-3 = NotoColorEmoji:scale=13;2
+
+modules-left = mpd
+modules-right = memory cpu wlan eth
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -29,25 +54,6 @@ background = #1c1c1c
 dark= #555555
 red = #cc241d
 
-[module/i3]
-type = internal/i3
-index-sort = true
-wrapping-scroll = false
-
-label-focused = %name%
-label-focused-background = ${colors.foreground}
-label-focused-foreground = ${colors.background}
-label-focused-padding = 1
-
-label-unfocused = %name%
-label-unfocused-padding = 1
-
-label-visible = %name%
-label-visible-padding = 1
-
-label-urgent = %name%
-label-urgent-foreground = ${colors.red}
-label-urgent-padding = 1
 
 [module/bspwm]
 type = internal/bspwm
@@ -69,17 +75,25 @@ label-empty = %name%
 label-empty-foreground = ${colors.dark}
 label-empty-padding = 1
 
+[module/title]
+type = internal/xwindow
+label = %title%
+label-empty =
+label-maxlen = 50
+
 [module/wlan]
 type = internal/network
 interface = wlp3s0
 interval = 5.0
-label-connected = 
+label-connected =  %essid% - %local_ip%  %upspeed%  %downspeed%
+label-disconnected =  down
 
 [module/eth]
 type = internal/network
 interface = enp0s25
 interval = 5.0
-label-connected = 
+label-connected =  %local_ip%  %upspeed%  %downspeed%
+label-disconnected =  down
 
 [module/date]
 type = internal/date
@@ -116,8 +130,8 @@ label-muted =  00%
 type = internal/mpd
 format-online =  <label-song> <label-time>
 format-online-padding = 1
-label-song = %artist% - %title%
-label-song-maxlen = 70
+label-song = %artist% / %album% - %title%
+label-song-maxlen = 130
 label-song-ellipsis = true
 
 [module/screen]
@@ -141,6 +155,15 @@ exec = polybarEmail
 click-right = export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; export DISPLAY=:0; /home/havra/.config/mutt/bin/mailsync
 click-left = exec st -e neomutt &
 label = %output%
+
+[module/cpu]
+type = internal/cpu
+label =  %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 3
+label =  %gb_used%/%gb_free%
 
 [settings]
 screenchange-reload = true

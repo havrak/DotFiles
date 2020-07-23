@@ -18,6 +18,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'lervag/vimtex'
 Plug 'morhetz/gruvbox'
 Plug 'kovetskiy/sxhkd-vim'
+Plug 'Chiel92/vim-autoformat'
 call plug#end()
 
 " Some basics:
@@ -31,6 +32,7 @@ call plug#end()
 	set clipboard=unnamedplus
 	let g:gruvbox_contrast_light='hard'
 	let g:gruvbox_italic=1
+	let g:python3_host_prog='/usr/bin/python'
 	set background=dark
 	colorscheme gruvbox
 	set mouse=a

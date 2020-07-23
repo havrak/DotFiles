@@ -2,4 +2,5 @@
 
 rm -r $HOME/Desktop
 rm  $HOME/.lesshst
+rm $HOME/.wget-hsts
 

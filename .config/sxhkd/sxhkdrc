@@ -3,8 +3,15 @@
 alt + {0-9}
 	bspc desktop -f {10,1-9}
 
+alt + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10}
+	bspc desktop -f {11,12,13,14,15,16,17,18,19,20}
+
 alt + shift + {0-9}
 	bspwmMTW {10,1-9}
+
+alt + shift + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10}
+	bspwmMTW {11,12,13,14,15,16,17,18,19,20}
+
 
 alt + {Left,Right,Down,Up}
 	bspc node -f {west,east,south,north}
@@ -51,7 +58,7 @@ alt + shift + x
 alt + {a,x,n,s}
   scratchpad {math,gpt,notes,rss}
 
-alt + F11
+super + F11
 	togglePicom
 
 # Dmenu stuff
@@ -59,7 +66,7 @@ alt + F11
 alt + d
 	dmenu_run
 
-alt + {F9,F10}
+alt + {F11,F12}
 	{dmenuMount,dmenuUmount}
 
 alt + {w,t,q}
@@ -67,7 +74,7 @@ alt + {w,t,q}
 
 # Power managment
 
-alt + shift + {F1,F2,F3}
+super + shift + {F1,F2,F3}
 	{pixelLock, powerMenu -l, powerMenu -p}
 
 # Terminal
@@ -93,7 +100,6 @@ Print
 
 shift+Print
 	scrot -u -e 'mv $f ~/tmp/screen/'
-
 
 # Audio
 

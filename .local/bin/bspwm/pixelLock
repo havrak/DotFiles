@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 scrot /tmp/screen.png
 convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
-ICON=$HOME/.scripts/files/lock.png
+ICON=$HOME/.local/bin/files/lock.png
 
 KBD=""
 case "$(xset -q|grep LED| awk '{ print $10 }')" in
@@ -11,7 +11,7 @@ case "$(xset -q|grep LED| awk '{ print $10 }')" in
   "00001002") KBD="Czech" ;;
   *) KBD="unknown" ;;
 esac
-convert /tmp/screen.png /home/havra/.scripts/files/lock.png -gravity center -composite -matte /tmp/screen.png
+convert /tmp/screen.png $ICON -gravity center -composite -matte /tmp/screen.png
 
 convert -font helvetica -fill green -pointsize 30 -gravity center -draw "text 0,300 'Layout on start of i3lock was: $KBD'" /tmp/screen.png /tmp/screen.png # can't use numbers on czech without shift
 mpc pause

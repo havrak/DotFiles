@@ -1,5 +1,7 @@
 #!/usr/bin/fish
 
+# java
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 set PATH (du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':') $PATH
 set -x READER zathura
@@ -11,6 +13,14 @@ function fish_greeting
 end
 
 function fish_prompt
+	set_color yellow
+		printf "%s" "$USER"
+	set_color green
+		printf "@"
+	set_color magenta
+		printf "%s" "$hostname"
+	set_color green
+		printf ":"
 	set_color blue --bold
 		printf (basename $PWD)
 	set_color red --bold
