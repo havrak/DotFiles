@@ -1,26 +1,23 @@
 # bspwm
 
-alt + {0-9}
-	bspc desktop -f {10,1-9}
+alt + {0-9,minus,equal}
+	bspc desktop -f {10,1-9,11,12}
 
-alt + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10}
-	bspc desktop -f {11,12,13,14,15,16,17,18,19,20}
+alt + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12}
+	bspc desktop -f {13,14,15,16,17,18,19,20,21,22,23,24}
 
-alt + shift + {0-9}
-	bspwmMTW {10,1-9}
+alt + shift + {0-9,minus,equal}
+	bspwmMTW {10,1-9,11,12}
 
-alt + shift + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10}
-	bspwmMTW {11,12,13,14,15,16,17,18,19,20}
+alt + shift + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12}
+	bspwmMTW {13,14,15,16,17,18,19,20,21,22,23,24}
 
 
-alt + {Left,Right,Down,Up}
-	bspc node -f {west,east,south,north}
+alt + {h,j,k,l}
+	bspc node -f {west,south,north,east}
 
-alt + ctrl + {Left,Right}
-	bspc node @parent -C {forward, backward}
-
-alt + shift + {Left,Down,Up,Right}
-  bspc node @parent -F {vertical,horizontal,horizontal,vertical}
+alt + shift + {h,j,k,l}
+	bspc node @parent -F {vertical,horizontal,horizontal,vertical}
 
 alt + r
 	bspc node @parent -R 90
@@ -41,7 +38,7 @@ super + Right
 super + shift + {Left,Down,Up,Right}
 	xdotool getwindowfocus windowmove --relative %1 {-20 0, 0 +20, 0 -20, +20 0}
 alt + f
-  bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
+	bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
 
 alt + shift + space
 	bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
@@ -53,20 +50,17 @@ alt + shift + r
 	bspc wm -r && notify-send "🔁 reloaded bspwm"
 
 alt + shift + x
-  killall sxhkd && notify-send "🔁 reloaded sxhkd" && sxhkd &
+	killall sxhkd && notify-send "🔁 reloaded sxhkd" && sxhkd &
 
 alt + {a,x,n,s}
-  scratchpad {math,gpt,notes,rss}
-
-super + F11
-	togglePicom
+	scratchpad {math,gpt,notes,rss}
 
 # Dmenu stuff
 
 alt + d
 	dmenu_run
 
-alt + {F11,F12}
+super + {F9,F10}
 	{dmenuMount,dmenuUmount}
 
 alt + {w,t,q}
@@ -124,11 +118,11 @@ alt + {greater,less}
 alt + e
 	mpc toggle
 
-alt + {minus,equal}
-	mpc volume {-5,+5}
+#alt + {minus,equal}
+#	mpc volume {-5,+5}
 
-alt + shift + {minus,equal}
-	mpc volume {0,100}
+#alt + shift + {minus,equal}
+#	mpc volume {0,100}
 
 # Launch programms
 super + {f,n,a,p,g,e,c,k,l,d}

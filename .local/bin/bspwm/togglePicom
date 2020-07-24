@@ -1,9 +1,0 @@
-#!/bin/sh
-if [ `pidof picom` ]; then
-	notify-send "📺 Disabled compton"
-	killall picom
-else
-	notify-send "📺 Enabled compton"
-	picom -b
-fi
-exit
