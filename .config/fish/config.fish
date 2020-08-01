@@ -13,7 +13,7 @@ function fish_greeting
 end
 
 function fish_prompt
-set_color yellow
+	set_color yellow
 		printf "%s" "$USER"
 	set_color green
 		printf "@"

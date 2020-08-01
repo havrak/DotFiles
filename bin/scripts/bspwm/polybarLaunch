@@ -2,6 +2,12 @@
 
 killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-polybar default &
-polybar topBar &
+
+if [ "$HOSTNAME" == "tp" ]; then
+	polybar default &
+	polybar topBar &
+else
+	polybar desktop &
+fi
+
 exit

@@ -7,7 +7,7 @@ stty -ixon
 [[ $- != *i* ]] && return
 
 alias ls='ls --group-directories-first --color=auto'
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':')"
+export PATH="$PATH:$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':')"
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"
