@@ -1,0 +1,7 @@
+#!/bin/sh
+
+rm -r $HOME/Desktop
+rm -r $HOME/.nnmpcpp
+rm  $HOME/.lesshst
+rm $HOME/.wget-hsts
+

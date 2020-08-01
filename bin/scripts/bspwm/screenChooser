@@ -1,0 +1,40 @@
+#!/bin/sh
+choose=$(printf "laptop\\nexternal\\nschool\\ntemp\\nmanual" | dmenu -i -p "Choose monitor setup")
+
+case "$choose" in
+	"laptop")
+		xrandr --output eDP1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output DP2 --off --output HDMI2 --off
+		sleep 1
+		setbg
+		polybarLaunch
+		remap.sh
+		;;
+	"external")
+		xrandr --output eDP1 --off --output DP1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output DP2 --off --output HDMI2 --off
+		sleep 1
+		setbg
+		polybarLaunch
+		remap.sh
+		;;
+	"school")
+		xrandr --output eDP1 --off --output DP1 --off --output DP2 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
+		sleep 1
+		setbg
+		polybarLaunch
+		remap.sh
+		;;
+	"temp")
+		xrandr --output eDP1 --off --output DP1 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output DP2 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
+		sleep 1
+		setbg
+		polybarLaunch
+		remap.sh
+		;;
+	"manual")
+		arandr
+		sleep 1
+		setbg
+		remap.sh
+		;;
+esac
+exit

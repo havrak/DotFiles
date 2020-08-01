@@ -9,8 +9,6 @@ https://nyaa.si/?page=rss&q=Re+Zero+kara+Hajimeru+Isekai+Seikatsu&c=1_2&f=0 "~Re
 https://nyaa.si/?page=rss&q=Yahari+Ore+no+Seishun+Love+Comedy+wa+Machigatteiru.+Kan&c=1_2&f=0 "~Yahari Ore no Seishun Love Comedy wa Machigatteiru. Kan"
 https://nyaa.si/?page=rss&q=The+God+of+High+School&c=1_2&f=0 "~The God of High School"
 https://nyaa.si/?page=rss&q=Great+Pretender&c=1_2&f=0 "~Great Pretender"
-https://nyaa.si/?page=rss&q=Kanojo%2C+Okarishimasu&c=1_2&f=0 "~Kanojo, Okarishimasu"
-https://nyaa.si/?page=rss&q=Shokugeki+no+Souma%3A+Gou+no+Sara&c=1_2&f=0 "~Shokugeki no Souma: Gou no Sara"
 
 ===Linux-YT===
 
@@ -21,15 +19,15 @@ https://www.youtube.com/feeds/videos.xml?user=MentalOutlawStudios 						lin
 https://www.youtube.com/feeds/videos.xml?user=OmegaDungeon										lin
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA 	lin
 
-===/k/stuff===
+#===/k/stuff===
 
 #"query:Meta feed:tags # \"kst\"" meta
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UCzMV_BNHRP71kMA7ZZ95MaA 	kst
-https://www.youtube.com/feeds/videos.xml?channel_id=UCANk4DCsImDX3wlXQ6M1Jdg 	kst
-https://www.youtube.com/feeds/videos.xml?channel_id=UCFWjEwhX6cSAKBQ28pufG3w 	kst
-https://www.youtube.com/feeds/videos.xml?user=ForgottenWeapons 								kst
-https://www.youtube.com/feeds/videos.xml?channel_id=UCKNCbBWiMiXBVXUmUuu_dsQ	kst
+#https://www.youtube.com/feeds/videos.xml?channel_id=UCzMV_BNHRP71kMA7ZZ95MaA 	kst
+#https://www.youtube.com/feeds/videos.xml?channel_id=UCANk4DCsImDX3wlXQ6M1Jdg 	kst
+#https://www.youtube.com/feeds/videos.xml?channel_id=UCFWjEwhX6cSAKBQ28pufG3w 	kst
+#https://www.youtube.com/feeds/videos.xml?user=ForgottenWeapons 								kst
+#https://www.youtube.com/feeds/videos.xml?channel_id=UCKNCbBWiMiXBVXUmUuu_dsQ	kst
 
 ===VTubres===
 
@@ -83,14 +81,14 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCOyYb1c43VlX9rc_lT6NKQw	vto
 https://www.youtube.com/feeds/videos.xml?channel_id=UCEzsociuFqVwgZuMaZqaCsg	vto
 https://www.youtube.com/feeds/videos.xml?channel_id=UCvaTdHTWBGv3MKj3KVqJVCw	vto
 
-===Ludology===
+#===Ludology===
 
 #"query:Meta feed:tags # \"lud\"" meta
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UC3_kehZbfRz-KrjXIqeIiPw	lud
-https://www.youtube.com/feeds/videos.xml?channel_id=UCqJ-Xo29CKyLTjn6z2XwYAw	lud
-https://www.youtube.com/feeds/videos.xml?channel_id=UC1JTQBa5QxZCpXrFSkMxmPw	lud
-https://www.youtube.com/feeds/videos.xml?user=bunnyhopshow										lud
+#https://www.youtube.com/feeds/videos.xml?channel_id=UC3_kehZbfRz-KrjXIqeIiPw	lud
+#https://www.youtube.com/feeds/videos.xml?channel_id=UCqJ-Xo29CKyLTjn6z2XwYAw	lud
+#https://www.youtube.com/feeds/videos.xml?channel_id=UC1JTQBa5QxZCpXrFSkMxmPw	lud
+#https://www.youtube.com/feeds/videos.xml?user=bunnyhopshow										lud
 
 ===Anitubers===
 
@@ -102,6 +100,6 @@ https://www.youtube.com/feeds/videos.xml?user=gigguk													ant
 https://www.youtube.com/feeds/videos.xml?channel_id=UCcmxOGYGF51T1XsqQLewGtQ	ant
 https://www.youtube.com/feeds/videos.xml?channel_id=UC1GNOke2DJrgPaE2QlWMEsQ	ant
 
-===Other===
+#===Other===
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UCqGKtkZ8-MlAeTVL0fFAMnw
+#https://www.youtube.com/feeds/videos.xml?channel_id=UCqGKtkZ8-MlAeTVL0fFAMnw

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Made by Luke Smith: //github.com/LukeSmithxyz
+
+[ ! -z "$1" ] && cp "$1" $HOME/bin/scripts/files/wall.png && notify-send -i "$HOME/.local/bin/files/wall.png" "Wallpaper changed."
+xwallpaper --zoom ~/bin/scripts/files/wall.png

@@ -3,26 +3,25 @@
 # java
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-set PATH (du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':') $PATH
+set PATH (du "$HOME/bin/" | cut -f2 | tr '\n' ':') $PATH
 set -x READER zathura
 set -x EDITOR nvim
-set -x BROWSER firefor
+set -x BROWSER firefox
 set -x TERMINAL st
 
 function fish_greeting
 end
 
-
 function fish_prompt
-	set_color yellow
+set_color yellow
 		printf "%s" "$USER"
 	set_color green
 		printf "@"
-	set_color magenta
+	set_color magenta --bold
 		printf "%s" "$hostname"
 	set_color green
 		printf ":"
-	set_color blue --bold
+	set_color blue
 		printf (basename $PWD)
 	set_color red --bold
 		printf " >"
@@ -80,5 +79,42 @@ function ramuse
                 | awk '{$1/=1024;printf "%.0fMB\t",$1}{print $2}'
 end
 
-fish_vi_key_bindings
+setenv SSH_ENV $HOME/.ssh/environment
 
+function start_agent
+    echo "Initializing new SSH agent ..."
+    ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
+    echo "succeeded"
+    chmod 600 $SSH_ENV
+    . $SSH_ENV > /dev/null
+    ssh-add
+end
+
+function test_identities
+    ssh-add -l | grep "The agent has no identities" > /dev/null
+    if [ $status -eq 0 ]
+        ssh-add
+        if [ $status -eq 2 ]
+            start_agent
+        end
+    end
+end
+
+if [ -n "$SSH_AGENT_PID" ]
+    ps -ef | grep $SSH_AGENT_PID | grep ssh-agent > /dev/null
+    if [ $status -eq 0 ]
+        test_identities
+    end
+else
+    if [ -f $SSH_ENV ]
+        . $SSH_ENV > /dev/null
+    end
+    ps -ef | grep $SSH_AGENT_PID | grep -v grep | grep ssh-agent > /dev/null
+    if [ $status -eq 0 ]
+        test_identities
+    else
+        start_agent
+    end
+end
+
+fish_vi_key_bindings
