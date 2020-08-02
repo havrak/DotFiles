@@ -1,0 +1,4 @@
+#!/bin/sh
+
+setxkbmap -option 'grp:win_space_toggle' -layout us,cz -variant ,qwerty
+setxkbmap -option caps:escape

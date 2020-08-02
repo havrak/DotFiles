@@ -1,15 +1,8 @@
-"        _
-" __   _(_)_ __ ___  _ __ ___
-" \ \ / / | '_ ` _ \| '__/ __|
-"  \ V /| | | | | | | | | (__
-"   \_/ |_|_| |_| |_|_|  \___|
-
 let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'wincent/command-t'
 Plug 'bling/vim-airline'
@@ -33,11 +26,12 @@ call plug#end()
 	let g:gruvbox_contrast_light='hard'
 	let g:gruvbox_italic=1
 	let g:python3_host_prog='/usr/bin/python'
+	let g:goyo_width=150
 	set background=dark
 	colorscheme gruvbox
 	set mouse=a
 
-	" Bindings to get to cmdline, I need to switch Czech a US layout so
+" Bindings to get to cmdline
 	nmap ; :
 	nmap ů :
 	imap <F2> <Esc>:
@@ -48,13 +42,12 @@ call plug#end()
 " Disables automatic cmmenting on newline:
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Goyo plugin makes text more readable when writing prose:
-	map <leader>f :Goyo \| set linebreak<CR>
+	map <leader>f :Goyo \| setlocal spell! spelllang=en_us,cs,de \| set linebreak<CR>
 " Enable Goyo by default for mutt writting
 	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
+	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo \| setlocal spell! spelllang=en_us,cs,de \| set linebreak
 " Typing
 	map <leader>o :setlocal spell! spelllang=en_us,cs,de \| set linebreak <CR>
-	map <leader>l :set linebreak <CR>
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 	set splitright splitbelow
@@ -81,9 +74,6 @@ call plug#end()
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
 
-" Open dmen
-	map <leader>s :!copyDir <CR><CR>
-
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
 
@@ -99,8 +89,9 @@ call plug#end()
 " Automatically deletes all trailing whitespace on save.
 	autocmd BufWritePre * %s/\s\+$//e
 
-" Run xrdb whenever Xdefaults or Xresources are updated.
+" Run command on update of certain files
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
+	autocmd BufWritePost ~/.config/newsboat/urls !rsw -r
 
 " Navigating with guides
 	inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l
@@ -121,20 +112,16 @@ call plug#end()
 
 	autocmd VimEnter * :silent AirlineToggleWhitespace
 
+
+" Macros
+
+"	general
 	inoremap ,os ß
 
-	"____        _                  _
-"/ ___| _ __ (_)_ __  _ __   ___| |_ ___
-"\___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
- "___) | | | | | |_) | |_) |  __/ |_\__ \
-"|____/|_| |_|_| .__/| .__/ \___|\__|___/
-              "|_|   |_|
-
-
-"""LATEX
+"	LaTeX
 	" Word count:
 	autocmd FileType tex map <leader><leader>o :w !detex \| wc -w<CR>
-	" Code snippets
+	" Code snippets:
 	autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\itemize{begin}<Enter>\item<++><Enter>\itemize{end}<Enter>}<Enter><Enter><++><Esc>6kf}i
 	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 	autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
@@ -180,7 +167,7 @@ call plug#end()
 	autocmd FileType tex inoremap ,) \<++>{<++>}<++>
 	autocmd FileType tex inoremap ,( \<++>[<++>]{<++>}<++>
 
-"""HTML
+"	HTML
 	autocmd FileType html inoremap ,b <b></b><Space><++><Esc>FbT>i
 	autocmd FileType html inoremap ,it <em></em><Space><++><Esc>FeT>i
 	autocmd FileType html inoremap ,1 <h1></h1><Enter><Enter><++><Esc>2kf<i
@@ -225,8 +212,7 @@ call plug#end()
 	autocmd FileType html inoremap ò &ograve;
 	autocmd FileType html inoremap ù &ugrave;
 
-"MARKDOWN
-	autocmd Filetype markdown,rmd map <leader>w yiWi[<esc>Ea](<esc>pa)
+"	Markdown
 	autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 	autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
 	autocmd Filetype markdown,rmd inoremap ,s ~~~~<++><Esc>F~hi
@@ -238,7 +224,7 @@ call plug#end()
 	autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
 	autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-	autocmd Filetype markdown,rmd inoremap ,, +<Space>
+	autocmd FileType markdown,rmd inoremap ,li <Enter>+<Space>
 
 	autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 	autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO

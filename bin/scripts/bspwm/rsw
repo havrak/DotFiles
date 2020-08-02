@@ -1,0 +1,39 @@
+#!/bin/sh
+killClass() {
+	for var in "$@" ; do
+		pids=$(xdotool search --class ${var})
+		for pid in $pids; do
+			xdo close $pid
+		done
+	done
+}
+case "$1" in
+	"-g")
+		killClass gpt
+		setsid -f st -c gpt &
+		exit
+		;;
+	"-m")
+		killClass math
+		setsid -f st -c math -e python &
+		exit
+		;;
+	"-r")
+		killClass rss
+		setsid -f st -c rss -e newsboat
+		exit
+		;;
+	"-n")
+		killClass notes
+		setsid -f st -c notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex &
+		exit
+		;;
+esac
+
+killClass gpt notes math rss
+
+setsid -f st -c gpt &
+setsid -f st -c notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex &
+setsid -f st -c math -e python &
+setsid -f st -c rss -e newsboat
+exit

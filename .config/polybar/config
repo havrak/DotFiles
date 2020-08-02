@@ -1,5 +1,3 @@
-# polybar config
-
 [bar/desktop]
 width = 100%
 height = 13
@@ -20,7 +18,7 @@ font-2 = sazanami mincho:pixelsize=8;1
 font-3 = NotoColorEmoji:scale=13;2
 
 modules-left = bspwm mpd
-modules-right = torrents mail temperature volume memory cpu eth xkeyboard date
+modules-right = torrents mail temperature volume memory cpu ethD xkeyboard date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -115,6 +113,13 @@ interface = wlp3s0
 interval = 5.0
 label-connected =  %essid% - %local_ip%  %upspeed%  %downspeed%
 label-disconnected =  down
+
+[module/ethD]
+type = internal/network
+interface = eno1
+interval = 5.0
+label-connected =  %local_ip%  %upspeed%  %downspeed%
+label-disconnected =  down
 
 [module/eth]
 type = internal/network

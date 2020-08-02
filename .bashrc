@@ -1,7 +1,3 @@
-#
-# ~/.bashrc
-#
-
 stty -ixon
 
 [[ $- != *i* ]] && return
