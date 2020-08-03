@@ -2,8 +2,11 @@
 killClass() {
 	for var in "$@" ; do
 		pids=$(xdotool search --class ${var})
-		for pid in $pids; do
-			xdo close $pid
+		while [ -n "$pids" ] ; do
+			for pid in $pids; do
+				xdo close $pid
+			done
+			pids=$(xdotool search --class ${var})
 		done
 	done
 }

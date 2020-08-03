@@ -1,8 +1,9 @@
 #!/usr/bin/bash
 # toggles dropdown terminal, window will always be centered
 if [ -z $1 ]; then
-	echo "Usage: in case no flag is given script toggles scratchpad window if window in argument doesn't exist it will call rsw with given and such window will be created if it exist. "
+	echo "Usage: in case no flag is given script toggles scratchpad window if window in argument doesn't exists script rsw will be called with same argument as was scratchpad and such window will be created."
 	echo "In case flag -h or argument --hide is used program will hide every window given as argument after the flag."
+	exit
 fi
 
 if [ "$1" == "--hide" ] || [ "$1" == "-h" ]; then
@@ -18,7 +19,6 @@ if [ "$1" == "--hide" ] || [ "$1" == "-h" ]; then
 	exit
 fi
 
-
 pids=$(xdotool search --class ${1})
 
 if [ -z "$pids" ] ; then
@@ -31,7 +31,6 @@ fi
 [ "$(wc -w <<< "$pids")" -gt "1" ] && notify-send -t 400 "⚠ multiple same windows open"
 
 for pid in $pids; do
-	echo "Toggle $pid"
 	width=$(($(xdotool getwindowgeometry --shell $pid | grep WIDTH | awk -F "=" '{print $2}')/2))
 	height=$(($(xdotool getwindowgeometry --shell $pid | grep HEIGHT | awk -F "=" '{print $2}')/2))
 	if bspc query -N -n "$pid.hidden" > /dev/null; then

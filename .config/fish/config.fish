@@ -3,7 +3,7 @@
 # java
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-set PATH (du "$HOME/bin/" | cut -f2 | tr '\n' ':') $PATH
+set PATH (du "$HOME/bin/scripts" | cut -f2 | tr '\n' ':') $PATH
 set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox

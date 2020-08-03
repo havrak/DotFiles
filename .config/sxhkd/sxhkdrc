@@ -54,7 +54,7 @@ alt + {a,x,n,s}
 # Dmenu stuff
 
 alt + d
-	dmenu_run
+	dmenu_run -i
 
 super + {F10,F11}
 	{dmenuMount,dmenuUmount}
