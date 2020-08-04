@@ -49,6 +49,7 @@ setbg &
 xrdb .Xresources &
 polybarLaunch &
 remap &
+picom -b &
 pactl set-sink-volume @DEFAULT_SINK@ 50% &
 pactl set-source-mute @DEFAULT_SOURCE@ 1 &
 mpc volume 100 &

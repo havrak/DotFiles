@@ -23,7 +23,6 @@ call plug#end()
 	set encoding=utf-8
 	set relativenumber number
 	set clipboard=unnamedplus
-	let g:gruvbox_contrast_light='hard'
 	let g:gruvbox_italic=1
 	let g:python3_host_prog='/usr/bin/python'
 	let g:goyo_width=150
@@ -92,6 +91,7 @@ call plug#end()
 " Run command on update of certain files
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 	autocmd BufWritePost ~/.config/newsboat/urls !rsw -r
+	autocmd BufWritePost ~/.config/polybar/config !polybarLaunch
 
 " Navigating with guides
 	inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l

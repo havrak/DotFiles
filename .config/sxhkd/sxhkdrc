@@ -56,8 +56,8 @@ alt + {a,x,n,s}
 alt + d
 	dmenu_run -i
 
-super + {F10,F11}
-	{dmenuMount,dmenuUmount}
+super + {F9,F10,F11}
+	{togglePicom, dmenuMount,dmenuUmount}
 
 alt + {w,t,q}
 	{screenChooser,clipboardText,emojiPicker}
