@@ -3,7 +3,7 @@
 # java
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-set PATH (du "$HOME/bin/scripts" | cut -f2 | tr '\n' ':') $PATH
+set PATH $PATH (du "$HOME/bin" | cut -f2 | tr '\n' ':')
 set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox
@@ -44,7 +44,6 @@ abbr mus "ncmpcpp"
 abbr z "zathura --fork"
 abbr s "sensors"
 abbr yt "youtube-dl"
-abbr fan "sudo echo level | sudo tee /proc/acpi/ibm/fan"
 abbr sc "sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr netres "sudo modprobe -r e1000e && sudo modprobe e1000e"

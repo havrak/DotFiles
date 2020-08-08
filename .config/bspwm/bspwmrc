@@ -33,20 +33,21 @@ bspc config right_padding 0
 bspc config border_width 2
 bspc config window_gap 0
 
-if [ "$HOSTNAME" == "tp" ]; then bspc config bottom_padding 23 ; else bspc config bottom_padding 12 ; fi
+if [ "$HOSTNAME" == "tp" ]; then bspc config bottom_padding 22 ; else bspc config bottom_padding 12 ; fi
 
 # Rules
 bspc rule -a Zathura state=tiled
 bspc rule -a discord desktop=22
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
-bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x650+0+0
+bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x700+0+0
 bspc rule -a notes sticky=on state=floating hidden=on rectangle=800x700+0+0
 bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
 bspc rule -a monitor desktop=24
+bspc rule -a trans desktop=23
 
 # Autostart
 setbg &
-xrdb .Xresources &
+xrdb .Xresources
 polybarLaunch &
 remap &
 picom -b &
@@ -54,4 +55,5 @@ pactl set-sink-volume @DEFAULT_SINK@ 50% &
 pactl set-source-mute @DEFAULT_SOURCE@ 1 &
 mpc volume 100 &
 [ -z $(xdotool search --class monitor) ] && setsid -f st -c monitor -e htop &
+[ -z $(xdotool search --class trans) ] && setsid -f st -c trans -e tremc &
 rsw &

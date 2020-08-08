@@ -32,7 +32,7 @@ separator = " "
 wm-restack = bspwm
 padding-right=1
 override-redirect = true
-offset-y = -2
+offset-y = -3
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -52,7 +52,7 @@ cursor-scroll = ns-resize
 [bar/topBar]
 width = 100%
 height = 13
-offset-y = 10
+offset-y = 9
 fixed-center = true
 separator = " "
 bottom=true

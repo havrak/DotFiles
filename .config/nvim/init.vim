@@ -3,7 +3,6 @@ let mapleader =" "
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'jreybert/vimagit'
 Plug 'wincent/command-t'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -91,7 +90,6 @@ call plug#end()
 " Run command on update of certain files
 	autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 	autocmd BufWritePost ~/.config/newsboat/urls !rsw -r
-	autocmd BufWritePost ~/.config/polybar/config !polybarLaunch
 
 " Navigating with guides
 	inoremap <Space><Tab> <Esc>/<++><Enter>"_c4l

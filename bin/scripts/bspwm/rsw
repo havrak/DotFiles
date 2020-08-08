@@ -38,5 +38,5 @@ killClass gpt notes math rss
 setsid -f st -c gpt &
 setsid -f st -c notes -e nvim -p ~/dox/oth/notes.md ~/prog/ard/ProjectFiles/notes.md ~/dox/bookshelf/bookList.tex &
 setsid -f st -c math -e python &
-setsid -f st -c rss -e newsboat
+setsid -f st -c rss -e newsboat &
 exit
