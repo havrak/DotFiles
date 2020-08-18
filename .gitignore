@@ -8,3 +8,16 @@ mt
 dw
 bin/scripts/files/wall.png
 .config/mpv/watch_later
+.abook
+.bash_history
+.cache
+.local/lib
+.mbsyncrc
+.mozilla
+.notmuch-config
+.pki
+.pulse-cookie
+.rsf_history
+.ssh
+.viminfo
+.Xauthority

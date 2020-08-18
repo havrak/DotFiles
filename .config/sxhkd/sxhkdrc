@@ -3,17 +3,21 @@
 alt + {0-9,minus,equal}
 	bspc desktop -f {10,1-9,11,12}
 
-alt + shift + {0-9,minus,equal}
-	bspwmMTW {10,1-9,11,12}
-
 alt + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12}
 	bspc desktop -f {13,14,15,16,17,18,19,20,21,22,23,24}
 
+alt + shift + {0-9,minus,equal}
+	 bspc node -d {10,1-9,11,12} --follow
+
 alt + shift + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12}
-	bspwmMTW {13,14,15,16,17,18,19,20,21,22,23,24}
+	bspc node -d {13,14,15,16,17,18,19,20,21,22,23,24} --follow
+
 
 alt + {h,j,k,l}
 	bspc node -f {west,south,north,east}
+
+alt + ctrl + {h,l}
+	bspc node @/ -C {forward,backward}
 
 alt + shift + {h,j,k,l}
 	bspc node @parent -F {vertical,horizontal,horizontal,vertical}
@@ -21,16 +25,16 @@ alt + shift + {h,j,k,l}
 alt + r
 	bspc node @parent -R 90
 
-alt + ctrl + k
+alt + ctrl + Up
 	bspc node -z top 0 -20; bspc node -z bottom 0 20
 
-alt + ctrl + j
+alt + ctrl + Down
 	bspc node -z top 0 20; bspc node -z bottom 0 -20
 
-alt + ctrl + h
+alt + ctrl + Left
 	bspc node -z left 20 0; bspc node -z right -20 0
 
-alt + ctrl + l
+alt + ctrl + Right
 	bspc node -z left -20 0; bspc node -z right 20 0
 
 alt + f
@@ -50,6 +54,9 @@ alt + shift + x
 
 alt + {a,x,n,s}
 	scratchpad {math,gpt,notes,rss}
+
+alt + shift + s
+	scratchpad -h math gpt notes rss
 
 # Dmenu stuff
 
@@ -119,6 +126,5 @@ alt + shift + {bracketleft,bracketright}
 	mpc volume {0,100}
 
 # Launch programms
-super + {f,n,a,p,g,e,c,k,l,d}
-	startAndNotify {firefox,netbeans,arduino,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord}
-
+super + {f,b,n,a,p,g,e,c,k,l,d}
+	startAndNotify {firefox,brave,netbeans,arduino,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord}

@@ -1,4 +1,3 @@
 #!/usr/bin/bash
-# kills all windows with class given in the argument
 prog=$(which "$1")
-notify-send "⭐ Starting "${1^}"" && setsid -f "$prog"
+notify-send -t 400 "⭐ Starting "${1^}"" && setsid -f "$prog"

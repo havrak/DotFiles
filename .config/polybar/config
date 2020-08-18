@@ -23,7 +23,7 @@ modules-right = torrents mail temperature volume memory cpu ethD xkeyboard date
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/default]
+[bar/bottom]
 width = 100%
 height = 13
 fixed-center = true
@@ -49,7 +49,7 @@ modules-right = torrents mail temperature volume screen batt xkeyboard date
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/topBar]
+[bar/top]
 width = 100%
 height = 13
 offset-y = 9
@@ -69,7 +69,7 @@ font-2 = sazanami mincho:pixelsize=8;1
 font-3 = NotoColorEmoji:scale=13;2
 
 modules-left = mpd
-modules-right = memory cpu wlan eth
+modules-right = memory cpu wlan alpha eth
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -110,6 +110,13 @@ label-maxlen = 50
 [module/wlan]
 type = internal/network
 interface = wlp3s0
+interval = 5.0
+label-connected =  %essid% - %local_ip%  %upspeed%  %downspeed%
+label-disconnected =  down
+
+[module/alpha]
+type = internal/network
+interface = wlp0s20u1
 interval = 5.0
 label-connected =  %essid% - %local_ip%  %upspeed%  %downspeed%
 label-disconnected =  down

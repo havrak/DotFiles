@@ -1,6 +1,16 @@
 #!/bin/sh
 bspc rule -r "*"
 
+# Autostart
+setbg &
+xrdb .Xresources
+polybarLaunch &
+remap &
+picom -b &
+pactl set-sink-volume @DEFAULT_SINK@ 50% &
+pactl set-source-mute @DEFAULT_SOURCE@ 1 &
+mpc volume 100 &
+
 # Global Settings
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
 
@@ -21,7 +31,7 @@ bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true
 bspc config merge_overlapping_monitors true
 
-bspc config normal_border_color	"458588"
+bspc config normal_border_color	"#000000"
 bspc config active_border_color	"#c6c8c5"
 bspc config focused_border_color "#c6c8c5"
 bspc config presel_feedback_color	"#5e81ac"
@@ -31,7 +41,7 @@ bspc config top_padding 0
 bspc config left_padding 0
 bspc config right_padding 0
 bspc config border_width 2
-bspc config window_gap 0
+bspc config window_gap 6
 
 if [ "$HOSTNAME" == "tp" ]; then bspc config bottom_padding 22 ; else bspc config bottom_padding 12 ; fi
 
@@ -43,17 +53,7 @@ bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x700+0+0
 bspc rule -a notes sticky=on state=floating hidden=on rectangle=800x700+0+0
 bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
 bspc rule -a monitor desktop=24
-bspc rule -a trans desktop=23
 
-# Autostart
-setbg &
-xrdb .Xresources
-polybarLaunch &
-remap &
-picom -b &
-pactl set-sink-volume @DEFAULT_SINK@ 50% &
-pactl set-source-mute @DEFAULT_SOURCE@ 1 &
-mpc volume 100 &
+#	Autostart terminal windows
 [ -z $(xdotool search --class monitor) ] && setsid -f st -c monitor -e htop &
-[ -z $(xdotool search --class trans) ] && setsid -f st -c trans -e tremc &
 rsw &
