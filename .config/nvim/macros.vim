@@ -2,11 +2,6 @@
 inoremap ,os ß
 
 " LaTeX
-
-" Word count:
-autocmd FileType tex map <leader><leader>o :w !detex \| wc -w <CR>
-
-" Code snippets:
 autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\itemize{begin}<Enter>\item<++><Enter>\itemize{end}<Enter>}<Enter><Enter><++><Esc>6kf}i
 autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
@@ -16,7 +11,6 @@ autocmd FileType tex inoremap ,uv \uv{}<++><Esc>T{i
 autocmd FileType tex inoremap ,fn \footnote{}<++><Esc>T{i
 autocmd FileType tex inoremap ,fm \footnotemark <++>
 autocmd FileType tex inoremap ,ft \footnotetext{}<++><Esc>T{i
-
 autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
 autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
 autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
@@ -26,7 +20,7 @@ autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\
 autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
 autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
 autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap ,li <Enter>\item<Space>
+autocmd FileType tex inoremap ,li <ESC>o\item<Space>
 autocmd FileType tex inoremap ,ref \ref{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
 autocmd FileType tex inoremap ,ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
@@ -109,7 +103,7 @@ autocmd Filetype markdown,rmd inoremap ,1 #<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd inoremap ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd inoremap ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown,rmd inoremap ,l --------<Enter>
-autocmd FileType markdown,rmd inoremap ,li <Enter>+<Space>
+autocmd FileType markdown,rmd inoremap ,li <Esc>o+<Space>
 
 autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO

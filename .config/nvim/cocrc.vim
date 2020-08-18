@@ -1,6 +1,6 @@
 " ------COC SETTINGS------
 " prettier command for coc
-let g:tex_flavor = 'latex'
+"let g:tex_flavor = 'latex'
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
@@ -12,8 +12,9 @@ let g:coc_global_extensions = [
 			\ 'coc-css',
 			\ 'coc-json',
 			\ 'coc-angular',
-			\ 'coc-vimtex',
-			\ 'coc-java'
+			\ 'coc-texlab',
+			\ 'coc-java',
+			\ 'coc-template'
 			\ ]
 
 " From Coc Readme

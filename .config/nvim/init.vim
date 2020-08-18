@@ -13,7 +13,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 " Code Completion
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -39,6 +39,8 @@ set encoding=utf-8
 set relativenumber number
 set clipboard=unnamedplus
 set termguicolors
+set cursorline
+set cursorcolumn
 let g:gruvbox_italic=1
 let g:python3_host_prog='/usr/bin/python'
 set background=dark
@@ -61,6 +63,7 @@ nmap te :tabedit <c-r>
 
 " Enable autocompletion:
 set wildmode=longest,list,full
+set wildchar=<Tab> wildmenu wildmode=full
 
 " Disables automatic comenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -81,6 +84,10 @@ map <C-Left> <C-w>h
 map <C-Down> <C-w>j
 map <C-Up> <C-w>k
 map <C-Right> <C-w>l
+
+" Make buffers more practical
+nnoremap gt :bnext<CR>
+nnoremap Q :w\|bd<cr>
 
 " Replace all is aliased to S.
 nnoremap S :%s///g<Left><Left><Left>
@@ -149,6 +156,16 @@ nmap <leader><leader>f <Plug>(easymotion-overwin-f)
 nmap <leader><leader>j <Plug>(easymotion-overwin-line)
 nmap <leader><leader>k <Plug>(easymotion-overwin-line)
 nmap <leader><leader>w <Plug>(easymotion-overwin-w)
+
+" FzF
+nnoremap <c-g> :GFiles<CR>
+nnoremap <c-z> :Files<CR>
+let g:fzf_preview_window = 'right:60%'
+
+command! -bang -nargs=? -complete=dir Files
+	\ call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+command! -bang -nargs=? -complete=dir GFiles
+	\ call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 
 " Load external files
 runtime macros.vim
