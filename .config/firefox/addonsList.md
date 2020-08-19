@@ -9,6 +9,7 @@
 + Stylus
 + uBlock Origin
 + Vim Vixen
++ Channel Blocker
 + Violentmonkey
 	+ https://github.com/Zren/ResizeYoutubePlayerToWindowSize/
 	+ https://www.4chan-x.net
