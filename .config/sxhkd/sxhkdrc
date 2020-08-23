@@ -77,8 +77,8 @@ super + {F1,F2,F3}
 alt + ctrl + t
 	st
 
-alt + ctrl + {n,m,r,g,w}
-	st -e {neomutt,ncmpcpp,ranger,tremc,nmtui}
+alt + ctrl + {n,m,r,g,w,v}
+	st -e {neomutt,ncmpcpp,ranger,tremc,nmtui,nvim}
 
 # Brightness
 

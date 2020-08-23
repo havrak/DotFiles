@@ -171,7 +171,7 @@ type = internal/mpd
 format-online =  <label-song> <label-time>
 format-online-padding = 1
 label-song = %artist% / %album% - %title%
-label-song-maxlen = 130
+label-song-maxlen = 110
 label-song-ellipsis = true
 
 [module/screen]

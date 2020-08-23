@@ -3,6 +3,9 @@
 # java
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# use bat to color man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 set PATH $PATH (du "$HOME/bin" | cut -f2 | tr '\n' ':')
 set -x READER zathura
 set -x EDITOR nvim
@@ -57,6 +60,7 @@ abbr prm "sudo rm -rf /var/cache/pacman/"
 abbr orphans "yay -Qqtd"
 abbr pror "yay -Rscn (yay -Qqtd)"
 abbr pr "yay -Rscn"
+abbr pse "yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro  yay -S"
 
 # navigation
 abbr .. "cd .."
@@ -80,24 +84,26 @@ abbr tag "git tag"
 abbr newtag "git tag -a"
 abbr push "git remote | xargs -L1 git push --all"
 
-function fzfdircd
+# function fish_user_key_bindings
+# 	fzf_key_bindings
+# end
+
+function fzf-dir-cd
 	cd (dirname (locate home media | fzf -i -e))
 end
 
-function fzfevrycd
+function fzf-full-cd
 	cd (dirname (locate / | fzf -i -e))
 end
 
-function fzffilecd
-	cd (dirname (find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i -e))
-end
-
-function fzfbookcd
-	cd (dirname (find ~/dox/Bookshelf -type f | fzf -i -e))
-end
-
-function fzffileedit
+function fzf-file-edit
 	find ~/.config ~/.local ~/.scripts ~/* -type f | fzf -i -e | xargs -r $EDITOR
+end
+
+bind \cg fzf-file-edit
+
+if bind -M insert > /dev/null 2>&1
+	bind -M insert \cg fzf-file-edit
 end
 
 function ramuse

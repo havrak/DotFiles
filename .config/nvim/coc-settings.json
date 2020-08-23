@@ -1,3 +1,21 @@
 {
-	"texlab.path": "/usr/bin/texlab"
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "graphql",
+    "html",
+    "yaml",
+    "json",
+    "python",
+    "java",
+    "latex"
+  ],
+
+  "texlab.path": "/usr/bin/texlab",
+
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snips"
 }

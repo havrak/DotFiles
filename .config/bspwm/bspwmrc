@@ -55,5 +55,5 @@ bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
 bspc rule -a monitor desktop=24
 
 #	Autostart terminal windows
-[ -z $(xdotool search --class monitor) ] && setsid -f st -c monitor -e htop &
+[ -z "$(xdotool search --class monitor)" ] && setsid -f st -c monitor -e htop &
 rsw &
