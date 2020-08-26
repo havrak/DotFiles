@@ -28,7 +28,7 @@ case "$1" in
 		;;
 	"-n" | "notes")
 		killClass notes
-		setsid -f st -c notes -e nvim ~/vimwiki/index.wiki ~/dox/bookshelf/bookList.tex &
+		setsid -f st -c notes -e nvim ~/.vim/vimwiki/index.wiki ~/dox/bookshelf/bookList.tex &
 		exit
 		;;
 esac
@@ -36,7 +36,7 @@ esac
 killClass gpt notes math rss
 
 setsid -f st -c gpt &
-setsid -f st -c notes -e nvim -p ~/vimwiki/index.wiki ~/dox/bookshelf/bookList.tex &
+setsid -f st -c notes -e nvim -p ~/.vim/vimwiki/index.wiki ~/dox/bookshelf/bookList.tex &
 setsid -f st -c math -e python &
 setsid -f st -c rss -e newsboat &
 exit

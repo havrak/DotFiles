@@ -21,3 +21,4 @@ bin/scripts/files/wall.png
 .ssh
 .viminfo
 .Xauthority
+.config/nvim/vimwiki
