@@ -1,4 +1,4 @@
-auto-reload yes
+auto-reload no
 reload-time	10
 
 show-title-bar no

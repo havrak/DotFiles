@@ -34,59 +34,59 @@ function fish_prompt
 	printf '\033[?1h\033=' >/dev/tty
 end
 
-abbr v "nvim"
-abbr vim "nvim"
-abbr sr "sudo ranger"
-abbr r "ranger"
-abbr n "neomutt"
-abbr sv "sudoedit"
-abbr mus "ncmpcpp"
-abbr z "zathura --fork"
-abbr s "sensors"
-abbr yt "youtube-dl"
-abbr sc "sudo systemctl"
+abbr v 				"nvim"
+abbr vim 			"nvim"
+abbr sr 			"sudo ranger"
+abbr r 				"ranger"
+abbr n 				"neomutt"
+abbr sv 			"sudoedit"
+abbr mus 			"ncmpcpp"
+abbr z 				"zathura --fork"
+abbr s 				"sensors"
+abbr yt 			"youtube-dl"
+abbr SS 			"sudo systemctl"
 abbr pyserver "python3 -m http.server"
-abbr netres "sudo modprobe -r e1000e && sudo modprobe e1000e"
-abbr smloadr "smloadr -p /home/havra/dw/deezloader/ -q FLAC"
-abbr cp "cp -i"
-abbr mv "mv -i"
+abbr netres 	"sudo modprobe -r e1000e && sudo modprobe e1000e"
+abbr smloadr 	"smloadr -p /home/havra/dw/deezloader/ -q FLAC"
+abbr cp 			"cp -i"
+abbr mv 			"mv -i"
 
 # get error messages from journalctl
-abbr jctl "journalctl -p 3 -xb"
+abbr jctl 		"journalctl -p 3 -xb"
 
 # pacman
-abbr p "yay"
-abbr prm "sudo rm -rf /var/cache/pacman/"
-abbr orphans "yay -Qqtd"
-abbr pror "yay -Rscn (yay -Qqtd)"
-abbr pr "yay -Rscn"
-abbr pse "yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro  yay -S"
+abbr p 				"yay"
+abbr prm 			"sudo rm -rf /var/cache/pacman/"
+abbr orphans 	"yay -Qqtd"
+abbr pror 		"yay -Rscn (yay -Qqtd)"
+abbr pr 			"yay -Rscn"
+abbr pse 			"yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro  yay -S"
 
 # navigation
-abbr .. "cd .."
-abbr ... "cd ../.."
-abbr .3 "cd ../../.."
-abbr .4 "cd ../../.."
-abbr .5 "cd ../../../..'"
-abbr .6 "cd ../../../../.."
+abbr ..  			"cd .."
+abbr ... 			"cd ../.."
+abbr .3  			"cd ../../.."
+abbr .4  			"cd ../../.."
+abbr .5  			"cd ../../../..'"
+abbr .6  			"cd ../../../../.."
 
 # git
-abbr g "git"
-abbr addup "git add -u"
-abbr addall "git add ."
-abbr branch "git branch"
+abbr g 				"git"
+abbr addup 		"git add -u"
+abbr addall 	"git add ."
+abbr branch 	"git branch"
 abbr checkout "git checkout"
-abbr commit "git commit -m"
-abbr fetch "git fetch"
-abbr pull "git pull origin"
-abbr status "git status"
-abbr tag "git tag"
-abbr newtag "git tag -a"
-abbr push "git remote | xargs -L1 git push --all"
+abbr commit 	"git commit -m"
+abbr fetch 		"git fetch"
+abbr pull 		"git pull origin"
+abbr status 	"git status"
+abbr tag 			"git tag"
+abbr newtag 	"git tag -a"
+abbr push 		"git remote | xargs -L1 git push --all"
 
-# function fish_user_key_bindings
-# 	fzf_key_bindings
-# end
+function fish_user_key_bindings
+	fzf_key_bindings
+end
 
 function fzf-dir-cd
 	cd (dirname (locate home media | fzf -i -e))
