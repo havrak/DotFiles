@@ -7,6 +7,11 @@ tmp
 mt
 dw
 bin/scripts/files/wall.png
+bin/dmenu
+bin/roms
+bin/st
+bin/tremc
+bin/Urban Terror
 .config/mpv/watch_later
 .abook
 .bash_history
@@ -22,3 +27,14 @@ bin/scripts/files/wall.png
 .viminfo
 .Xauthority
 .config/nvim/vimwiki
+.gnupg
+.local/lib
+.npm
+.password-store
+.tooling
+.gitconfig
+.Xauthority
+.pulse-cookie
+.rsf_history
+.notmuch-config
+.mbsyncrc

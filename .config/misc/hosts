@@ -91831,6 +91831,9 @@ ff02::3 ip6-allhosts
 # 'example.com':
 
 0.0.0.0 humblebundle.com
+0.0.0.0 youtube.com
+0.0.0.0 www.youtube.com
+0.0.0.0 m.youtube.com
 0.0.0.0 fanatical.com
 0.0.0.0 boards.4channel.org
 0.0.0.0 4channel.org
@@ -91838,4 +91841,3 @@ ff02::3 ip6-allhosts
 0.0.0.0 murdochmurdoch.net
 0.0.0.0 rapeable.com
 89.203.250.49 havrak.xyz
-88.101.30.210 pi

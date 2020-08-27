@@ -1,5 +1,5 @@
-auto-reload no
-reload-time	10
+auto-reload yes
+reload-time	15
 
 show-title-bar no
 show-keymap-hint no
