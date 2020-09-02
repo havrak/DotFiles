@@ -17,27 +17,34 @@ Plug 'rbgrouleff/bclose.vim' 																" closes buffer without closing win
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 						" Code completion and much more
 Plug 'honza/vim-snippets' 																	" buch of snippets to work with CoC
+Plug 'lervag/vimtex' 																				" supplies latex support for CoC
 " Git
 Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
 Plug 'tpope/vim-fugitive' 																	" better integration with git commands
 Plug 'tpope/vim-rhubarb' 																		" enables GBrowse - opens file in github
 Plug 'rhysd/git-messenger.vim' 															" displays commit message from commit that affected the line (on <leader>gm)
+Plug 'airblade/vim-rooter' 																	" work in current git repository
 " Motions
 Plug 'pechorin/any-jump.vim' 																" searches for definitions and references across files, better than coc's <leader>gd and ripgrep
 Plug 'easymotion/vim-easymotion' 														" enables new ways to move through file
+Plug 'kshenoy/vim-signature' 																" shows tag in signcolumn, currently overlaps gitgutter tags
 " Syntax highlighting
 Plug 'morhetz/gruvbox' 																			" gruvbox color scheme used by vim
 Plug 'rust-lang/rust.vim' 																	" better highlighting for rust lang
 Plug 'kovetskiy/sxhkd-vim' 																	" highlighting for sxhkd configuration
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } 	" color hex codes will display corresponding color
+" Note taking
+Plug 'vimwiki/vimwiki' 																			" note-organizing tool in vim, org mode like
+Plug 'mattn/calendar-vim' 																	" enables Calendar command, integrates with vimwiki
 " Misc
 Plug 'junegunn/goyo.vim' 																		" writing mode that cleans up the vim UI
 Plug 'tpope/vim-repeat'  																		" . repeats the whole map if map is defined with repeat#
-Plug 'vimwiki/vimwiki' 																			" note-organizing tool in vim, org mode like
-Plug 'kshenoy/vim-signature' 																" shows tag in signcolumn, currently overlaps gitgutter tags
 Plug 'metakirby5/codi.vim' 																	" runs code while editing, only languages with interactive shell
 Plug 'mhinz/vim-startify' 																	" gives vim pretty start screen (bye bye Uganda), manages stored vim sessions
 Plug 'mbbill/undotree' 																			" complex undo enables moving to already rewritten changes
+Plug 'brooth/far.vim' 																			" search and replace across multiple files
+Plug 'liuchengxu/vim-which-key' 														" guide for key bindings
+Plug 'voldikss/vim-floaterm' 																" floating terminals in vim
 call plug#end()
 
 " Some basics:
@@ -190,7 +197,7 @@ function! ToggleNERDTree()
 endfunction
 
 "nnoremap <silent> <expr> <Leader>t g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-map <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '►'
 let g:NERDTreeDirArrowCollapsible = '▼'
 let NERDTreeHijackNetrw=1
@@ -250,14 +257,68 @@ nnoremap <leader>r :Ranger<CR>
 nnoremap F :Autoformat<CR>
 
 " Undotree
-nnoremap <C-u> :UndotreeToggle<cr>
+nnoremap <leader>u :UndotreeToggle<cr>
+
+" Vimtex
+" let g:syntastic_tex_checkers = ['lacheck']
+
+let g:tex_stylish = 1
+let g:tex_conceal = ''
+let g:tex_flavor = 'latex'
+let g:tex_isk='48-57,a-z,A-Z,192-255,:'
+
+let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_types = {
+      \ 'markers' : {'enabled': 0},
+      \ 'sections' : {'parse_levels': 1},
+      \}
+let g:vimtex_format_enabled = 1
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_automatic = 0
+let g:vimtex_view_forward_search_on_start = 0
+let g:vimtex_toc_config = {
+      \ 'split_pos' : 'full',
+      \ 'mode' : 2,
+      \ 'fold_enable' : 1,
+      \ 'hotkeys_enabled' : 1,
+      \ 'hotkeys_leader' : '',
+      \ 'refresh_always' : 0,
+      \}
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_quickfix_autoclose_after_keystrokes = 3
+let g:vimtex_imaps_enabled = 1
+let g:vimtex_complete_img_use_tail = 1
+let g:vimtex_complete_bib = {
+      \ 'simple' : 1,
+      \ 'menu_fmt' : '@year, @author_short, @title',
+      \}
+let g:vimtex_echo_verbose_input = 0
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/.vim/vimwiki/'}]
+let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1}]
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
+
+let g:vimwiki_diary_months = {
+	\ 1: 	"leden", 		2: 	"únor", 		3: 	"březen",
+	\ 4: 	"duben", 		5: 	"květen", 	6: 	"červen",
+	\ 7: 	"červenec", 8: 	"srpen", 		9: 	"září",
+	\ 10: "říjen", 		11: "listopad", 12: "prosinec"}
+
+nnoremap <leader>w<leader>t :VimwikiMakeTomorrowDiaryNote><CR>
+nnoremap <leader>wc :CalendarH<CR>
+nnoremap <leader>wb :Vimwiki2HTMLBrowse<CR>
+
+" vim-rooter
+let g:rooter_manual_only = 1
+let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
+
+" floaterm
+nnoremap <leader>G :FloatermNew --height=0.8 --width=0.8 --wintype=floating --position=center --autoclose=2 lazygit<CR>
 
 " Load external files
 runtime macros.vim
 runtime cocrc.vim
 runtime start-screen.vim
+
+

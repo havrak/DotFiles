@@ -1,6 +1,5 @@
 " ------COC SETTINGS------
 " prettier command for coc
-"let g:tex_flavor = 'latex'
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
@@ -12,10 +11,14 @@ let g:coc_global_extensions = [
 			\ 'coc-css',
 			\ 'coc-json',
 			\ 'coc-angular',
-			\ 'coc-texlab',
+			\ 'coc-vimtex',
 			\ 'coc-java',
 			\ 'coc-python',
 			\ 'coc-vimlsp',
+			\ 'coc-spell-checker',
+			\ 'coc-cspell-dicts',
+			\ 'coc-actions',
+			\ 'coc-sh',
 			\ 'coc-template'
 			\ ]
 
@@ -51,9 +54,16 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+autocmd FileType vimwiki inoremap <expr> <c-e> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>" " vimwiki interefears with selection, its keymap has higher priority
+
+autocmd CmdwinEnter * inoremap <CR> <CR>
+autocmd BufReadPost quickfix inoremap <CR> <CR>
+
+" template menu
+nnoremap <leader>tl :CocList templates<CR>
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -88,12 +98,14 @@ augroup mygroup
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xnoremap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nnoremap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@<CR>
 
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+"nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 

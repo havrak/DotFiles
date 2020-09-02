@@ -4,12 +4,12 @@ bspc rule -r "*"
 # Autostart
 setbg &
 xrdb .Xresources
-polybarLaunch &
 remap &
-picom -b &
 pactl set-sink-volume @DEFAULT_SINK@ 50% &
 pactl set-source-mute @DEFAULT_SOURCE@ 1 &
 mpc volume 100 &
+[ ! `pidof polybar` ] && polybarLaunch &
+[ ! `pidof picom` ] && picom -b &
 
 # Global Settings
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
@@ -50,7 +50,7 @@ bspc rule -a Zathura state=tiled
 bspc rule -a discord desktop=22
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x700+0+0
-bspc rule -a notes sticky=on state=floating hidden=on rectangle=800x700+0+0
+bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0
 bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
 bspc rule -a monitor desktop=24
 

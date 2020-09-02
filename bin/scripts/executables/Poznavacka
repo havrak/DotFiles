@@ -1,0 +1,3 @@
+#!/bin/sh
+java -jar $HOME/prog/java/Poznavacka/dist/Poznavacka.jar
+
