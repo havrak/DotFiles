@@ -7,7 +7,7 @@ alt + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12}
 	bspc desktop -f {13,14,15,16,17,18,19,20,21,22,23,24}
 
 alt + shift + {0-9,minus,equal}
-	 bspc node -d {10,1-9,11,12} --follow
+	bspc node -d {10,1-9,11,12} --follow
 
 alt + shift + {F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12}
 	bspc node -d {13,14,15,16,17,18,19,20,21,22,23,24} --follow
@@ -127,4 +127,4 @@ alt + shift + {bracketleft,bracketright}
 
 # Launch programms
 super + {f,b,n,a,p,g,e,c,k,l,d}
-	startAndNotify {firefox,brave,netbeans,arduino,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord}
+	startAndNotify {firefox,brave,netbeans,pavucontrol,PPSSPPQt,gimp,picard,calibre,klavaro,libreoffice,discord}

@@ -119,3 +119,10 @@ bin/Urban Terror
 .local/share/xorg/
 .local/share/zathura/
 .pylint.d/
+.config/QtProject.conf
+.config/coc/extensions/node_modules/coc-emmet/
+.java/
+.local/share/calibre-parallel/
+.netbeans/
+.node_repl_history
+routersploit.log

@@ -45,6 +45,7 @@ Plug 'mbbill/undotree' 																			" complex undo enables moving to alrea
 Plug 'brooth/far.vim' 																			" search and replace across multiple files
 Plug 'liuchengxu/vim-which-key' 														" guide for key bindings
 Plug 'voldikss/vim-floaterm' 																" floating terminals in vim
+Plug 'mattn/emmet-vim' 																			" make writing html much more easier
 call plug#end()
 
 " Some basics:
@@ -196,7 +197,6 @@ function! ToggleNERDTree()
 	silent NERDTreeMirror
 endfunction
 
-"nnoremap <silent> <expr> <Leader>t g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 nnoremap <leader>t :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '►'
 let g:NERDTreeDirArrowCollapsible = '▼'
@@ -260,7 +260,6 @@ nnoremap F :Autoformat<CR>
 nnoremap <leader>u :UndotreeToggle<cr>
 
 " Vimtex
-" let g:syntastic_tex_checkers = ['lacheck']
 
 let g:tex_stylish = 1
 let g:tex_conceal = ''
