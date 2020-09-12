@@ -69,27 +69,6 @@ autocmd FileType html inoremap ,yl <font color="yellow"></font><Esc>F>a
 autocmd FileType html inoremap ,dt <dt></dt><Enter><dd><++></dd><Enter><++><esc>2kcit
 autocmd FileType html inoremap ,dl <dl><Enter><Enter></dl><enter><enter><++><esc>3kcc
 autocmd FileType html inoremap &<space> &amp;<space>
-autocmd FileType html inoremap á &aacute;
-autocmd FileType html inoremap é &eacute;
-autocmd FileType html inoremap í &iacute;
-autocmd FileType html inoremap ó &oacute;
-autocmd FileType html inoremap ú &uacute;
-autocmd FileType html inoremap ä &auml;
-autocmd FileType html inoremap ë &euml;
-autocmd FileType html inoremap ï &iuml;
-autocmd FileType html inoremap ö &ouml;
-autocmd FileType html inoremap ü &uuml;
-autocmd FileType html inoremap ã &atilde;
-autocmd FileType html inoremap ẽ &etilde;
-autocmd FileType html inoremap ĩ &itilde;
-autocmd FileType html inoremap õ &otilde;
-autocmd FileType html inoremap ũ &utilde;
-autocmd FileType html inoremap ñ &ntilde;
-autocmd FileType html inoremap à &agrave;
-autocmd FileType html inoremap è &egrave;
-autocmd FileType html inoremap ì &igrave;
-autocmd FileType html inoremap ò &ograve;
-autocmd FileType html inoremap ù &ugrave;
 
 "	Markdown
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
