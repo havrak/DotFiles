@@ -60,7 +60,8 @@ abbr prm 			"sudo rm -rf /var/cache/pacman/"
 abbr orphans 	"yay -Qqtd"
 abbr pror 		"yay -Rscn (yay -Qqtd)"
 abbr pr 			"yay -Rscn"
-abbr pse 			"yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro  yay -S"
+abbr pse 			"yay -Slq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -S"
+
 
 # navigation
 abbr ..  			"cd .."

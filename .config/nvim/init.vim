@@ -1,11 +1,6 @@
 let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
-" Formating
-Plug 'Chiel92/vim-autoformat' 															" autoformats file, normally use CoC feature
-Plug 'dhruvasagar/vim-table-mode' 													" makes markdown tables less infuriating
-" Commenting
-Plug 'tpope/vim-commentary' 																" easy commenting
 " Airline
 Plug 'bling/vim-airline' 																		" feature packed status line
 Plug 'vim-airline/vim-airline-themes' 											" themes for airline
@@ -18,6 +13,7 @@ Plug 'rbgrouleff/bclose.vim' 																" closes buffer without closing win
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 						" Code completion and much more
 Plug 'honza/vim-snippets' 																	" buch of snippets to work with CoC
 Plug 'lervag/vimtex' 																				" supplies latex support for CoC
+Plug 'mattn/emmet-vim' 																			" make writing html much more easier
 " Git
 Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
 Plug 'tpope/vim-fugitive' 																	" better integration with git commands
@@ -36,16 +32,19 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } 	" color hex codes wil
 " Note taking
 Plug 'vimwiki/vimwiki' 																			" note-organizing tool in vim, org mode like
 Plug 'mattn/calendar-vim' 																	" enables Calendar command, integrates with vimwiki
-" Misc
+" Writing, text editing
+Plug 'tpope/vim-commentary' 																" easy commenting
 Plug 'junegunn/goyo.vim' 																		" writing mode that cleans up the vim UI
 Plug 'tpope/vim-repeat'  																		" . repeats the whole map if map is defined with repeat#
-Plug 'metakirby5/codi.vim' 																	" runs code while editing, only languages with interactive shell
-Plug 'mhinz/vim-startify' 																	" gives vim pretty start screen (bye bye Uganda), manages stored vim sessions
 Plug 'mbbill/undotree' 																			" complex undo enables moving to already rewritten changes
 Plug 'brooth/far.vim' 																			" search and replace across multiple files
+Plug 'Chiel92/vim-autoformat' 															" autoformats file, normally use CoC feature
+Plug 'dhruvasagar/vim-table-mode' 													" makes markdown tables less infuriating
+" Programming
+Plug 'metakirby5/codi.vim' 																	" runs code while editing, only works for languages with interactive shell
+" Misc
+Plug 'mhinz/vim-startify' 																	" gives vim pretty start screen (bye bye Uganda), manages stored vim sessions
 Plug 'liuchengxu/vim-which-key' 														" guide for key bindings
-Plug 'voldikss/vim-floaterm' 																" floating terminals in vim
-Plug 'mattn/emmet-vim' 																			" make writing html much more easier
 call plug#end()
 
 " Some basics:
@@ -138,6 +137,7 @@ xnoremap S :%s///g<Left><Left>
 
 " Compile document
 nnoremap <leader>c :w! \| !compiler <c-r>%<CR>
+autocmd BufEnter *.wiki nnoremap <leader>c :Vimwiki2HTML<CR>
 
 " Open corresponding .pdf/.html or preview
 nnoremap <leader>p :!opout <c-r>%<CR><CR>
@@ -242,7 +242,7 @@ nnoremap ?? :Rg<CR>
 nnoremap // :BLines<CR>
 nnoremap cc :Commands<CR>
 let g:fzf_preview_window = 'right:50%'
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.9,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 command! FileHistory execute ":BCommits!"
 
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
@@ -260,7 +260,6 @@ nnoremap F :Autoformat<CR>
 nnoremap <leader>u :UndotreeToggle<cr>
 
 " Vimtex
-
 let g:tex_stylish = 1
 let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
@@ -312,12 +311,7 @@ nnoremap <leader>wb :Vimwiki2HTMLBrowse<CR>
 let g:rooter_manual_only = 1
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 
-" floaterm
-nnoremap <leader>G :FloatermNew --height=0.8 --width=0.8 --wintype=floating --position=center --autoclose=2 lazygit<CR>
-
 " Load external files
 runtime macros.vim
 runtime cocrc.vim
 runtime start-screen.vim
-
-

@@ -5,6 +5,7 @@ inoremap ,os ß
 autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\itemize{begin}<Enter>\item<++><Enter>\itemize{end}<Enter>}<Enter><Enter><++><Esc>6kf}i
 autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
 autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
 autocmd FileType tex inoremap ,uv \uv{}<++><Esc>T{i
@@ -19,7 +20,7 @@ autocmd FileType tex inoremap ,cf \footnote{c.<space>d.<space>\cite{<++>}:<space
 autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
 autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
 autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Esc>kA\item<Space>
 autocmd FileType tex inoremap ,li <ESC>o\item<Space>
 autocmd FileType tex inoremap ,ref \ref{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i

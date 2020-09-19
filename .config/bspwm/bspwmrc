@@ -1,19 +1,32 @@
 #!/bin/sh
 bspc rule -r "*"
 
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+
+# Rules
+bspc rule -a Zathura state=tiled
+bspc rule -a firefox desktop=1
+bspc rule -a discord desktop=23
+bspc rule -a monitor desktop=24
+bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
+bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x700+0+0
+bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0
+bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
+
 # Autostart
 setbg &
 xrdb .Xresources
+rsw &
 remap &
-pactl set-sink-volume @DEFAULT_SINK@ 50% &
 pactl set-source-mute @DEFAULT_SOURCE@ 1 &
 mpc volume 100 &
+
 [ ! `pidof polybar` ] && polybarLaunch &
 [ ! `pidof picom` ] && picom -b &
+[ -z "$(xdotool search --class monitor)" ] && setsid -f st -c monitor -e htop &
+[ ! `pidof firefox` ] && setsid -f firefox &
 
 # Global Settings
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-
 bspc config automatic_scheme longest_side
 
 bspc config pointer_modifier mod1
@@ -42,18 +55,4 @@ bspc config left_padding 0
 bspc config right_padding 0
 bspc config border_width 2
 bspc config window_gap 6
-
 if [ "$HOSTNAME" == "tp" ]; then bspc config bottom_padding 22 ; else bspc config bottom_padding 12 ; fi
-
-# Rules
-bspc rule -a Zathura state=tiled
-bspc rule -a discord desktop=23
-bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
-bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x700+0+0
-bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0
-bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
-bspc rule -a monitor desktop=24
-
-#	Autostart terminal windows
-[ -z "$(xdotool search --class monitor)" ] && setsid -f st -c monitor -e htop &
-rsw &

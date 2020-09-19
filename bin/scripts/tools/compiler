@@ -4,7 +4,7 @@
 # have this script run via vim.
 #
 # tex files: Compiles to pdf, including bibliography if necessary
-# md files: Compiles to pdf via md2pdf (package in aur, uses git like css)
+# md files: Compiles to pdf via pandoc
 # rmd files: Compiles via R Markdown
 # c files: Compiles via whatever compiler is set to cc. Usually gcc.
 # py files: runs via python command

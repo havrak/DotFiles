@@ -27,7 +27,7 @@ let g:startify_bookmarks = [
             \ { 'po': '~/.config/polybar/config' },
             \ { 'ra': '~/.config/ranger/rc.conf' },
             \ { 'ri': '~/.config/ranger/rifle.conf' },
-            \ { 'fc': '~/.config/fish/config.fish' },
+            \ { 'fi': '~/.config/fish/config.fish' },
             \ { 'fv': '~/.config/fish/fish_variables' },
             \ { 'b': '~/.config/bspwm/bspwmrc' },
             \ { 'v': '~/.config/nvim/init.vim' },
