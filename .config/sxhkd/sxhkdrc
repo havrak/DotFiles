@@ -128,3 +128,10 @@ alt + shift + {bracketleft,bracketright}
 # Launch programms
 super + {f,b,n,a,g,e,c,k,l,d}
 	startAndNotify {firefox,brave,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord}
+
+super + w
+	firefox $HOME/.vim/vimwiki/html/index.html
+
+super + t
+	firefox $HOME/web/homepage/index.html
+

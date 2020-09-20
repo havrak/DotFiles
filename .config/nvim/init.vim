@@ -141,6 +141,7 @@ autocmd BufEnter *.wiki nnoremap <leader>c :Vimwiki2HTML<CR>
 
 " Open corresponding .pdf/.html or preview
 nnoremap <leader>p :!opout <c-r>%<CR><CR>
+autocmd BufEnter *.wiki nnoremap <leader>p :Vimwiki2HTMLBrowse<CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 autocmd VimLeave *.tex !texclear %
@@ -293,10 +294,13 @@ let g:vimtex_complete_bib = {
 let g:vimtex_echo_verbose_input = 0
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1}]
+let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,
+\ 'template_path': '~/.vim/vimwiki/templates',
+		  \ 'template_default': 'def_template',
+		  \ 'template_ext': '.html'}]
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
-
+let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr, pre, script'
 let g:vimwiki_diary_months = {
 	\ 1: 	"leden", 		2: 	"únor", 		3: 	"březen",
 	\ 4: 	"duben", 		5: 	"květen", 	6: 	"červen",
@@ -305,7 +309,6 @@ let g:vimwiki_diary_months = {
 
 nnoremap <leader>w<leader>t :VimwikiMakeTomorrowDiaryNote><CR>
 nnoremap <leader>wc :CalendarH<CR>
-nnoremap <leader>wb :Vimwiki2HTMLBrowse<CR>
 
 " vim-rooter
 let g:rooter_manual_only = 1

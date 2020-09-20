@@ -6,6 +6,7 @@ prog
 tmp
 mt
 dw
+web
 bin/scripts/files/wall.png
 bin/dmenu
 bin/roms
