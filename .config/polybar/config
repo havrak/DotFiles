@@ -25,6 +25,8 @@ cursor-scroll = ns-resize
 
 [bar/bottom]
 width = 100%
+border-left = 6
+border-right = 6
 height = 13
 fixed-center = true
 bottom = true
@@ -32,7 +34,8 @@ separator = " "
 wm-restack = bspwm
 padding-right=1
 override-redirect = true
-offset-y = -3
+offset-y = 7
+radius-bottom = 5
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -50,6 +53,8 @@ cursor-scroll = ns-resize
 
 [bar/top]
 width = 100%
+border-left = 6
+border-right = 6
 height = 13
 fixed-center = true
 separator = " "
@@ -57,7 +62,8 @@ bottom=true
 wm-restack = bspwm
 padding-right=1
 override-redirect = true
-offset-y = 9
+offset-y = 20
+radius-top = 5
 
 background = ${colors.background}
 foreground = ${colors.foreground}
