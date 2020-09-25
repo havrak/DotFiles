@@ -5,15 +5,15 @@ ICON=$HOME/bin/scripts/files/lock.png
 
 KBD=""
 case "$(xset -q|grep LED| awk '{ print $10 }')" in
-  "00000000") KBD="English" ;;
-  "00000002") KBD="English" ;;
-  "00001000") KBD="Czech" ;;
-  "00001002") KBD="Czech" ;;
-  *) KBD="unknown" ;;
+  "00000000") KBD="$HOME/bin/scripts/files/eng.jpg" ;;
+  "00000002") KBD="$HOME/bin/scripts/files/eng.jpg" ;;
+  "00001000") KBD="$HOME/bin/scripts/files/cze.jpg" ;;
+  "00001002") KBD="$HOME/bin/scripts/files/cze.jpg" ;;
+  *) KBD="??" ;;
 esac
 convert /tmp/screen.png $ICON -gravity center -composite -matte /tmp/screen.png
+convert /tmp/screen.png $KBD -gravity southwest -composite -matte /tmp/screen.png
 
-convert -font helvetica -fill green -pointsize 30 -gravity center -draw "text 0,300 'Layout on start of i3lock was: $KBD'" /tmp/screen.png /tmp/screen.png # can't use numbers on czech without shift
 mpc pause
 i3lock -i /tmp/screen.png
 rm /tmp/screen.png

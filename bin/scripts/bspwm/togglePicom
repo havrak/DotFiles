@@ -3,9 +3,11 @@ if [ `pidof picom` ]; then
 	notify-send "📺 Disabled compton"
 	killall picom
 	bspc config window_gap 0
+	bspc config single_monocle true
 else
 	notify-send "📺 Enabled compton"
 	picom -b
 	bspc config window_gap 6
+	bspc config single_monocle false
 fi
 exit

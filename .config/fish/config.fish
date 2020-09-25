@@ -2,7 +2,6 @@
 
 # java
 export _JAVA_AWT_WM_NONREPARENTING=1
-
 # use bat to color man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
