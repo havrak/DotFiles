@@ -3,20 +3,18 @@ width = 100%
 height = 13
 fixed-center = true
 bottom = true
-separator = "  "
 wm-restack = bspwm
-padding-right=1
 override-redirect = true
-offset-y = 0
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
 font-0 = Mononoki Nerd Font:pixelsize=9;1
 font-1 = sazanami mincho:pixelsize=8;1
+font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
-modules-left = bspwm mpd
-modules-right = torrents mail temperature volume memory cpu ethDesktop xkeyboard date
+modules-left = bspwm cao mpd left
+modules-right = right torrents cao mail cao temperature cao volume cao memory cao cpu cao ethDesktop cao xkeyboard cao date darkSpace
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -29,21 +27,19 @@ border-bottom-size = 6
 height = 14
 fixed-center = true
 bottom = true
-separator = "  "
 wm-restack = bspwm
-padding-right=1
 override-redirect = true
-offset-y = 0
 radius-bottom = 5
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-font-0 = Mononoki Nerd Font:pixelsize=8.5;antialias=true;1
+font-0 = Mononoki Nerd Font:pixelsize=8.5;2
 font-1 = sazanami mincho:pixelsize=8;1
+font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
-modules-left = bspwm
-modules-right = torrents mail volume backlight batt xkeyboard date
+modules-left = bspwm left
+modules-right = right torrents cao mail cao volume cao backlight cao batt cao xkeyboard cao date darkSpace
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -54,49 +50,53 @@ border-left-size = 6
 border-right-size = 6
 height = 14
 fixed-center = true
-separator = "  "
 bottom=true
 wm-restack = bspwm
-padding-right=1
 override-redirect = true
 offset-y = 20
 radius-top = 5
 
 background = ${colors.background}
 foreground = ${colors.foreground}
-font-0 = Mononoki Nerd Font:pixelsize=8.5:antialias=true;1
-font-1 = sazanami mincho:pixelsize=8;1
 
-modules-left = mpd
-modules-right = memory cpu temperature wlan wlanAlpha eth
+font-0 = Mononoki Nerd Font:pixelsize=8.5;2
+font-1 = sazanami mincho:pixelsize=8;1
+font-2 = Mononoki Nerd Font:style=Medium:size=12;2
+
+modules-left = mpd left
+modules-right = right memory cao cpu cao temperature cao wlan cao eth darkSpace
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 [colors]
 foreground = #ffffd7
-background = #121212
-dark= #555555
-red = #cc241d
+background = #cc121212
+darkDark   = #191919
+dark       = #777777
+red        = #cc241d
 
 [module/bspwm]
 type = internal/bspwm
 enable-scroll = false
 
 label-focused-background = ${colors.foreground}
-label-focused-foreground = ${colors.background}
+label-focused-foreground = ${colors.darkDark}
 label-focused = %name%
 label-focused-padding = 1
 
 label-occupied = %name%
 label-occupied-padding = 1
+label-occupied-background = ${colors.darkDark}
 
 label-urgent = %name%
 label-urgent-background = ${colors.red}
+label-urgent-foreground = ${colors.darkDark}
 label-urgent-padding = 1
 
 label-empty = %name%
 label-empty-foreground = ${colors.dark}
+label-empty-background = ${colors.darkDark}
 label-empty-padding = 1
 
 [module/wlan]
@@ -137,7 +137,6 @@ label = %time% %date%
 [module/torrents]
 type = custom/script
 exec = polybarTorrents
-click-left = st -e tremc &
 interval = 10
 label = %output%
 
@@ -194,5 +193,29 @@ type = internal/memory
 interval = 10
 label =  %gb_used%/%gb_free%
 
+[module/left]
+type = custom/text
+content-background = ${colors.background}
+content-foreground = ${colors.darkDark}
+content = "%{T3}%{T-}"
+
+[module/right]
+type = custom/text
+content-background = ${colors.background}
+content-foreground = ${colors.darkDark}
+content = "%{T3}%{T-}"
+
+[module/cao]
+type = custom/text
+content-background = ${colors.background}
+content-foreground = ${colors.darkDark}
+content = "%{T3}%{T-} %{T3}%{T-}"
+
+[module/darkSpace]
+type = custom/text
+content-background = ${colors.darkDark}
+content = " "
+
 [settings]
 screenchange-reload = true
+format-background = ${colors.darkDark}
