@@ -35,7 +35,6 @@ let g:startify_bookmarks = [
             \ { 'c': '~/.config/nvim/cocrc.vim' },
             \ { 'x': '~/.Xresources' },
             \ { 'n': '~/.config/newsboat/config' },
-            \ { 'u': '~/.config/newsboat/urls' },
             \ { 'pi': '~/.config/picom/picom.conf' },
             \ { 's': '~/.config/sxhkd/sxhkdrc' },
             \ ]

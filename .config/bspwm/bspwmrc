@@ -1,13 +1,13 @@
 #!/bin/bash
 bspc rule -r "*"
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12
 
 # Rules
 bspc rule -a Zathura state=tiled
 bspc rule -a firefox desktop=1
-bspc rule -a discord desktop=23
-bspc rule -a monitor desktop=24
+bspc rule -a discord desktop=11
+bspc rule -a monitor desktop=12
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x700+0+0
 bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0

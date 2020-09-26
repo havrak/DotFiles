@@ -7,7 +7,7 @@ if [ -n "$(pidof transmission-daemon)" ]; then
 	paused=$(echo "$torrents" | grep "Stopped" | wc -l)
 	seeding=$(echo "$torrents" | grep "Seeding" | wc -l)
 	idle=$(echo "$torrents" | grep "Idle" | wc -l)
-	echo " $downloading  $paused  $seeding  $idle"
+	echo " $downloading  $paused  $seeding  $idle"
 else
-	echo " down"
+	echo " down"
 fi
