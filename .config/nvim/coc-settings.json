@@ -9,7 +9,8 @@
     "json",
     "python",
     "java",
-    "latex"
+    "latex",
+    "csv"
   ],
 
   "python.linting.enabled": true,
@@ -20,7 +21,7 @@
   "cSpellExt.enableDictionaries": ["czech", "german"],
   "cSpell.dictionaries": ["latex"],
   "cSpell.language": "en_us,cs,de",
-  "cSpell.enabled": true,
+  "cSpell.enabled": false,
   "cSpell.showStatus": true,
   "cSpell.maxNumberOfProblems": 800,
   "cSpell.enabledLanguageIds": [

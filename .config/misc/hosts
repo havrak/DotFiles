@@ -90626,12 +90626,8 @@ ff02::3 ip6-allhosts
 0.0.0.0 mixi.jp
 0.0.0.0 mixch.tv
 0.0.0.0 lobi.co
+
 # blacklist
-#
-# The contents of this file (containing a listing of additional domains in
-# 'hosts' file format) are appended to the unified hosts file during the
-# update process. For example, uncomment the following line to block
-# 'example.com':
 0.0.0.0 humblebundle.com
 0.0.0.0 bitchute.com
 0.0.0.0 archive.org
@@ -90643,4 +90639,3 @@ ff02::3 ip6-allhosts
 0.0.0.0 4channel.org
 0.0.0.0 soundcloud.com
 0.0.0.0 rapeable.com
-
