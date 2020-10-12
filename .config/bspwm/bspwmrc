@@ -1,13 +1,12 @@
 #!/bin/bash
 bspc rule -r "*"
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10 11 12
-
+bspc monitor -d '一' '二' '三' '四' '五' '六' '七' '八' '九' '十' '十一' '十二'
 # Rules
 bspc rule -a Zathura state=tiled
-bspc rule -a firefox desktop=1
-bspc rule -a discord desktop=11
-bspc rule -a monitor desktop=12
+bspc rule -a firefox desktop='^1'
+bspc rule -a discord desktop='^11'
+bspc rule -a monitor desktop='^12'
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 bspc rule -a rss sticky=on state=floating hidden=on rectangle=1200x700+0+0
 bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0
@@ -23,12 +22,11 @@ mpc volume 100 &
 
 [ ! `pidof polybar` ] && polybarLaunch &
 [ ! `pidof picom` ] && picom -b &
-[ -z "$(xdotool search --class monitor)" ] && setsid -f st -c monitor -e htop &
-[ ! `pidof firefox` ] && setsid -f firefox &
+[ -z "$(xdotool search --class monitor)" ] && setsid -f st -c monitor -e htop
+[ ! `pidof firefox` ] && setsid -f firefox
 
 # Global Settings
-bsp-layout set even
-
+bspc config automatic_scheme longest_side
 bspc config pointer_modifier mod1
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side

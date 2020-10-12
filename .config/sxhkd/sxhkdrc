@@ -1,10 +1,10 @@
 # bspwm
 
 alt + {0-9,minus,equal}
-	bspc desktop -f {10,1-9,11,12}
+	bspc desktop -f '^{10,1-9,11,12}'
 
 alt + shift + {0-9,minus,equal}
-	bspc node -d {10,1-9,11,12} --follow
+	bspc node -d '^{10,1-9,11,12}' --follow
 
 alt + {h,j,k,l}
 	bspc node -f {west,south,north,east}
@@ -56,14 +56,11 @@ alt + shift + s
 alt + d
 	dmenu_run -i
 
-super + {F9,F10,F11}
-	{togglePicom, dmenuMount,dmenuUmount}
+super + {F1,F2,F3,F9,F10,F11}
+	{pixelLock, powerMenu -l, powerMenu -p,togglePicom, dmenuMount,dmenuUmount}
 
 alt + {w,t,q}
 	{screenChooser,clipboardText,emojiPicker}
-
-super + {F1,F2,F3}
-	{pixelLock, powerMenu -l, powerMenu -p}
 
 # Terminal
 
@@ -121,10 +118,3 @@ alt + shift + {bracketleft,bracketright}
 # Launch programms
 super + {f,b,n,a,g,e,c,k,l,d}
 	startAndNotify {firefox,brave,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord}
-
-super + w
-	firefox $HOME/.vim/vimwiki/html/index.html
-
-super + t
-	firefox $HOME/web/homepage/index.html
-

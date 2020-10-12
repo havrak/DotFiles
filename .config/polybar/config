@@ -14,7 +14,7 @@ font-1 = sazanami mincho:pixelsize=8;1
 font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
 modules-left = bspwm cao mpd left
-modules-right = right torrents cao mail cao temperature cao volume cao memory cao cpu cao ethDesktop cao xkeyboard cao date darkSpace
+modules-right = right torrents cao mail cao temperature cao volume cao memory cao cpu cao ethDesktop cao xkeyboard cao date space
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -39,7 +39,7 @@ font-1 = sazanami mincho:pixelsize=8;1
 font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
 modules-left = bspwm left
-modules-right = right torrents cao mail cao volume cao backlight cao batt cao xkeyboard cao date darkSpace
+modules-right = right torrents cao mail cao volume cao backlight cao batt cao xkeyboard cao date space
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -63,40 +63,41 @@ font-0 = Mononoki Nerd Font:pixelsize=8.5;2
 font-1 = sazanami mincho:pixelsize=8;1
 font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
-modules-left = mpd left
-modules-right = right memory cao cpu cao temperature cao wlan cao eth darkSpace
+modules-left = space mpd left
+modules-right = right memory cao cpu cao temperature cao wlan cao eth space
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 [colors]
-foreground = #ffffd7
 background = #cc121212
-darkDark   = #1f1f1f
-dark       = #777777
+foreground = #1f1f1f
+modulebg   = #ffffd7
+dark       = #999999
 red        = #cc241d
 
 [module/bspwm]
 type = internal/bspwm
 enable-scroll = false
+label-separator-padding = 2
 
 label-focused-background = ${colors.foreground}
-label-focused-foreground = ${colors.darkDark}
+label-focused-foreground = ${colors.modulebg}
 label-focused = %name%
 label-focused-padding = 1
 
 label-occupied = %name%
 label-occupied-padding = 1
-label-occupied-background = ${colors.darkDark}
+label-occupied-background = ${colors.modulebg}
 
 label-urgent = %name%
 label-urgent-background = ${colors.red}
-label-urgent-foreground = ${colors.darkDark}
+label-urgent-foreground = ${colors.modulebg}
 label-urgent-padding = 1
 
 label-empty = %name%
 label-empty-foreground = ${colors.dark}
-label-empty-background = ${colors.darkDark}
+label-empty-background = ${colors.modulebg}
 label-empty-padding = 1
 
 [module/wlan]
@@ -131,7 +132,7 @@ label-disconnected =   down
 type = internal/date
 interval = 1
 date =  %d.%m.
-time =  %H:%M
+time =  %H:%M
 label = %time% %date%
 
 [module/torrents]
@@ -164,12 +165,12 @@ label-muted =  00%
 type = internal/mpd
 label-offline =  down
 format-online =  <label-song> <label-time>
-format-online-padding = 1
 label-song = %artist% / %album% - %title%
 label-song-maxlen = 110
 
 [module/backlight]
-type = internal/xbacklight
+type = internal/backlight
+card = intel_backlight
 label =  %percentage%%
 scroll-up = exec sudo light -A 5
 scroll-down =  exec sudo light -U 5
@@ -199,26 +200,26 @@ label =  %gb_used%/%gb_free%
 [module/left]
 type = custom/text
 content-background = ${colors.background}
-content-foreground = ${colors.darkDark}
+content-foreground = ${colors.modulebg}
 content = "%{T3}%{T-}"
 
 [module/right]
 type = custom/text
 content-background = ${colors.background}
-content-foreground = ${colors.darkDark}
+content-foreground = ${colors.modulebg}
 content = "%{T3}%{T-}"
 
 [module/cao]
 type = custom/text
 content-background = ${colors.background}
-content-foreground = ${colors.darkDark}
+content-foreground = ${colors.modulebg}
 content = "%{T3}%{T-} %{T3}%{T-}"
 
-[module/darkSpace]
+[module/space]
 type = custom/text
-content-background = ${colors.darkDark}
+content-background = ${colors.modulebg}
 content = " "
 
 [settings]
 screenchange-reload = true
-format-background = ${colors.darkDark}
+format-background = ${colors.modulebg}

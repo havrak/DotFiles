@@ -29,7 +29,8 @@ if [ -z "$pids" ] ; then
 	done
 fi
 
-[ "$(wc -w <<< "$pids")" -gt "1" ] && notify-send -t 400 "⚠ multiple same windows open"
+[ "$(wc -w <<< "$pids")" -gt "1" ] && notify-send -t 800 " multiple same $1's open"
+
 
 for pid in $pids; do
 	if bspc query -N -n "$pid.hidden" > /dev/null; then

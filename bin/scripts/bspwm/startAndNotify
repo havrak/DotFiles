@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 prog=$(which "$1")
-notify-send -t 400 "⭐ Starting "${1^}"" && setsid -f "$prog"
+notify-send -t 500 " Starting "${1^}"" && setsid -f "$prog"

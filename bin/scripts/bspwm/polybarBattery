@@ -44,6 +44,6 @@ if [ -n "$battery_charging" ]; then
 else
 	echo " $battery_percent%"
 	if [ $battery_percent -le 3 ]; then
-		notify-send "🔋 Low battery - $battery_percent%"
+		notify-send " Low battery - $battery_percent%"
 	fi
 fi

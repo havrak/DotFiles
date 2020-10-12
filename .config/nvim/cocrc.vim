@@ -26,15 +26,9 @@ let g:coc_global_extensions = [
 " From Coc Readme
 set updatetime=300
 
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" always show signcolumns
-set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.

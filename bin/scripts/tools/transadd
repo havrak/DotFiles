@@ -5,4 +5,4 @@
 
 pgrep -x transmission-daemon > /dev/null || transmission-daemon
 
-transmission-remote --add "$@" && notify-send "Transmission-daemon" "Torrent added."
+transmission-remote --add "$@" && notify-send " Transmission-daemon" "Torrent added."

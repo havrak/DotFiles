@@ -60,12 +60,13 @@ set termguicolors
 set cursorline
 set cursorcolumn
 set nobackup
+set nowritebackup
 set noswapfile
 set linebreak
 set breakindent
 set hidden
 set autoindent
-set foldmethod=indent
+set foldmethod=syntax
 set incsearch
 set smartindent
 set splitright

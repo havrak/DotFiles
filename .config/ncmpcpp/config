@@ -29,7 +29,7 @@ current_item_inactive_column_prefix = $(magenta)$r
 current_item_inactive_column_suffix = $/r$(end)
 
 browser_display_mode = columns
-progressbar_look = "――"
+progressbar_look = "─╼ "
 progressbar_color = black:b
 progressbar_elapsed_color = yellow:b
 
