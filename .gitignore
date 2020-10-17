@@ -127,3 +127,6 @@ bin/Urban Terror
 .netbeans/
 .node_repl_history
 routersploit.log
+.config/coc/extensions/db.json
+.config/coc/list-templates-history.json
+.config/nvim/autoload/plug.vim.old

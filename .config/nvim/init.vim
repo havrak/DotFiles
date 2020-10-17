@@ -142,7 +142,6 @@ autocmd BufEnter *.wiki nnoremap <leader>c :Vimwiki2HTML<CR>
 
 " Open corresponding .pdf/.html or preview
 nnoremap <leader>p :!opout <c-r>%<CR><CR>
-autocmd BufEnter *.wiki nnoremap <leader>p :Vimwiki2HTMLBrowse<CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 autocmd VimLeave *.tex !texclear %

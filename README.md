@@ -106,17 +106,17 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 
 # Firefox plugins
 
-| NAME                | PURPOUSE                                                                |
-|---------------------|-------------------------------------------------------------------------|
-| Cookie AutoDelete   | deletes cookies after user leaves the site                              |
-| Decenraleyes        | gets rid of some trackers                                               |
-| h264ify             | using 4. get intel procesor, no hardware support for x265 or VP9        |
-| HTTPS Everywhere    | upgrades connection to HTTPS                                            |
-| Privacy Badger      | like uMatrix, but does stuff automatically                              |
-| Sidebery            | tab+bookmark bar on the right side of screen                            |
-| Stylus              | custom css for some sites                                               |
-| Tridactyl           | vim like control in browser                                             |
-| uBlock Origin       | blocks adds                                                             |
-| User-Agent Switcher | switches user-agent string, harder tracking                             |
-| Violentmonkey       | Custom JS Scripts -- 4ChanX, OneeChan, ResizeYoutubePlayerToWindowSize, Absolute Enable Right Click & Copy|
-| Channel Blocker     | best way to hide/block YT channels                                      |
+| NAME                | PURPOUSE                                                                                                   |
+|---------------------|------------------------------------------------------------------------------------------------------------|
+| Cookie AutoDelete   | deletes cookies after user leaves the site                                                                 |
+| Decenraleyes        | gets rid of some trackers                                                                                  |
+| h264ify             | using 4. get intel procesor, no hardware support for x265 or VP9                                           |
+| HTTPS Everywhere    | upgrades connection to HTTPS                                                                               |
+| Privacy Badger      | like uMatrix, but does stuff automatically                                                                 |
+| Sidebery            | tab+bookmark bar on the right side of screen                                                               |
+| Stylus              | custom css for some sites                                                                                  |
+| Tridactyl           | vim like control in browser                                                                                |
+| uBlock Origin       | blocks adds                                                                                                |
+| User-Agent Switcher | switches user-agent string, harder tracking                                                                |
+| Violentmonkey       | Custom JS Scripts -- 4ChanX, OneeChan, ResizeYoutubePlayerToWindowSize, Absolute Enable Right Click & Copy |
+| Channel Blocker     | best way to hide/block YT channels                                                                         |
