@@ -16,13 +16,14 @@ import os
 from ranger.api.commands import Command
 from ranger.core.loader import CommandLoader
 
+
 class fzf_locate(Command):
     def execute(self):
         import subprocess
         if self.quantifier:
-            command="locate home media | fzf -e -i"
+            command = "locate home media | fzf -e -i"
         else:
-            command="locate home media | fzf -e -i"
+            command = "locate home media | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
@@ -31,14 +32,15 @@ class fzf_locate(Command):
                 self.fm.cd(fzf_file)
             else:
                 self.fm.select_file(fzf_file)
+
 
 class fzf_locate_whole(Command):
     def execute(self):
         import subprocess
         if self.quantifier:
-            command="locate / | fzf -e -i"
+            command = "locate / | fzf -e -i"
         else:
-            command="locate / | fzf -e -i"
+            command = "locate / | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
@@ -48,13 +50,14 @@ class fzf_locate_whole(Command):
             else:
                 self.fm.select_file(fzf_file)
 
+
 class fzf_locate_dokument(Command):
     def execute(self):
         import subprocess
         if self.quantifier:
-            command="find ~/dox/the\ dokument -type f | fzf -e -i"
+            command = "fd --type file . ~/dox/the\ dokument | fzf -e -i"
         else:
-            command="find ~/dox/the\ dokument -type f | fzf -e -i"
+            command = "fd --type file . ~/dox/the\ dokument | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
@@ -63,13 +66,15 @@ class fzf_locate_dokument(Command):
                 self.fm.cd(fzf_file)
             else:
                 self.fm.select_file(fzf_file)
+
+
 class fzf_locate_book(Command):
     def execute(self):
         import subprocess
         if self.quantifier:
-            command="find ~/dox/bookshelf -type f | fzf -e -i"
+            command = "fd --type file \".*(pdf|mobi|epub)\" ~/dox/bookshelf | fzf -e -i"
         else:
-            command="find ~/dox/bookshelf -type f | fzf -e -i"
+            command = "fd --type file \".*(pdf|mobi|epub)\" ~/dox/bookshelf | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:

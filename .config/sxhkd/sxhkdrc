@@ -46,10 +46,10 @@ alt + shift + x
 	killall sxhkd && notify-send "🔁 reloaded sxhkd" && sxhkd &
 
 alt + {a,x,n,s}
-	scratchpad {math,gpt,notes,rss}
+	scratchpad {math,gpt,notes}
 
 alt + shift + s
-	scratchpad -h math gpt notes rss
+	scratchpad -h math gpt notes
 
 # Dmenu stuff
 
@@ -117,4 +117,4 @@ alt + shift + {bracketleft,bracketright}
 
 # Launch programms
 super + {f,b,n,a,g,e,c,k,l,d}
-	startAndNotify {firefox,brave,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord}
+	startAndNotify {firefox,brave,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,ripcord}

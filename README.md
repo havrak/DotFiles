@@ -40,6 +40,8 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | dragon-drag-and-drop-git | enables drag and drop in terminal           |                                 |
 | dunst                    | notifications                               |                                 |
 | firefox                  | my browser of choice                        |                                 |
+| find                     | searches for files                          |                                 |
+| fd                       | simmilar to find, but faster                |                                 |
 | fish                     | my shell of choice                          |                                 |
 | fzf                      | fuzzy finder used in ranger and shell       |                                 |
 | git                      | vcs system                                  |                                 |
@@ -109,10 +111,9 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | NAME                | PURPOUSE                                                                                                   |
 |---------------------|------------------------------------------------------------------------------------------------------------|
 | Cookie AutoDelete   | deletes cookies after user leaves the site                                                                 |
-| Decenraleyes        | gets rid of some trackers                                                                                  |
+| LocalCDN            | gets rid of injected sources                                                                               |
 | h264ify             | using 4. get intel procesor, no hardware support for x265 or VP9                                           |
 | HTTPS Everywhere    | upgrades connection to HTTPS                                                                               |
-| Privacy Badger      | like uMatrix, but does stuff automatically                                                                 |
 | Sidebery            | tab+bookmark bar on the right side of screen                                                               |
 | Stylus              | custom css for some sites                                                                                  |
 | Tridactyl           | vim like control in browser                                                                                |

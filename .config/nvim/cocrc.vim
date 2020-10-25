@@ -52,7 +52,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Or use `complete_info` if your vim support it, like:
 inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd FileType vimwiki inoremap <expr> <c-e> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>" " vimwiki interefears with selection, its keymap has higher priority
+autocmd FileType vimwiki inoremap <expr> <c-w> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>" " vimwiki interefears with selection, its keymap has higher priority
 
 autocmd CmdwinEnter * inoremap <CR> <CR>
 autocmd BufReadPost quickfix inoremap <CR> <CR>

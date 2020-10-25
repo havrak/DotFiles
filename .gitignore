@@ -130,3 +130,6 @@ routersploit.log
 .config/coc/extensions/db.json
 .config/coc/list-templates-history.json
 .config/nvim/autoload/plug.vim.old
+.zoom
+.config/zoomus.conf
+.local/share/Ripcord

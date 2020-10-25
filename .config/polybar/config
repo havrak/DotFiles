@@ -111,7 +111,7 @@ label-disconnected =   down
 type = internal/network
 interface = enp0s25
 interval = 5.0
-label-connected =   %local_ip%  %upspeed%  %downspeed%
+label-connected =   %local_ip%  %upspeed%  %downspeed%
 label-disconnected =   down
 
 [module/wlanAlpha]
@@ -125,7 +125,7 @@ label-disconnected =   down
 type = internal/network
 interface = eno1
 interval = 5.0
-label-connected =   %local_ip%  %upspeed%  %downspeed%
+label-connected =   %local_ip%  %upspeed%  %downspeed%
 label-disconnected =   down
 
 [module/date]
@@ -140,6 +140,7 @@ type = custom/script
 exec = polybarTorrents
 interval = 10
 label = %output%
+
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -195,7 +196,7 @@ label =  %percentage%%
 [module/memory]
 type = internal/memory
 interval = 10
-label =  %gb_used%/%gb_free%
+label =  %gb_used%
 
 [module/left]
 type = custom/text

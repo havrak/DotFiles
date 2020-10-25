@@ -12,8 +12,7 @@
 # config.h files: (For suckless utils) recompiles and installs program.
 # all others: run `sent` to show a presentation
 
-
-file=$(readlink -f "$1")
+file=$(readlink -f "$*")
 dir=$(dirname "$file")
 base="${file%.*}"
 basename=$(echo $base| rev | awk -v FS='/' '{print $1}' | rev)

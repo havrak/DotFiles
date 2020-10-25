@@ -1,9 +1,9 @@
 #!/bin/sh
 # opout: "open output": A general handler for opening a file's intended output.
+str="$*"
+basename="$(echo "$str" | sed 's/\.[^\/.]*$//')"
 
-basename="$(echo "$1" | sed 's/\.[^\/.]*$//')"
-
-case "$1" in
+case "$str" in
 	*.tex|*.md|*.rmd|*.ms|*.me|*.mom) setsid "$READER" "$basename".pdf >/dev/null 2>&1 &;;
 	*.html) setsid "$BROWSER" "$basename".html >/dev/null 2>&1 & ;;
 	*.wiki) setsid "$BROWSER" "$(echo $basename | sed 's/vimwiki/vimwiki\/html/')".html >/dev/null 2>&1 & ;;
