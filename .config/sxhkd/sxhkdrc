@@ -45,10 +45,10 @@ alt + shift + r
 alt + shift + x
 	killall sxhkd && notify-send "🔁 reloaded sxhkd" && sxhkd &
 
-alt + {a,x,n,s}
+alt + {a,x,n}
 	scratchpad {math,gpt,notes}
 
-alt + shift + s
+alt + s
 	scratchpad -h math gpt notes
 
 # Dmenu stuff
@@ -67,9 +67,11 @@ alt + {w,t,q}
 alt + ctrl + t
 	st
 
-alt + ctrl + {n,m,r,g,w,v}
-	st -e {neomutt,ncmpcpp,ranger,tremc,nmtui,nvim}
+alt + ctrl + {n,r,g,w,v}
+	st -e {neomutt,ranger,tremc,nmtui,nvim}
 
+alt + ctrl + m
+	launchncmpcpp
 # Brightness
 
 XF86MonBrightnessUp

@@ -48,6 +48,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | gvim                     | enables clipboard buffer for vim            |                                 |
 | i3lock-cac03-git         | i3lock fork that displays layout and time   |                                 |
 | imagemagick              | used to create background for lockscreen    |                                 |
+| inotify-tools            | used by ncmpcpp to update cover art         |                                 |
 | lib32-vulkan-intel       | use vulkan backend for mpv                  |                                 |
 | libnotify                | enables notify-send command                 |                                 |
 | libva-intel-driver       | intel driver                                |                                 |
@@ -90,6 +91,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | ttf-nerd-fonts-symbols   | glyphs for polybar                          |                                 |
 | ttf-sazanami             | Japanese font for polybar                   |                                 |
 | ttf-symbola              | font                                        |                                 |
+| tmux                     | terminal multiplexer, used by ncmpcpp       |                                 |
 | vulkan-intel             | used by mpv                                 |                                 |
 | xclip                    | clipboard                                   |                                 |
 | xdo                      | used in scripts controls X windows          |                                 |
@@ -111,13 +113,10 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | NAME                | PURPOUSE                                                                                                   |
 |---------------------|------------------------------------------------------------------------------------------------------------|
 | Cookie AutoDelete   | deletes cookies after user leaves the site                                                                 |
-| LocalCDN            | gets rid of injected sources                                                                               |
 | h264ify             | using 4. get intel procesor, no hardware support for x265 or VP9                                           |
-| HTTPS Everywhere    | upgrades connection to HTTPS                                                                               |
 | Sidebery            | tab+bookmark bar on the right side of screen                                                               |
 | Stylus              | custom css for some sites                                                                                  |
 | Tridactyl           | vim like control in browser                                                                                |
 | uBlock Origin       | blocks adds                                                                                                |
-| User-Agent Switcher | switches user-agent string, harder tracking                                                                |
 | Violentmonkey       | Custom JS Scripts -- 4ChanX, OneeChan, ResizeYoutubePlayerToWindowSize, Absolute Enable Right Click & Copy |
 | Channel Blocker     | best way to hide/block YT channels                                                                         |

@@ -6,16 +6,15 @@ autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\begin{item
 autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
-autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
-autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
-autocmd FileType tex inoremap ,uv \uv{}<++><Esc>T{i
-autocmd FileType tex inoremap ,fn \footnote{}<++><Esc>T{i
+autocmd FileType tex inoremap ,em \emph{} <++><Esc>T{i
+autocmd FileType tex inoremap ,bf \textbf{} <++><Esc>T{i
+autocmd FileType tex inoremap ,uv \uv{} <++><Esc>T{i
+autocmd FileType tex inoremap ,fn \footnote{} <++><Esc>T{i
 autocmd FileType tex inoremap ,fm \footnotemark <++>
-autocmd FileType tex inoremap ,ft \footnotetext{}<++><Esc>T{i
-autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
-autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
-autocmd FileType tex inoremap ,ct \textcite{}<++><Esc>T{i
-autocmd FileType tex inoremap ,cp \parencite{}<++><Esc>T{i
+autocmd FileType tex inoremap ,ft \footnotetext{} <++><Esc>T{i
+autocmd FileType tex inoremap ,it \textit{} <++><Esc>T{i
+autocmd FileType tex inoremap ,ct \textcite{} <++><Esc>T{i
+autocmd FileType tex inoremap ,cp \parencite{} <++><Esc>T{i
 autocmd FileType tex inoremap ,cf \footnote{c.<space>d.<space>\cite{<++>}:<space><++>}
 autocmd FileType tex inoremap ,glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
 autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
@@ -43,9 +42,10 @@ autocmd FileType tex inoremap ,bt {\blindtext}
 autocmd FileType tex inoremap ,nu $\varnothing$
 autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
 autocmd FileType tex inoremap ,rn (\ref{})<++><Esc>F}i
+autocmd FileType tex inoremap ,h \vspace{0.3cm}<Enter>\noindent<Enter>\textbf{\large }<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,, \
-autocmd FileType tex inoremap ,) \<++>{<++>}<++>
-autocmd FileType tex inoremap ,( \<++>[<++>]{<++>}<++>
+autocmd FileType tex inoremap ,) \{}<Esc>1hi
+autocmd FileType tex inoremap ,( \[]{}<Esc>3hi
 
 "	HTML
 autocmd FileType html inoremap ,b <b></b><Space><++><Esc>FbT>i

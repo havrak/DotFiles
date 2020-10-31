@@ -24,7 +24,6 @@ mpc volume 100 &
 [ ! `pidof polybar` ] && polybarLaunch &
 [ ! `pidof picom` ] && picom -b &
 [ -z "$(xdotool search --class monitor)" ] && setsid -f st -c monitor -e htop
-[ ! `pidof firefox` ] && setsid -f firefox
 
 # Global Settings
 bspc config automatic_scheme longest_side
