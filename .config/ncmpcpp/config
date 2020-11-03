@@ -230,7 +230,7 @@ browser_sort_format = {%a - }{%t}|{%f} {(%l)}
 #
 
 # song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
-song_columns_list_format = "(36)[white]{t|f:Title}(28f)[white]{}(20)[white]{b}"
+song_columns_list_format = "(36)[white]{t|f:Title}"
 
 #### various settings #####
 

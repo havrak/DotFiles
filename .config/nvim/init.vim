@@ -317,9 +317,8 @@ let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 " vim-which-key
 nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
-set timeoutlen=0
+set timeoutlen=500 " anything less messes with other keybindings
 let g:which_key_use_floating_win = 1
-let g:which_key_map =  {}
 let g:which_key_sep = '→'
 
 " Load external files

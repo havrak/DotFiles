@@ -10,7 +10,7 @@ MUSIC_DIR="$HOME/mus"
 # Path to output cover
 COVER="/tmp/cover.png"
 # Size of cover
-COVER_SIZE=314
+COVER_SIZE=315
 # Size in pixel of borders to crop out
 CROP_BORDER=0
 # Radius or rounded borders

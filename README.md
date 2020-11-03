@@ -24,6 +24,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 + transmission
 + picom
 
+![screenshot](bin/scripts/files/screenshot.png)
 
 # Necessary programms
 | NAME                     | PURPOUSE                                    | NOTE                            |

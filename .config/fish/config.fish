@@ -49,6 +49,7 @@ abbr netres 	"sudo modprobe -r e1000e && sudo modprobe e1000e"
 abbr smloadr 	"smloadr -p /home/havra/dw/deezloader/ -q FLAC"
 abbr cp 			"cp -i"
 abbr mv 			"mv -i"
+abbr pipu     "pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
 # get error messages from journalctl
 abbr jctl 		"journalctl -p 3 -xb"

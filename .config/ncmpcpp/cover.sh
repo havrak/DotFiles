@@ -7,26 +7,22 @@
 source "`ueberzug library`"
 
 COVER="/tmp/cover.png"
-X_PADDING=0
-Y_PADDING=0
 
 function add_cover() {
-    ImageLayer::add [identifier]="cover" [x]="$X_PADDING" [y]="$Y_PADDING" [path]="$COVER"
+  ImageLayer::add [identifier]="cover" [x]="0" [y]="0" [path]="$COVER"
 }
 
 function remove_cover() {
-    ImageLayer::remove [identifier]="cover"
+  ImageLayer::remove [identifier]="cover"
 }
 
 function you_wait() {
-    while inotifywait -q -q -e close_write "$COVER"; do
-        add_cover
-    done
+  while inotifywait -q -q -e close_write "$COVER"; do
+  	add_cover
+  done
 }
 
-clear
-
 ImageLayer 0< <(
-    add_cover
-    you_wait
+  add_cover
+  you_wait
 )

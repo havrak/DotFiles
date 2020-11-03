@@ -118,5 +118,5 @@ alt + shift + {bracketleft,bracketright}
 	mpc volume {0,100}
 
 # Launch programms
-super + {f,b,n,a,g,e,c,k,l,d}
-	startAndNotify {firefox,brave,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,ripcord}
+super + {f,b,n,p,g,e,c,k,l,d,a}
+	startAndNotify {firefox,brave,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki}
