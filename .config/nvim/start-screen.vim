@@ -33,8 +33,10 @@ let g:startify_bookmarks = [
             \ { 'v': '~/.config/nvim/init.vim' },
             \ { 'm': '~/.config/nvim/macros.vim' },
             \ { 'c': '~/.config/nvim/cocrc.vim' },
+            \ { 't': '~/.config/nvim/start-screen.vim' },
             \ { 'x': '~/.Xresources' },
             \ { 'n': '~/.config/newsboat/config' },
+            \ { 'u': '~/.config/newsboat/urls' },
             \ { 'pi': '~/.config/picom/picom.conf' },
             \ { 's': '~/.config/sxhkd/sxhkdrc' },
             \ ]

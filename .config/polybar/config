@@ -64,7 +64,7 @@ font-1 = sazanami mincho:pixelsize=8;1
 font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
 modules-left = space mpd left
-modules-right = right memory cao cpu cao temperature cao wlan cao eth space
+modules-right = right cpu cao temperature cao wlan cao eth space
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -173,8 +173,6 @@ label-song-maxlen = 110
 type = internal/backlight
 card = intel_backlight
 label =  %percentage%%
-scroll-up = exec sudo light -A 5
-scroll-down =  exec sudo light -U 5
 
 [module/batt]
 type = custom/script

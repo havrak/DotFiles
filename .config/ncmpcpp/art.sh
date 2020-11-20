@@ -8,7 +8,7 @@
 # Path to music directory
 MUSIC_DIR="$HOME/mus"
 # Path to output cover
-COVER="/tmp/cover.png"
+COVER="$HOME/bin/scripts/files/cover.png"
 # Size of cover
 COVER_SIZE=315
 # Size in pixel of borders to crop out

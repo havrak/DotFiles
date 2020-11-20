@@ -6,7 +6,7 @@
 
 source "`ueberzug library`"
 
-COVER="/tmp/cover.png"
+COVER="$HOME/bin/scripts/files/cover.png"
 
 function add_cover() {
   ImageLayer::add [identifier]="cover" [x]="0" [y]="0" [path]="$COVER"

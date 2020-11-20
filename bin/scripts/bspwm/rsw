@@ -21,11 +21,6 @@ case "$1" in
 		setsid -f st -c math -e python
 		exit
 		;;
-	"-r" | "rss")
-#		killClass rss
-#		setsid -f st -c rss -e newsboat
-		exit
-		;;
 	"-n" | "notes")
 		killClass notes
 		setsid -f st -c notes -e nvim ~/.vim/vimwiki/index.wiki
@@ -33,9 +28,8 @@ case "$1" in
 		;;
 esac
 
-killClass gpt notes math rss
+killClass gpt notes math
 setsid -f st -c gpt &
 setsid -f st -c notes -e nvim ~/.vim/vimwiki/index.wiki
 setsid -f st -c math -e python
-#setsid -f st -c rss -e newsboat
 exit

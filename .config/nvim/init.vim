@@ -164,7 +164,6 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Run command on update of certain files
 autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
-autocmd BufWritePost ~/.config/newsboat/urls !rsw -r
 autocmd BufWritePost ~/.config/fish/config.fish !rm ~/.config/fish/fish_variables
 
 " Navigating with guides

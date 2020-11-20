@@ -2,7 +2,7 @@
 inoremap ,os ß
 
 " LaTeX
-autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\begin{itemize}<Enter>\item<++><Enter>\end{itemize}<Enter>}<Enter><Enter><++><Esc>6kf}i
+autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\begin{itemize}<Enter>\item <++><Enter>\end{itemize}<Enter>}<Enter><Enter><++><Esc>6kf}i
 autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>

@@ -50,6 +50,7 @@ abbr smloadr 	"smloadr -p /home/havra/dw/deezloader/ -q FLAC"
 abbr cp 			"cp -i"
 abbr mv 			"mv -i"
 abbr pipu     "pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+abbr schoolssh "ssh -L 3306:localhost:3306 dk-301@db.gyarab.cz"
 
 # get error messages from journalctl
 abbr jctl 		"journalctl -p 3 -xb"
