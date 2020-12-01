@@ -1,10 +1,19 @@
-#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"])
+  #TabsToolbar
+  > .toolbar-items {
   opacity: 0;
   pointer-events: none;
 }
 #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
-    visibility: collapse !important;
+  visibility: collapse !important;
 }
-#sidebar-header { display: none; }
+#sidebar-header {
+  display: none;
+}
 #statuspanel #statuspanel-label,
-statuspanel[type="status"] .statuspanel-label {display:none!important;}
+statuspanel[type="status"] .statuspanel-label {
+  display: none !important;
+}
+#webrtcIndicator {
+  display: none;
+}

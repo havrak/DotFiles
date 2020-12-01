@@ -30,6 +30,7 @@ bottom = true
 wm-restack = bspwm
 override-redirect = true
 radius-bottom = 5
+monitor = ${env:MONITOR:}
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -55,6 +56,8 @@ wm-restack = bspwm
 override-redirect = true
 offset-y = 20
 radius-top = 5
+monitor = ${env:MONITOR:}
+
 
 background = ${colors.background}
 foreground = ${colors.foreground}

@@ -8,6 +8,7 @@ mt
 dw
 web
 bin/scripts/files/wall.png
+bin/scripts/files/wall2.png
 bin/dmenu
 bin/roms
 bin/st
@@ -133,3 +134,9 @@ routersploit.log
 .zoom
 .config/zoomus.conf
 .local/share/Ripcord
+bin/scripts/files/cover.png
+.local/aqt_data
+.m2
+.config/Unknown Organization
+.adobe/
+SMLoadrConfig.json

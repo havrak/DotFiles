@@ -1,5 +1,17 @@
 #!/bin/sh
-# Made by Luke Smith: //github.com/LukeSmithxyz
 
-[ ! -z "$1" ] && cp "$1" $HOME/bin/scripts/files/wall.png && notify-send -i "$HOME/bin/scripts/files/wall.png" "Wallpaper changed."
-xwallpaper --zoom ~/bin/scripts/files/wall.png
+if [ ! -z "$1" ]; then
+	if [ $(xrandr | grep " connected" | wc -l) -gt "1" ]; then
+		case "$(printf "1st\\n2nd" | dmenu -i -p "Select monitor for wallpaper")" in
+			"1st")
+				cp "$1" $HOME/bin/scripts/files/wall.png && notify-send -i "$HOME/bin/scripts/files/wall.png" "1st wallpaper changed."
+			;;
+			"2nd")
+				cp "$1" $HOME/bin/scripts/files/wall2.png && notify-send -i "$HOME/bin/scripts/files/wall2.png" "2nd wallpaper changed."
+			;;
+		esac
+	else
+		cp "$1" $HOME/bin/scripts/files/wall.png && notify-send -i "$HOME/bin/scripts/files/wall.png" "Wallpaper changed."
+	fi
+fi
+xwallpaper --output eDP1 --zoom ~/bin/scripts/files/wall.png --output DP1  --zoom ~/bin/scripts/files/wall2.png

@@ -44,6 +44,7 @@ Plug 'metakirby5/codi.vim'																	" runs code while editing, only works
 " Misc
 Plug 'mhinz/vim-startify'																		" gives vim pretty start screen (bye bye Uganda), manages stored vim sessions
 Plug 'liuchengxu/vim-which-key'															" guide for key bindings
+Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 call plug#end()
 
 " Some basics:

@@ -15,7 +15,8 @@ function fish_greeting
 end
 
 function fish_prompt
-	set_color yellow
+  set -l last_status $status
+  set_color yellow
 		printf "%s" "$USER"
 	set_color green
 		printf "@"
@@ -25,6 +26,8 @@ function fish_prompt
 		printf ":"
 	set_color blue
 		printf (basename $PWD)
+	set_color yellow
+		printf " %s" "$last_status"
 	set_color red --bold
 		printf " >"
 	set_color normal
