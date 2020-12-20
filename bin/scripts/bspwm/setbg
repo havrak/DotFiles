@@ -14,4 +14,4 @@ if [ ! -z "$1" ]; then
 		cp "$1" $HOME/bin/scripts/files/wall.png && notify-send -i "$HOME/bin/scripts/files/wall.png" "Wallpaper changed."
 	fi
 fi
-xwallpaper --output eDP1 --zoom ~/bin/scripts/files/wall.png --output DP1  --zoom ~/bin/scripts/files/wall2.png
+xwallpaper --output eDP1 --zoom ~/bin/scripts/files/wall.png --output DP1  --zoom ~/bin/scripts/files/wall2.png --output HDMI1  --zoom ~/bin/scripts/files/wall2.png

@@ -6,7 +6,7 @@
 #-------------------------------#
 
 # Path to music directory
-MUSIC_DIR="$HOME/mus"
+MUSIC_DIR="$HOME/med/mus"
 # Path to output cover
 COVER="$HOME/bin/scripts/files/cover.png"
 # Size of cover

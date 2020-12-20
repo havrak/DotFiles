@@ -30,7 +30,7 @@ mpd_connection_timeout = 5
 
 # Needed for tag editor and file operations to work.
 #
-mpd_music_dir = ~/mus
+mpd_music_dir = ~/med/mus
 
 mpd_crossfade_time = 0
 

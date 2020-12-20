@@ -140,3 +140,18 @@ bin/scripts/files/cover.png
 .config/Unknown Organization
 .adobe/
 SMLoadrConfig.json
+.config/libvirt/
+.config/ncmpcpp/error.log
+.config/neofetch/
+.local/share/Steam
+.local/share/applications/Corpse Party.desktop
+.local/share/applications/Hyperdimension Neptunia Re;Birth3 V Generation.desktop
+.local/share/applications/Metro 2033 Redux.desktop
+.local/share/applications/Tom Clancy's Splinter Cell.desktop
+.local/share/icons/
+.local/share/libvirt/
+.steam/
+.steampath
+.steampid
+.yEd/
+med/
