@@ -33,7 +33,7 @@
     hide_duplicate_count = true
     show_indicators = yes
     icon_position = left
-    max_icon_size = 40
+    max_icon_size = 60
     sticky_history = yes
     history_length = 20
     dmenu = /usr/bin/dmenu -p dunst:

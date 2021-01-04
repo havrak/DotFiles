@@ -5,12 +5,8 @@ bspc monitor -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 
 # Rules
 bspc rule -a Zathura state=tiled
-bspc rule -a firefox desktop='^1'
-bspc rule -a discord desktop='^11'
-bspc rule -a monitor desktop='^12'
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0
-bspc rule -a math sticky=on state=floating hidden=on rectangle=800x300+0+0
 
 # Autostart
 setbg &
@@ -21,7 +17,6 @@ mpc volume 100 &
 
 [ ! `pidof polybar` ] && polybarLaunch &
 [ ! `pidof picom` ] && picom -b &
-[ -z "$(xdotool search --class monitor)" ] && setsid -f st -c monitor -e htop
 
 # Global Settings
 bspc config automatic_scheme longest_side
@@ -33,8 +28,8 @@ bspc config click_to_focus true
 bspc config pointer_follows_focus false
 
 bspc config single_monocle false
-bspc config borderless_monocle true # single_monocle is set to true by togglePicom script
-bspc config gapless_monocle true # single_monocle is set to true by togglePicom script
+bspc config borderless_monocle true
+bspc config gapless_monocle true
 bspc config focus_follows_pointer true
 bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true
@@ -56,7 +51,8 @@ case "$HOSTNAME" in
 		bspc config bottom_padding 12
 		;;
 	"dl")
-		xinput set-prop 10 329 1
+		xinput set-prop 15 331 1
+		xinput set-prop 10 337 1
 		bspc config bottom_padding 34
 		;;
 	"tp")

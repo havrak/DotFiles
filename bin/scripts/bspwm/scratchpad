@@ -35,7 +35,7 @@ fi
 for pid in $pids; do
 	if bspc query -N -n "$pid.hidden" > /dev/null; then
 		if [ $(xrandr | grep " connected" | wc -l) -gt "1" ]; then
-			xdotool windowmove $pid 50% 29
+			xdotool windowmove $pid 50% 25%
 			else
 			xdotool windowmove $pid 50% 50%
 		fi

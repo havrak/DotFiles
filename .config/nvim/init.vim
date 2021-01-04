@@ -164,7 +164,7 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Run command on update of certain files
 autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
-autocmd BufWritePost ~/.config/fish/config.fish !rm ~/.config/fish/fish_variables
+autocmd BufWritePost ~/.config/fish/config.fish,~/.config/fish/abbreviations.fish !rm ~/.config/fish/fish_variables
 
 " Navigating with guides
 inoremap	<C-w> <Esc>/<++><Enter>"_c4l

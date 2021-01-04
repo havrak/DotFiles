@@ -2,7 +2,10 @@
 
 if [ ! -z "$1" ]; then
 	if [ $(xrandr | grep " connected" | wc -l) -gt "1" ]; then
-		case "$(printf "1st\\n2nd" | dmenu -i -p "Select monitor for wallpaper")" in
+		case "$(printf "both\\n1st\\n2nd" | dmenu -i -p "Select monitor for wallpaper")" in
+			"both")
+				cp "$1" $HOME/bin/scripts/files/wall.png && cp "$1" $HOME/bin/scripts/files/wall2.png && notify-send -i "$HOME/bin/scripts/files/wall.png" "1st wallpaper changed."
+			;;
 			"1st")
 				cp "$1" $HOME/bin/scripts/files/wall.png && notify-send -i "$HOME/bin/scripts/files/wall.png" "1st wallpaper changed."
 			;;
