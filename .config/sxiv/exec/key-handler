@@ -9,6 +9,10 @@ do
 			convert -rotate -90 "$file" "$file" ;;
 		"f")
 			convert -flop "$file" "$file" ;;
+		"p")
+			setsid -f pinta "$file" ;;
+		"g")
+			setsid -f gimp "$file" ;;
 		"y")
 			echo -n "$file" | xclip -selection clipboard &&
 			notify-send "$file copied to clipboard" & ;;

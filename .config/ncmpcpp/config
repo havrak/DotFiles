@@ -43,7 +43,6 @@ mpd_crossfade_time = 0
 visualizer_type = spectrum
 visualizer_look = "▋▋"
 visualizer_in_stereo = no
-visualizer_sync_interval = 30
 visualizer_color = white
 
 # Alternative subset of 256 colors for terminals that support it.

@@ -14,6 +14,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much
 Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
 Plug 'lervag/vimtex'																				" supplies latex support for CoC
 Plug 'mattn/emmet-vim'																			" make writing html much more easier
+Plug 'aperezdc/vim-template'                                " template supprot in vim, since CoC plugin got deprected
 " Git
 Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
 Plug 'tpope/vim-fugitive'																		" better integration with git commands
@@ -165,6 +166,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " Run command on update of certain files
 autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 autocmd BufWritePost ~/.config/fish/config.fish,~/.config/fish/abbreviations.fish !rm ~/.config/fish/fish_variables
+autocmd BufWritePost ~/.config/polybar/config !polybarLaunch
 
 " Navigating with guides
 inoremap	<C-w> <Esc>/<++><Enter>"_c4l
@@ -319,6 +321,9 @@ vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 set timeoutlen=500 " anything less messes with other keybindings
 let g:which_key_use_floating_win = 1
 let g:which_key_sep = '→'
+
+" vim-template
+let g:templates_directory= '/home/havra/.vim/templates'
 
 " Load external files
 runtime macros.vim

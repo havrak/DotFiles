@@ -94,7 +94,7 @@ font-1 = sazanami mincho:pixelsize=8;1
 font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
 modules-left = space mpd left
-modules-right = right cpu cao wlandl cao ethdl space
+modules-right = right wlandl cao ethdl space
 
 cursor-click = pointer
 cursor-scroll = ns-resize

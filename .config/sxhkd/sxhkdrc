@@ -12,29 +12,17 @@ alt + shift + {0-9,minus,equal}
 alt + shift + {F1,F2,F3,F4}
 	bspc node -d {A,B,C,D} --follow
 
-alt + {h,j,k,l}
+alt + {Left,Down,Up,Right}
 	bspc node -f {west,south,north,east}
 
-alt + ctrl + {h,l}
-	bspc node @/ -C {forward,backward}
-
-alt + shift + {h,j,k,l}
+alt + shift + {Left,Down,Up,Right}
 	bspc node @parent -F {vertical,horizontal,horizontal,vertical}
 
 alt + r
 	bspc node @parent -R 90
 
-alt + ctrl + Up
-	bspc node -z top 0 -20; bspc node -z bottom 0 20
-
-alt + ctrl + Down
-	bspc node -z top 0 20; bspc node -z bottom 0 -20
-
-alt + ctrl + Left
-	bspc node -z left 20 0; bspc node -z right -20 0
-
-alt + ctrl + Right
-	bspc node -z left -20 0; bspc node -z right 20 0
+super + {Up,Down,Left,Right}
+	{bspc node -z top 0 -20; bspc node -z bottom 0 20,bspc node -z top 0 20; bspc node -z bottom 0 -20,bspc node -z left 20 0; bspc node -z right -20 0,bspc node -z left -20 0; bspc node -z right 20 0}
 
 alt + f
 	bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
@@ -56,8 +44,8 @@ alt + shift + x
 alt + {d,w,t,q}
 	{dmenu_run -i, screenChooser,clipboardText,emojiPicker}
 
-super + {F1,F2,F3,F9,F10,F11}
-	{pixelLock, powerMenu -l, powerMenu -p,togglePicom, dmenuMount,dmenuUmount}
+super + {F1,F2,F3,F10,F11}
+	{pixelLock, powerMenu -l, powerMenu -p, dmenuMount,dmenuUmount}
 
 # Terminal
 
@@ -78,11 +66,11 @@ alt + s
 
 # Brightness
 
-XF86MonBrightnessUp
-	sudo light -A 5
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+	sudo light {-A,-U} 5
 
-XF86MonBrightnessDown
-	sudo light -U 5
+shift + {XF86MonBrightnessUp, XF86MonBrightnessDown}
+	sudo light {-A,-U} 1
 
 # Printscreen
 
@@ -109,8 +97,14 @@ XF86AudioMicMute
 alt + {comma,period}
 	mpc {prev,next}
 
-alt + {greater,less}
-	mpc seek {+15,-15}
+alt + shift + {comma,period}
+	mpc seek {-15,+15}
+
+{XF86AudioNext,XF86AudioPrev}
+	mpc {prev,next}
+
+{XF86AudioPlay,XF86AudioPause}
+	mpc {toggle,toggle}
 
 alt + e
 	mpc toggle
@@ -122,5 +116,5 @@ alt + shift + {bracketleft,bracketright}
 	mpc volume {0,100}
 
 # Launch programms
-super + {f,n,p,g,e,c,k,l,d,a,v,w}
-	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer}
+super + {f,n,p,g,e,c,k,l,d,a,v,w,b,t,s}
+	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,tlpui,steam}

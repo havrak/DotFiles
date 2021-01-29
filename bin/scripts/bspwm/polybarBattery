@@ -4,7 +4,7 @@ PATH_BATTERY_0="/sys/class/power_supply/BAT0"
 PATH_BATTERY_1="/sys/class/power_supply/BAT1"
 battery_percent=0
 
-if [ "$hostname" == "tp" ]; then
+if [ "$HOSTNAME" == "tp" ]; then
 
 ac=0
 battery_level_0=0

@@ -1,5 +1,6 @@
 " ------COC SETTINGS------
 " prettier command for coc
+let g:coc_disable_startup_warning = 1
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
@@ -13,13 +14,10 @@ let g:coc_global_extensions = [
 			\ 'coc-angular',
 			\ 'coc-vimtex',
 			\ 'coc-java',
-			\ 'coc-python',
 			\ 'coc-vimlsp',
 			\ 'coc-spell-checker',
 			\ 'coc-cspell-dicts',
-			\ 'coc-actions',
 			\ 'coc-sh',
-			\ 'coc-template',
 			\ 'coc-emmet'
 			\ ]
 
@@ -96,8 +94,9 @@ augroup end
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
-xnoremap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nnoremap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@<CR>
+
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  vw<Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
 "nmap <leader>ac  <Plug>(coc-codeaction)

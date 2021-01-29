@@ -5,6 +5,7 @@ bspc monitor -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 
 # Rules
 bspc rule -a Zathura state=tiled
+bspc rule -a Raycaster state=floating
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0
 
@@ -51,8 +52,8 @@ case "$HOSTNAME" in
 		bspc config bottom_padding 12
 		;;
 	"dl")
-		xinput set-prop 15 331 1
 		xinput set-prop 10 337 1
+		xinput set-prop 15 339 1
 		bspc config bottom_padding 34
 		;;
 	"tp")
