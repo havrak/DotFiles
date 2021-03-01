@@ -3,14 +3,14 @@
 alt + {0-9,minus,equal}
 	bspc desktop -f '^{10,1-9,11,12}'
 
-alt + {F1,F2,F3,F4}
-	bspc desktop -f {A,B,C,D}
+alt + {F1,F2,F3,F4,F5,F6}
+	bspc desktop -f {A,B,C,D,E,F}
 
 alt + shift + {0-9,minus,equal}
 	bspc node -d '^{10,1-9,11,12}' --follow
 
-alt + shift + {F1,F2,F3,F4}
-	bspc node -d {A,B,C,D} --follow
+alt + shift + {F1,F2,F3,F4,F5,F6}
+	bspc node -d {A,B,C,D,E,F} --follow
 
 alt + {Left,Down,Up,Right}
 	bspc node -f {west,south,north,east}
@@ -44,8 +44,8 @@ alt + shift + x
 alt + {d,w,t,q}
 	{dmenu_run -i, screenChooser,clipboardText,emojiPicker}
 
-super + {F1,F2,F3,F10,F11}
-	{pixelLock, powerMenu -l, powerMenu -p, dmenuMount,dmenuUmount}
+super + {F1,F2,F3,F9,F10,F11}
+	{pixelLock, powerMenu -l, powerMenu -p, togglePicom, dmenuMount, dmenuUmount}
 
 # Terminal
 
@@ -116,5 +116,5 @@ alt + shift + {bracketleft,bracketright}
 	mpc volume {0,100}
 
 # Launch programms
-super + {f,n,p,g,e,c,k,l,d,a,v,w,b,t,s}
-	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,tlpui,steam}
+super + {f,n,p,g,e,c,k,l,d,a,v,w,b,t,z}
+	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,tlpui,zoom}

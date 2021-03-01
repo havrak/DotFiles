@@ -55,9 +55,6 @@ autocmd FileType vimwiki inoremap <expr> <c-w> complete_info()["selected"] != "-
 autocmd CmdwinEnter * inoremap <CR> <CR>
 autocmd BufReadPost quickfix inoremap <CR> <CR>
 
-" template menu
-nnoremap <leader>tl :CocList templates<CR>
-
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)

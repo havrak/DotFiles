@@ -11,12 +11,16 @@ abbr s 				"sensors"
 abbr yt 			"youtube-dl"
 abbr SS 			"sudo systemctl"
 abbr pyserver "python3 -m http.server"
-abbr netres 	"sudo modprobe -r e1000e && sudo modprobe e1000e"
 abbr smloadr 	"smloadr -p /home/havra/dw/deezloader/ -q FLAC"
 abbr cp 			"cp -i"
 abbr mv 			"mv -i"
 abbr pipu     "pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
-abbr schoolssh "ssh -L 3306:localhost:3306 dk-301@db.gyarab.cz"
+
+# ssh connections and tunnels
+abbr sshschool 		"ssh dk-301@db.gyarab.cz"
+abbr sshschoolsql "ssh -L 3306:localhost:3306 dk-301@db.gyarab.cz"
+abbr sshsql 			"ssh -L 3306:localhost:3306 89.203.250.49"
+abbr sshlxd 			"ssh -L 8443:localhost:8443 89.203.250.49"
 
 # get error messages from journalctl
 abbr jctl 		"journalctl -p 3 -xb"

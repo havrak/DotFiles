@@ -198,6 +198,7 @@ label-warn = !﨎 %temperature-c%
 type = internal/pulseaudio
 label-volume =  %percentage%%
 label-muted =  00%
+interval = 0
 
 [module/mpd]
 type = internal/mpd

@@ -324,6 +324,7 @@ let g:which_key_sep = '→'
 
 " vim-template
 let g:templates_directory= '/home/havra/.vim/templates'
+nnoremap <leader>tl :Template<CR>
 
 " Load external files
 runtime macros.vim
