@@ -9,6 +9,8 @@ Plug 'scrooloose/nerdtree'																	" IDE-like file browser
 Plug 'junegunn/fzf.vim'																			" fuzzy finder integration in vim
 Plug 'francoiscabrol/ranger.vim'														" ranger file browser integration in vim
 Plug 'rbgrouleff/bclose.vim'																" closes buffer without closing window, same y Q mapping but necessary for ranger plugins
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
 Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
@@ -26,9 +28,11 @@ Plug 'pechorin/any-jump.vim'																" searches for definitions and refer
 Plug 'easymotion/vim-easymotion'														" enables new ways to move through file
 " Syntax highlighting
 Plug 'morhetz/gruvbox'																			" gruvbox color scheme used by vim
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'rust-lang/rust.vim'																		" better highlighting for rust lang
 Plug 'kovetskiy/sxhkd-vim'																	" highlighting for sxhkd configuration
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }		" color hex codes will display corresponding color
+Plug 'pangloss/vim-javascript'
 " Note taking
 Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
 Plug 'mattn/calendar-vim'																		" enables Calendar command, integrates with vimwiki
@@ -66,7 +70,12 @@ set linebreak
 set breakindent
 set hidden
 set autoindent
-set foldmethod=syntax
+set foldmethod=syntax "syntax highlighting items specify folds
+set foldcolumn=1 "defines 1 col at window left, to indicate folding
+let javascript_fold=1 "activate folding by JS syntax
+let python_fold=1
+set foldlevelstart=1 "start file with all folds opened
+"set nofoldenable
 set incsearch
 set smartindent
 set splitright
@@ -131,6 +140,7 @@ nnoremap gt :bnext<CR>
 nnoremap gb :edit #<CR>
 nnoremap gn :enew \| Startify <CR>
 nnoremap Q :w\|bd<CR>
+tnoremap <Esc> <C-\><C-n>
 
 " Replace all is aliased to S.
 nnoremap S :%s///g<Left><Left>
@@ -141,7 +151,7 @@ nnoremap <leader>c :w! \| !compiler <c-r>%<CR>
 autocmd BufEnter *.wiki nnoremap <leader>c :Vimwiki2HTML<CR>
 
 " Open corresponding .pdf/.html or preview
-nnoremap <leader>p :!opout <c-r>%<CR><CR>
+nnoremap <leader>p :!opout "%"<CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 autocmd VimLeave *.tex !texclear %
@@ -166,7 +176,6 @@ autocmd BufWritePre * %s/\s\+$//e
 " Run command on update of certain files
 autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 autocmd BufWritePost ~/.config/fish/config.fish,~/.config/fish/abbreviations.fish !rm ~/.config/fish/fish_variables
-autocmd BufWritePost ~/.config/polybar/config !polybarLaunch
 
 " Navigating with guides
 inoremap	<C-w> <Esc>/<++><Enter>"_c4l
@@ -192,28 +201,20 @@ call matchadd('IMPORTANT', 'IMPORTANT')
 call matchadd('DELETE', 'DELETE')
 call matchadd('OPTIONAL', 'OPTIONAL')
 
-
-" NERDTree
-function! ToggleNERDTree()
-	NERDTreeToggle
-	silent NERDTreeMirror
-endfunction
-
-nnoremap <leader>t :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '►'
-let g:NERDTreeDirArrowCollapsible = '▼'
-let NERDTreeHijackNetrw=1
-let NERDTreeShowLineNumbers=1
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI = 1
-autocmd StdinReadPre * let s:std_in=1
-
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='gruvbox'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#fnametruncate = 30
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|markdown.pandoc|org|rst|tex|text|wiki'
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#whitespace#enabled= 0
 
@@ -315,6 +316,7 @@ nnoremap <leader>wc :CalendarH<CR>
 let g:rooter_manual_only = 1
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 
+
 " vim-which-key
 nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
@@ -330,3 +332,6 @@ nnoremap <leader>tl :Template<CR>
 runtime macros.vim
 runtime cocrc.vim
 runtime start-screen.vim
+
+lua require('nv-nvimtree')
+lua require('nv-treesitter')

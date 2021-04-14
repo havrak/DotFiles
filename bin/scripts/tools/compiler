@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# This script will compile or run another finishing operation on a document. I
-# have this script run via vim.
-#
 # tex files: Compiles to pdf, including bibliography if necessary
 # md files: Compiles to pdf via pandoc
 # rmd files: Compiles via R Markdown
@@ -11,6 +8,18 @@
 # go files: compiles and runs with "go run"
 # config.h files: (For suckless utils) recompiles and installs program.
 # all others: run `sent` to show a presentation
+
+# potřebné programy:
+texlive-formatsextra
+texlive-publishers
+texlive-latexextra
+texlive-humanities
+texlive-fontsextra
+texlive-pictures
+texlive-science
+texlive-core
+pandoc
+
 
 file=$(readlink -f "$*")
 dir=$(dirname "$file")
@@ -36,7 +45,7 @@ case "$file" in
 	*\.tex) textype "$file" ;;
 	*\.md) pandoc -s -f markdown "$file" -t pdf -o "$base".pdf ;;
 	*config.h) sudo make install ;;
-        *\.c) cc "$file" -o "$base" && "$base" ;;
+  *\.c) cc "$file" -o "$base" && "$base" ;;
 	*\.py) python "$file" ;;
 	*\.m) octave "$file" ;;
 	*\.scad) openscad -o "$base".stl "$file" ;;

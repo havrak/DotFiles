@@ -1,10 +1,3 @@
-"let g:startify_custom_header = [
-"			\'      __                           __  _                __           ',
-"			\'     / /_  ____ __   ___________ _/ /_( )_____   _   __(_)___ ___    ',
-"			\'    / __ \/ __ `/ | / / ___/ __ `/ //_/// ___/  | | / / / __ `__ \   ',
-"			\'   / / / / /_/ /| |/ / /  / /_/ / ,<   (__  )   | |/ / / / / / / /   ',
-"			\'  /_/ /_/\__,_/ |___/_/   \__,_/_/|_| /____/    |___/_/_/ /_/ /_/    ',
-"			\]
 let g:startify_custom_header = []
 let g:startify_session_dir = '~/.config/nvim/session'
 
@@ -22,7 +15,8 @@ let g:startify_session_delete_buffers = 1
 let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
-
+let g:startify_enable_special = 0
+let g:startify_session_before_save = [ 'silent! NvimTreeClose' ]
 
 let g:startify_bookmarks = [
             \ { 'po': '~/.config/polybar/config' },
@@ -43,6 +37,3 @@ let g:startify_bookmarks = [
             \ { 's': '~/.config/sxhkd/sxhkdrc' },
             \ ]
 
-let g:startify_change_to_vcs_root = 1
-let g:startify_session_autoload = 1
-let g:startify_enable_special = 0

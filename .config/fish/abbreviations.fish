@@ -19,8 +19,9 @@ abbr pipu     "pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -
 # ssh connections and tunnels
 abbr sshschool 		"ssh dk-301@db.gyarab.cz"
 abbr sshschoolsql "ssh -L 3306:localhost:3306 dk-301@db.gyarab.cz"
-abbr sshsql 			"ssh -L 3306:localhost:3306 89.203.250.49"
-abbr sshlxd 			"ssh -L 8443:localhost:8443 89.203.250.49"
+abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
+abbr sshlxd 			"ssh -L 8443:localhost:8443 havrak.xyz"
+abbr sshmon 			"ssh -L 27017:localhost:27017 havrak.xyz"
 
 # get error messages from journalctl
 abbr jctl 		"journalctl -p 3 -xb"

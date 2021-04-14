@@ -18,12 +18,12 @@ case "$1" in
 		;;
 	"-n" | "notes")
 		killClass notes
-		setsid -f st -c notes -e nvim ~/.vim/vimwiki/index.wiki
+		setsid -f st -c notes -e nvim -c VimwikiIndex
 		exit
 		;;
 esac
 
 killClass gpt notes
 setsid -f st -c gpt &
-setsid -f st -c notes -e nvim ~/.vim/vimwiki/index.wiki
+setsid -f st -c notes -e nvim -c VimwikiIndex
 exit

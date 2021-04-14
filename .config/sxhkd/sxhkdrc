@@ -80,6 +80,9 @@ Print
 shift+Print
 	scrot -u -e 'mv $f ~/tmp/screen/'
 
+ctrl+Print
+	scrot -u -e 'mv $f ~/tmp/screen && pinta ~/tmp/screen/$f'
+
 # Audio
 
 XF86AudioLowerVolume
@@ -117,4 +120,4 @@ alt + shift + {bracketleft,bracketright}
 
 # Launch programms
 super + {f,n,p,g,e,c,k,l,d,a,v,w,b,t,z}
-	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,tlpui,zoom}
+	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,putty,zoom}

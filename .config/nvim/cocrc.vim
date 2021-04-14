@@ -15,10 +15,12 @@ let g:coc_global_extensions = [
 			\ 'coc-vimtex',
 			\ 'coc-java',
 			\ 'coc-vimlsp',
+			\ 'coc-pyright',
 			\ 'coc-spell-checker',
 			\ 'coc-cspell-dicts',
 			\ 'coc-sh',
-			\ 'coc-emmet'
+			\ 'coc-emmet',
+			\ 'coc-yaml'
 			\ ]
 
 " From Coc Readme
