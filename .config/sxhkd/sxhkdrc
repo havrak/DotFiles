@@ -1,5 +1,3 @@
-# bspwm
-
 alt + {0-9,minus,equal}
 	bspc desktop -f '^{10,1-9,11,12}'
 
@@ -44,8 +42,8 @@ alt + shift + x
 alt + {d,w,t,q}
 	{dmenu_run -i, screenChooser,clipboardText,emojiPicker}
 
-super + {F1,F2,F3,F9,F10,F11}
-	{pixelLock, powerMenu -l, powerMenu -p, togglePicom, dmenuMount, dmenuUmount}
+super + {F1,F2,F3,F9}
+	{pixelLock, powerMenu -l, powerMenu -p, togglePicom}
 
 # Terminal
 
@@ -119,5 +117,5 @@ alt + shift + {bracketleft,bracketright}
 	mpc volume {0,100}
 
 # Launch programms
-super + {f,n,p,g,e,c,k,l,d,a,v,w,b,t,z,s}
-	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,putty,zoom,simplescreenrecorder}
+super + {f,n,p,g,e,c,k,l,d,a,v,w,b,t,z,s,m}
+	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,putty,zoom,simplescreenrecorder,anitmicrox}

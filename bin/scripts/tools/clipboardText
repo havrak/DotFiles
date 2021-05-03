@@ -1,6 +1,6 @@
 #!/bin/sh
 
-text=$(cat $HOME/bin/scripts/files/clipboardText | dmenu -l 20 -p "Choose text to save to clipboard")
+text=$(cat $HOME/bin/scripts/files/clipboardText | dmenu -l 20 | awk -F " " '{for (i=2; i<=NF; i++) print $i}' )
 
 echo $text | xclip -selection clipboard
-echo $text | xclip
+echo $text | xclip -selection primary

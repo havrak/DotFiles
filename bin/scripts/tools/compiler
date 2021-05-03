@@ -9,18 +9,6 @@
 # config.h files: (For suckless utils) recompiles and installs program.
 # all others: run `sent` to show a presentation
 
-# potřebné programy:
-texlive-formatsextra
-texlive-publishers
-texlive-latexextra
-texlive-humanities
-texlive-fontsextra
-texlive-pictures
-texlive-science
-texlive-core
-pandoc
-
-
 file=$(readlink -f "$*")
 dir=$(dirname "$file")
 base="${file%.*}"
