@@ -100,8 +100,8 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [colors]
-background = #00121212
-#background = #cc121212
+#background = #00121212
+background = #cc121212
 foreground = #1f1f1f
 modulebg   = #ffffd7
 dark       = #999999

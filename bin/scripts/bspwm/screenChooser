@@ -42,7 +42,9 @@ elif [ $HOSTNAME = "dl" ]; then
 			bspc monitor DP1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 			;;
 		"temp")
-			xrandr --output eDP1 --off --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
+			xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output DP1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
+			bspc monitor HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
+			bspc monitor eDP1 -d 'A' 'B' 'C' 'D' 'E' 'F'
 			;;
 		"manual")
 			arandr

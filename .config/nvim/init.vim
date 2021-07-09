@@ -5,7 +5,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'bling/vim-airline'																		" feature packed status line
 Plug 'vim-airline/vim-airline-themes'												" themes for airline
 " Files
-Plug 'scrooloose/nerdtree'																	" IDE-like file browser
 Plug 'junegunn/fzf.vim'																			" fuzzy finder integration in vim
 Plug 'francoiscabrol/ranger.vim'														" ranger file browser integration in vim
 Plug 'rbgrouleff/bclose.vim'																" closes buffer without closing window, same y Q mapping but necessary for ranger plugins
@@ -139,7 +138,7 @@ nnoremap <C-s>l :vertical resize +5<CR>
 nnoremap gt :bnext<CR>
 nnoremap gb :edit #<CR>
 nnoremap gn :enew \| Startify <CR>
-nnoremap Q :w\|bd<CR>
+nnoremap Q :w\|Bclose<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Replace all is aliased to S.
