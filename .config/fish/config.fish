@@ -6,8 +6,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # use bat to color man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-set PATH $PATH (du "$HOME/bin" | cut -f2 | tr " " "\n" | nl)
-#set PATH $PATH (du "$HOME/bin" | cut -f2 | tr '\n' ':')
+export default_fish_path="$PATH"
+
+
+set PATH "$default_fish_path" (du --exclude='*git*' $HOME/bin | cut -f2 | tr '\n' ':')
 set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox

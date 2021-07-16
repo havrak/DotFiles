@@ -1,23 +1,9 @@
-[bar/desktop]
-width = 100%
-height = 13
-fixed-center = true
-bottom = true
-wm-restack = bspwm
-override-redirect = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-font-0 = Mononoki Nerd Font:pixelsize=9;1
-font-1 = sazanami mincho:pixelsize=8;1
-font-2 = Mononoki Nerd Font:style=Medium:size=12;2
-
-modules-left = bspwm cao mpd left
-modules-right = right torrents cao mail cao temperature cao volume cao memory cao cpu cao ethDesktop cao xkeyboard cao date space
-
-cursor-click = pointer
-cursor-scroll = ns-resize
+[colors]
+background = #00121212
+foreground = #1f1f1f
+modulebg   = #ffffd7
+dark       = #999999
+red        = #cc241d
 
 [bar/bottom]
 width = 100%-12
@@ -45,7 +31,8 @@ modules-right = right torrents cao mail cao volume cao backlight cao batt cao xk
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/toptp]
+
+[bar/top]
 width = 100%
 border-left-size = 6
 border-right-size = 6
@@ -67,45 +54,10 @@ font-1 = sazanami mincho:pixelsize=8;1
 font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
 modules-left = space mpd left
-modules-right = right wlantp cao ethtp space
+modules-right = right wlan cao eth space
 
 cursor-click = pointer
 cursor-scroll = ns-resize
-
-[bar/topdl]
-width = 100%
-border-left-size = 6
-border-right-size = 6
-height = 14
-fixed-center = true
-bottom=true
-wm-restack = bspwm
-override-redirect = true
-offset-y = 20
-radius-top = 5
-monitor = ${env:MONITOR:}
-
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-font-0 = Mononoki Nerd Font:pixelsize=8.5;2
-font-1 = sazanami mincho:pixelsize=8;1
-font-2 = Mononoki Nerd Font:style=Medium:size=12;2
-
-modules-left = space mpd left
-modules-right = right wlandl cao ethdl space
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[colors]
-#background = #00121212
-background = #cc121212
-foreground = #1f1f1f
-modulebg   = #ffffd7
-dark       = #999999
-red        = #cc241d
 
 [module/bspwm]
 type = internal/bspwm
@@ -131,37 +83,16 @@ label-empty-foreground = ${colors.dark}
 label-empty-background = ${colors.modulebg}
 label-empty-padding = 1
 
-[module/wlantp]
+[module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = ${env:WIRELESS:}
 interval = 5.0
 label-connected =   %essid% - %local_ip%  %upspeed%  %downspeed%
 label-disconnected =   down
 
-[module/wlandl]
+[module/eth]
 type = internal/network
-interface = wlp0s20f3
-interval = 5.0
-label-connected =   %essid% - %local_ip%  %upspeed%  %downspeed%
-label-disconnected =   down
-
-[module/ethtp]
-type = internal/network
-interface = enp0s25
-interval = 5.0
-label-connected =   %local_ip%  %upspeed%  %downspeed%
-label-disconnected =   down
-
-[module/ethdl]
-type = internal/network
-interface = enp1s0
-interval = 5.0
-label-connected =   %local_ip%  %upspeed%  %downspeed%
-label-disconnected =   down
-
-[module/ethDesktop]
-type = internal/network
-interface = eno1
+interface = ${env:WIRED:}
 interval = 5.0
 label-connected =   %local_ip%  %upspeed%  %downspeed%
 label-disconnected =   down
@@ -178,7 +109,6 @@ type = custom/script
 exec = polybarTorrents
 interval = 10
 label = %output%
-
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -203,7 +133,7 @@ interval = 0
 
 [module/mpd]
 type = internal/mpd
-label-offline =  down
+format-offline =  down
 format-online =  <label-song> <label-time>
 label-song = %artist% / %album% - %title%
 label-song-maxlen = 110

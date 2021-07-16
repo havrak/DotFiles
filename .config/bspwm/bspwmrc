@@ -16,8 +16,6 @@ rsw &
 remap &
 mpc volume 100 &
 
-[ ! `pidof polybar` ] && polybarLaunch &
-[ ! `pidof picom` ] && picom -b &
 
 # Global Settings
 bspc config automatic_scheme longest_side
@@ -47,6 +45,7 @@ bspc config left_padding 0
 bspc config right_padding 0
 bspc config border_width 2
 bspc config window_gap 6
+
 case "$HOSTNAME" in
 	"dt")
 		bspc config bottom_padding 12
@@ -59,3 +58,8 @@ case "$HOSTNAME" in
 		bspc config bottom_padding 34
 		;;
 esac
+
+
+[ ! `pidof polybar` ] && polybarLaunch &
+[ ! `pidof picom` ] && picom -b &
+
