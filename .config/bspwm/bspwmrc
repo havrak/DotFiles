@@ -48,15 +48,12 @@ bspc config window_gap 6
 bspc config border_radius 8
 
 case "$HOSTNAME" in
-	"dt")
-		bspc config bottom_padding 12
-		;;
 	"dl")
 		xinput set-prop DELL0959:00\ 06CB:CDD5\ Touchpad libinput\ Tapping\ Enabled 1
-		bspc config bottom_padding 34
+		bspc config bottom_padding 38
 		;;
 	"tp")
-		bspc config bottom_padding 34
+		bspc config bottom_padding 38
 		;;
 esac
 

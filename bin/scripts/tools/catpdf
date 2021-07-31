@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pdfs="$(ls | grep EPSON)"
+pdftk $pdfs cat output a.pdf

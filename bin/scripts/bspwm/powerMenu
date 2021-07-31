@@ -25,7 +25,7 @@ case "$1" in
 				;;
 			"logoff")
 				if [ $(printf "no\\nyes" | dmenu -i -p "confirm") == "yes" ]; then
-					i3-msg exit
+					bspc quit
 				fi
 				;;
 		esac

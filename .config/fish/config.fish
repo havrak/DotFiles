@@ -9,7 +9,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export default_fish_path="$PATH"
 
 
-set PATH "$default_fish_path" (du --exclude='*git*' $HOME/bin | cut -f2 | tr '\n' ':')
+set PATH "$default_fish_path" (du --exclude='*git*' $HOME/bin | cut -f2 | tr '\n' ':') "$HOME/.local/share/gem/ruby/3.0.0/bin"  "$HOME/.local/share/gem/ruby/2.7.0/bin"
 set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox

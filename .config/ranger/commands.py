@@ -50,35 +50,6 @@ class fzf_locate_whole(Command):
             else:
                 self.fm.select_file(fzf_file)
 
-
-class fzf_locate_dokument(Command):
-    def execute(self):
-        import subprocess
-        command = "fd --type file . ~/med/dokument | fzf -e -i"
-        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
-        stdout, stderr = fzf.communicate()
-        if fzf.returncode == 0:
-            fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
-            if os.path.isdir(fzf_file):
-                self.fm.cd(fzf_file)
-            else:
-                self.fm.select_file(fzf_file)
-
-
-class fzf_locate_list(Command):
-    def execute(self):
-        import subprocess
-        command = "fd --type file \".*(md|txt|jpg|jpeg|png)\" ~/dox/bookshelf/-\ Lists | fzf -e -i"
-        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
-        stdout, stderr = fzf.communicate()
-        if fzf.returncode == 0:
-            fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
-            if os.path.isdir(fzf_file):
-                self.fm.cd(fzf_file)
-            else:
-                self.fm.select_file(fzf_file)
-
-
 class fzf_locate_book(Command):
     def execute(self):
         import subprocess
