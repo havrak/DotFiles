@@ -117,5 +117,5 @@ alt + shift + {bracketleft,bracketright}
 	mpc volume {0,100}
 
 # Launch programms
-super + {f,n,p,i,e,c,k,l,d,a,v,w,b,u,z,q,g}
-	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,blueman-manager,putty,zoom,simplescreenrecorder,github-desktop}
+super + {f,n,p,i,e,c,k,l,d,a,v,w,b,u,z,q,g,s}
+	startAndNotify {firefox,netbeans,pavucontrol,gimp,picard,calibre,klavaro,libreoffice,discord,anki,virt-manager,ahoviewer,binance,putty,filezilla,simplescreenrecorder,github-desktop,spotify}

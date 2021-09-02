@@ -34,7 +34,6 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }		" color hex codes wil
 Plug 'pangloss/vim-javascript'
 " Note taking
 Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
-Plug 'mattn/calendar-vim'																		" enables Calendar command, integrates with vimwiki
 " Writing, text editing
 Plug 'tpope/vim-commentary'																	" easy commenting
 Plug 'junegunn/goyo.vim'																		" writing mode that cleans up the vim UI
@@ -302,13 +301,7 @@ let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/h
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
 let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr, pre, script'
-let g:vimwiki_diary_months = {
-			\ 1:	"leden",		2:	"únor",			3:	"březen",
-			\ 4:	"duben",		5:	"květen",		6:	"červen",
-			\ 7:	"červenec", 8:	"srpen",		9:	"září",
-			\ 10: "říjen",		11: "listopad", 12: "prosinec"}
 
-nnoremap <leader>w<leader>t :VimwikiMakeTomorrowDiaryNote><CR>
 nnoremap <leader>wc :CalendarH<CR>
 
 " vim-rooter

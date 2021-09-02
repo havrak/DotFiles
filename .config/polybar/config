@@ -26,7 +26,7 @@ font-1 = sazanami mincho:pixelsize=8;1
 font-2 = Mononoki Nerd Font:style=Medium:size=12;2
 
 modules-left = right bspwm left
-modules-right = right torrents cao mail cao volume cao backlight cao batt cao xkeyboard cao date left
+modules-right = right mail cao volume cao backlight cao batt cao xkeyboard cao date left
 
 cursor-click = pointer
 cursor-scroll = ns-resize
