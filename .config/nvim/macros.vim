@@ -3,8 +3,7 @@ inoremap ,os ß
 
 " LaTeX
 autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\begin{itemize}<Enter>\item <++><Enter>\end{itemize}<Enter>}<Enter><Enter><++><Esc>6kf}i
-autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
-autocmd FileType tex inoremap ,exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
+autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\centering<Enter>\includegraphics[height=]{}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>3k$i
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
 autocmd FileType tex inoremap ,em \emph{} <++><Esc>T{i
 autocmd FileType tex inoremap ,bf \textbf{} <++><Esc>T{i
@@ -24,18 +23,12 @@ autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Esc
 autocmd FileType tex inoremap ,li <ESC>o\item<Space>
 autocmd FileType tex inoremap ,ref \ref{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ,tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
-autocmd FileType tex inoremap ,ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
-autocmd FileType tex inoremap ,can \cand{}<Tab><++><Esc>T{i
 autocmd FileType tex inoremap ,con \const{}<Tab><++><Esc>T{i
-autocmd FileType tex inoremap ,v \vio{}<Tab><++><Esc>T{i
 autocmd FileType tex inoremap ,a \href{}{<++>}<Space><++><Esc>2T{i
-autocmd FileType tex inoremap ,sc \textsc{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ,st <Esc>F{i*<Esc>f}i
-autocmd FileType tex inoremap ,beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
 autocmd FileType tex inoremap ,up <Esc>/usepackage<Enter>o\usepackage{}<Esc>i
 autocmd FileType tex nnoremap ,up /usepackage<Enter>o\usepackage{}<Esc>i
 autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
@@ -89,3 +82,11 @@ autocmd FileType markdown,rmd inoremap ,li <Esc>o+<Space>
 autocmd Filetype rmd inoremap ,r ```{r}<CR>```<CR><CR><esc>2kO
 autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kOo
+
+" Vimwiki
+autocmd Filetype vimwiki inoremap ,a [](<++>)<++><Esc>F[a
+autocmd Filetype vimwiki inoremap ,1 =<Space><Space>=<Esc>1hi
+autocmd Filetype vimwiki inoremap ,2 ==<Space><Space>==<Esc>2hi
+autocmd Filetype vimwiki inoremap ,3 ===<Space><Space>===<Esc>3hi
+autocmd Filetype vimwiki inoremap ,4 ===<Space><Space>===<Esc>4hi
+autocmd Filetype vimwiki inoremap ,li *
