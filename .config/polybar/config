@@ -44,7 +44,7 @@ override-redirect = true
 offset-y = 24
 #radius-top = 5
 monitor = ${env:MONITOR:}
-tray-position = right
+#tray-position = right
 
 background = ${colors.background}
 foreground = ${colors.foreground}

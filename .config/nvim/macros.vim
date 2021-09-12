@@ -4,6 +4,10 @@ inoremap ,os ß
 " LaTeX
 autocmd FileType tex inoremap ,fr \frame{<Enter> \frametitle{}<Enter>\begin{itemize}<Enter>\item <++><Enter>\end{itemize}<Enter>}<Enter><Enter><++><Esc>6kf}i
 autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\centering<Enter>\includegraphics[height=]{}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>3k$i
+autocmd FileType tex inoremap ,ff \frame{<Enter>\begin{figure}[!htb]<Enter>\begin{minipage}{0.4\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}\hfill<Enter>\begin{minipage}{0.4\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{<++>}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}<Enter>\end{figure}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>}<Esc>11k$i
+
+
+
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
 autocmd FileType tex inoremap ,em \emph{} <++><Esc>T{i
 autocmd FileType tex inoremap ,bf \textbf{} <++><Esc>T{i

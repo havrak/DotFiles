@@ -6,10 +6,9 @@ Plug 'bling/vim-airline'																		" feature packed status line
 Plug 'vim-airline/vim-airline-themes'												" themes for airline
 " Files
 Plug 'junegunn/fzf.vim'																			" fuzzy finder integration in vim
-Plug 'francoiscabrol/ranger.vim'														" ranger file browser integration in vim
 Plug 'rbgrouleff/bclose.vim'																" closes buffer without closing window, same y Q mapping but necessary for ranger plugins
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons' 												" for file icons
+Plug 'kyazdani42/nvim-tree.lua' 														" file browser for vim
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
 Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
@@ -37,13 +36,14 @@ Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode
 " Writing, text editing
 Plug 'tpope/vim-commentary'																	" easy commenting
 Plug 'junegunn/goyo.vim'																		" writing mode that cleans up the vim UI
-Plug 'tpope/vim-repeat'																			" . repeats the whole map if map is defined with repeat#
+Plug 'tpope/vim-repeat'																			" . repeats the wholermap if map is defined with repeat#
 Plug 'mbbill/undotree'																			" complex undo enables moving to already rewritten changes
 Plug 'brooth/far.vim'																				" search and replace across multiple files
 Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use CoC feature
 Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infuriating
 " Programming
 Plug 'metakirby5/codi.vim'																	" runs code while editing, only works for languages with interactive shell
+Plug 'stevearc/vim-arduino' 																" compiling and uploading programs to arduino
 " Misc
 Plug 'mhinz/vim-startify'																		" gives vim pretty start screen (bye bye Uganda), manages stored vim sessions
 Plug 'liuchengxu/vim-which-key'															" guide for key bindings
