@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#echo $PWD
+
+music=$(find "$PWD" -name "*.flac")
+music=$music $(find "$PWD" -name "*.mp3")
+
+#echo $music
+
+IFS=$'\n'
+for track in $music
+do
+	echo $track
+	image_name="${track%.*}".png
+	ffmpeg -i $track $image_name
+  convert $image_name -resize 500x500 $image_name
+	if [[ $track == *.flac ]]; then
+		metaflac --remove-tag=COVERART  --dont-use-padding $track
+		metaflac --remove --block-type=PICTURE $track
+		metaflac --import-picture-from=$image_name $track
+	else
+		ffmpeg -y -i $track -i $image_name -c:a copy -c:v copy -map 0:0 -map 1:0 -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" $track
+	fi
+	rm $image_name
+done
+
