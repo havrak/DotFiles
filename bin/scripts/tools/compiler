@@ -18,7 +18,7 @@ cd "$dir" || exit
 
 textype() { \
 	bibtex "$basename"
-	command="pdflatex -file-line-error"
+	command="pdflatex -shell-escape -file-line-error"
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
 	grep -i addbibresource "$file" >/dev/null &&

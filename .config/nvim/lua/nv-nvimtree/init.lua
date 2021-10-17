@@ -1,13 +1,16 @@
 -- vim.g.nvim_tree_disable_netrw = 0 --"1 by default, disables netrw
 -- vim.g.nvim_tree_hijack_netrw = 0 --"1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
 
+require'nvim-tree'.setup()
+
 local M = {}
 local status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
 if not status_ok then
   return
 end
 
-vim.cmd("nnoremap <leader>t :NvimTreeToggle<CR>")
+vim.cmd("nnoremap <leader>n :NvimTreeToggle<CR>")
+
 M.config = function()
   local g = vim.g
 

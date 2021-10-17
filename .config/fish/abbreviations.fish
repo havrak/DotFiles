@@ -22,7 +22,7 @@ abbr sshschool 		"ssh dk-301@db.gyarab.cz"
 abbr sshschoolsql "ssh -L 3306:localhost:3306 dk-301@db.gyarab.cz"
 abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
 abbr sshlxd 			"ssh -L 8443:localhost:8443 -L 27017:localhost:27017 havrak.xyz"
-abbr sshfit       "ssh ar_013@fray1.fit.cvut.cz"
+abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
 
 # get error messages from journalctl
 abbr jctl 		"journalctl -p 3 -xb"

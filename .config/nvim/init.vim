@@ -22,8 +22,8 @@ Plug 'tpope/vim-rhubarb'																		" enables GBrowse - opens file in gith
 Plug 'rhysd/git-messenger.vim'															" displays commit message from commit that affected the line (on <leader>gm)
 Plug 'airblade/vim-rooter'																	" work in current git repository
 " Motions
-Plug 'pechorin/any-jump.vim'																" searches for definitions and references across files, better than coc's <leader>gd and ripgrep
 Plug 'easymotion/vim-easymotion'														" enables new ways to move through file
+Plug 'preservim/tagbar' 																		" navigate via chapter, sections, etc. in LaTeX files
 " Syntax highlighting
 Plug 'morhetz/gruvbox'																			" gruvbox color scheme used by vim
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -46,7 +46,6 @@ Plug 'metakirby5/codi.vim'																	" runs code while editing, only works
 Plug 'stevearc/vim-arduino' 																" compiling and uploading programs to arduino
 " Misc
 Plug 'mhinz/vim-startify'																		" gives vim pretty start screen (bye bye Uganda), manages stored vim sessions
-Plug 'liuchengxu/vim-which-key'															" guide for key bindings
 call plug#end()
 
 " Some basics:
@@ -222,12 +221,6 @@ let g:Hexokinase_optInPatterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl'
 let g:Hexokinase_highlighters = ['backgroundfull']
 autocmd BufEnter * HexokinaseTurnOn
 
-" Goyo;
-let g:goyo_width=150
-autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo \| setlocal spell! spelllang=en_us,cs,de \| set breakindent \| set linebreak
-nnoremap <leader>y :Goyo \| set breakindent \| set linebreak <CR>
-
 " Easy Motion
 let g:EasyMotion_do_shade = 0
 map <leader><leader>.  <Plug>(easymotion-repeat)
@@ -250,15 +243,14 @@ command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'optio
 command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case --color=always --smart-case -- '.shellescape(<q-args>), 1,fzf#vim#with_preview(), <bang>0)
 
-" Ranger
-let g:ranger_map_keys=0
-nnoremap <leader>r :Ranger<CR>
-
 " Autoformat
 nnoremap <leader>F :Autoformat<CR>
 
 " Undotree
 nnoremap <leader>u :UndotreeToggle<cr>
+
+" Tabbar
+nnoremap <F8> :TagbarToggle<CR>
 
 " Vimtex
 let g:tex_stylish = 1
@@ -302,22 +294,13 @@ let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
 let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr, pre, script'
 
-nnoremap <leader>wc :CalendarH<CR>
-
 " vim-rooter
 let g:rooter_manual_only = 1
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 
-
-" vim-which-key
-nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
-set timeoutlen=500 " anything less messes with other keybindings
-let g:which_key_use_floating_win = 1
-let g:which_key_sep = '→'
-
 " vim-template
 let g:templates_directory= '/home/havra/.vim/templates'
+let g:templates_no_autocmd = 1
 nnoremap <leader>tl :Template<CR>
 
 " Load external files
