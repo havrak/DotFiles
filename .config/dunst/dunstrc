@@ -1,17 +1,18 @@
 [global]
     monitor = 0
     follow = keyboard
-    geometry = "350x5-15+15"
+		width = (0,300)
+		origin = top-right
+		offset = 6x6
     indicate_hidden = yes
-    shrink = yes
     transparency = 0
     notification_height = 0
-    separator_height = 2
     padding = 0
-    horizontal_padding = 15
+    horizontal_padding = 6
     frame_width = 2
-    frame_color = "#c6c8c5"
+    frame_color = "#ffffd7"
 
+		separator_height = 2
     separator_color = frame
 
     # Sort messages by urgency.
@@ -30,7 +31,7 @@
     ellipsize = middle
     ignore_newline = no
     stack_duplicates = true
-    hide_duplicate_count = true
+    hide_duplicate_count = false
     show_indicators = yes
     icon_position = left
     max_icon_size = 60
@@ -39,13 +40,13 @@
     dmenu = /usr/bin/dmenu -p dunst:
     browser = /usr/bin/firefox -new-tab
 
-    # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
 
     title = Dunst
     class = Dunst
     startup_notification = false
     force_xinerama = false
+
 [experimental]
     per_monitor_dpi = false
 

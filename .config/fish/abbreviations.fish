@@ -27,14 +27,23 @@ abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
 # get error messages from journalctl
 abbr jctl 		"journalctl -p 3 -xb"
 
-# pacman
-abbr p 				"yay"
-abbr po 			"yay -S --overwrite \"*\""
-abbr prm 			"sudo rm -rf /var/cache/pacman/"
-abbr orphans 	"yay -Qqtd"
-abbr pr 			"yay -Rscn"
-abbr pss 			"yay -Slq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -S"
-abbr psr 			"yay -Qeq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -Rscn"
+# package manager
+
+switch (cat /etc/*-release | grep "^ID=" | awk -F '=' '{print $2}')
+	case arch
+		abbr p 				"yay"
+		abbr po 			"yay -S --overwrite \"*\""
+		abbr prm 			"sudo rm -rf /var/cache/pacman/"
+		abbr orphans 	"yay -Qqtd"
+		abbr pr 			"yay -Rscn"
+		abbr pss 			"yay -Slq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -S"
+		abbr psr 			"yay -Qeq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -Rscn"
+	case debian raspbian
+		abbr p 				"sudo apt"
+		abbr pr 			"sudo apt autoremove"
+		abbr pss                        "apt list | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt isntall"
+		abbr psr                        "apt list --installed | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt autoremove"
+end
 
 
 # navigation
