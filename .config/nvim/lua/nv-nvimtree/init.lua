@@ -9,7 +9,6 @@ if not status_ok then
   return
 end
 
-vim.cmd("nnoremap <leader>n :NvimTreeToggle<CR>")
 
 M.config = function()
   local g = vim.g

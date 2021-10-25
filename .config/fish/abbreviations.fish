@@ -1,4 +1,5 @@
 #!/usr/bin/fish
+
 abbr v 				"nvim"
 abbr vim 			"nvim"
 abbr sr 			"sudo ranger"
@@ -6,7 +7,6 @@ abbr r 				"ranger"
 abbr n 				"neomutt"
 abbr sv 			"sudoedit"
 abbr mus 			"ncmpcpp"
-abbr z 				"zathura --fork"
 abbr s 				"sensors"
 abbr yt 			"youtube-dl"
 abbr SS 			"sudo systemctl"
@@ -19,9 +19,7 @@ abbr um 			"udisksctl mount -b /dev/sdb"
 
 # ssh connections and tunnels
 abbr sshschool 		"ssh dk-301@db.gyarab.cz"
-abbr sshschoolsql "ssh -L 3306:localhost:3306 dk-301@db.gyarab.cz"
 abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
-abbr sshlxd 			"ssh -L 8443:localhost:8443 -L 27017:localhost:27017 havrak.xyz"
 abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
 
 # get error messages from journalctl
@@ -41,8 +39,9 @@ switch (cat /etc/*-release | grep "^ID=" | awk -F '=' '{print $2}')
 	case debian raspbian
 		abbr p 				"sudo apt"
 		abbr pr 			"sudo apt autoremove"
-		abbr pss                        "apt list | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt isntall"
-		abbr psr                        "apt list --installed | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt autoremove"
+		abbr pu       "sudo apt update && sudo apt upgrade"
+		abbr pss      "apt list | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt isntall"
+		abbr psr      "apt list --installed | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt autoremove"
 end
 
 
@@ -55,10 +54,12 @@ abbr .5  			"cd ../../../..'"
 abbr .6  			"cd ../../../../.."
 
 # ls -> exa
-alias ls='exa -al --color=always --group-directories-first' # my preferred listing
-alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
+if type -q exa
+	alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+	alias la='exa -a --color=always --group-directories-first'  # all files and dirs
+	alias ll='exa -l --color=always --group-directories-first'  # long format
+	alias lt='exa -aT --color=always --group-directories-first' # tree listing
+end
 
 # git
 abbr g 				"git"

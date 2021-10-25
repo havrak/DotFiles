@@ -23,10 +23,10 @@ super + {Up,Down,Left,Right}
 	{bspc node -z top 0 -20; bspc node -z bottom 0 20,bspc node -z top 0 20; bspc node -z bottom 0 -20,bspc node -z left 20 0; bspc node -z right -20 0,bspc node -z left -20 0; bspc node -z right 20 0}
 
 alt + f
-	bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
+	bspc node focused.fullscreen -t tiled || bspc node focused.tiled -t fullscreen
 
 alt + shift + space
-	bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
+	bspc node focused.floating -t tiled || bspc node focused.tiled -t floating
 
 alt + shift + q
 	bspc node -c

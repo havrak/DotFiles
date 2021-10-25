@@ -4,10 +4,11 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # use bat to color man pages
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+if type -q bat
+	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+end
 
 export default_fish_path="$PATH"
-
 
 set PATH "$default_fish_path" (du --exclude='*git*' $HOME/bin | cut -f2 | tr '\n' ':') "$HOME/.local/share/gem/ruby/3.0.0/bin"  "$HOME/.local/share/gem/ruby/2.7.0/bin"
 set -x READER zathura

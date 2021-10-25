@@ -7,14 +7,13 @@ Plug 'vim-airline/vim-airline-themes'												" themes for airline
 " Files
 Plug 'junegunn/fzf.vim'																			" fuzzy finder integration in vim
 Plug 'rbgrouleff/bclose.vim'																" closes buffer without closing window, same y Q mapping but necessary for ranger plugins
-Plug 'kyazdani42/nvim-web-devicons' 												" for file icons
-Plug 'kyazdani42/nvim-tree.lua' 														" file browser for vim
+Plug 'kyazdani42/nvim-web-devicons'													" for file icons
+Plug 'kyazdani42/nvim-tree.lua'															" file browser for vim
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
 Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
 Plug 'lervag/vimtex'																				" supplies latex support for CoC
-Plug 'mattn/emmet-vim'																			" make writing html much more easier
-Plug 'aperezdc/vim-template'                                " template supprot in vim, since CoC plugin got deprected
+Plug 'aperezdc/vim-template'                                " template support in vim, since CoC plugin got deprected
 " Git
 Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
 Plug 'tpope/vim-fugitive'																		" better integration with git commands
@@ -23,11 +22,10 @@ Plug 'rhysd/git-messenger.vim'															" displays commit message from comm
 Plug 'airblade/vim-rooter'																	" work in current git repository
 " Motions
 Plug 'easymotion/vim-easymotion'														" enables new ways to move through file
-Plug 'preservim/tagbar' 																		" navigate via chapter, sections, etc. in LaTeX files
+Plug 'preservim/tagbar'																			" navigate via sections (usually used in LaTeX)
 " Syntax highlighting
 Plug 'morhetz/gruvbox'																			" gruvbox color scheme used by vim
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'rust-lang/rust.vim'																		" better highlighting for rust lang
+Plug 'nvim-treesitter/nvim-treesitter' 											" complex syntax highlighting engine to replace vim default
 Plug 'kovetskiy/sxhkd-vim'																	" highlighting for sxhkd configuration
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }		" color hex codes will display corresponding color
 Plug 'pangloss/vim-javascript'
@@ -35,17 +33,14 @@ Plug 'pangloss/vim-javascript'
 Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
 " Writing, text editing
 Plug 'tpope/vim-commentary'																	" easy commenting
-Plug 'junegunn/goyo.vim'																		" writing mode that cleans up the vim UI
-Plug 'tpope/vim-repeat'																			" . repeats the wholermap if map is defined with repeat#
 Plug 'mbbill/undotree'																			" complex undo enables moving to already rewritten changes
-Plug 'brooth/far.vim'																				" search and replace across multiple files
+Plug 'brooth/far.vim'																				" find and replace across multiple files
 Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use CoC feature
 Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infuriating
 " Programming
-Plug 'metakirby5/codi.vim'																	" runs code while editing, only works for languages with interactive shell
-Plug 'stevearc/vim-arduino' 																" compiling and uploading programs to arduino
+Plug 'stevearc/vim-arduino'																	" compiling and uploading programs to arduino
 " Misc
-Plug 'mhinz/vim-startify'																		" gives vim pretty start screen (bye bye Uganda), manages stored vim sessions
+Plug 'mhinz/vim-startify'																		" gives vim pretty start screen, manages stored vim sessions
 call plug#end()
 
 " Some basics:
@@ -72,7 +67,6 @@ set foldcolumn=1 "defines 1 col at window left, to indicate folding
 let javascript_fold=1 "activate folding by JS syntax
 let python_fold=1
 set foldlevelstart=1 "start file with all folds opened
-"set nofoldenable
 set incsearch
 set smartindent
 set splitright
@@ -182,20 +176,17 @@ nnoremap	<C-w> <Esc>/<++><Enter>"_c4l
 " Custom commands
 command! Filename execute ":echo expand('%:p')"
 command! Config execute ":e $MYVIMRC"
-command! Reload execute "source ~/.vimrc"
 
 " Special highlighting
-hi DELETE			term=standout guibg=white guifg=red		ctermbg=white ctermfg=red
-hi TODO				term=standout guifg=blue	guibg=white ctermbg=blue	ctermfg=white
-hi NOTE				term=standout guifg=blue	guibg=white ctermbg=green ctermfg=red
-hi NEXT				term=standout guifg=red		guibg=green ctermbg=blue	ctermfg=red
-hi IMPORTANT	term=bold			guibg=red		guifg=white ctermbg=red		ctermfg=white
-hi OPTIONAL		term=bold			guibg=green guifg=white ctermbg=green ctermfg=white
+hi DELETE			term=bold	guibg=#fb4934 guifg=#121212 ctermfg=black ctermbg=red
+hi TODO				term=bold	guibg=#fabd2f	guifg=#121212 ctermfg=black ctermbg=yellow
+hi NOTE				term=bold	guibg=#83a598	guifg=#121212 ctermfg=black ctermbg=blue
+hi IMPORTANT	term=bold	guibg=#fb4934	guifg=#121212 ctermfg=black ctermbg=red
+hi OPTIONAL		term=bold	guibg=#98971a guifg=#121212 ctermfg=black ctermbg=green
+call matchadd('DELETE', 'DELETE')
 call matchadd('TODO','TODO')
 call matchadd('NOTE','NOTE')
-call matchadd('NEXT', 'NEXT')
 call matchadd('IMPORTANT', 'IMPORTANT')
-call matchadd('DELETE', 'DELETE')
 call matchadd('OPTIONAL', 'OPTIONAL')
 
 " Airline
@@ -246,12 +237,6 @@ command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-hea
 " Autoformat
 nnoremap <leader>F :Autoformat<CR>
 
-" Undotree
-nnoremap <leader>u :UndotreeToggle<cr>
-
-" Tabbar
-nnoremap <F8> :TagbarToggle<CR>
-
 " Vimtex
 let g:tex_stylish = 1
 let g:tex_conceal = ''
@@ -301,7 +286,11 @@ let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 " vim-template
 let g:templates_directory= '/home/havra/.vim/templates'
 let g:templates_no_autocmd = 1
-nnoremap <leader>tl :Template<CR>
+
+" Trees
+nnoremap <F6> :TagbarToggle<CR>
+nnoremap <F4> :NvimTreeToggle<CR>
+nnoremap <F5> :UndotreeToggle<cr>
 
 " Load external files
 runtime macros.vim

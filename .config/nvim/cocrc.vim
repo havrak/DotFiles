@@ -1,8 +1,5 @@
-" ------COC SETTINGS------
-" prettier command for coc
 let g:coc_disable_startup_warning = 1
 
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
 			\ 'coc-snippets',
 			\ 'coc-pairs',
@@ -84,9 +81,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
 	autocmd!
-	" Setup formatexpr specified filetype(s).
 	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-	" Update signature help on jump placeholder
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
@@ -108,13 +103,9 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
