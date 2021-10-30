@@ -16,24 +16,20 @@ Plug 'lervag/vimtex'																				" supplies latex support for CoC
 Plug 'aperezdc/vim-template'                                " template support in vim, since CoC plugin got deprected
 " Git
 Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
-Plug 'tpope/vim-fugitive'																		" better integration with git commands
-Plug 'tpope/vim-rhubarb'																		" enables GBrowse - opens file in github
 Plug 'rhysd/git-messenger.vim'															" displays commit message from commit that affected the line (on <leader>gm)
 Plug 'airblade/vim-rooter'																	" work in current git repository
 " Motions
-Plug 'easymotion/vim-easymotion'														" enables new ways to move through file
 Plug 'preservim/tagbar'																			" navigate via sections (usually used in LaTeX)
 " Syntax highlighting
 Plug 'morhetz/gruvbox'																			" gruvbox color scheme used by vim
 Plug 'nvim-treesitter/nvim-treesitter' 											" complex syntax highlighting engine to replace vim default
 Plug 'kovetskiy/sxhkd-vim'																	" highlighting for sxhkd configuration
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }		" color hex codes will display corresponding color
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'  														" better folding for JavaScript
 " Note taking
 Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
 " Writing, text editing
 Plug 'tpope/vim-commentary'																	" easy commenting
-Plug 'mbbill/undotree'																			" complex undo enables moving to already rewritten changes
 Plug 'brooth/far.vim'																				" find and replace across multiple files
 Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use CoC feature
 Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infuriating
@@ -66,12 +62,12 @@ set foldmethod=syntax "syntax highlighting items specify folds
 set foldcolumn=1 "defines 1 col at window left, to indicate folding
 let javascript_fold=1 "activate folding by JS syntax
 let python_fold=1
-set foldlevelstart=1 "start file with all folds opened
 set incsearch
 set smartindent
 set splitright
 set splitbelow
 set undofile
+set shortmess+=c
 set undodir="~/.vim/undo/"
 set mouse=a
 let g:python3_host_prog='/usr/bin/python'
@@ -111,31 +107,25 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 noremap <leader>o :setlocal spell! spelllang=en_us,cs,de <CR>
 
 " Shortcutting split navigation, saving a keypress:
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 nnoremap <C-Left> <C-w>h
 nnoremap <C-Down> <C-w>j
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Right> <C-w>l
 
-nnoremap <C-s>h :vertical resize -5<CR>
-nnoremap <C-s>j :resize -5<CR>
-nnoremap <C-s>k :resize +5<CR>
-nnoremap <C-s>l :vertical resize +5<CR>
+nnoremap <C-h> :vertical resize -5<CR>
+nnoremap <C-j> :resize -5<CR>
+nnoremap <C-k> :resize +5<CR>
+nnoremap <C-l> :vertical resize +5<CR>
 
 " Make buffers more practical
 nnoremap gt :bnext<CR>
-nnoremap gb :edit #<CR>
-nnoremap gn :enew \| Startify <CR>
 nnoremap Q :w\|Bclose<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Replace all is aliased to S.
 nnoremap S :%s///g<Left><Left>
-xnoremap S :%s///g<Left><Left>
+xnoremap S :'<,'>%s///g<Left><Left>
 
 " Compile document
 nnoremap <leader>c :w! \| !compiler <c-r>%<CR>
@@ -152,9 +142,8 @@ autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Copy selected text to system clipboard
-noremap <C-c> "*y :let @+=@*<CR>
-noremap <C-x> "*x :let @+=@*<CR>
-noremap <C-p> "+P
+noremap y "*y :let @+=@*<CR>
+noremap x "*x :let @+=@*<CR>
 noremap p "+P
 
 " Easy CAPS
@@ -172,10 +161,6 @@ autocmd BufWritePost ~/.config/fish/config.fish,~/.config/fish/abbreviations.fis
 inoremap	<C-w> <Esc>/<++><Enter>"_c4l
 vnoremap	<C-w> <Esc>/<++><Enter>"_c4l
 nnoremap	<C-w> <Esc>/<++><Enter>"_c4l
-
-" Custom commands
-command! Filename execute ":echo expand('%:p')"
-command! Config execute ":e $MYVIMRC"
 
 " Special highlighting
 hi DELETE			term=bold	guibg=#fb4934 guifg=#121212 ctermfg=black ctermbg=red
@@ -212,27 +197,16 @@ let g:Hexokinase_optInPatterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl'
 let g:Hexokinase_highlighters = ['backgroundfull']
 autocmd BufEnter * HexokinaseTurnOn
 
-" Easy Motion
-let g:EasyMotion_do_shade = 0
-map <leader><leader>.  <Plug>(easymotion-repeat)
-nmap <leader><leader>f <Plug>(easymotion-overwin-f)
-nmap <leader><leader>j <Plug>(easymotion-overwin-line)
-nmap <leader><leader>k <Plug>(easymotion-overwin-line)
-nmap <leader><leader>w <Plug>(easymotion-overwin-w)
-
 " FzF
 nnoremap <c-g> :GFiles<CR>
 nnoremap <c-z> :Files<CR>
-nnoremap ?? :Rg<CR>
 nnoremap // :BLines<CR>
-nnoremap cc :Commands<CR>
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.9,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 command! FileHistory execute ":BCommits!"
 
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
-command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case --color=always --smart-case -- '.shellescape(<q-args>), 1,fzf#vim#with_preview(), <bang>0)
 
 " Autoformat
 nnoremap <leader>F :Autoformat<CR>
@@ -249,21 +223,8 @@ let g:vimtex_fold_types = {
 			\ 'sections' : {'parse_levels': 1},
 			\}
 let g:vimtex_format_enabled = 1
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_view_automatic = 0
-let g:vimtex_view_forward_search_on_start = 0
-let g:vimtex_toc_config = {
-			\ 'split_pos' : 'full',
-			\ 'mode' : 2,
-			\ 'fold_enable' : 1,
-			\ 'hotkeys_enabled' : 1,
-			\ 'hotkeys_leader' : '',
-			\ 'refresh_always' : 0,
-			\}
 let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_quickfix_autoclose_after_keystrokes = 3
-let g:vimtex_imaps_enabled = 1
-let g:vimtex_complete_img_use_tail = 1
 let g:vimtex_complete_bib = {
 			\ 'simple' : 1,
 			\ 'menu_fmt' : '@year, @author_short, @title',
@@ -280,17 +241,16 @@ let g:vimwiki_conceallevel = 2
 let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr, pre, script'
 
 " vim-rooter
-let g:rooter_manual_only = 1
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 
 " vim-template
 let g:templates_directory= '/home/havra/.vim/templates'
-let g:templates_no_autocmd = 1
+let g:templates_no_autocmd = 0
+nnoremap <F1> :Template<CR>
 
 " Trees
 nnoremap <F6> :TagbarToggle<CR>
 nnoremap <F4> :NvimTreeToggle<CR>
-nnoremap <F5> :UndotreeToggle<cr>
 
 " Load external files
 runtime macros.vim

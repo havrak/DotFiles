@@ -6,6 +6,7 @@ autocmd FileType tex inoremap ,tab \begin{figure}[h]<Enter>\centering<Enter>\beg
 autocmd FileType tex inoremap ,ls \begin{figure}[h]<Enter>\centering<Enter>\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter>\end{minted}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Enter><Esc>5k$i
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
 autocmd FileType tex inoremap ,la $\Leftarrow$<space>
+autocmd FileType tex inoremap ,x  $\times$<space>
 autocmd FileType tex inoremap ,nu $\varnothing$
 autocmd FileType tex inoremap ,em \emph{} <++><Esc>T{i
 autocmd FileType tex inoremap ,bf \textbf{} <++><Esc>T{i
@@ -17,7 +18,6 @@ autocmd FileType tex inoremap ,it \textit{} <++><Esc>T{i
 autocmd FileType tex inoremap ,ct \textcite{} <++><Esc>T{i
 autocmd FileType tex inoremap ,ci \fullbibentry{} <++><Esc>T{i
 autocmd FileType tex inoremap ,cf \footnote{c.<space>d.<space>\cite{<++>}:<space><++>}
-autocmd FileType tex inoremap ,x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
 autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
 autocmd FileType tex inoremap ,ll \begin{enumerate}[label=\alph*)]<Enter><Enter>\end{enumerate}<Esc>kA\item<Space>
 autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Esc>kA\item<Space>

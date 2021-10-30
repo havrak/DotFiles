@@ -842,10 +842,12 @@
     "černofigurový",
     "červenofigurový",
     "Římsů",
+    "říšskoněmeckého",
     "Šašiech",
     "Šhárie",
     "Šlejhar",
     "Šůdrové",
     "životopisectví"
-  ]
+  ],
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
 }

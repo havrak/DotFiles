@@ -104,12 +104,6 @@ date =  %d.%m.
 time =  %H:%M
 label = %time% %date%
 
-[module/torrents]
-type = custom/script
-exec = polybarTorrents
-interval = 10
-label = %output%
-
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
@@ -117,13 +111,6 @@ blacklist-1 = scroll lock
 blacklist-2 = caps lock
 format = <label-layout>
 label-layout =  %layout%
-
-[module/temperature]
-type = internal/temperature
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input
-warn-temperature = 60
-label = 﨎 %temperature-c%
-label-warn = !﨎 %temperature-c%
 
 [module/volume]
 type = internal/pulseaudio

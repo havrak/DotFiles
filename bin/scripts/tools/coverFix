@@ -3,7 +3,7 @@
 #echo $PWD
 
 music=$(find "$PWD" -name "*.flac")
-music=$music $(find "$PWD" -name "*.mp3")
+music="$music $(find "$PWD" -name "*.mp3")"
 
 #echo $music
 
@@ -19,7 +19,9 @@ do
 		metaflac --remove --block-type=PICTURE $track
 		metaflac --import-picture-from=$image_name $track
 	else
-		ffmpeg -y -i $track -i $image_name -c:a copy -c:v copy -map 0:0 -map 1:0 -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" $track
+		fmpeg -ic $track -write_xing 0 -id3v2_version 0 "$track
+		ffmpeg -y -i $track -i $image_name -c:a copy -c:v copy -map 0:0 -map 1:0 -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "$track bac.mp3"
+		mv "$track bac.mp3" $track
 	fi
 	rm $image_name
 done

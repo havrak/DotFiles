@@ -17,6 +17,8 @@ abbr pipu     "pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -
 abbr un 			"udisksctl unmount -b /dev/sdb"
 abbr um 			"udisksctl mount -b /dev/sdb"
 
+alias cmake "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+
 # ssh connections and tunnels
 abbr sshschool 		"ssh dk-301@db.gyarab.cz"
 abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
@@ -40,7 +42,7 @@ switch (cat /etc/*-release | grep "^ID=" | awk -F '=' '{print $2}')
 		abbr p 				"sudo apt"
 		abbr pr 			"sudo apt autoremove"
 		abbr pu       "sudo apt update && sudo apt upgrade"
-		abbr pss      "apt list | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt isntall"
+		abbr pss      "apt list | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt install"
 		abbr psr      "apt list --installed | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt autoremove"
 end
 
@@ -53,6 +55,7 @@ abbr .4  			"cd ../../.."
 abbr .5  			"cd ../../../..'"
 abbr .6  			"cd ../../../../.."
 
+abbr uas "rsync -vrh --info=progress2  --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' /home/havra/prog/uav project/drone software/  pi@192.168.6.1:~/drone_software --delete"
 # ls -> exa
 if type -q exa
 	alias ls='exa -al --color=always --group-directories-first' # my preferred listing
