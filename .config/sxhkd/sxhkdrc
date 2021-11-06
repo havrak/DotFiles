@@ -50,8 +50,8 @@ super + {F1,F2,F3,F9}
 alt + ctrl + t
 	st
 
-alt + ctrl + {n,r,g,w,v,o,p}
-	st -e {neomutt,ranger,tremc,nmtui,nvim,htop,python}
+alt + ctrl + {n,r,w,v,p}
+	st -e {neomutt,ranger,nmtui,nvim,htop}
 
 alt + ctrl + m
 	launchncmpcpp
@@ -117,5 +117,5 @@ alt + shift + {bracketleft,bracketright}
 	mpc volume {0,100}
 
 # Launch programms
-super + {f,n,p,e,c,l,v,b,u,z,q,g,s}
-	startAndNotify {firefox,netbeans,pavucontrol,picard,calibre,libreoffice,,virt-manager,binance,putty,filezilla,simplescreenrecorder,github-desktop,spotify}
+super + {f,n,p,e,c,s}
+	startAndNotify {firefox,netbeans,pavucontrol,picard,calibre,spotify}

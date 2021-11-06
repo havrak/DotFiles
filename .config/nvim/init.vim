@@ -92,6 +92,10 @@ set wildignore+=*.tmp,*.swp
 " Vertically center document when entering insert mode
 autocmd InsertEnter * norm zz
 
+" setting up varialbes to be used in templates
+let g:email="krystof@havrak.xyz"
+let g:username="Havránek Kryštof"
+
 " Fix indenting visual block
 vmap < <gv
 vmap > >gv
@@ -182,10 +186,6 @@ let g:airline_right_sep = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#fnametruncate = 30
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|markdown.pandoc|org|rst|tex|text|wiki'
 let g:airline#extensions#wordcount#enabled = 1
@@ -203,8 +203,8 @@ nnoremap <c-z> :Files<CR>
 nnoremap // :BLines<CR>
 let g:fzf_preview_window = 'right:50%'
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.9,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
-command! FileHistory execute ":BCommits!"
 
+command! FileHistory execute ":BCommits!"
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 
@@ -217,19 +217,12 @@ let g:tex_conceal = ''
 let g:tex_flavor = 'latex'
 let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 
+let g:vimtex_format_enabled = 1
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = {
 			\ 'markers' : {'enabled': 0},
 			\ 'sections' : {'parse_levels': 1},
 			\}
-let g:vimtex_format_enabled = 1
-let g:vimtex_quickfix_open_on_warning = 0
-let g:vimtex_quickfix_autoclose_after_keystrokes = 3
-let g:vimtex_complete_bib = {
-			\ 'simple' : 1,
-			\ 'menu_fmt' : '@year, @author_short, @title',
-			\}
-let g:vimtex_echo_verbose_input = 0
 
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,
@@ -246,7 +239,6 @@ let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 " vim-template
 let g:templates_directory= '/home/havra/.vim/templates'
 let g:templates_no_autocmd = 0
-nnoremap <F1> :Template<CR>
 
 " Trees
 nnoremap <F6> :TagbarToggle<CR>

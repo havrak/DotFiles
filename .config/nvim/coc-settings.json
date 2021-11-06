@@ -46,6 +46,9 @@
     "python",
     "php",
     "plaintext",
+    "cpp",
+    "h",
+    "c",
     "tex",
     "vimwiki"
   ],
