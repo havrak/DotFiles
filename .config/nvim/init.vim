@@ -41,7 +41,7 @@ call plug#end()
 
 " Some basics:
 set nocompatible
-filetype plugin on
+filetype plugin indent on
 syntax on
 set tabstop=2 shiftwidth=2 smarttab
 set encoding=utf-8
@@ -212,10 +212,12 @@ command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'o
 nnoremap <leader>F :Autoformat<CR>
 
 " Vimtex
+let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
 let g:tex_conceal = ''
-let g:tex_flavor = 'latex'
 let g:tex_isk='48-57,a-z,A-Z,192-255,:'
+let g:vimtex_indent_enabled = 1
+let g:vimtex_indent_bib_enabled = 1
 
 let g:vimtex_format_enabled = 1
 let g:vimtex_fold_enabled = 1

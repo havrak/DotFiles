@@ -4,19 +4,18 @@ autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\centering<Enter>\incl
 autocmd FileType tex inoremap ,ff \frame{<Enter>\begin{figure}[!htb]<Enter>\begin{minipage}{0.4\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}\hfill<Enter>\begin{minipage}{0.4\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{<++>}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}<Enter>\end{figure}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>}<Esc>11k$i
 autocmd FileType tex inoremap ,tab \begin{figure}[h]<Enter>\centering<Enter>\begin{center}<Enter>\begin{longtable}{\| m{4cm} \| m{4cm} \| m{4cm} \| }<Enter>\hline<Enter>\hline<Enter>\end{longtable}<Enter>\end{center}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>2ki
 autocmd FileType tex inoremap ,ls \begin{figure}[h]<Enter>\centering<Enter>\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter>\end{minted}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Enter><Esc>5k$i
-autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
-autocmd FileType tex inoremap ,la $\Leftarrow$<space>
-autocmd FileType tex inoremap ,x  $\times$<space>
+autocmd FileType tex inoremap ,ra $\Rightarrow$ <space>
+autocmd FileType tex inoremap ,la $\Leftarrow$ <space>
 autocmd FileType tex inoremap ,nu $\varnothing$
-autocmd FileType tex inoremap ,em \emph{} <++><Esc>T{i
-autocmd FileType tex inoremap ,bf \textbf{} <++><Esc>T{i
-autocmd FileType tex inoremap ,uv \uv{} <++><Esc>T{i
-autocmd FileType tex inoremap ,fn \footnote{} <++><Esc>T{i
-autocmd FileType tex inoremap ,fm \footnotemark <++>
-autocmd FileType tex inoremap ,ft \footnotetext{} <++><Esc>T{i
-autocmd FileType tex inoremap ,it \textit{} <++><Esc>T{i
-autocmd FileType tex inoremap ,ct \textcite{} <++><Esc>T{i
-autocmd FileType tex inoremap ,ci \fullbibentry{} <++><Esc>T{i
+autocmd FileType tex inoremap ,em \emph{}<Esc>T{i
+autocmd FileType tex inoremap ,bf \textbf{}<Esc>T{i
+autocmd FileType tex inoremap ,uv \uv{}<Esc>T{i
+autocmd FileType tex inoremap ,fn \footnote{}<Esc>T{i
+autocmd FileType tex inoremap ,fm \footnotemark
+autocmd FileType tex inoremap ,ft \footnotetext{} <Esc>T{i
+autocmd FileType tex inoremap ,it \textit{}<Esc>T{i
+autocmd FileType tex inoremap ,ct \textcite{}<Esc>T{i
+autocmd FileType tex inoremap ,ci \fullbibentry{}<Esc>T{i
 autocmd FileType tex inoremap ,cf \footnote{c.<space>d.<space>\cite{<++>}:<space><++>}
 autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
 autocmd FileType tex inoremap ,ll \begin{enumerate}[label=\alph*)]<Enter><Enter>\end{enumerate}<Esc>kA\item<Space>

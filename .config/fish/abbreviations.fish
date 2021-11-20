@@ -14,6 +14,7 @@ abbr pyserver "python3 -m http.server"
 abbr cp 			"cp -i"
 abbr mv 			"mv -i"
 abbr pipu     "pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+abbr spipu    "sudo pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U"
 abbr un 			"udisksctl unmount -b /dev/sdb"
 abbr um 			"udisksctl mount -b /dev/sdb"
 
@@ -55,13 +56,18 @@ abbr .4  			"cd ../../.."
 abbr .5  			"cd ../../../..'"
 abbr .6  			"cd ../../../../.."
 
-abbr uas "rsync -vrh --info=progress2  --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' /home/havra/prog/uav project/drone software/  pi@192.168.6.1:~/drone_software --delete"
+abbr uas "rsync -vrh --info=progress2  --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' /home/havra/prog/uav project/drone software/  pi@192.168.6.1:~/drone_software --delete"
 # ls -> exa
 if type -q exa
 	alias ls='exa -al --color=always --group-directories-first' # my preferred listing
 	alias la='exa -a --color=always --group-directories-first'  # all files and dirs
 	alias ll='exa -l --color=always --group-directories-first'  # long format
 	alias lt='exa -aT --color=always --group-directories-first' # tree listing
+else
+	alias ls='ls --group-directories-first --color=auto -al'
+	alias la='ls --group-directories-first --color=auto -a'
+	alias ll='ls --group-directories-first --color=auto -l'
+	alias lt='ls --group-directories-first --color=auto -aT'
 end
 
 # git

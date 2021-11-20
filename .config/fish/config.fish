@@ -46,13 +46,6 @@ function fish_user_key_bindings
 	fzf_key_bindings
 end
 
-bind \cg fzf-file-edit
-
-if bind -M insert > /dev/null 2>&1
-	bind -M insert \cg fzf-file-edit
-end
-
-
 # starts ssh agent on loggin into tty
 source "$HOME/.config/fish/abbreviations.fish"
 source "$HOME/.config/fish/startssh.fish"
