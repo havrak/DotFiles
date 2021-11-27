@@ -8,6 +8,10 @@ if type -q bat
 	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 end
 
+# while using fish over ssh shift+Left/Right don't work by default
+bind "[1;2D" backward-bigword
+bind "[1;2C" forward-bigword
+
 export default_fish_path="$PATH"
 
 set PATH "$default_fish_path" (du --exclude='*git*' $HOME/bin | cut -f2 | tr '\n' ':') "$HOME/.local/share/gem/ruby/3.0.0/bin"  "$HOME/.local/share/gem/ruby/2.7.0/bin"

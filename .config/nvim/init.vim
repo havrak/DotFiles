@@ -1,14 +1,14 @@
 let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
-" Airline
+" Statuslines
 Plug 'bling/vim-airline'																		" feature packed status line
-Plug 'vim-airline/vim-airline-themes'												" themes for airline
+" Plug 'romgrk/barbar.nvim'																		" bufferbar, enables switching buffer order
 " Files
 Plug 'junegunn/fzf.vim'																			" fuzzy finder integration in vim
-Plug 'rbgrouleff/bclose.vim'																" closes buffer without closing window, same y Q mapping but necessary for ranger plugins
 Plug 'kyazdani42/nvim-web-devicons'													" for file icons
 Plug 'kyazdani42/nvim-tree.lua'															" file browser for vim
+Plug 'rbgrouleff/bclose.vim'																" close buffer
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
 Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
@@ -22,10 +22,10 @@ Plug 'airblade/vim-rooter'																	" work in current git repository
 Plug 'preservim/tagbar'																			" navigate via sections (usually used in LaTeX)
 " Syntax highlighting
 Plug 'morhetz/gruvbox'																			" gruvbox color scheme used by vim
-Plug 'nvim-treesitter/nvim-treesitter' 											" complex syntax highlighting engine to replace vim default
+Plug 'nvim-treesitter/nvim-treesitter'											" complex syntax highlighting engine to replace vim default
 Plug 'kovetskiy/sxhkd-vim'																	" highlighting for sxhkd configuration
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }		" color hex codes will display corresponding color
-Plug 'pangloss/vim-javascript'  														" better folding for JavaScript
+Plug 'pangloss/vim-javascript'															" better folding for JavaScript
 " Note taking
 Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
 " Writing, text editing
@@ -58,6 +58,7 @@ set linebreak
 set breakindent
 set hidden
 set autoindent
+set smartindent
 set foldmethod=syntax "syntax highlighting items specify folds
 set foldcolumn=1 "defines 1 col at window left, to indicate folding
 let javascript_fold=1 "activate folding by JS syntax
@@ -99,6 +100,8 @@ let g:username="Havránek Kryštof"
 " Fix indenting visual block
 vmap < <gv
 vmap > >gv
+vmap ? <gv
+vmap : >gv
 
 " Bindings to get to cmdline
 nnoremap ; :
@@ -111,7 +114,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 noremap <leader>o :setlocal spell! spelllang=en_us,cs,de <CR>
 
 " Shortcutting split navigation, saving a keypress:
-
 nnoremap <C-Left> <C-w>h
 nnoremap <C-Down> <C-w>j
 nnoremap <C-Up> <C-w>k
@@ -124,12 +126,13 @@ nnoremap <C-l> :vertical resize +5<CR>
 
 " Make buffers more practical
 nnoremap gt :bnext<CR>
-nnoremap Q :w\|Bclose<CR>
+nnoremap gT :bprevious<CR>
+nnoremap Q	:w\|Bclose<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Replace all is aliased to S.
 nnoremap S :%s///g<Left><Left>
-xnoremap S :'<,'>%s///g<Left><Left>
+xnoremap S :%s///g<Left><Left>
 
 " Compile document
 nnoremap <leader>c :w! \| !compiler <c-r>%<CR>
@@ -163,8 +166,8 @@ autocmd BufWritePost ~/.config/fish/config.fish,~/.config/fish/abbreviations.fis
 
 " Navigating with guides
 inoremap	<C-w> <Esc>/<++><Enter>"_c4l
-vnoremap	<C-w> <Esc>/<++><Enter>"_c4l
 nnoremap	<C-w> <Esc>/<++><Enter>"_c4l
+vnoremap	<C-w> <Esc>/<++><Enter>"_c4l
 
 " Special highlighting
 hi DELETE			term=bold	guibg=#fb4934 guifg=#121212 ctermfg=black ctermbg=red
@@ -187,9 +190,21 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#fnametruncate = 30
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|markdown.pandoc|org|rst|tex|text|wiki'
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#whitespace#enabled= 0
+
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>0 <Plug>AirlineSelectTab0
 
 " Vim Hexokinase
 let g:Hexokinase_refreshEvents = ['InsertLeave']
@@ -216,24 +231,18 @@ let g:tex_flavor = 'latex'
 let g:tex_stylish = 1
 let g:tex_conceal = ''
 let g:tex_isk='48-57,a-z,A-Z,192-255,:'
-let g:vimtex_indent_enabled = 1
+let g:vimtex_indent_enabled = 0
 let g:vimtex_indent_bib_enabled = 1
 
 let g:vimtex_format_enabled = 1
 let g:vimtex_fold_enabled = 1
-let g:vimtex_fold_types = {
-			\ 'markers' : {'enabled': 0},
-			\ 'sections' : {'parse_levels': 1},
-			\}
+let g:vimtex_fold_types = { 'markers' : {'enabled': 0}, 'sections' : {'parse_levels': 1},}
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,
-			\ 'template_path': '~/.vim/vimwiki/templates',
-			\ 'template_default': 'def_template',
-			\ 'template_ext': '.html'}]
+let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,'template_path': '~/.vim/vimwiki/templates','template_default': 'def_template', 'template_ext': '.html'}]
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
-let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr, pre, script'
+let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,pre,script'
 
 " vim-rooter
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']

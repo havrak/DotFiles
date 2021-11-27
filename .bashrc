@@ -42,34 +42,35 @@ alias SS="sudo systemctl"
 alias pyserver="python3 -m http.server"
 alias cp="cp -i"
 alias mv="mv -i"
-alias tmuxn='tmux new-session -s $$'
 
 alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
-
 alias jctl="journalctl -p 3 -xb"
 
+# mount devices/android
+alias ud="udisksctl unmount -b /dev/sdb"
+alias md="udisksctl mount -b /dev/sdb"
+alias ma="aft-mtp-mount ~/tmp/android/"
+alias ua="sudo umount ~/tmp/android --lazy"
+
 # package manager
-# file /etc/*-release does not exist on SunOS
-if [ $(uname -a | awk '{print $1}') != "SunOS" ] ; then
-	case $(cat /etc/*-release | grep "^ID=" | awk -F '=' '{print $2}') in
-		arch)
-			alias p="yay"
-			alias po="yay -S --overwrite \"*\""
-			alias prm="sudo rm -rf /var/cache/pacman/"
-			alias orphans="yay -Qqtd"
-			alias pr="yay -Rscn"
-			alias pss="yay -Slq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -S"
-			alias psr="yay -Qeq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -Rscn"
-			;;
-		debian | raspbian)
-			alias p="sudo apt"
-			alias pr="sudo apt autoremove"
-			alias pu="sudo apt update && sudo apt upgrade"
-			alias pss="apt list | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt install"
-			alias psr="apt list --installed | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt autoremove"
-			;;
-	esac
-fi
+case $(cat /etc/*-release 2>/dev/null | grep "^ID=" | awk -F '=' '{print $2}' 2>/dev/null) in
+	arch)
+		alias p="yay"
+		alias po="yay -S --overwrite \"*\""
+		alias prm="sudo rm -rf /var/cache/pacman/"
+		alias orphans="yay -Qqtd"
+		alias pr="yay -Rscn"
+		alias pss="yay -Slq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -S"
+		alias psr="yay -Qeq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -Rscn"
+		;;
+	debian | raspbian)
+		alias p="sudo apt"
+		alias pr="sudo apt autoremove"
+		alias pu="sudo apt update && sudo apt upgrade"
+		alias pss="apt list | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt install"
+		alias psr="apt list --installed | awk -F \"/\" '{print \$1}' | tail -n +2 | fzf -m --preview 'apt show {1}' --preview-window=wrap | xargs -ro sudo apt autoremove"
+		;;
+esac
 
 alias pipu="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias spipu="sudo pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 sudo pip install -U"

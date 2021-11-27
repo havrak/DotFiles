@@ -12,24 +12,21 @@ autocmd FileType tex inoremap ,bf \textbf{}<Esc>T{i
 autocmd FileType tex inoremap ,uv \uv{}<Esc>T{i
 autocmd FileType tex inoremap ,fn \footnote{}<Esc>T{i
 autocmd FileType tex inoremap ,fm \footnotemark
-autocmd FileType tex inoremap ,ft \footnotetext{} <Esc>T{i
+autocmd FileType tex inoremap ,ft \footnotetext{}<Esc>T{i
 autocmd FileType tex inoremap ,it \textit{}<Esc>T{i
 autocmd FileType tex inoremap ,ct \textcite{}<Esc>T{i
 autocmd FileType tex inoremap ,ci \fullbibentry{}<Esc>T{i
-autocmd FileType tex inoremap ,cf \footnote{c.<space>d.<space>\cite{<++>}:<space><++>}
-autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap ,ll \begin{enumerate}[label=\alph*)]<Enter><Enter>\end{enumerate}<Esc>kA\item<Space>
+autocmd FileType tex inoremap ,cf \footnote{Ibid.<space>\cite{<++>}:<space><++>}
 autocmd FileType tex inoremap ,ul \begin{itemize}<Enter><Enter>\end{itemize}<Esc>kA\item<Space>
+autocmd FileType tex inoremap ,ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Esc>kA\item<Space>
+autocmd FileType tex inoremap ,ll \begin{enumerate}[label=\alph*)]<Enter><Enter>\end{enumerate}<Esc>kA\item<Space>
 autocmd FileType tex inoremap ,li <ESC>o\item<Space>
-autocmd FileType tex inoremap ,ref \ref{}<Space><++><Esc>T{i
-autocmd FileType tex inoremap ,con \const{}<Tab><++><Esc>T{i
+autocmd FileType tex inoremap ,ref \ref{}<Esc>T{i
+autocmd FileType tex inoremap ,con \const{}<Esc>T{i
 autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ,up <Esc>/usepackage<Enter>o\usepackage{}<Esc>i
-autocmd FileType tex nnoremap ,up /usepackage<Enter>o\usepackage{}<Esc>i
-autocmd FileType tex inoremap ,tt \texttt{}<Space><++><Esc>T{i
 autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
 autocmd FileType tex inoremap ,h \vspace{0.3cm}<Enter>\noindent<Enter>\textbf{\large }<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,, \
