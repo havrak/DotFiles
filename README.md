@@ -11,12 +11,11 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 + dmenu
 + mpd
 + ncmpcpp
-+ vlc
 + ranger
 + zathura
 + sxiv
 + dunst
-+ firefox - bookmarks, sideberry, channel blocker, addons, css (small changes necessary for vertical tabs), mozilla.cfg (privacy features, pretty sure it breaks google login)
++ firefox - bookmarks, sideberry, channel blocker, addons, css (small changes necessary for vertical tabs), mozilla.cfg
 + Xresources
 + mpv
 + youtube-dl
@@ -31,8 +30,8 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 |--------------------------|---------------------------------------------|---------------------------------|
 | abook                    | address book for neomutt                    |                                 |
 | acpi                     | get information whether battery is charging |                                 |
-| arandr                   | gui screen adjusment                        |                                 |
-| bat                      | cat with syntax highlightning               |                                 |
+| arandr                   | gui screen adjustment                       |                                 |
+| bat                      | cat with syntax highlighting                |                                 |
 | brave-bin                | used as secondary browser                   |                                 |
 | bsp-layout               | provides more layouts for bspwm             |                                 |
 | bspwm                    | my window manager of choice                 |                                 |
@@ -42,7 +41,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | dunst                    | notifications                               |                                 |
 | firefox                  | my browser of choice                        |                                 |
 | find                     | searches for files                          |                                 |
-| fd                       | simmilar to find, but faster                |                                 |
+| fd                       | similar to find, but faster                 |                                 |
 | fish                     | my shell of choice                          |                                 |
 | fzf                      | fuzzy finder used in ranger and shell       |                                 |
 | git                      | vcs system                                  |                                 |
@@ -54,10 +53,11 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | libnotify                | enables notify-send command                 |                                 |
 | libva-intel-driver       | intel driver                                |                                 |
 | libxft-bgra-git          | emojis in st                                |                                 |
+| texlive-latexindent-meta | indenting for LaTeX files                   |                                 |
 | light                    | adjust screen brightness                    |                                 |
 | lynx                     | html mails in neomutt                       |                                 |
-| mpc                      | controls form mpd deamon                    |                                 |
-| mpd                      | music deamon                                |                                 |
+| mpc                      | controls form mpd daemon                    |                                 |
+| mpd                      | music daemon                                |                                 |
 | mpv                      | media player                                |                                 |
 | mutt-wizzard-git         | sets up neomutt                             |                                 |
 | ncmpcpp                  | terminal frontend for mpd                   |                                 |
@@ -77,12 +77,12 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | shadowfox-updater        | install dark css for firefox                |                                 |
 | simple-mtpfs             | mounting android phones                     |                                 |
 | st                       | terminal                                    | https://github.com/havrak/st    |
-| stubby                   | DNS deamon                                  |                                 |
-| sxhkd                    | key deamon for bspwm                        |                                 |
+| stubby                   | DNS daemon                                  |                                 |
+| sxhkd                    | key daemon for bspwm                        |                                 |
 | sxiv                     | image viewer                                |                                 |
-| tlp                      | battery managment                           |                                 |
+| tlp                      | battery management                          |                                 |
 | tlpui-git                | gui for tlp                                 |                                 |
-| transmission-cli         | transmission deamon                         |                                 |
+| transmission-cli         | transmission daemon                         |                                 |
 | tremc                    | transmission frontend                       |                                 |
 | udisck2                  | better mounting                             |                                 |
 | ueberzug                 | images in terminal                          | available via pip               |
@@ -115,9 +115,9 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 |---------------------|------------------------------------------------------------------------------------------------------------|
 | Cookie AutoDelete   | deletes cookies after user leaves the site                                                                 |
 | h264ify             | using 4. get intel procesor, no hardware support for x265 or VP9                                           |
-| Sidebery            | tab+bookmark bar on the right side of screen                                                               |
-| Stylus              | custom css for some sites                                                                                  |
-| Tridactyl           | vim like control in browser                                                                                |
+| Sidebery            | sidebar with tabs and book                                                                                 |
 | uBlock Origin       | blocks adds                                                                                                |
-| Violentmonkey       | Custom JS Scripts -- 4ChanX, OneeChan, ResizeYoutubePlayerToWindowSize, Absolute Enable Right Click & Copy |
+| Violentmonkey       | Custom JS Scripts -- ResizeYoutubePlayerToWindowSize                                                       |
 | Channel Blocker     | best way to hide/block YT channels                                                                         |
+| Translate Web Pages | google transalte integration into browser                                                                  |
+| Universal Bypass    | skips sites like ad.fly                                                                                    |

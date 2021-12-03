@@ -225,16 +225,13 @@ command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'o
 
 " Autoformat
 nnoremap <leader>F :Autoformat<CR>
+let g:formatdef_latexindent = '"latexindent --local=$HOME/.config/latexindent/config.yaml -"'
 
 " Vimtex
 let g:tex_flavor = 'latex'
-let g:tex_stylish = 1
-let g:tex_conceal = ''
-let g:tex_isk='48-57,a-z,A-Z,192-255,:'
 let g:vimtex_indent_enabled = 0
-let g:vimtex_indent_bib_enabled = 1
+let g:vimtex_indent_bib_enabled = 0
 
-let g:vimtex_format_enabled = 1
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = { 'markers' : {'enabled': 0}, 'sections' : {'parse_levels': 1},}
 

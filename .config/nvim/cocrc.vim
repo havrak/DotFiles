@@ -3,7 +3,6 @@ let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
 			\ 'coc-snippets',
 			\ 'coc-pairs',
-			\ 'coc-prettier',
 			\ 'coc-tsserver',
 			\ 'coc-html',
 			\ 'coc-css',
@@ -13,7 +12,6 @@ let g:coc_global_extensions = [
 			\ 'coc-spell-checker',
 			\ 'coc-cspell-dicts',
 			\ 'coc-sh',
-			\ 'coc-yaml',
 			\ 'coc-clangd',
 			\ 'coc-cmake',
 			\ ]
@@ -62,7 +60,6 @@ nmap <F2> <Plug>(coc-rename)
 
 
 command! -nargs=0 Format 			:call CocAction('format')
-command! -nargs=0 Prettier 		:CocCommand prettier.formatFile
 command! -nargs=? Fold 				:call CocAction('fold', <f-args>)
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
