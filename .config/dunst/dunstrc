@@ -1,13 +1,13 @@
 [global]
     monitor = 0
-    follow = keyboard
+    follow = mouse
 		width = (0,300)
 		origin = top-right
 		offset = 6x6
     indicate_hidden = yes
-    transparency = 0
-    notification_height = 0
-    padding = -1
+
+		transparency = 0
+    padding = 0
     horizontal_padding = 4
     frame_width = 2
     frame_color = "#ffffd7"
@@ -23,7 +23,7 @@
     line_height = 0
     markup = full
 
-    format = "%s\n%b"
+		format = "<b>%s</b>\n%b"
 
     alignment = left
     show_age_threshold = 60
@@ -44,17 +44,10 @@
 
     title = Dunst
     class = Dunst
-    startup_notification = false
     force_xinerama = false
 
 [experimental]
     per_monitor_dpi = false
-
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
 
 [urgency_low]
     background = "#ffffd7"
@@ -70,3 +63,5 @@
     background = "#cc2421"
     foreground = "#ffffd7"
     timeout = 0
+
+

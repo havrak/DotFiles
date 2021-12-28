@@ -13,9 +13,9 @@ abbr SS 			"sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr cp 			"cp -i"
 abbr mv 			"mv -i"
-abbr ms  			"mw -Y 2>/dev/null"
-
+alias ms  		"mw -Y 2>/dev/null"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+
 abbr jctl 		"journalctl -p 3 -xb"
 
 # mount device/android
@@ -24,11 +24,15 @@ abbr md 			"udisksctl mount -b /dev/sdb"
 abbr ma 			"aft-mtp-mount ~/tmp/android/"
 abbr ua 			"sudo umount ~/tmp/android --lazy"
 
-# ssh connections, tunnels, rsync
+# ssh connections, tunnels
 abbr sshschool 		"ssh dk-301@db.gyarab.cz"
 abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
 abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
-abbr uas 					"rsync -vrh --info=progress2  --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' /home/havra/prog/uav\ project/drone\ software/  pi@192.168.6.1:~/drone_software --delete"
+
+# rsync commands
+abbr syd 					"rsync -vrh --info=progress2  --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' /home/havra/prog/uav\ project/drone\ software/  pi@192.168.6.1:~/drone_software --delete"
+abbr sys 					"rsync -vrh --info=progress2  --exclude '.git' /home/havra/dox/school/ /run/media/havra/500\ GB/dox/school/ --delete-after"
+abbr pix 					"rsync -vrh --info=progress2  --exclude '.git' /home/havra/pix /run/media/havra/500\ GB/pix --delete-after"
 
 # package manager
 switch (cat /etc/*-release | grep "^ID=" | awk -F '=' '{print $2}')

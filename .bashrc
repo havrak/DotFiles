@@ -6,7 +6,7 @@ if command -v bat &>/dev/null; then
 	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-export PATH="$PATH:$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':')"
+export PATH="$PATH:$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':'):$HOME/.rvm/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/.local/share/gem/ruby/2.7.0/bin"
 export TERMINAL="st"
 export TERM="xterm-256color"
 export BROWSER="firefox"
@@ -42,8 +42,9 @@ alias SS="sudo systemctl"
 alias pyserver="python3 -m http.server"
 alias cp="cp -i"
 alias mv="mv -i"
-
+alias ms="mw -Y 2>/dev/null"
 alias cmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+
 alias jctl="journalctl -p 3 -xb"
 
 # mount devices/android

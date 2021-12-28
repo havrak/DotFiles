@@ -1,4 +1,5 @@
 #!/bin/sh
+# merges multiple pdf files from scanner to one
 
 pdfs="$(ls | grep EPSON)"
-pdftk $pdfs cat output a.pdf
+pdftk $pdfs cat output concated.pdf
