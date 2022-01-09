@@ -25,6 +25,7 @@ let g:startify_bookmarks = [
             \ { 'fi': '~/.config/fish/config.fish' },
             \ { 'fa': '~/.config/fish/abbreviations.fish' },
             \ { 'fv': '~/.config/fish/fish_variables' },
+            \ { 'a': '~/.bashrc' },
             \ { 'b': '~/.config/bspwm/bspwmrc' },
             \ { 'v': '~/.config/nvim/init.vim' },
             \ { 'm': '~/.config/nvim/macros.vim' },

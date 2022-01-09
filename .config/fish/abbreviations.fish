@@ -15,7 +15,7 @@ abbr cp 			"cp -i"
 abbr mv 			"mv -i"
 alias ms  		"mw -Y 2>/dev/null"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
-
+alias rsync 	"rsync --info=progress2"
 abbr jctl 		"journalctl -p 3 -xb"
 
 # mount device/android
@@ -30,9 +30,12 @@ abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
 abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
 
 # rsync commands
-abbr syd 					"rsync -vrh --info=progress2  --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' /home/havra/prog/uav\ project/drone\ software/  pi@192.168.6.1:~/drone_software --delete"
-abbr sys 					"rsync -vrh --info=progress2  --exclude '.git' /home/havra/dox/school/ /run/media/havra/500\ GB/dox/school/ --delete-after"
-abbr pix 					"rsync -vrh --info=progress2  --exclude '.git' /home/havra/pix /run/media/havra/500\ GB/pix --delete-after"
+abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  pi@192.168.6.1:~/drone_software --delete"
+abbr sys 					"rsync -vrh --exclude '.git' $HOME/dox/school/ /run/media/$USER/500\ GB/dox/school/ --delete-after"
+abbr syp 					"rsync -vrh --exclude '.git' $HOME/pix /run/media/$USER/500\ GB/pix --delete-after"
+abbr syc 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.tmp' --exclude '.cache' --exclude 'node_modules' --exclude '.git' --exclude '.jekyll-cache' --exclude '__pycache__' $HOME/prog /run/media/$USER/500\ GB/prog --delete-after"
+abbr syw 					"rsync -vrh --exclude '.git' $HOME/.vim/vimwiki havrak.xyz:~ --delete-after"
+abbr syW 					"whiptail --yesno \"Do you truly wish to sync vimwiki from remote to local\" 20 60 && rsync -vrh --exclude '.git' havrak.xyz:vimwiki $HOME/.vim/ --delete-after"
 
 # package manager
 switch (cat /etc/*-release | grep "^ID=" | awk -F '=' '{print $2}')

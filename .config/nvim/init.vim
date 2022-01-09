@@ -3,7 +3,6 @@ let mapleader =" "
 call plug#begin('~/.config/nvim/plugged')
 " Statuslines
 Plug 'bling/vim-airline'																		" feature packed status line
-" Plug 'romgrk/barbar.nvim'																		" bufferbar, enables switching buffer order
 " Files
 Plug 'junegunn/fzf.vim'																			" fuzzy finder integration in vim
 Plug 'kyazdani42/nvim-web-devicons'													" for file icons
