@@ -17,6 +17,10 @@ basename=$(echo $base| rev | awk -v FS='/' '{print $1}' | rev)
 cd "$dir" || exit
 
 textype() { \
+	if [[ $basename =~ ^.*[[:space:]]P[0-9]*$ ]]; then
+		basename=$(echo $basename | sed 's/\(^.*\sP\)[0-9]*$/\10/' )
+		base=$(echo $base | sed 's/\(^.*\sP\)[0-9]*$/\10/' )
+	fi
 	bibtex "$basename"
 	command="pdflatex -shell-escape -file-line-error"
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"

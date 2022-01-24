@@ -2,6 +2,6 @@
 
 rm -r $HOME/Desktop
 rm -r $HOME/.ncmpcpp
-rm  $HOME/.lesshst
+rm $HOME/.lesshst
 rm $HOME/.wget-hsts
-
+rm $HOME/indent.log

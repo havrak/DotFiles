@@ -36,6 +36,7 @@ Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infu
 Plug 'stevearc/vim-arduino'																	" compiling and uploading programs to arduino
 " Misc
 Plug 'mhinz/vim-startify'																		" gives vim pretty start screen, manages stored vim sessions
+Plug 'andweeb/presence.nvim'
 call plug#end()
 
 " Some basics:
@@ -250,6 +251,7 @@ let g:templates_no_autocmd = 0
 " Trees
 nnoremap <F6> :TagbarToggle<CR>
 nnoremap <F4> :NvimTreeToggle<CR>
+
 
 " Load external files
 runtime macros.vim

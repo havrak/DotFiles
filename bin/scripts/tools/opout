@@ -4,8 +4,16 @@
 str="$*"
 basename="$(echo "$str" | sed 's/\.[^\/.]*$//')"
 
+textype() { \
+	if [[ $basename =~ ^.*[[:space:]]P[0-9]*$ ]]; then
+		basename=$(echo $basename | sed 's/\(^.*\sP\)[0-9]*$/\10/' )
+	fi
+	setsid "$READER" "$basename".pdf >/dev/null 2>&1 &
+}
+
 case "$str" in
-	*.tex|*.md|*.rmd|*.ms|*.me|*.mom) setsid "$READER" "$basename".pdf >/dev/null 2>&1 &;;
+	*.tex) textype $basename ;;
+	*.md|*.rmd|*.ms|*.me|*.mom) setsid "$READER" "$basename".pdf >/dev/null 2>&1 &;;
 	*.html) setsid "$BROWSER" "$basename".html >/dev/null 2>&1 & ;;
 	*.wiki)
 		if [ $str == "index.wiki" ]; then

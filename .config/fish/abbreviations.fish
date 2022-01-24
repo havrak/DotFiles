@@ -8,12 +8,13 @@ abbr n 				"neomutt"
 abbr sv 			"sudoedit"
 abbr mus 			"ncmpcpp"
 abbr s 				"sensors"
-abbr yt 			"youtube-dl"
+abbr yt 			"yt-dlp"
 abbr SS 			"sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr cp 			"cp -i"
 abbr mv 			"mv -i"
 alias ms  		"mw -Y 2>/dev/null"
+alias ccmake 	"cmake . && make"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	"rsync --info=progress2"
 abbr jctl 		"journalctl -p 3 -xb"
@@ -29,6 +30,9 @@ abbr sshschool 		"ssh dk-301@db.gyarab.cz"
 abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
 abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
 
+abbr picamup      "gst-launch-1.0 -v v4l2src device=/dev/video0 ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480,framerate=30/1 ! jpegenc ! rtpjpegpay ! udpsink host=192.168.6.11 port=5000"
+abbr picamdw      "gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp, media=video, clock-rate=90000, payload=96 ! rtpjpegdepay ! jpegdec ! videoconvert ! autovideosink"
+
 # rsync commands
 abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  pi@192.168.6.1:~/drone_software --delete"
 abbr sys 					"rsync -vrh --exclude '.git' $HOME/dox/school/ /run/media/$USER/500\ GB/dox/school/ --delete-after"
@@ -36,6 +40,8 @@ abbr syp 					"rsync -vrh --exclude '.git' $HOME/pix /run/media/$USER/500\ GB/pi
 abbr syc 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.tmp' --exclude '.cache' --exclude 'node_modules' --exclude '.git' --exclude '.jekyll-cache' --exclude '__pycache__' $HOME/prog /run/media/$USER/500\ GB/prog --delete-after"
 abbr syw 					"rsync -vrh --exclude '.git' $HOME/.vim/vimwiki havrak.xyz:~ --delete-after"
 abbr syW 					"whiptail --yesno \"Do you truly wish to sync vimwiki from remote to local\" 20 60 && rsync -vrh --exclude '.git' havrak.xyz:vimwiki $HOME/.vim/ --delete-after"
+abbr sya 					"scp .abook/addressbook havrak.xyz:~/.abook/"
+abbr syA 					"scp havrak.xyz:~/.abook/addressbook ~/.abook/"
 
 # package manager
 switch (cat /etc/*-release | grep "^ID=" | awk -F '=' '{print $2}')
