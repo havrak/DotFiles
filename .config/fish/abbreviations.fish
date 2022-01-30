@@ -38,7 +38,7 @@ abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --ex
 abbr sys 					"rsync -vrh --exclude '.git' $HOME/dox/school/ /run/media/$USER/500\ GB/dox/school/ --delete-after"
 abbr syp 					"rsync -vrh --exclude '.git' $HOME/pix /run/media/$USER/500\ GB/pix --delete-after"
 abbr syc 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.tmp' --exclude '.cache' --exclude 'node_modules' --exclude '.git' --exclude '.jekyll-cache' --exclude '__pycache__' $HOME/prog /run/media/$USER/500\ GB/prog --delete-after"
-abbr syw 					"rsync -vrh --exclude '.git' $HOME/.vim/vimwiki havrak.xyz:~ --delete-after"
+abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.vim/vimwiki havrak.xyz:~ --delete-after"
 abbr syW 					"whiptail --yesno \"Do you truly wish to sync vimwiki from remote to local\" 20 60 && rsync -vrh --exclude '.git' havrak.xyz:vimwiki $HOME/.vim/ --delete-after"
 abbr sya 					"scp .abook/addressbook havrak.xyz:~/.abook/"
 abbr syA 					"scp havrak.xyz:~/.abook/addressbook ~/.abook/"

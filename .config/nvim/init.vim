@@ -11,8 +11,7 @@ Plug 'rbgrouleff/bclose.vim'																" close buffer
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
 Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
-Plug 'lervag/vimtex'																				" supplies latex support for CoC
-Plug 'aperezdc/vim-template'                                " template support in vim, since CoC plugin got deprected
+Plug 'aperezdc/vim-template'                                " template support in vim
 " Git
 Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
 Plug 'rhysd/git-messenger.vim'															" displays commit message from commit that affected the line (on <leader>gm)
@@ -36,7 +35,6 @@ Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infu
 Plug 'stevearc/vim-arduino'																	" compiling and uploading programs to arduino
 " Misc
 Plug 'mhinz/vim-startify'																		" gives vim pretty start screen, manages stored vim sessions
-Plug 'andweeb/presence.nvim'
 call plug#end()
 
 " Some basics:
@@ -225,15 +223,7 @@ command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'o
 
 " Autoformat
 nnoremap <leader>F :Autoformat<CR>
-let g:formatdef_latexindent = '"latexindent --local=$HOME/.config/latexindent/config.yaml -"'
-
-" Vimtex
-let g:tex_flavor = 'latex'
-let g:vimtex_indent_enabled = 0
-let g:vimtex_indent_bib_enabled = 0
-
-let g:vimtex_fold_enabled = 1
-let g:vimtex_fold_types = { 'markers' : {'enabled': 0}, 'sections' : {'parse_levels': 1},}
+let g:formatdef_latexindent = '"latexindent --logfile=/dev/null --local=$HOME/.config/latexindent/config.yaml -"'
 
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,'template_path': '~/.vim/vimwiki/templates','template_default': 'def_template', 'template_ext': '.html'}]
@@ -251,7 +241,6 @@ let g:templates_no_autocmd = 0
 " Trees
 nnoremap <F6> :TagbarToggle<CR>
 nnoremap <F4> :NvimTreeToggle<CR>
-
 
 " Load external files
 runtime macros.vim

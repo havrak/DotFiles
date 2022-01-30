@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [ ! -f "$@" ]; then
+	echo "this script requires a file to be converted"
+fi
+
+filename="${@%.*}.wiki"
+# document starts with chapter, ends with end document
+NAME_OF_DOC=$(grep '^.*title.*$' $@ | head -1 | sed 's/^[^{]*.\([^}]*\).*$/\1/' | xargs)
+
+STR_OF_DATA=$(grep '^\\\chapter{.*}$' $@ --line-number | cut -d':' -f1 | head -1)
+END_OF_DATA=$(grep '^\\\end{document}$' $@ --line-number | cut -d':' -f1)
+echo $STR_OF_DATA
+((END_OF_DATA=END_OF_DATA-1))
+echo $END_OF_DATA
+
+echo "= $NAME_OF_DOC =" > $filename
+
+LIST=0
+while IFS= read -r line; do
+	if [[ $line =~ ^.*\\\chapter.*$ ]] || [[ $line =~ ^\\[sub]*section.*$ ]]; then
+		LIST=0
+		echo $line | latex2vimwikitran.sed >> $filename
+	elif [[ $line =~ ^.*begin\{itemize\}.*$ ]] || [[ $line =~ ^.*begin\{enumerate\}.*$ ]] ;then
+		((LIST++))
+	elif [[ $line =~ ^.*end\{itemize\}.*$ ]] || [[ $line =~ ^.*end\{enumerate\}.*$ ]] ;then
+		((LIST--))
+	else
+
+		STRING=''
+		for ((i=1; i<$LIST; i++)); do
+			STRING=$STRING"<#>"
+		done
+		[[ $LIST != 0 ]] && STRING=$STRING-
+		echo $STRING$line | latex2vimwikitran.sed >> $filename
+	fi
+done < <(head -n "$END_OF_DATA" "$@" | tail -n +$STR_OF_DATA)
+
+
