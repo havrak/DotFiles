@@ -9,7 +9,7 @@ source "`ueberzug library`"
 COVER="$HOME/bin/scripts/files/cover.png"
 
 function add_cover() {
-  ImageLayer::add [identifier]="cover" [x]="0" [y]="0" [path]="$COVER"
+  ImageLayer::add [identifier]="cover" [x]="-1" [y]="-1" [path]="$COVER"
 }
 
 function remove_cover() {

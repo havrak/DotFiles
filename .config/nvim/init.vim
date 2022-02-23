@@ -11,6 +11,7 @@ Plug 'rbgrouleff/bclose.vim'																" close buffer
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
 Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
+Plug 'lervag/vimtex' 																				" completion, highlighting, folds
 Plug 'aperezdc/vim-template'                                " template support in vim
 " Git
 Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
@@ -130,7 +131,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " Replace all is aliased to S.
 nnoremap S :%s///g<Left><Left>
-xnoremap S :%s///g<Left><Left>
+xnoremap S :s///g<Left><Left>
 
 " Compile document
 nnoremap <leader>c :w! \| !compiler <c-r>%<CR>
@@ -225,6 +226,14 @@ command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'o
 nnoremap <leader>F :Autoformat<CR>
 let g:formatdef_latexindent = '"latexindent --logfile=/dev/null --local=$HOME/.config/latexindent/config.yaml -"'
 
+" Vimtex
+let g:tex_flavor = 'latex'
+let g:vimtex_indent_enabled = 0
+let g:vimtex_indent_bib_enabled = 0
+
+let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_types = { 'markers' : {'enabled': 0}, 'sections' : {'parse_levels': 1},}
+
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,'template_path': '~/.vim/vimwiki/templates','template_default': 'def_template', 'template_ext': '.html'}]
 let g:vimwiki_listsyms = '✗✓'
@@ -242,9 +251,74 @@ let g:templates_no_autocmd = 0
 nnoremap <F6> :TagbarToggle<CR>
 nnoremap <F4> :NvimTreeToggle<CR>
 
+" CoC
+let g:coc_disable_startup_warning = 1
+
+let g:coc_global_extensions = [
+			\ 'coc-snippets',
+			\ 'coc-pairs',
+			\ 'coc-tsserver',
+			\ 'coc-html',
+			\ 'coc-css',
+			\ 'coc-json',
+			\ 'coc-vimlsp',
+			\ 'coc-pyright',
+			\ 'coc-spell-checker',
+			\ 'coc-cspell-dicts',
+			\ 'coc-sh',
+			\ 'coc-clangd',
+			\ 'coc-cmake',
+			\ 'coc-vimtex',
+			\ ]
+
+" From Coc Readme
+set updatetime=300
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+au filetype vimwiki silent! iunmap <buffer> <CR>
+
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  vw<Plug>(coc-codeaction-selected)
+
+autocmd CmdwinEnter * inoremap <CR> <CR>
+autocmd BufReadPost quickfix inoremap <CR> <CR>
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+
+command! -nargs=? Fold 				:call CocAction('fold', <f-args>)
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " Load external files
 runtime macros.vim
-runtime cocrc.vim
 runtime start-screen.vim
 
 lua require('nv-nvimtree')

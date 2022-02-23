@@ -2,7 +2,7 @@ neww
 set -g status off
 send-keys '$HOME/.config/ncmpcpp/cover.sh' C-m
 split-window -h
-resize-pane -t 0 -x 45
-set-hook -g client-resized 'resize-pane -t 0 -x 45'
+resize-pane -t 0 -x 44
+set-hook -g client-resized 'resize-pane -t 0 -x 44'
 select-pane -t 1
 send-keys 'ncmpcpp' C-m

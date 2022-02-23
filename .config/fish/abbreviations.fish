@@ -34,7 +34,7 @@ abbr picamup      "gst-launch-1.0 -v v4l2src device=/dev/video0 ! videoconvert !
 abbr picamdw      "gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp, media=video, clock-rate=90000, payload=96 ! rtpjpegdepay ! jpegdec ! videoconvert ! autovideosink"
 
 # rsync commands
-abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  pi@192.168.6.1:~/drone_software --delete"
+abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  192.168.6.1:~/drone_software --delete"
 abbr sys 					"rsync -vrh --exclude '.git' $HOME/dox/school/ /run/media/$USER/500\ GB/dox/school/ --delete-after"
 abbr syp 					"rsync -vrh --exclude '.git' $HOME/pix /run/media/$USER/500\ GB/pix --delete-after"
 abbr syc 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.tmp' --exclude '.cache' --exclude 'node_modules' --exclude '.git' --exclude '.jekyll-cache' --exclude '__pycache__' $HOME/prog /run/media/$USER/500\ GB/prog --delete-after"
@@ -87,6 +87,7 @@ end
 
 # git
 abbr g 				"git"
+abbr add 			"git add"
 abbr addup 		"git add -u"
 abbr addall 	"git add ."
 abbr branch 	"git branch"

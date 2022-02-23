@@ -1,4 +1,4 @@
-" LaTeX
+"G LaTeX
 autocmd FileType tex inoremap ,fr \begin{frame}[fragile]<Enter>\frametitle{}<Enter>\begin{itemize}<Enter>\item <++><Enter>\end{itemize}<Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
 autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\centering<Enter>\includegraphics[height=]{}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>3k$i
 autocmd FileType tex inoremap ,ff \begin{frame}[fragile]<Enter>\begin{figure}[!htb]<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}\hfill<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{<++>}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}<Enter>\end{figure}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\end{frame}<Esc>11k$i
@@ -56,6 +56,9 @@ autocmd FileType html inoremap ,dt <dt></dt><Enter><dd><++></dd><Enter><++><esc>
 autocmd FileType html inoremap ,dl <dl><Enter><Enter></dl><enter><enter><++><esc>3kcc
 autocmd FileType html inoremap &<space> &amp;<space>
 
+" C
+autocmd FileType h,c,cpp,hpp inoremap ,ou cout <<  << "\n";<ESC>8hi
+
 "	Markdown
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>
 autocmd Filetype markdown,rmd inoremap ,b ****<++><Esc>F*hi
@@ -80,4 +83,7 @@ autocmd Filetype vimwiki inoremap ,1 =<Space><Space>=<Esc>1hi
 autocmd Filetype vimwiki inoremap ,2 ==<Space><Space>==<Esc>2hi
 autocmd Filetype vimwiki inoremap ,3 ===<Space><Space>===<Esc>3hi
 autocmd Filetype vimwiki inoremap ,4 ===<Space><Space>===<Esc>4hi
-autocmd Filetype vimwiki inoremap ,li *
+autocmd Filetype vimwiki inoremap ,li <ESC>o*<space>
+autocmd FileType vimwiki inoremap ,ra -><space>
+autocmd FileType vimwiki inoremap ,la <-<space>
+autocmd FileType vimwiki inoremap ,ls <pre class ="prettyprint "><Enter>{{{<Enter>}}}<Esc>kk$hi

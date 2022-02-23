@@ -1,0 +1,4 @@
+*/5 * * * * /usr/bin/mw -Y >/dev/null 2>&1
+* * * * * /home/havra/bin/scripts/bspwm/deleteGarbageFiles
+0 * * * * rsync -vrh --info=progress2 	--exclude '.git' $HOME/.vim/vimwiki havrak.xyz:~ --delete-after
+
