@@ -48,12 +48,6 @@ bspc config border_width 2
 bspc config window_gap 6
 bspc config border_radius 8
 
-case "$HOSTNAME" in
-	"dl")
-		xinput set-prop DELL0959:00\ 06CB:CDD5\ Touchpad libinput\ Tapping\ Enabled 1
-esac
-
-
 [ ! `pidof polybar` ] && polybarLaunch &
 [ ! `pidof picom` ] && picom -b &
 

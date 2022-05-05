@@ -23,6 +23,9 @@ textype() { \
 	fi
 	bibtex "$basename"
 	command="pdflatex -shell-escape -file-line-error"
+	if [ $basename == "poster" ]; then
+		command="lualatex -shell-escape -file-line-error"
+	fi
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
 	grep -i addbibresource "$file" >/dev/null &&

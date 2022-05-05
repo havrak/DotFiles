@@ -2,3 +2,8 @@
 
 setxkbmap -option 'grp:win_space_toggle' -layout us,cz -variant ,qwerty
 setxkbmap -option caps:escape
+
+xinput set-prop 'DELL0959:00 06CB:CDD5 Touchpad' 'Device Enabled' 0
+xinput set-prop 'DELL0959:00 06CB:CDD5 Touchpad' 'Device Enabled' 1
+xinput set-prop 'DELL0959:00 06CB:CDD5 Touchpad' 'libinput Tapping Enabled' 1
+

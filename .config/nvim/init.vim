@@ -1,8 +1,10 @@
 let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
-" Statuslines
+" Environnement
 Plug 'bling/vim-airline'																		" feature packed status line
+Plug 'mhinz/vim-startify'																		" gives vim pretty start screen, manages stored vim sessions
+Plug 'preservim/tagbar'																			" navigate via sections, functions
 " Files
 Plug 'junegunn/fzf.vim'																			" fuzzy finder integration in vim
 Plug 'kyazdani42/nvim-web-devicons'													" for file icons
@@ -14,28 +16,22 @@ Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
 Plug 'lervag/vimtex' 																				" completion, highlighting, folds
 Plug 'aperezdc/vim-template'                                " template support in vim
 " Git
-Plug 'airblade/vim-gitgutter'                               " shows changes in signcolumn
 Plug 'rhysd/git-messenger.vim'															" displays commit message from commit that affected the line (on <leader>gm)
 Plug 'airblade/vim-rooter'																	" work in current git repository
-" Motions
-Plug 'preservim/tagbar'																			" navigate via sections (usually used in LaTeX)
 " Syntax highlighting
 Plug 'morhetz/gruvbox'																			" gruvbox color scheme used by vim
 Plug 'nvim-treesitter/nvim-treesitter'											" complex syntax highlighting engine to replace vim default
 Plug 'kovetskiy/sxhkd-vim'																	" highlighting for sxhkd configuration
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }		" color hex codes will display corresponding color
-Plug 'pangloss/vim-javascript'															" better folding for JavaScript
-" Note taking
-Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
 " Writing, text editing
+Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
 Plug 'tpope/vim-commentary'																	" easy commenting
 Plug 'brooth/far.vim'																				" find and replace across multiple files
 Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use CoC feature
 Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infuriating
 " Programming
 Plug 'stevearc/vim-arduino'																	" compiling and uploading programs to arduino
-" Misc
-Plug 'mhinz/vim-startify'																		" gives vim pretty start screen, manages stored vim sessions
+Plug 'github/copilot.vim'                                   " github copilot for vim
 call plug#end()
 
 " Some basics:
@@ -58,9 +54,8 @@ set breakindent
 set hidden
 set autoindent
 set smartindent
-set foldmethod=syntax "syntax highlighting items specify folds
-set foldcolumn=1 "defines 1 col at window left, to indicate folding
-let javascript_fold=1 "activate folding by JS syntax
+set foldmethod=syntax   "syntax highlighting items specify folds
+set foldcolumn=1        "defines 1 col at window left, to indicate folding
 let python_fold=1
 set incsearch
 set smartindent
@@ -127,6 +122,7 @@ nnoremap <C-l> :vertical resize +5<CR>
 nnoremap gt :bnext<CR>
 nnoremap gT :bprevious<CR>
 nnoremap Q	:w\|Bclose<CR>
+nnoremap <C-q> :Bclose!<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Replace all is aliased to S.
@@ -142,10 +138,6 @@ nnoremap <leader>p :!opout "%"<CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 autocmd VimLeave *.tex !texclear %
-
-" Ensure files are read as what I want:
-autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Copy selected text to system clipboard
 noremap y "*y :let @+=@*<CR>
@@ -167,18 +159,6 @@ autocmd BufWritePost ~/.config/fish/config.fish,~/.config/fish/abbreviations.fis
 inoremap	<C-w> <Esc>/<++><Enter>"_c4l
 nnoremap	<C-w> <Esc>/<++><Enter>"_c4l
 vnoremap	<C-w> <Esc>/<++><Enter>"_c4l
-
-" Special highlighting
-hi DELETE			term=bold	guibg=#fb4934 guifg=#121212 ctermfg=black ctermbg=red
-hi TODO				term=bold	guibg=#fabd2f	guifg=#121212 ctermfg=black ctermbg=yellow
-hi NOTE				term=bold	guibg=#83a598	guifg=#121212 ctermfg=black ctermbg=blue
-hi IMPORTANT	term=bold	guibg=#fb4934	guifg=#121212 ctermfg=black ctermbg=red
-hi OPTIONAL		term=bold	guibg=#98971a guifg=#121212 ctermfg=black ctermbg=green
-call matchadd('DELETE', 'DELETE')
-call matchadd('TODO','TODO')
-call matchadd('NOTE','NOTE')
-call matchadd('IMPORTANT', 'IMPORTANT')
-call matchadd('OPTIONAL', 'OPTIONAL')
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -211,6 +191,18 @@ let g:Hexokinase_optInPatterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl'
 let g:Hexokinase_highlighters = ['backgroundfull']
 autocmd BufEnter * HexokinaseTurnOn
 
+" Special highlighting
+hi DELETE			term=bold	guibg=#fb4934 guifg=#121212 ctermfg=black ctermbg=red
+hi TODO				term=bold	guibg=#fabd2f	guifg=#121212 ctermfg=black ctermbg=yellow
+hi NOTE				term=bold	guibg=#83a598	guifg=#121212 ctermfg=black ctermbg=blue
+hi IMPORTANT	term=bold	guibg=#fb4934	guifg=#121212 ctermfg=black ctermbg=red
+hi OPTIONAL		term=bold	guibg=#98971a guifg=#121212 ctermfg=black ctermbg=green
+call matchadd('DELETE', 'DELETE')
+call matchadd('TODO','TODO')
+call matchadd('NOTE','NOTE')
+call matchadd('IMPORTANT', 'IMPORTANT')
+call matchadd('OPTIONAL', 'OPTIONAL')
+
 " FzF
 nnoremap <c-g> :GFiles<CR>
 nnoremap <c-z> :Files<CR>
@@ -238,7 +230,7 @@ let g:vimtex_fold_types = { 'markers' : {'enabled': 0}, 'sections' : {'parse_lev
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,'template_path': '~/.vim/vimwiki/templates','template_default': 'def_template', 'template_ext': '.html'}]
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
-let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,pre,script'
+let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,pre,script,div'
 
 " vim-rooter
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
@@ -296,6 +288,20 @@ au filetype vimwiki silent! iunmap <buffer> <CR>
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  vw<Plug>(coc-codeaction-selected)
 
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
 autocmd CmdwinEnter * inoremap <CR> <CR>
 autocmd BufReadPost quickfix inoremap <CR> <CR>
 
@@ -312,10 +318,11 @@ nmap <silent> gr <Plug>(coc-references)
 " Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
 
-command! -nargs=? Fold 				:call CocAction('fold', <f-args>)
-
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" GitHub copilot
+autocmd Filetype vimwiki let g:copilot_enabled = v:false
 
 " Load external files
 runtime macros.vim

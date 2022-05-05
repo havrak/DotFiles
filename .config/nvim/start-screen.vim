@@ -29,8 +29,6 @@ let g:startify_bookmarks = [
             \ { 'b': '~/.config/bspwm/bspwmrc' },
             \ { 'v': '~/.config/nvim/init.vim' },
             \ { 'm': '~/.config/nvim/macros.vim' },
-            \ { 'c': '~/.config/nvim/cocrc.vim' },
-            \ { 't': '~/.config/nvim/start-screen.vim' },
             \ { 'x': '~/.Xresources' },
             \ { 'n': '~/.config/newsboat/config' },
             \ { 'u': '~/.config/newsboat/urls' },

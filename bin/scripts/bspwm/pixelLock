@@ -2,5 +2,8 @@
 scrot /tmp/screen.png
 convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
 mpc pause
-i3lock -i /tmp/screen.png -R 120 -F 40
+setxkbmap us
+i3lock -i /tmp/screen.png
+setxkbmap -option 'grp:win_space_toggle' -layout us,cz -variant ,qwerty
+setxkbmap -option caps:escape
 rm /tmp/screen.png

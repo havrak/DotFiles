@@ -1,0 +1,40 @@
+#!/bin/bash
+
+main() {
+	# Required paramets: password, domain, and host
+	local readonly password="$1"
+	local readonly domain="$2"
+	local readonly host="$3"
+
+		# Verify that both are somewhat valid:
+		if [[ -z "${password}" ]]; then
+			echo "Waiting for password to be configured" >&2
+		elif [[ -z "${domain}" ]]; then
+			echo "Waiting for domain to be configured" >&2
+		elif [[ -z "${host}" ]]; then
+			echo "Waiting for host to be configured" >&2
+		else
+			local ip=$(curl -s http://whatismyip.akamai.com/)
+
+			if [[ -z "${ip}" ]]; then
+				# Something went wrong
+				echo "Could not fetch IP! Waiting for the next round..." >&2
+			else
+				# Config looks good, update the record
+				local target="https://dynamicdns.park-your-domain.com/update?host=${host:=@}&domain=${domain}&password=${password}&ip=${ip}"
+				output=$(echo url="${target}" | curl -s -K -)
+
+				local errorText=$(echo "${output}" | sed 's/utf-16/utf-8/' | xmllint --xpath '//ResponseString/text()' -
+				2>/dev/null)
+				if [ -z "$errorText" ]; then
+					echo "Successfully updated dynamic DNS to ${ip}"
+				else
+					echo "Errors while updating dynamic DNS (${errorText})" >&2
+				fi
+
+			fi
+		fi
+
+	}
+
+	main "$@" || exit 1

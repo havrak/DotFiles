@@ -8,11 +8,11 @@ do
 		"R")
 			convert -rotate -90 "$file" "$file" ;;
 		"f")
-			convert -flop "$file" "$file" ;;
+			dragon-drag-and-drop --and-exit "$file" & ;;
 		"p")
-			setsid -f pinta "$file" ;;
+		setsid -f pinta "$file" >/dev/null 2>&1 & ;;
 		"g")
-			setsid -f gimp "$file" ;;
+		setsid -f gimp "$file" >/dev/null 2>&1 & ;;
 		"y")
 			echo -n "$file" | xclip -selection clipboard &&
 			notify-send "$file copied to clipboard" & ;;
@@ -21,5 +21,6 @@ do
 				notify-send "$(readlink -f "$file") copied to clipboard" & ;;
 		"d")
 			[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
+
 	esac
 done
