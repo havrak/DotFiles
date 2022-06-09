@@ -10,11 +10,5 @@ case "$HOSTNAME" in
 			WIRED=enp1s0 WIRELESS=wlp0s20f3 MONITOR=$m polybar top &
 		done
 		;;
-	"tp")
-		for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-			MONITOR=$m polybar bottom &
-			WIRED=enp0s25 WIRELESS=wlp3s0 MONITOR=$m polybar top &
-		done
-		;;
 esac
 

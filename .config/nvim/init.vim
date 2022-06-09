@@ -49,6 +49,7 @@ set cursorcolumn
 set nobackup
 set nowritebackup
 set noswapfile
+set wrap
 set linebreak
 set breakindent
 set hidden
@@ -106,8 +107,9 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Typing
 noremap <leader>o :setlocal spell! spelllang=en_us,cs,de <CR>
+autocmd FileType mail :setlocal textwidth=0
 
-" Shortcutting split navigation, saving a keypress:
+" Shortcutting navigation
 nnoremap <C-Left> <C-w>h
 nnoremap <C-Down> <C-w>j
 nnoremap <C-Up> <C-w>k
@@ -117,6 +119,9 @@ nnoremap <C-h> :vertical resize -5<CR>
 nnoremap <C-j> :resize -5<CR>
 nnoremap <C-k> :resize +5<CR>
 nnoremap <C-l> :vertical resize +5<CR>
+
+noremap <silent> <S-Up> gk
+noremap <silent> <S-Down> gj
 
 " Make buffers more practical
 nnoremap gt :bnext<CR>

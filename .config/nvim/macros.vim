@@ -78,7 +78,7 @@ autocmd Filetype rmd inoremap ,p ```{python}<CR>```<CR><CR><esc>2kO
 autocmd Filetype rmd inoremap ,c ```<cr>```<cr><cr><esc>2kOo
 
 " Vimwiki
-autocmd Filetype vimwiki inoremap ,a [](<++>)<++><Esc>F[a
+autocmd Filetype vimwiki inoremap ,a []()<Esc>F[a
 autocmd Filetype vimwiki inoremap ,1 =<Space><Space>=<Esc>1hi
 autocmd Filetype vimwiki inoremap ,2 ==<Space><Space>==<Esc>2hi
 autocmd Filetype vimwiki inoremap ,3 ===<Space><Space>===<Esc>3hi
@@ -86,4 +86,6 @@ autocmd Filetype vimwiki inoremap ,4 ===<Space><Space>===<Esc>4hi
 autocmd Filetype vimwiki inoremap ,li <ESC>o*<space>
 autocmd FileType vimwiki inoremap ,ra -><space>
 autocmd FileType vimwiki inoremap ,la <-<space>
-autocmd FileType vimwiki inoremap ,ls <pre class ="prettyprint "><Enter>{{{<Enter>}}}<Esc>kk$hi
+autocmd FileType vimwiki inoremap ,c <pre class ="prettyprint "><Enter>{{{<Enter>}}}<Enter></pre><Esc>kkk$hi
+autocmd FileType vimwiki inoremap ,m {{$%align%<Enter><Enter>}}$<Esc>ki
+
