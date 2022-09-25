@@ -37,6 +37,30 @@
 		"-j=4",
 		"--log=verbose"
 	],
+	"languageserver": {
+		"arduino": {
+			"command": "/home/havra/bin/progs/arduino-language-server/arduino-language-server",
+			"rootPatterns": [
+				"*.ino"
+			],
+			"filetypes": [
+				"arduino"
+			],
+			"args": [
+				"-cli",
+				"/usr/bin/arduino-cli",
+				"-clangd",
+				"/usr/bin/clangd",
+				"-cli-config",
+				"/home/havra/.arduino15/arduino-cli.yaml",
+				"-fqbn",
+				"esp8266:esp32:generic",
+				"-log",
+				"/home/havra/ardu.log"
+			],
+			"trace.server": "verbose"
+		}
+	},
 	"coc.source.vimtex.enable": true,
 	"cSpell.language": "en_us,cs,de",
 	"cSpell.enabled": true,

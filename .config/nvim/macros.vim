@@ -4,6 +4,8 @@ autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\centering<Enter>\incl
 autocmd FileType tex inoremap ,ff \begin{frame}[fragile]<Enter>\begin{figure}[!htb]<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}\hfill<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{<++>}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}<Enter>\end{figure}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\end{frame}<Esc>11k$i
 autocmd FileType tex inoremap ,tab \begin{figure}[h]<Enter>\centering<Enter>\begin{center}<Enter>\begin{longtable}{\| m{4cm} \| m{4cm} \| m{4cm} \| }<Enter>\hline<Enter>\hline<Enter>\end{longtable}<Enter>\end{center}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>2ki
 autocmd FileType tex inoremap ,ls \begin{figure}[h]<Enter>\centering<Enter>\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter>\end{minted}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Enter><Esc>5k$i
+autocmd FileType tex inoremap ,ma \begin{pmatrix}<Enter>\\<Enter><Enter>\end{pmatrix}<Esc>2khhi
+
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
 autocmd FileType tex inoremap ,la $\Leftarrow$<space>
 autocmd FileType tex inoremap ,nu $\varnothing$

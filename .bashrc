@@ -6,7 +6,7 @@ if command -v bat &>/dev/null; then
 	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-export PATH="$PATH:$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':'):$HOME/.rvm/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/.local/share/gem/ruby/2.7.0/bin"
+export PATH="$PATH:$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':')"
 export TERMINAL="st"
 export TERM="xterm-256color"
 export BROWSER="firefox"

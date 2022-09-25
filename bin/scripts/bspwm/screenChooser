@@ -33,9 +33,11 @@ case "$choose" in
 		;;
 esac
 
-sleep .3
+
 setbg
-polybarLaunch
 remap
+
+sleep 1
+polybarLaunch
 
 exit

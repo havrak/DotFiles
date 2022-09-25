@@ -150,8 +150,8 @@ nnoremap <leader>p :!opout "%"<CR><CR>
 autocmd VimLeave *.tex !texclear %
 
 " Copy selected text to system clipboard
-noremap y "*y :let @+=@*<CR>
-noremap x "*x :let @+=@*<CR>
+noremap y "+y :let @*=@+<CR>
+noremap x "+x :let @*=@+<CR>
 noremap p "+P
 
 " Easy CAPS
@@ -202,11 +202,11 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 autocmd BufEnter * HexokinaseTurnOn
 
 " Special highlighting
-hi DELETE			term=bold	guibg=#fb4934 guifg=#121212 ctermfg=black ctermbg=red
-hi TODO				term=bold	guibg=#fabd2f	guifg=#121212 ctermfg=black ctermbg=yellow
-hi NOTE				term=bold	guibg=#83a598	guifg=#121212 ctermfg=black ctermbg=blue
-hi IMPORTANT	term=bold	guibg=#fb4934	guifg=#121212 ctermfg=black ctermbg=red
-hi OPTIONAL		term=bold	guibg=#98971a guifg=#121212 ctermfg=black ctermbg=green
+hi DELETE			term=bold	guibg=#fb4934 guifg=#1a1a1a ctermfg=black ctermbg=red
+hi TODO				term=bold	guibg=#fabd2f	guifg=#1a1a1a ctermfg=black ctermbg=yellow
+hi NOTE				term=bold	guibg=#83a598	guifg=#1a1a1a ctermfg=black ctermbg=blue
+hi IMPORTANT	term=bold	guibg=#fb4934	guifg=#1a1a1a ctermfg=black ctermbg=red
+hi OPTIONAL		term=bold	guibg=#98971a guifg=#1a1a1a ctermfg=black ctermbg=green
 call matchadd('DELETE', 'DELETE')
 call matchadd('TODO','TODO')
 call matchadd('NOTE','NOTE')

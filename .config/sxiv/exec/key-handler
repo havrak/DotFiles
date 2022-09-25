@@ -8,7 +8,7 @@ do
 		"R")
 			convert -rotate -90 "$file" "$file" ;;
 		"f")
-			dragon-drag-and-drop --and-exit "$file" & ;;
+			dragon-drop --and-exit "$file" & ;;
 		"p")
 		setsid -f pinta "$file" >/dev/null 2>&1 & ;;
 		"g")
