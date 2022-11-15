@@ -1,11 +1,8 @@
 let mapleader =" "
 
 call plug#begin('~/.config/nvim/plugged')
-" Code Completion
 Plug 'aperezdc/vim-template'                                " template support in vim
-" Writing, text editing
 Plug 'tpope/vim-commentary'																	" easy commenting
-Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use CoC feature
 call plug#end()
 
 " Some basics:
@@ -28,14 +25,9 @@ set breakindent
 set hidden
 set autoindent
 set smartindent
-let python_fold=1
 set incsearch
 set smartindent
-set splitright
-set splitbelow
-set undofile
 set shortmess+=c
-set undodir="~/.vim/undo/"
 set mouse=a
 
 " Use UFT-8
@@ -83,34 +75,7 @@ noremap p "+P
 inoremap <c-u> <ESC>viwUi
 nnoremap <c-u> viwU<Esc>
 
-" Automatically deletes all trailing whitespace on save.
-autocmd BufWritePre * %s/\s\+$//e
-
-" Navigating with guides
-inoremap	<C-w> <Esc>/<++><Enter>"_c4l
-nnoremap	<C-w> <Esc>/<++><Enter>"_c4l
-vnoremap	<C-w> <Esc>/<++><Enter>"_c4l
-
-unmap <C-h>
-
-" Special highlighting
-hi DELETE			term=bold	guibg=#fb4934 guifg=#121212 ctermfg=black ctermbg=red
-hi TODO				term=bold	guibg=#fabd2f	guifg=#121212 ctermfg=black ctermbg=yellow
-hi NOTE				term=bold	guibg=#83a598	guifg=#121212 ctermfg=black ctermbg=blue
-hi IMPORTANT	term=bold	guibg=#fb4934	guifg=#121212 ctermfg=black ctermbg=red
-hi OPTIONAL		term=bold	guibg=#98971a guifg=#121212 ctermfg=black ctermbg=green
-call matchadd('DELETE', 'DELETE')
-call matchadd('TODO','TODO')
-call matchadd('NOTE','NOTE')
-call matchadd('IMPORTANT', 'IMPORTANT')
-call matchadd('OPTIONAL', 'OPTIONAL')
-
-" Autoformat
-nnoremap <leader>F :Autoformat<CR>
-
 " vim-template
 let g:templates_directory= '/home/havra/.vim/templates'
 let g:templates_no_autocmd=0
 let g:templates_detect_git=1
-
-runtime macros.vim

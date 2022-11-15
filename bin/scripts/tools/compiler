@@ -18,8 +18,8 @@ cd "$dir" || exit
 
 textype() { \
 	if [[ $basename =~ ^.*[[:space:]]P[0-9]*$ ]]; then
-		basename=$(echo $basename | sed 's/\(^.*\sP\)[0-9]*$/\10/' )
-		base=$(echo $base | sed 's/\(^.*\sP\)[0-9]*$/\10/' )
+		basename=$(echo $basename | sed 's/\(^.*\sP\)[0-9]*$/\100/' )
+		base=$(echo $base | sed 's/\(^.*\sP\)[0-9]*$/\100/' )
 	fi
 	bibtex "$basename"
 	command="pdflatex -shell-escape -file-line-error"

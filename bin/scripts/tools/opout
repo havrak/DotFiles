@@ -6,7 +6,7 @@ basename="$(echo "$str" | sed 's/\.[^\/.]*$//')"
 
 textype() { \
 	if [[ $basename =~ ^.*[[:space:]]P[0-9]*$ ]]; then
-		basename=$(echo $basename | sed 's/\(^.*\sP\)[0-9]*$/\10/' )
+		basename=$(echo $basename | sed 's/\(^.*\sP\)[0-9]*$/\100/' )
 	fi
 	setsid "$READER" "$basename".pdf >/dev/null 2>&1 &
 }

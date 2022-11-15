@@ -26,7 +26,6 @@ Plug 'airblade/vim-rooter'																	" work in current git repository
 " Syntax highlighting
 Plug 'morhetz/gruvbox'																			" gruvbox color scheme used by vim
 Plug 'nvim-treesitter/nvim-treesitter'											" complex syntax highlighting engine to replace vim default
-Plug 'kovetskiy/sxhkd-vim'																	" highlighting for sxhkd configuration
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }		" color hex codes will display corresponding color
 " Writing, text editing
 Plug 'vimwiki/vimwiki'																			" note-organizing tool in vim, org mode like
@@ -36,7 +35,6 @@ Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use Co
 Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infuriating
 " Programming
 Plug 'stevearc/vim-arduino'																	" compiling and uploading programs to arduino
-Plug 'github/copilot.vim'                                   " github copilot for vim
 call plug#end()
 
 " Some basics:
@@ -232,6 +230,7 @@ let g:formatdef_latexindent = '"latexindent --logfile=/dev/null --local=$HOME/.c
 let g:tex_flavor = 'latex'
 let g:vimtex_indent_enabled = 0
 let g:vimtex_indent_bib_enabled = 0
+let g:vimtex_syntax_enabled = 0
 
 let g:vimtex_fold_enabled = 1
 let g:vimtex_fold_types = { 'markers' : {'enabled': 0}, 'sections' : {'parse_levels': 1},}
@@ -278,7 +277,7 @@ set updatetime=300
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
+      \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
@@ -301,6 +300,11 @@ nmap <leader>a  vw<Plug>(coc-codeaction-selected)
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -330,9 +334,6 @@ nmap <F2> <Plug>(coc-rename)
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" GitHub copilot
-autocmd Filetype vimwiki let g:copilot_enabled = v:false
 
 " Load external files
 runtime macros.vim

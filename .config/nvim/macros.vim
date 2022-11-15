@@ -1,10 +1,9 @@
-"G LaTeX
+"LaTeX
 autocmd FileType tex inoremap ,fr \begin{frame}[fragile]<Enter>\frametitle{}<Enter>\begin{itemize}<Enter>\item <++><Enter>\end{itemize}<Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
 autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\centering<Enter>\includegraphics[height=]{}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>3k$i
 autocmd FileType tex inoremap ,ff \begin{frame}[fragile]<Enter>\begin{figure}[!htb]<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}\hfill<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{<++>}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}<Enter>\end{figure}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\end{frame}<Esc>11k$i
 autocmd FileType tex inoremap ,tab \begin{figure}[h]<Enter>\centering<Enter>\begin{center}<Enter>\begin{longtable}{\| m{4cm} \| m{4cm} \| m{4cm} \| }<Enter>\hline<Enter>\hline<Enter>\end{longtable}<Enter>\end{center}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>2ki
 autocmd FileType tex inoremap ,ls \begin{figure}[h]<Enter>\centering<Enter>\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter>\end{minted}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Enter><Esc>5k$i
-autocmd FileType tex inoremap ,ma \begin{pmatrix}<Enter>\\<Enter><Enter>\end{pmatrix}<Esc>2khhi
 
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
 autocmd FileType tex inoremap ,la $\Leftarrow$<space>
@@ -29,9 +28,24 @@ autocmd FileType tex inoremap ,chap \chapter{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,sec \section{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ,col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
+autocmd FileType tex inoremap ,mcol \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
+autocmd FileType tex inoremap ,col \begin{multicols}{2}<Enter><Enter>\columnbreak<Enter><Enter>\end{multicols}<Esc>3ki
 autocmd FileType tex inoremap ,h \vspace{0.3cm}<Enter>\noindent<Enter>\textbf{\large }<Enter><Enter><++><Esc>2kf}i
 autocmd FileType tex inoremap ,, \
+
+
+" LaTeX Math Mode
+autocmd FileType tex inoremap .mm $$<Esc>ha
+autocmd FileType tex inoremap .mat \begin{pmatrix}<Enter>\\<Enter>\end{pmatrix}<Esc>khhi
+autocmd FileType tex inoremap .lim \lim_{x \rightarrow }<Space><Esc>hi
+autocmd FileType tex inoremap .sum \sum_{i=1}^{n}<Space>
+autocmd FileType tex inoremap .n \int  \text{ d}x<Esc>10hi
+autocmd FileType tex inoremap .v \vec{}<Esc>ha
+autocmd FileType tex inoremap .t \text{}<Esc>ha
+autocmd FileType tex inoremap .i \infty<Space>
+autocmd FileType tex inoremap .d \cdot<Space>
+autocmd FileType tex inoremap .cc \lcom  \rcom<Esc>5hi
+
 
 
 "	HTML
@@ -59,7 +73,7 @@ autocmd FileType html inoremap ,dl <dl><Enter><Enter></dl><enter><enter><++><esc
 autocmd FileType html inoremap &<space> &amp;<space>
 
 " C
-autocmd FileType h,c,cpp,hpp inoremap ,ou cout <<  << "\n";<ESC>8hi
+autocmd FileType h,cpp,hpp inoremap ,ou cout <<  << "\n";<ESC>8hi
 
 "	Markdown
 autocmd Filetype markdown,rmd inoremap ,n ---<Enter><Enter>

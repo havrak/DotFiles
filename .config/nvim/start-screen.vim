@@ -19,7 +19,7 @@ let g:startify_enable_special = 0
 let g:startify_session_before_save = [ 'silent! NvimTreeClose', 'sleep 100m' ]
 
 let g:startify_bookmarks = [
-            \ { 'po': '~/.config/polybar/config' },
+            \ { 'po': '~/.config/polybar/config.ini' },
             \ { 'ra': '~/.config/ranger/rc.conf' },
             \ { 'ri': '~/.config/ranger/rifle.conf' },
             \ { 'fi': '~/.config/fish/config.fish' },

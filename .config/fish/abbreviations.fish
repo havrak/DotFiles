@@ -18,6 +18,7 @@ alias ccmake 	"cmake . && make"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	"rsync --info=progress2"
 alias xppen    "setsid -f sudo /usr/lib/pentablet/pentablet.sh"
+alias packettracer "/opt/pt/packettracer"
 abbr jctl 		"journalctl -p 3 -xb"
 
 # mount device/android
