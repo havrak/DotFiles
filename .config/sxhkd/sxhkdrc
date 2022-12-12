@@ -101,12 +101,6 @@ alt + {comma,period}
 alt + shift + {comma,period}
 	mpc seek {-15,+15}
 
-{XF86AudioNext,XF86AudioPrev}
-	mpc {prev,next}
-
-{XF86AudioPlay,XF86AudioPause}
-	mpc {toggle,toggle}
-
 alt + e
 	mpc toggle
 

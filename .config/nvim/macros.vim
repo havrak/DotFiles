@@ -37,7 +37,7 @@ autocmd FileType tex inoremap ,, \
 " LaTeX Math Mode
 autocmd FileType tex inoremap .mm $$<Esc>ha
 autocmd FileType tex inoremap .mat \begin{pmatrix}<Enter>\\<Enter>\end{pmatrix}<Esc>khhi
-autocmd FileType tex inoremap .lim \lim_{x \rightarrow }<Space><Esc>hi
+autocmd FileType tex inoremap .lim \lim_{ \rightarrow }<Space><Esc>14hi
 autocmd FileType tex inoremap .sum \sum_{i=1}^{n}<Space>
 autocmd FileType tex inoremap .n \int  \text{ d}x<Esc>10hi
 autocmd FileType tex inoremap .v \vec{}<Esc>ha
