@@ -41,6 +41,7 @@
 🤥 lying face; U+1F925
 😌 relieved face; U+1F60C
 😔 pensive face; U+1F614
+🫡 saluting face; U+1FAE1
 😪 sleepy face; U+1F62A
 🤤 drooling face; U+1F924
 😴 sleeping face; U+1F634
@@ -63,7 +64,7 @@
 😕 confused face; U+1F615
 😟 worried face; U+1F61F
 🙁 slightly frowning face; U+1F641
-☹ frowning face; U+2639
+☹  frowning face; U+2639
 😮 face with open mouth; U+1F62E
 😯 hushed face; U+1F62F
 😲 astonished face; U+1F632
@@ -90,7 +91,7 @@
 😈 smiling face with horns; U+1F608
 👿 angry face with horns; U+1F47F
 💀 skull; U+1F480
-☠ skull and crossbones; U+2620
+☠  skull and crossbones; U+2620
 💩 pile of poo; U+1F4A9
 🤡 clown face; U+1F921
 👹 ogre; U+1F479
@@ -139,7 +140,6 @@
 🕳 hole; U+1F573
 💣 bomb; U+1F4A3
 💬 speech balloon; U+1F4AC
-👁️‍🗨️ eye in speech bubble; U+1F441 U+FE0F U+200D U+1F5E8 U+FE0F
 🗨 left speech bubble; U+1F5E8
 🗯 right anger bubble; U+1F5EF
 💭 thought balloon; U+1F4AD
@@ -195,18 +195,6 @@
 🧑 person; U+1F9D1
 👱 person: blond hair; U+1F471
 👨 man; U+1F468
-👱‍♂️ man: blond hair; U+1F471 U+200D U+2642 U+FE0F
-👨‍🦰 man: red hair; U+1F468 U+200D U+1F9B0
-👨‍🦱 man: curly hair; U+1F468 U+200D U+1F9B1
-👨‍🦳 man: white hair; U+1F468 U+200D U+1F9B3
-👨‍🦲 man: bald; U+1F468 U+200D U+1F9B2
-🧔 man: beard; U+1F9D4
-👩 woman; U+1F469
-👱‍♀️ woman: blond hair; U+1F471 U+200D U+2640 U+FE0F
-👩‍🦰 woman: red hair; U+1F469 U+200D U+1F9B0
-👩‍🦱 woman: curly hair; U+1F469 U+200D U+1F9B1
-👩‍🦳 woman: white hair; U+1F469 U+200D U+1F9B3
-👩‍🦲 woman: bald; U+1F469 U+200D U+1F9B2
 🧓 older person; U+1F9D3
 👴 old man; U+1F474
 👵 old woman; U+1F475
@@ -296,7 +284,7 @@
 🎅 Santa Claus; U+1F385
 🤶 Mrs. Claus; U+1F936
 🦸 superhero; U+1F9B8
-🦸‍♂️ man superhero; U+1F9B8 U+200D U+2642 U+FE0F
+🦸‍♂️ man superhero; U+1F9B8 U+200D U+2642
 🦸‍♀️ woman superhero; U+1F9B8 U+200D U+2640 U+FE0F
 🦹 supervillain; U+1F9B9
 🦹‍♂️ man supervillain; U+1F9B9 U+200D U+2642 U+FE0F
@@ -398,39 +386,6 @@
 👫 woman and man holding hands; U+1F46B
 👬 men holding hands; U+1F46C
 💏 kiss; U+1F48F
-👩‍❤️‍💋‍👨 kiss: woman, man; U+1F469 U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468
-👨‍❤️‍💋‍👨 kiss: man, man; U+1F468 U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468
-👩‍❤️‍💋‍👩 kiss: woman, woman; U+1F469 U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F469
-💑 couple with heart; U+1F491
-👩‍❤️‍👨 couple with heart: woman, man; U+1F469 U+200D U+2764 U+FE0F U+200D U+1F468
-👨‍❤️‍👨 couple with heart: man, man; U+1F468 U+200D U+2764 U+FE0F U+200D U+1F468
-👩‍❤️‍👩 couple with heart: woman, woman; U+1F469 U+200D U+2764 U+FE0F U+200D U+1F469
-👪 family; U+1F46A
-👨‍👩‍👦 family: man, woman, boy; U+1F468 U+200D U+1F469 U+200D U+1F466
-👨‍👩‍👧 family: man, woman, girl; U+1F468 U+200D U+1F469 U+200D U+1F467
-👨‍👩‍👧‍👦 family: man, woman, girl, boy; U+1F468 U+200D U+1F469 U+200D U+1F467 U+200D U+1F466
-👨‍👩‍👦‍👦 family: man, woman, boy, boy; U+1F468 U+200D U+1F469 U+200D U+1F466 U+200D U+1F466
-👨‍👩‍👧‍👧 family: man, woman, girl, girl; U+1F468 U+200D U+1F469 U+200D U+1F467 U+200D U+1F467
-👨‍👨‍👦 family: man, man, boy; U+1F468 U+200D U+1F468 U+200D U+1F466
-👨‍👨‍👧 family: man, man, girl; U+1F468 U+200D U+1F468 U+200D U+1F467
-👨‍👨‍👧‍👦 family: man, man, girl, boy; U+1F468 U+200D U+1F468 U+200D U+1F467 U+200D U+1F466
-👨‍👨‍👦‍👦 family: man, man, boy, boy; U+1F468 U+200D U+1F468 U+200D U+1F466 U+200D U+1F466
-👨‍👨‍👧‍👧 family: man, man, girl, girl; U+1F468 U+200D U+1F468 U+200D U+1F467 U+200D U+1F467
-👩‍👩‍👦 family: woman, woman, boy; U+1F469 U+200D U+1F469 U+200D U+1F466
-👩‍👩‍👧 family: woman, woman, girl; U+1F469 U+200D U+1F469 U+200D U+1F467
-👩‍👩‍👧‍👦 family: woman, woman, girl, boy; U+1F469 U+200D U+1F469 U+200D U+1F467 U+200D U+1F466
-👩‍👩‍👦‍👦 family: woman, woman, boy, boy; U+1F469 U+200D U+1F469 U+200D U+1F466 U+200D U+1F466
-👩‍👩‍👧‍👧 family: woman, woman, girl, girl; U+1F469 U+200D U+1F469 U+200D U+1F467 U+200D U+1F467
-👨‍👦 family: man, boy; U+1F468 U+200D U+1F466
-👨‍👦‍👦 family: man, boy, boy; U+1F468 U+200D U+1F466 U+200D U+1F466
-👨‍👧 family: man, girl; U+1F468 U+200D U+1F467
-👨‍👧‍👦 family: man, girl, boy; U+1F468 U+200D U+1F467 U+200D U+1F466
-👨‍👧‍👧 family: man, girl, girl; U+1F468 U+200D U+1F467 U+200D U+1F467
-👩‍👦 family: woman, boy; U+1F469 U+200D U+1F466
-👩‍👦‍👦 family: woman, boy, boy; U+1F469 U+200D U+1F466 U+200D U+1F466
-👩‍👧 family: woman, girl; U+1F469 U+200D U+1F467
-👩‍👧‍👦 family: woman, girl, boy; U+1F469 U+200D U+1F467 U+200D U+1F466
-👩‍👧‍👧 family: woman, girl, girl; U+1F469 U+200D U+1F467 U+200D U+1F467
 🗣 speaking head; U+1F5E3
 👤 bust in silhouette; U+1F464
 👥 busts in silhouette; U+1F465
@@ -899,9 +854,9 @@
 🎖 military medal; U+1F396
 🏆 trophy; U+1F3C6
 🏅 sports medal; U+1F3C5
-1st place medal; U+1F947 🥇
-2nd place medal; U+1F948 🥈
-3rd place medal; U+1F949 🥉
+🥇 1st place medal; U+1F947
+🥈 2nd place medal; U+1F948
+🥉 3rd place medal; U+1F949
 ⚽ soccer ball; U+26BD
 ⚾ baseball; U+26BE
 🥎 softball; U+1F94E
@@ -1300,18 +1255,6 @@
 © copyright; U+00A9
 ® registered; U+00AE
 ™ trade mark; U+2122
-#️⃣ keycap: #; U+0023 U+FE0F U+20E3
-*️⃣ keycap: *; U+002A U+FE0F U+20E3
-0️⃣ keycap: 0; U+0030 U+FE0F U+20E3
-1️⃣ keycap: 1; U+0031 U+FE0F U+20E3
-2️⃣ keycap: 2; U+0032 U+FE0F U+20E3
-3️⃣ keycap: 3; U+0033 U+FE0F U+20E3
-4️⃣ keycap: 4; U+0034 U+FE0F U+20E3
-5️⃣ keycap: 5; U+0035 U+FE0F U+20E3
-6️⃣ keycap: 6; U+0036 U+FE0F U+20E3
-7️⃣ keycap: 7; U+0037 U+FE0F U+20E3
-8️⃣ keycap: 8; U+0038 U+FE0F U+20E3
-9️⃣ keycap: 9; U+0039 U+FE0F U+20E3
 🔟 keycap: 10; U+1F51F
 🔠 input latin uppercase; U+1F520
 🔡 input latin lowercase; U+1F521
@@ -1335,23 +1278,6 @@
 🆘 SOS button; U+1F198
 🆙 UP! button; U+1F199
 🆚 VS button; U+1F19A
-🈁 Japanese “here” button; U+1F201
-🈂 Japanese “service charge” button; U+1F202
-🈷 Japanese “monthly amount” button; U+1F237
-🈶 Japanese “not free of charge” button; U+1F236
-🈯 Japanese “reserved” button; U+1F22F
-🉐 Japanese “bargain” button; U+1F250
-🈹 Japanese “discount” button; U+1F239
-🈚 Japanese “free of charge” button; U+1F21A
-🈲 Japanese “prohibited” button; U+1F232
-🉑 Japanese “acceptable” button; U+1F251
-🈸 Japanese “application” button; U+1F238
-🈴 Japanese “passing grade” button; U+1F234
-🈳 Japanese “vacancy” button; U+1F233
-㊗ Japanese “congratulations” button; U+3297
-㊙ Japanese “secret” button; U+3299
-🈺 Japanese “open for business” button; U+1F23A
-🈵 Japanese “no vacancy” button; U+1F235
 🔴 red circle; U+1F534
 🔵 blue circle; U+1F535
 ⚪ white circle; U+26AA

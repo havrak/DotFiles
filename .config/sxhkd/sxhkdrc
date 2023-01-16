@@ -53,9 +53,6 @@ alt + ctrl + t
 alt + ctrl + {n,r,w,v,p}
 	st -e {neomutt,ranger,nmtui,nvim,htop}
 
-alt + ctrl + m
-	launchncmpcpp
-
 alt + {x,n}
 	scratchpad {gpt,notes}
 
@@ -95,20 +92,23 @@ XF86AudioMute
 XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-alt + {comma,period}
-	mpc {prev,next}
+# alt + ctrl + m
+# 	launchncmpcpp
 
-alt + shift + {comma,period}
-	mpc seek {-15,+15}
+# alt + {comma,period}
+# 	mpc {prev,next}
 
-alt + e
-	mpc toggle
+# alt + shift + {comma,period}
+# 	mpc seek {-15,+15}
 
-alt + {bracketleft,bracketright}
-	mpc volume {-5,+5}
+# alt + e
+# 	mpc toggle
 
-alt + shift + {bracketleft,bracketright}
-	mpc volume {0,100}
+# alt + {bracketleft,bracketright}
+# 	mpc volume {-5,+5}
+
+# alt + shift + {bracketleft,bracketright}
+# 	mpc volume {0,100}
 
 # Launch programms
 super + {f,p,c,d,s,k}

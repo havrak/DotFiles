@@ -3,12 +3,6 @@
 killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-case "$HOSTNAME" in
-	"dl")
-		for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-			WIRED=enp1s0 WIRELESS=wlp0s20f3 MONITOR=$m polybar bottom &
-			# WIRED=enp1s0 WIRELESS=wlp0s20f3 MONITOR=$m polybar top &
-		done
-		;;
-esac
-
+for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+	WIRED=enp1s0 WIRELESS=wlp0s20f3 MONITOR=$m polybar bar &
+done
