@@ -230,6 +230,7 @@ let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/h
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
 let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,pre,script,div'
+nmap <F8> :VimwikiIndex<CR>
 
 " vim-rooter
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']

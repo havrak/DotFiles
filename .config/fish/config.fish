@@ -20,6 +20,7 @@ set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox
 set -x TERMINAL st
+set -x TEXINPUTS "::$HOME/dox/templates/::$HOME/dox/templates/bibliography::$HOME/dox/templates/images"
 
 function fish_greeting
 end

@@ -50,11 +50,11 @@ super + {F1,F2,F3,F9}
 alt + ctrl + t
 	st
 
-alt + ctrl + {n,r,w,v,p}
-	st -e {neomutt,ranger,nmtui,nvim,htop}
+alt + ctrl + {n,r,w,v,p,b}
+	st -e {neomutt,ranger,nmtui,nvim,htop,nvim -c VimwikiIndex}
 
-alt + {x,n}
-	scratchpad {gpt,notes}
+alt + x
+	scratchpad gpt
 
 alt + s
 	scratchpad -h gpt notes
