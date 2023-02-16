@@ -15,10 +15,11 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 + zathura
 + sxiv
 + dunst
-+ firefox - bookmarks, sideberry, channel blocker, addons, css (small changes necessary for vertical tabs), mozilla.cfg
++ firefox - sideberry, addons, css (small changes necessary for vertical tabs), mozilla.cfg
 + Xresources
 + mpv
-+ youtube-dl
++ yt-dlp
++ arduino
 + sxhkd
 + transmission
 + picom
@@ -46,7 +47,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 | fzf                      | fuzzy finder used in ranger and shell       |                                 |
 | git                      | vcs system                                  |                                 |
 | gvim                     | enables clipboard buffer for vim            |                                 |
-| i3lock-cac03-git         | i3lock fork that displays layout and time   |                                 |
+| i3lock                   | locking screen                              |                                 |
 | imagemagick              | used to create background for lockscreen    |                                 |
 | inotify-tools            | used by ncmpcpp to update cover art         |                                 |
 | lib32-vulkan-intel       | use vulkan backend for mpv                  |                                 |
@@ -113,11 +114,7 @@ In this repository are my personal dotfiles which I use on my arch system. Termi
 
 | NAME                | PURPOUSE                                                                                                   |
 |---------------------|------------------------------------------------------------------------------------------------------------|
-| Cookie AutoDelete   | deletes cookies after user leaves the site                                                                 |
-| h264ify             | using 4. get intel procesor, no hardware support for x265 or VP9                                           |
 | Sidebery            | sidebar with tabs and book                                                                                 |
 | uBlock Origin       | blocks adds                                                                                                |
 | Violentmonkey       | Custom JS Scripts -- ResizeYoutubePlayerToWindowSize                                                       |
-| Channel Blocker     | best way to hide/block YT channels                                                                         |
 | Translate Web Pages | google transalte integration into browser                                                                  |
-| Universal Bypass    | skips sites like ad.fly                                                                                    |

@@ -1,0 +1,23 @@
+board_manager:
+ additional_urls: [https://dl.espressif.com/dl/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json]
+daemon:
+  port: "50051"
+directories:
+  data: /home/havra/.arduino15
+  downloads: /home/havra/.arduino15/staging
+  user: /home/havra/.arduino15
+library:
+  enable_unsafe_install: false
+logging:
+  file: "cli.log"
+  format: text
+  level: info
+metrics:
+  addr: :9090
+  enabled: true
+output:
+  no_color: false
+sketch:
+  always_export_binaries: false
+updater:
+  enable_notification: true

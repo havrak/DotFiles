@@ -17,7 +17,6 @@ Plug 'kyazdani42/nvim-tree.lua'															" file browser for vim
 Plug 'rbgrouleff/bclose.vim'																" close buffer
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
-Plug 'honza/vim-snippets'																		" buch of snippets to work with CoC
 Plug 'aperezdc/vim-template'                                " template support in vim
 " Git
 Plug 'rhysd/git-messenger.vim'															" displays commit message from commit that affected the line (on <leader>gm)
@@ -32,8 +31,6 @@ Plug 'tpope/vim-commentary'																	" easy commenting
 Plug 'brooth/far.vim'																				" find and replace across multiple files
 Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use CoC feature
 Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infuriating
-" Programming
-Plug 'stevearc/vim-arduino'																	" compiling and uploading programs to arduino
 call plug#end()
 
 " Some basics:
@@ -244,10 +241,7 @@ nnoremap <F6> :TagbarToggle<CR>
 nnoremap <F4> :NvimTreeToggle<CR>
 
 " CoC
-let g:coc_disable_startup_warning = 1
-
 let g:coc_global_extensions = [
-			\ 'coc-snippets',
 			\ 'coc-pairs',
 			\ 'coc-tsserver',
 			\ 'coc-html',
@@ -262,72 +256,10 @@ let g:coc_global_extensions = [
 			\ 'coc-cmake',
 			\ ]
 
-" From Coc Readme
-set updatetime=300
-
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-au filetype vimwiki silent! iunmap <buffer> <CR>
-
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  vw<Plug>(coc-codeaction-selected)
-
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-autocmd CmdwinEnter * inoremap <CR> <CR>
-autocmd BufReadPost quickfix inoremap <CR> <CR>
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Remap for rename current word
-nmap <F2> <Plug>(coc-rename)
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Load external files
 runtime macros.vim
 runtime start-screen.vim
 
-lua require('nv-nvimtree')
-lua require('nv-treesitter')
+lua require('coc')
+lua require('nvimtree')
+lua require('treesitter')
