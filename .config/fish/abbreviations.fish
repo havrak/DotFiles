@@ -17,6 +17,8 @@ alias ms  		"mw -Y 2>/dev/null"
 alias ccmake 	"cmake . && make"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	"rsync --info=progress2"
+alias espd    "/home/havra/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/esp-2021r2-patch5-8.4.0/bin/xtensa-esp32-elf-addr2line -pfiaC -e"
+alias acdb    "/home/havra/bin/progs/acdb/build/src/acdb"
 abbr jctl 		"journalctl -p 3 -xb"
 
 # mount device/android

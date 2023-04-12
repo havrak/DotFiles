@@ -1,15 +1,17 @@
-"LaTeX
-autocmd FileType tex inoremap ,fr \begin{frame}[fragile]<Enter>\frametitle{}<Enter>\begin{itemize}<Enter>\item <++><Enter>\end{itemize}<Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
-autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\centering<Enter>\includegraphics[height=]{}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>3k$i
-autocmd FileType tex inoremap ,ff \begin{frame}[fragile]<Enter>\begin{figure}[!htb]<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}\hfill<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{<++>}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}<Enter>\end{figure}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\end{frame}<Esc>11k$i
-autocmd FileType tex inoremap ,tab \begin{figure}[h]<Enter>\centering<Enter>\begin{center}<Enter>\begin{longtable}{\| m{4cm} \| m{4cm} \| m{4cm} \| }<Enter>\hline<Enter>\hline<Enter>\end{longtable}<Enter>\end{center}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>2ki
-autocmd FileType tex inoremap ,ls \begin{figure}[h]<Enter>\centering<Enter>\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter>\end{minted}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Enter><Esc>5k$i
+"GLaTeX
+autocmd FileType tex inoremap ,frs \begin{frame}[fragile]<Enter>\frametitle{}<Enter>\begin{itemize}<Enter>\item <++><Enter>\end{itemize}<Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
+autocmd FileType tex inoremap ,frd \begin{frame}[fragile]<Enter>\begin{figure}[!htb]<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}\hfill<Enter>\begin{minipage}{0.48\textwidth}<Enter>\centering<Enter>\includegraphics[height=.8\linewidth]{<++>}<Enter>\caption{<++>\footnotemark}<Enter>\end{minipage}<Enter>\end{figure}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\footnotetext[]{Obrázek z URL: \url{<++>}}<Enter>\end{frame}<Esc>11k$i
+
+autocmd FileType tex inoremap ,fi \begin{figure}[h]<Enter>\begin{center}<Enter>\includegraphics[height=]{}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{center}<Enter>\end{figure}<Esc>4k$2hi
+autocmd FileType tex inoremap ,tab \begin{figure}[h]<Enter>\begin{center}<Enter>\begin{longtable}{\| m{4cm} \| m{4cm} \| m{4cm} \| }<Enter>\hline<Enter>\hline<Enter>\end{longtable}<Enter>\end{center}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{figure}<Esc>2ki
+autocmd FileType tex inoremap ,ls \begin{figure}[h]<Enter>\begin{center}<Enter>\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter>\end{minted}<Enter>\caption[]{}<Enter>\label{fig:}<Enter>\end{center}<Enter>\end{figure}<Enter><Esc>6k$i
 
 autocmd FileType tex inoremap ,ra $\Rightarrow$<space>
 autocmd FileType tex inoremap ,la $\Leftarrow$<space>
 autocmd FileType tex inoremap ,nu $\varnothing$
 autocmd FileType tex inoremap ,em \emph{}<Esc>T{i
 autocmd FileType tex inoremap ,bf \textbf{}<Esc>T{i
+autocmd FileType tex inoremap ,ud \underline{}<Esc>T{i
 autocmd FileType tex inoremap ,uv \uv{}<Esc>T{i
 autocmd FileType tex inoremap ,fn \footnote{}<Esc>T{i
 autocmd FileType tex inoremap ,fm \footnotemark
@@ -31,21 +33,33 @@ autocmd FileType tex inoremap ,sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}
 autocmd FileType tex inoremap ,mcol \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
 autocmd FileType tex inoremap ,col \begin{multicols*}{2}<Enter><Enter>\columnbreak<Enter><Enter>\end{multicols*}<Esc>3ki
 autocmd FileType tex inoremap ,h \vspace{0.3cm}<Enter>\noindent<Enter>\textbf{\large }<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ,, \
+autocmd FileType tex,vimwiki inoremap ,, \
 
+autocmd FileType tex inoremap ,tl \begin{lemma}<Enter><Enter>\end{lemma}<Esc>ki
+autocmd FileType tex inoremap ,tt \begin{tvrz}<Enter><Enter>\end{tvrz}<Esc>ki
+autocmd FileType tex inoremap ,tv \begin{veta}<Enter><Enter>\end{veta}<Esc>ki
+autocmd filetype tex inoremap ,td \begin{dusl}<enter><enter>\end{dusl}<esc>ki
+autocmd filetype tex inoremap ,te \begin{definice}<enter><enter>\end{definice}<esc>ki
+autocmd FileType tex inoremap ,tp \textit{Důkaz:}
 
 " LaTeX Math Mode
-autocmd FileType tex inoremap .mm $$<Esc>ha
-autocmd FileType tex inoremap .mat \begin{pmatrix}<Enter>\\<Enter>\end{pmatrix}<Esc>khhi
-autocmd FileType tex inoremap .lim \lim_{ \rightarrow }<Space><Esc>14hi
-autocmd FileType tex inoremap .sum \sum_{i=1}^{n}<Space>
-autocmd FileType tex inoremap .n \int  \text{ d}x<Esc>10hi
-autocmd FileType tex inoremap .v \vec{}<Esc>ha
-autocmd FileType tex inoremap .t \text{}<Esc>ha
-autocmd FileType tex inoremap .i \infty<Space>
-autocmd FileType tex inoremap .d \cdot<Space>
-autocmd FileType tex inoremap .cc \lcom  \rcom<Esc>5hi
-
+autocmd FileType tex,vimwiki inoremap .mm $$<Esc>ha
+autocmd FileType tex,vimwiki inoremap .mat \begin{pmatrix}<Enter>\\<Enter>\end{pmatrix}<Esc>khhi
+autocmd FileType tex,vimwiki inoremap .lim \lim_{ \rightarrow }<Space><Esc>14hi
+autocmd FileType tex,vimwiki inoremap .lie \frac{d }{d }<Space><Esc>5hi
+autocmd FileType tex,vimwiki inoremap .par \frac{\partial }{\partial }<Space><Esc>12hi
+autocmd FileType tex,vimwiki inoremap .sum \sum_{i=1}^{n}<Space>
+autocmd FileType tex,vimwiki inoremap .n \int<Space><Space>d<Esc>hi
+autocmd FileType tex,vimwiki inoremap .v \vec{}<Esc>ha
+autocmd FileType tex,vimwiki inoremap .t \text{}<Esc>ha
+autocmd FileType tex,vimwiki inoremap .f \frac{}{}<Esc>3ha
+autocmd FileType tex,vimwiki inoremap .i \infty<Space>
+autocmd FileType tex,vimwiki inoremap .d \cdot<Space>
+autocmd FileType tex,vimwiki inoremap .cc \lcom  \rcom<Esc>5hi
+autocmd FileType tex,vimwiki inoremap .[ \langle<Space>
+autocmd FileType tex,vimwiki inoremap .] \rangle<Space>
+autocmd FileType tex,vimwiki inoremap .j \left
+autocmd FileType tex,vimwiki inoremap .k \right
 
 
 "	HTML

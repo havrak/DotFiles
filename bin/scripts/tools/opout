@@ -14,7 +14,7 @@ textype() { \
 case "$str" in
 	*.tex) textype $basename ;;
 	*.md|*.rmd|*.ms|*.me|*.mom) setsid "$READER" "$basename".pdf >/dev/null 2>&1 &;;
-	*.html) setsid "$BROWSER" "$basename".html >/dev/null 2>&1 & ;;
+	*.html) "$BROWSER" "$basename".html >/dev/null 2>&1 & ;;
 	*.wiki)
 		if [ $str == "index.wiki" ]; then
 			setsid "$BROWSER" $HOME/.vim/vimwiki/html/index.html >/dev/null 2>&1 &

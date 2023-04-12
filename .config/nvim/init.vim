@@ -18,6 +18,7 @@ Plug 'rbgrouleff/bclose.vim'																" close buffer
 " Code Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}							" Code completion and much more
 Plug 'aperezdc/vim-template'                                " template support in vim
+Plug 'honza/vim-snippets'
 " Git
 Plug 'rhysd/git-messenger.vim'															" displays commit message from commit that affected the line (on <leader>gm)
 Plug 'airblade/vim-rooter'																	" work in current git repository
@@ -31,6 +32,7 @@ Plug 'tpope/vim-commentary'																	" easy commenting
 Plug 'brooth/far.vim'																				" find and replace across multiple files
 Plug 'Chiel92/vim-autoformat'																" autoformats file, normally use CoC feature
 Plug 'dhruvasagar/vim-table-mode'														" makes markdown tables less infuriating
+Plug 'github/copilot.vim'
 call plug#end()
 
 " Some basics:
@@ -178,16 +180,16 @@ let g:airline#extensions#wordcount#filetypes = '\vasciidoc|help|mail|markdown|ma
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#whitespace#enabled= 0
 
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>0 <Plug>AirlineSelectTab0
+noremap <F1> <Plug>AirlineSelectTab1
+noremap <F2> <Plug>AirlineSelectTab2
+noremap <F3> <Plug>AirlineSelectTab3
+noremap <F4> <Plug>AirlineSelectTab4
+noremap <F5> <Plug>AirlineSelectTab5
+noremap <F6> <Plug>AirlineSelectTab6
+noremap <F7> <Plug>AirlineSelectTab7
+noremap <F8> <Plug>AirlineSelectTab8
+noremap <F9> <Plug>AirlineSelectTab9
+noremap <F10> <Plug>AirlineSelectTab0
 
 " Vim Hexokinase
 let g:Hexokinase_refreshEvents = ['InsertLeave']
@@ -227,7 +229,28 @@ let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/h
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
 let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,pre,script,div'
-nmap <F8> :VimwikiIndex<CR>
+nmap <leader><F8> :VimwikiIndex<CR>
+
+nnoremap łwf <Plug>VimwikiFollowLink
+nnoremap łws <Plug>VimwikiSplitLink
+nnoremap łwv <Plug>VimwikiVSplitLink
+nnoremap łwv <Plug>VimwikiTabnewLink
+vnoremap łwn <Plug>VimwikiNormalizeLinkVisualCR
+inoremap łwn VimwikiReturn
+nnoremap <S-CR> <Plug>VimwikiFollowLink
+
+let g:copilot_enabled = v:true
+
+autocmd Filetype vimwiki let g:copilot_enabled = v:false
+
+augroup VimwikiRemaps
+    autocmd!
+    autocmd Filetype vimwiki silent! iunmap <buffer> <Tab>
+    autocmd Filetype vimwiki inoremap <silent><expr><buffer> <M-n> vimwiki#tbl#kbd_tab()
+    autocmd Filetype vimwiki inoremap <silent><expr><buffer> <M-p> vimwiki#tbl#kbd_shift_tab()
+    autocmd Filetype vimwiki inoremap <silent><expr><buffer> <cr> coc#pum#visible() ? coc#_select_confirm()
+                              \: "<C-]><Esc>:VimwikiReturn 1 5<CR>"
+augroup end
 
 " vim-rooter
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
@@ -237,8 +260,8 @@ let g:templates_directory= '/home/havra/.vim/templates'
 let g:templates_no_autocmd = 0
 
 " Trees
-nnoremap <F6> :TagbarToggle<CR>
-nnoremap <F4> :NvimTreeToggle<CR>
+nnoremap <leader><F6> :TagbarToggle<CR>
+nnoremap <leader><F4> :NvimTreeToggle<CR>
 
 " CoC
 let g:coc_global_extensions = [
@@ -259,6 +282,8 @@ let g:coc_global_extensions = [
 " Load external files
 runtime macros.vim
 runtime start-screen.vim
+
+
 
 lua require('coc')
 lua require('nvimtree')

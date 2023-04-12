@@ -34,7 +34,7 @@ fi
 
 for pid in $pids; do
 	if bspc query -N -n "$pid.hidden" > /dev/null; then
-		if [ $(bspc query -M -m --names) == "HDMI1" ]; then
+		if [ $(bspc query -M -m --names) == "DP1" ] || [$(bspc query -M -m --names) == "HDMI1" ]; then
 			xdotool windowmove $pid 50% 25%
 		else
 			if [ $(bspc query -M | wc -l) -gt "1" ]; then

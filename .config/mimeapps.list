@@ -28,6 +28,7 @@ application/x-extension-xht=firefox.desktop
 x-scheme-handler/webcal=brave-browser.desktop
 x-scheme-handler/discord-668477264995811338=nuclear.desktop
 x-scheme-handler/msteams=teams.desktop
+x-scheme-handler/discord-455712169795780630=discord-455712169795780630.desktop
 
 [Added Associations]
 application/zip=firefox.desktop;

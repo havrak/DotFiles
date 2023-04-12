@@ -22,9 +22,9 @@ textype() { \
 		base=$(echo $base | sed 's/\(^.*\sP\)[0-9]*$/\100/' )
 	fi
 	bibtex "$basename"
-	command="pdflatex -shell-escape -file-line-error"
+	command="pdflatex -shell-escape -tikzImageCreate -file-line-error"
 	if [ $basename == "poster" ]; then
-		command="lualatex -shell-escape -file-line-error"
+		command="lualatex -shell-escape -tikzImageCreate -file-line-error"
 	fi
 	( sed 5q "$file" | grep -i -q 'xelatex' ) && command="xelatex"
 	$command --output-directory="$dir" "$base" &&
