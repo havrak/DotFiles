@@ -263,6 +263,7 @@ let g:templates_no_autocmd = 0
 nnoremap <leader><F6> :TagbarToggle<CR>
 nnoremap <leader><F4> :NvimTreeToggle<CR>
 
+autocmd FileType arduino setlocal commentstring=\/*\ %s*\/
 " CoC
 let g:coc_global_extensions = [
 			\ 'coc-pairs',
