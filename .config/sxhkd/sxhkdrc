@@ -111,5 +111,5 @@ XF86AudioMicMute
 # 	mpc volume {0,100}
 
 # Launch programms
-super + {f,p,c,d,s,k}
-	startAndNotify {firefox,pavucontrol,calibre,discord,spotify,krita}
+super + {f,s}
+	startAndNotify {firefox,spotify}

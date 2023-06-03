@@ -1,8 +1,0 @@
-#!/bin/sh
-
-st -e tmux new-session -s music "tmux source-file ~/.config/ncmpcpp/tmux_session"
-trap_exit() {
-	tmux kill-session -t music
-}
-trap trap_exit EXIT
-

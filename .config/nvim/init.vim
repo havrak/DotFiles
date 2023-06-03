@@ -65,7 +65,7 @@ set splitright
 set splitbelow
 set undofile
 set shortmess+=c
-set undodir="~/.vim/undo/"
+set undodir="~/.config/nvim/undo/"
 set mouse=a
 let g:python3_host_prog='/usr/bin/python'
 
@@ -150,15 +150,10 @@ noremap y "+y :let @*=@+<CR>
 noremap x "+x :let @*=@+<CR>
 noremap p "+P
 
-" Easy CAPS
-inoremap <c-u> <ESC>viwUi
-nnoremap <c-u> viwU<Esc>
-
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 
 " Run command on update of certain files
-autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb %
 autocmd BufWritePost ~/.config/fish/config.fish,~/.config/fish/abbreviations.fish !rm ~/.config/fish/fish_variables
 
 " Navigating with guides
@@ -225,7 +220,7 @@ nnoremap <leader>F :Autoformat<CR>
 let g:formatdef_latexindent = '"latexindent --logfile=/dev/null --local=$HOME/.config/latexindent/config.yaml -"'
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/.vim/vimwiki/', 'path_html': '~/.vim/vimwiki/html', "auto_diary_index": 1,'template_path': '~/.vim/vimwiki/templates','template_default': 'def_template', 'template_ext': '.html'}]
+let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/', 'path_html': '~/.config/nvim/vimwiki/html', "auto_diary_index": 1,'template_path': '~/.config/nvim/vimwiki/templates','template_default': 'def_template', 'template_ext': '.html'}]
 let g:vimwiki_listsyms = '✗✓'
 let g:vimwiki_conceallevel = 2
 let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,pre,script,div'
@@ -239,9 +234,6 @@ vnoremap łwn <Plug>VimwikiNormalizeLinkVisualCR
 inoremap łwn VimwikiReturn
 nnoremap <S-CR> <Plug>VimwikiFollowLink
 
-let g:copilot_enabled = v:true
-
-autocmd Filetype vimwiki let g:copilot_enabled = v:false
 
 augroup VimwikiRemaps
     autocmd!
@@ -256,7 +248,7 @@ augroup end
 let g:rooter_patterns = ['.git', '.hg', '.bzr', '.svn']
 
 " vim-template
-let g:templates_directory= '/home/havra/.vim/templates'
+let g:templates_directory= '~/.config/nvim/templates'
 let g:templates_no_autocmd = 0
 
 " Trees
@@ -280,11 +272,13 @@ let g:coc_global_extensions = [
 			\ 'coc-cmake',
 			\ ]
 
+" Copilot
+let g:copilot_enabled = v:true
+autocmd Filetype vimwiki let g:copilot_enabled = v:false
+
 " Load external files
 runtime macros.vim
 runtime start-screen.vim
-
-
 
 lua require('coc')
 lua require('nvimtree')

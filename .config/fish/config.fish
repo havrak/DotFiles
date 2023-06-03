@@ -13,9 +13,19 @@ end
 bind "[1;2D" backward-bigword
 bind "[1;2C" forward-bigword
 
-export default_fish_path="$PATH"
+set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2) $(dirname $(find $HOME/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/ -name 'xtensa-esp32-elf-addr2line'))
 
-set PATH "$default_fish_path" (du --exclude='*git*' $HOME/bin | cut -f2 | tr '\n' ':')
+for entry in $toadd
+	if not contains $entry $PATH
+		set -x  PATH "$PATH:$entry"
+	end
+end
+
+
+
+# /opt/esp-idf/export.fish
+
+# set -x PATH $default_fish_path:(du --exclude='*git*' $HOME/bin/scripts | cut -f2 | tr '\n' ':')
 set -x READER zathura
 set -x EDITOR nvim
 set -x BROWSER firefox

@@ -1,32 +1,24 @@
 #!/bin/sh
-choose=$(printf "laptop\\ndual\\nexternal\\nschool\\npresentation\\ntemp\\nmanual" | dmenu -i -p "Choose monitor setup")
+choose=$(printf "laptop\\nultra\\n4k\\n1080p\\nmanual" | dmenu -i -p "Choose monitor setup")
 case "$choose" in
 	"laptop")
 		xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor eDP1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		;;
-	"dual")
+	"ultra")
 		xrandr --output eDP1 --primary --mode 1920x1080 --pos 320x1080 --rotate normal --output HDMI1 --off --output DP1 --mode 2560x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor DP1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor eDP1 -d 'A' 'B' 'C' 'D' 'E' 'F'
 		;;
-	"external")
-		xrandr --output eDP1 --off --output DP1 --off --output HDMI1 --mode 2560x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
+	"4k")
+xrandr --output eDP1 --primary --mode 1920x1080 --pos 960x2160 --rotate normal --output DP1 --mode 3840x2160 --pos 0x0 --rotate normal --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor DP1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
+		bspc monitor eDP1 -d 'A' 'B' 'C' 'D' 'E' 'F'
 		;;
-	"school")
+	"1080p")
 		xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output dp1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output virtual1 --off
 		bspc monitor HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor eDP1 -d 'A' 'B' 'C' 'D' 'E' 'F'
-		;;
-	"temp")
-		xrandr --output eDP1 --primary --mode 1920x1080 --pos 266x1440 --rotate normal --output DP1 --off --output HDMI1 --mode 2560x1440 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
-		bspc monitor HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
-		bspc monitor eDP1 -d 'A' 'B' 'C' 'D' 'E' 'F'
-		;;
-	"presentation")
-		xrandr --output eDP1 --primary --mode 1024x768 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --mode 1024x768 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
-		bspc monitor HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		;;
 	"manual")
 		arandr

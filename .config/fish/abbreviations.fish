@@ -13,13 +13,12 @@ abbr SS 			"sudo systemctl"
 abbr pyserver "python3 -m http.server"
 abbr cp 			"cp -i"
 abbr mv 			"mv -i"
+abbr espd    "xtensa-esp32-elf-addr2line -pfiaC -e"
+abbr jctl 		"journalctl -p 3 -xb"
 alias ms  		"mw -Y 2>/dev/null"
 alias ccmake 	"cmake . && make"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	"rsync --info=progress2"
-alias espd    "/home/havra/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/esp-2021r2-patch5-8.4.0/bin/xtensa-esp32-elf-addr2line -pfiaC -e"
-alias acdb    "/home/havra/bin/progs/acdb/build/src/acdb"
-abbr jctl 		"journalctl -p 3 -xb"
 
 # mount device/android
 abbr ud 			"udisksctl unmount -b /dev/sdb"
@@ -37,11 +36,7 @@ abbr picamdw      "gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp, media
 
 # rsync commands
 abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  192.168.6.1:~/drone_software"
-abbr sys 					"rsync -vrh --exclude '.git' $HOME/dox/school/ /run/media/$USER/500\ GB/dox/school --delete-after"
-abbr syi 					"rsync -vrh --exclude '.git' $HOME/pix/ /run/media/$USER/500\ GB/pix --delete-after"
-abbr syc 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.tmp' --exclude '.cache' --exclude 'node_modules' --exclude '.git' --exclude '.jekyll-cache' --exclude '__pycache__' $HOME/prog/ /run/media/$USER/500\ GB/prog --delete-after"
-abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.vim/vimwiki havrak.xyz: --delete-after"
-abbr syp 					"rsync -vrhL --exclude '.git' $HOME/prog/web/portfolio havrak.xyz: --delete-after"
+abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.config/nvim/vimwiki havrak.xyz: --delete-after"
 
 # package manager
 switch (cat /etc/*-release 2>/dev/null | grep "^ID=" | awk -F '=' '{print $2}')
