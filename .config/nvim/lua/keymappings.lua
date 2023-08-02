@@ -36,17 +36,16 @@ vim.keymap.set('n', '<C-l>', '<Cmd>vertical resize +5<CR>', { silent = true })
 -- Working with buffers
 vim.keymap.set('n', 'gt', '<Cmd>BufferNext<CR>', { silent = true })
 vim.keymap.set('n', 'gT', '<Cmd>BufferPrevious<CR>', { silent = true })
--- vim.keymap.set('n', 'Q', "<Cmd>w\|Bclose<CR>", { silent = true })
 vim.keymap.set('n', '<C-q>', '<Cmd>Bclose!<CR>', { silent = true })
 
 -- Replace selected text
-vim.keymap.set('n', 'S', ':%s///g<Left><Left>', { silent = true })
-vim.keymap.set('x', 'S', ':s///g<Left><Left>', { silent = true })
+vim.keymap.set('n', 'S', ':%s///g<Left><Left>')
+vim.keymap.set('x', 'S', ':s///g<Left><Left>')
 
 -- Compile document
 vim.keymap.set('n', '<leader>c', function() 
 	vim.cmd('w!')
-	vim.cmd('!compiler <c-r>%')
+	vim.cmd('!compiler %')
 end, { silent = true })
 
 -- autocmd BufEnter *.wiki nnoremap <leader>c :Vimwiki2HTML<CR>

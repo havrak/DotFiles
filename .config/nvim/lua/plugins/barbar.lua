@@ -1,4 +1,4 @@
-local M = {"romgrk/barbar.nvim", event = "VeryLazy"}
+local M = {"romgrk/barbar.nvim", lazy = false}
 function M.config()
 	require'bufferline'.setup {
 		animation = false,
@@ -8,8 +8,8 @@ function M.config()
 	}
 
 	-- Moving between
-	vim.keymap.set("n", "bt", "<Cmd>BufferMovePrevious<CR>")
-	vim.keymap.set("n", "bT", "<Cmd>BufferMoveNext<CR>")
+	vim.keymap.set("n", "mt", "<Cmd>BufferMovePrevious<CR>")
+	vim.keymap.set("n", "mT", "<Cmd>BufferMoveNext<CR>")
 	-- Direct selection
 	vim.keymap.set("n", "<Leader>1", "<Cmd>BufferGoto 1<CR>")
 	vim.keymap.set("n", "<Leader>2", "<Cmd>BufferGoto 2<CR>")

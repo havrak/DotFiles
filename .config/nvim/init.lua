@@ -13,6 +13,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require "autocommands"
+require "macros"
+require "keymappings"
+
 require'lazy'.setup("plugins", {
 	defaults = {lazy = true},
 	lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
@@ -32,13 +36,4 @@ require'lazy'.setup("plugins", {
 	},
 })
 
-vim.api.nvim_create_autocmd("User", {
-	pattern = "VeryLazy",
-	callback = function()
-		require "keymappings"
-		require "autocommands"
-	end,
-})
-vim.cmd('runtime macros.vim')
-
-
+	

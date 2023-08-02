@@ -42,16 +42,16 @@ vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-vim.api.nvim_exec([[
-	hi DELETE			term=bold	guibg=#fb4934 guifg=#1a1a1a ctermfg=black ctermbg=red
-	hi WARNING	  term=bold	guibg=#fb4934	guifg=#1a1a1a ctermfg=black ctermbg=red
-	hi NOTE				term=bold	guibg=#83a598	guifg=#1a1a1a ctermfg=black ctermbg=blue
-	hi TODO				term=bold	guibg=#fabd2f	guifg=#1a1a1a ctermfg=black ctermbg=yellow
-	hi DONE				term=bold	guibg=#8BC34A	guifg=#1a1a1a ctermfg=black ctermbg=yellow
-]], false)
-
-vim.fn.matchadd('DELETE', 'DELETE')
-vim.fn.matchadd('TODO','TODO')
-vim.fn.matchadd('DONE','DONE')
-vim.fn.matchadd('NOTE','NOTE')
-vim.fn.matchadd('WARNING', 'WARNING')
+-- vim.api.nvim_exec([[
+-- 	hi DELETE			term=bold	guibg=#fb4934 guifg=#1a1a1a ctermfg=black ctermbg=red
+-- 	hi WARNING	  term=bold	guibg=#fb4934	guifg=#1a1a1a ctermfg=black ctermbg=red
+-- 	hi NOTE				term=bold	guibg=#83a598	guifg=#1a1a1a ctermfg=black ctermbg=blue
+-- 	hi TODO				term=bold	guibg=#fabd2f	guifg=#1a1a1a ctermfg=black ctermbg=yellow
+-- 	hi DONE				term=bold	guibg=#8BC34A	guifg=#1a1a1a ctermfg=black ctermbg=yellow
+-- ]], false)
+--
+-- vim.fn.matchadd('DELETE', 'DELETE')
+-- vim.fn.matchadd('TODO','TODO')
+-- vim.fn.matchadd('DONE','DONE')
+-- vim.fn.matchadd('NOTE','NOTE')
+-- vim.fn.matchadd('WARNING', 'WARNING')

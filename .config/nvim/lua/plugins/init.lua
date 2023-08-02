@@ -10,8 +10,6 @@ return {
 
 	{'airblade/vim-rooter', lazy = false},
 
-	{'rbgrouleff/bclose.vim', event = "VeryLazy"},
-
 	{'kyazdani42/nvim-web-devicons', event = "VeryLazy"},
 	
 	{'lukas-reineke/indent-blankline.nvim', event = "VeryLazy",
@@ -35,7 +33,7 @@ return {
 
 	{'dhruvasagar/vim-table-mode' , event="VeryLazy"},
 
-	{'aperezdc/vim-template' , evnet = "VeryLazy", config = function()
+	{'aperezdc/vim-template' , event = "VeryLazy", config = function()
 		vim.g.email="krystof@havrak.xyz"
 		vim.g.username="Havránek Kryštof"
 		vim.g.templates_directory= '$HOME/.config/nvim/templates'
@@ -44,6 +42,5 @@ return {
 
 	{'airblade/vim-rooter', event = "VeryLazy" , config = function()
 		vim.g.rooter_patterns = "['.git', '.hg', '.bzr', '.svn']"
-	end} 
-
+	end},
 }
