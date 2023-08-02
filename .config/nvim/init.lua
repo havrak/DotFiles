@@ -39,7 +39,6 @@ vim.api.nvim_create_autocmd("User", {
 		require "autocommands"
 	end,
 })
+vim.cmd('runtime macros.vim')
 
-
-vim.cmd('source macros.vim')
 

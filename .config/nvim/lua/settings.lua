@@ -33,9 +33,25 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.undofile= true
 vim.o.shortmess = vim.o.shortmess .. 'c'
--- vim.o.updatetime = 250
--- vim.o.timeoutlen = 300
+vim.o.wildchar = vim.o.wildchar .. '<Tab>,<Down>,<Up>,<Left>,<Right>,<Space>,<BS>,<CR>,<Esc>'
+vim.o.wildmenu = true
+vim.o.wildmode = 'longest:full,full'
+vim.o.wildignore = vim.o.wildignore .. '*.o,*~,*.pyc,*.DS_Store,*.egg-info,*.egg,*.git,*.svn,*.hg,*.png,*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.pdf,*.dvi,*.ps,*.zip,*.tar.gz,*.tar.bz2,*.tar.xz,*.rar,*.tar,*.pyc,__pycache__'
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+vim.api.nvim_exec([[
+	hi DELETE			term=bold	guibg=#fb4934 guifg=#1a1a1a ctermfg=black ctermbg=red
+	hi WARNING	  term=bold	guibg=#fb4934	guifg=#1a1a1a ctermfg=black ctermbg=red
+	hi NOTE				term=bold	guibg=#83a598	guifg=#1a1a1a ctermfg=black ctermbg=blue
+	hi TODO				term=bold	guibg=#fabd2f	guifg=#1a1a1a ctermfg=black ctermbg=yellow
+	hi DONE				term=bold	guibg=#8BC34A	guifg=#1a1a1a ctermfg=black ctermbg=yellow
+]], false)
 
+vim.fn.matchadd('DELETE', 'DELETE')
+vim.fn.matchadd('TODO','TODO')
+vim.fn.matchadd('DONE','DONE')
+vim.fn.matchadd('NOTE','NOTE')
+vim.fn.matchadd('WARNING', 'WARNING')
