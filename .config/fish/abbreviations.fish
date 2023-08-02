@@ -19,6 +19,7 @@ alias ms  		"mw -Y 2>/dev/null"
 alias ccmake 	"cmake . && make"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	"rsync --info=progress2"
+alias idf-get "source $HOME/bin/progs/esp-idf/export.fish"
 
 # mount device/android
 abbr ud 			"udisksctl unmount -b /dev/sdb"
@@ -86,4 +87,4 @@ abbr pull 		"git pull origin"
 abbr status 	"git status"
 abbr tag 			"git tag"
 abbr newtag 	"git tag -a"
-abbr push 		"git remote | xargs git push --all"
+abbr push 		"git remote | xargs -I _ git push _ --all"

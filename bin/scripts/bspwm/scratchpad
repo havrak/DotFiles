@@ -43,9 +43,9 @@ for pid in $pids; do
 				fi
 			else
 				if [ $(bspc query -M -m --names) == "eDP1" ] ; then
-					xdotool windowmove $pid 50% 25%
+					xdotool windowmove $pid 50% 75%
 				else
-					xdotool windowmove $pid 50% 50%
+					xdotool windowmove $pid 50% 25%
 				fi
 			fi
 		else

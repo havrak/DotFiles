@@ -1,5 +1,6 @@
-vim.o.termguicolors = true
+local M = {"kyazdani42/nvim-tree.lua", event = "VeryLazy"}
 
+function M.config()
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 local function on_attach(bufnr)
@@ -8,7 +9,8 @@ local function on_attach(bufnr)
   local function opts(desc)
     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
-vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node,          opts('CD'))
+
+	vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node,          opts('CD'))
   vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer,     opts('Open: In Place'))
   vim.keymap.set('n', '<C-k>', api.node.show_info_popup,              opts('Info'))
   vim.keymap.set('n', '<C-r>', api.fs.rename_sub,                     opts('Rename: Omit Filename'))
@@ -168,3 +170,6 @@ local view_status_ok, view = pcall(require, "nvim-tree.view")
 if not view_status_ok then
 	return
 end
+	vim.keymap.set("n", "<F4>", "<Cmd>NvimTreeToggle<CR>", {silent = true})
+end
+return M

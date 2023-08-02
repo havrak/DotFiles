@@ -15,6 +15,7 @@ bind "[1;2C" forward-bigword
 
 set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2) $(dirname $(find $HOME/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/ -name 'xtensa-esp32-elf-addr2line'))
 
+
 for entry in $toadd
 	if not contains $entry $PATH
 		set -x  PATH "$PATH:$entry"

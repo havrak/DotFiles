@@ -1,3 +1,8 @@
+local M = {'mhinz/vim-startify', lazy = false, priority =999}
+
+function M.config()
+
+vim.api.nvim_exec([[
 let g:startify_custom_header = []
 let g:startify_session_dir = '~/.config/nvim/session'
 
@@ -26,4 +31,7 @@ let g:startify_bookmarks = [
             \ { 'v': '~/.config/nvim/init.vim' },
             \ { 'm': '~/.config/nvim/macros.vim' },
             \ ]
+]], false)
 
+end
+return M

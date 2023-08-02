@@ -1,5 +1,5 @@
 #!/bin/sh
-choose=$(printf "laptop\\nultra\\n4k\\n1080p\\nmanual" | dmenu -i -p "Choose monitor setup")
+choose=$(printf "laptop\\nultra\\n4k\\n1080p\\ntriple\\nmanual" | dmenu -i -p "Choose monitor setup")
 case "$choose" in
 	"laptop")
 		xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output HDMI1 --off --output HDMI2 --off --output VIRTUAL1 --off
@@ -18,6 +18,12 @@ xrandr --output eDP1 --primary --mode 1920x1080 --pos 960x2160 --rotate normal -
 	"1080p")
 		xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output dp1 --off --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output virtual1 --off
 		bspc monitor HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
+		bspc monitor eDP1 -d 'A' 'B' 'C' 'D' 'E' 'F'
+		;;
+	"triple")
+		xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output DP1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI2 --off --output VIRTUAL1 --off
+		bspc monitor HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI'
+		bspc monitor DP1 -d 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor eDP1 -d 'A' 'B' 'C' 'D' 'E' 'F'
 		;;
 	"manual")
