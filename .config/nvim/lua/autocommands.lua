@@ -35,10 +35,10 @@ vim.api.nvim_create_autocmd("VimLeave", {
 	command =  "!texclear %"
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("FileType", {
 	group = general_settings_group,
 	pattern = "*.wiki",
-	command =  "Vimwiki2HTML",
+	command =  "nnoremap <leader>c <Cmd>Vimwiki2HTML<CR>",
 })
 
 vim.api.nvim_create_autocmd("Filetype", {

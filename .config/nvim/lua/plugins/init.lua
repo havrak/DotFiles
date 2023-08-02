@@ -1,4 +1,5 @@
 return {
+
 	{'morhetz/gruvbox', lazy = false,
 	priority = 999,
 	config = function()
@@ -7,11 +8,9 @@ return {
 		vim.g.gruvbox_contrast_dark = 'hard'
 	end
 	},
-
+	{'rbgrouleff/bclose.vim', event="VeryLazy"},
 	{'airblade/vim-rooter', lazy = false},
 
-	{'kyazdani42/nvim-web-devicons', event = "VeryLazy"},
-	
 	{'lukas-reineke/indent-blankline.nvim', event = "VeryLazy",
 		opts = {
 		char = '┊',
