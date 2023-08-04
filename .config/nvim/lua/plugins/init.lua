@@ -8,22 +8,16 @@ return {
 		vim.g.gruvbox_contrast_dark = 'hard'
 	end
 	},
-	{'rbgrouleff/bclose.vim', event="VeryLazy"},
-	{'airblade/vim-rooter', lazy = false},
 
-	{'lukas-reineke/indent-blankline.nvim', event = "VeryLazy",
-		opts = {
-		char = '┊',
-		show_trailing_blankline_indent = false,
-		}
-	},
+	{'rbgrouleff/bclose.vim', event="VeryLazy"},
 
 	{ 'numToStr/Comment.nvim', event = "VeryLazy", opts = {} },
 
 	{ 'preservim/tagbar', event = "VeryLazy"},
 
-	{ 'github/copilot.vim', event = "VeryLazy", config = function()
-		vim.g.copilot_enabled = true
+	{ 'github/copilot.vim', event = "VeryLazy", priority = 0, config = function()
+		vim.g.copilot_enabled = 1
+		vim.g.copilot_assume_mapped = 1
 	end},
 
 	{ 'Chiel92/vim-autoformat', event = "VeryLazy", config = function()
@@ -37,9 +31,5 @@ return {
 		vim.g.username="Havránek Kryštof"
 		vim.g.templates_directory= '$HOME/.config/nvim/templates'
 		vim.g.templates_no_autocmd = 0
-	end},
-
-	{'airblade/vim-rooter', event = "VeryLazy" , config = function()
-		vim.g.rooter_patterns = "['.git', '.hg', '.bzr', '.svn']"
-	end},
+	end}
 }

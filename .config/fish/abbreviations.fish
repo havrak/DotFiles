@@ -20,6 +20,7 @@ alias ccmake 	"cmake . && make"
 alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	"rsync --info=progress2"
 alias idf-get "source $HOME/bin/progs/esp-idf/export.fish"
+alias idf     "idf.py"
 
 # mount device/android
 abbr ud 			"udisksctl unmount -b /dev/sdb"

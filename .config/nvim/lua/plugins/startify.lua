@@ -13,8 +13,6 @@ let g:startify_lists = [
           \ { 'type': 'bookmarks', 'header': ['   Bookmarks']                    },
           \ ]
 
-" \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
-
 let g:startify_session_autoload = 1
 let g:startify_session_delete_buffers = 1
 let g:startify_change_to_vcs_root = 1
@@ -28,8 +26,7 @@ let g:startify_bookmarks = [
             \ { 'fa': '~/.config/fish/abbreviations.fish' },
 						\ { 'lb': '~/dox/templates/basic.tex'},
 						\ { 'lm': '~/dox/templates/makra.tex'},
-            \ { 'v': '~/.config/nvim/init.vim' },
-            \ { 'm': '~/.config/nvim/macros.vim' },
+            \ { 'm': '~/.config/nvim/lua/macros.lua' },
             \ ]
 ]], false)
 
