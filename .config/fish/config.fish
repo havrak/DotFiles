@@ -5,9 +5,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
 
 # use bat to color man pages
-if type -q bat
-	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-end
+# if type -q bat
+# 	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="less"
+# end
 
 # while using fish over ssh shift+Left/Right don't work by default
 bind "[1;2D" backward-bigword

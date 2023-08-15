@@ -62,5 +62,5 @@ vim.keymap.set('n', 'p', '"+P', { silent = true })
 -- Navigating with guides
 vim.keymap.set({'i', 'n', 'v'}, '<C-w>', '<Cmd>/<++><Enter>"_c4l', { silent = true })
 
-vim.keymap.set('n', '<F6>',  '<Cmd>TagbarToggle<CR>', {silent = true})
+vim.keymap.set('n', '<leader><F6>',  '<Cmd>TagbarToggle<CR>', {silent = true})
 vim.keymap.set('n', 'F',  '<Cmd>Autoformat<CR>', {silent = true})

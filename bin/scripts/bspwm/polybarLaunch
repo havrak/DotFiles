@@ -3,6 +3,20 @@
 killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
+# check if argument with -p number was given
+if [[ $1 == "-b" ]] ; then
+	if [[ $2 =~ ^[0-9]+$ ]]; then
+		# if so, set the monitor number to the argument
+		BORDER_A=$2
+	else
+		echo "Error: Argument is not a number"
+		BORDER_A=6
+	fi
+else
+	# otherwise, set the monitor number to 1
+	BORDER_A=6
+fi
+
 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
 	if [[ $(ip route | grep enp0s20f0u4u1c2) ]] ; then
 		WIRED_A=enp0s20f0u4u1c2
@@ -14,5 +28,5 @@ for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
 		WIRED_A=enp1s0
 		WIRELESS_A=wlp0s20f3
 	fi
-	WIRED=$WIRED_A WIRELESS=$WIRELESS_A MONITOR=$m polybar bar &
+	BORDER=$BORDER_A WIRED=$WIRED_A WIRELESS=$WIRELESS_A MONITOR=$m polybar bar &
 done

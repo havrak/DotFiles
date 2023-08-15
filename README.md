@@ -15,7 +15,6 @@ In this repository are my personal dotfiles which I use on my arch system.
 - [sxhkd](.config/sxhkd/sxhkdrc)
 - [picom](.config/picom/picom.conf)
 - [latexindent](.config/latexindent/config.yaml)
-- [mpv](.config/mpv/mpv.conf)
 - [redshift](.config/redshift/redshift.json)
 - [sxiv](.config/sxiv/exec/key-handler)
 - [useful scripts](bin/scripts/)

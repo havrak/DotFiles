@@ -25,7 +25,7 @@ function M.config()
 			vim.cmd("iunmap <buffer> <Tab>")
 			vim.keymap.set ('i',  '<M-n>', 'vimwiki#tbl#kbd_tab()' , {noremap = true,silent = true})
 			vim.keymap.set ('i',  '<M-p>', 'vimwiki#tbl#kbd_shift_tab()' , {noremap = true,silent = true})
-			vim.keymap.set ('i',  '<cr>', 'coc#pum#visible() ? coc#_select_confirm() : "<cr>"' , {noremap = true,silent = true})
+			vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], {silent = true, noremap = true, expr = true, replace_keycodes = false})
 		end,
 	})
 	vim.keymap.set ('n', '<F8>', ':VimwikiIndex<CR>' , {silent = true, noremap = false})

@@ -4,10 +4,16 @@ if [ `pidof picom` ]; then
 	killall picom
 	bspc config window_gap 0
 	bspc config single_monocle true
+	bspc config bottom_padding 14
+	sleep 0.1
+	polybarLaunch -b 0
 else
 	notify-send " Enabled compton"
 	picom -b
 	bspc config window_gap 6
 	bspc config single_monocle false
+	bspc config bottom_padding 20
+	sleep 0.1
+	polybarLaunch
 fi
 exit

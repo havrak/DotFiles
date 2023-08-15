@@ -1,5 +1,5 @@
 board_manager:
- additional_urls: [https://dl.espressif.com/dl/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json]
+ additional_urls: [https://dl.espressif.com/dl/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json, https://apps.industrialshields.com/main/arduino/boards/package_industrialshields_index.json]
 daemon:
   port: "50051"
 directories:
