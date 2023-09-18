@@ -1,6 +1,4 @@
 #!/bin/sh
-# opout: "open output": A general handler for opening a file's intended output.
-
 str="$*"
 basename="$(echo "$str" | sed 's/\.[^\/.]*$//')"
 
@@ -22,6 +20,5 @@ case "$str" in
 			setsid "$BROWSER" "$(echo $basename | sed 's/vimwiki/vimwiki\/html/')".html >/dev/null 2>&1 &
 		fi
 		;;
-	*.sent) setsid sent "$1" >/dev/null 2>&1 & ;;
 esac
 

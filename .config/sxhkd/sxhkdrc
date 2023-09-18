@@ -42,8 +42,8 @@ alt + shift + x
 alt + {d,w,t,q}
 	{dmenu_run -i, screenChooser,clipboardText,emojiPicker}
 
-super + {F1,F2,F3,F9}
-	{pixelLock, powerMenu -l, powerMenu -p, togglePicom}
+super + {F1,F2,F3}
+	{pixelLock, powerMenu -l, powerMenu -p}
 
 # Terminal
 

@@ -1,27 +1,28 @@
 #!/usr/bin/fish
 
-abbr v 				"nvim"
-abbr vim 			"nvim"
-abbr sr 			"sudo ranger"
-abbr r 				"ranger"
-abbr n 				"neomutt"
-abbr sv 			"sudoedit"
-abbr mus 			"ncmpcpp"
-abbr s 				"sensors"
-abbr yt 			"yt-dlp"
-abbr SS 			"sudo systemctl"
-abbr pyserver "python3 -m http.server"
-abbr cp 			"cp -i"
-abbr mv 			"mv -i"
-abbr espd    "xtensa-esp32-elf-addr2line -pfiaC -e"
-abbr jctl 		"journalctl -p 3 -xb"
-alias ms  		"mw -Y 2>/dev/null"
-alias ccmake 	"cmake . && make"
-alias cmake 	"cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
-alias rsync 	"rsync --info=progress2"
-alias idf-get "source $HOME/bin/progs/esp-idf/export.fish"
-alias idf     "idf.py"
+abbr v 				 "nvim"
+abbr vim 			 "nvim"
+abbr sr 			 "sudo ranger"
+abbr r 				 "ranger"
+abbr n 				 "neomutt"
+abbr sv 			 "sudoedit"
+abbr mus 			 "ncmpcpp"
+abbr s 				 "sensors"
+abbr yt 			 "yt-dlp"
+abbr SS 			 "sudo systemctl"
+abbr pyserver  "python3 -m http.server"
+abbr cp 			 "cp -i"
+abbr mv 			 "mv -i"
+abbr espd      "xtensa-esp32-elf-addr2line -pfiaC -e"
+abbr jctl 		 "journalctl -p 3 -xb"
+alias ms  		 "mw -Y 2>/dev/null"
+alias ccmake 	 "cmake . && make"
+alias cmake 	 "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+alias rsync 	 "rsync --info=progress2"
+alias idf-get  "source $HOME/bin/progs/esp-idf/export.fish"
+alias idf      "idf.py"
 alias idf-tool "idf_tools.py"
+alias idf-tsk  'find $HOME/prog/embedded/fw-esp32/ -name "*tasker_ids.h" | xargs grep "define TSID" --color=never --no-filename'
 
 # mount device/android
 abbr ud 			"udisksctl unmount -b /dev/sdb"
@@ -63,12 +64,12 @@ end
 abbr ..  			"cd .."
 abbr ... 			"cd ../.."
 
-# ls -> exa
-if type -q exa
-	alias ls 		"exa -al --color=always --group-directories-first" # my preferred listing
-	alias la 		"exa -a --color=always --group-directories-first"  # all files and dirs
-	alias ll 		"exa -l --color=always --group-directories-first"  # long format
-	alias lt 		"exa -aT --color=always --group-directories-first" # tree listing
+# ls -> eza
+if type -q eza
+	alias ls 		"eza -al --color=always --group-directories-first" # my preferred listing
+	alias la 		"eza -a --color=always --group-directories-first"  # all files and dirs
+	alias ll 		"eza -l --color=always --group-directories-first"  # long format
+	alias lt 		"eza -aT --color=always --group-directories-first" # tree listing
 else
 	alias ls 		"ls --group-directories-first --color=auto -al"
 	alias la 		"ls --group-directories-first --color=auto -a"

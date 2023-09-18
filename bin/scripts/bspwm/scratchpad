@@ -40,19 +40,19 @@ if [ -z $1 ]; then
 				"ultra")
 					EDP1_X=50 EDP1_Y=75
 					HDMI1_X=0 HDMI1_Y=0
-					EDP0_X=50 EDP0_Y=25 ;;
+					DP1_X=50 DP1_Y=25 ;;
 				"4k")
 					EDP1_X=50 EDP1_Y=83
 					HDMI1_X=0 HDMI1_Y=0
-					EDP0_X=50 EDP0_Y=17 ;;
+					DP1_X=50 DP1_Y=31 ;;
 				"triple")
-					EDP1_X=75 EDP1_Y=25
+					EDP1_X=25 EDP1_Y=75
 					HDMI1_X=25 HDMI1_Y=25
-					EDP0_X=25 EDP0_Y=75 ;;
+					DP1_X=75 DP1_Y=25 ;;
 				*)
 					EDP1_X=50 EDP1_Y=50
 					HDMI1_X=50 HDMI1_Y=50
-					EDP0_X=50 EDP0_Y=50 ;;
+					DP1_X=50 DP1_Y=50 ;;
 			esac
 
 			case "$(bspc query -M -m --names)" in
@@ -61,7 +61,7 @@ if [ -z $1 ]; then
 				"HDMI1")
 					xdotool windowmove $pid $HDMI1_X% $HDMI1_Y% ;;
 				*)
-					xdotool windowmove $pid $EDP0_X% $EDP0_Y% ;;
+					xdotool windowmove $pid $DP1_X% $DP1_Y% ;;
 			esac
 
 			width=$(($(xdotool getwindowgeometry --shell $pid | grep WIDTH | awk -F "=" '{print $2}')/2))

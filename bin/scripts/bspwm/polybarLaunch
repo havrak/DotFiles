@@ -4,17 +4,10 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 0.2; done
 
 # check if argument with -p number was given
-if [[ $1 == "-b" ]] ; then
-	if [[ $2 =~ ^[0-9]+$ ]]; then
-		# if so, set the monitor number to the argument
-		BORDER_A=$2
-	else
-		echo "Error: Argument is not a number"
-		BORDER_A=6
-	fi
+if [[ $1 == "-b" ]] && [[ $2 =~ ^[0-9]+$ ]]; then
+	BORDER_A=$2
 else
-	# otherwise, set the monitor number to 1
-	BORDER_A=6
+	BORDER_A=0
 fi
 
 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
