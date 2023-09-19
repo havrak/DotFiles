@@ -13,7 +13,6 @@ In this repository are my personal dotfiles which I use on my arch system.
 - [fish](.config/fish/config.fish)
 - [zathura](.config/zathura/zathurarc)
 - [sxhkd](.config/sxhkd/sxhkdrc)
-- [picom](.config/picom/picom.conf)
 - [latexindent](.config/latexindent/config.yaml)
 - [redshift](.config/redshift/redshift.json)
 - [sxiv](.config/sxiv/exec/key-handler)
