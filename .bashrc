@@ -118,3 +118,5 @@ alias status="git status"
 alias tag="git tag"
 alias newtag="git tag -a"
 alias push="git remote | xargs -L1 git push --all"
+
+export QSYS_ROOTDIR="/home/havra/.cache/yay/quartus-free/pkg/quartus-free-quartus/opt/intelFPGA/21.1/quartus/sopc_builder/bin"

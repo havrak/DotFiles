@@ -29,7 +29,7 @@ function M.config()
 			vim.keymap.set("n", "<leader>c", ':Vimwiki2HTML<CR>', {silent = true, noremap = false})
 		end,
 	})
-	vim.keymap.set ('n', '<F8>', ':VimwikiIndex<CR>' , {silent = true, noremap = false})
+	vim.keymap.set ('n', '<leader><F8>', ':VimwikiIndex<CR>' , {silent = true, noremap = false})
 	vim.keymap.set ('n', 'łwf', '<Plug>VimwikiFollowLink' , {noremap = true,silent = true})
 	vim.keymap.set ('n', 'łws', '<Plug>VimwikiSplitLink' , {noremap = true,silent = true})
 	vim.keymap.set ('n', 'łwv', '<Plug>VimwikiVSplitLink' , {noremap = true,silent = true})

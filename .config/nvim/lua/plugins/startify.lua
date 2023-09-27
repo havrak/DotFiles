@@ -22,6 +22,13 @@ let g:startify_enable_special = 0
 let g:startify_session_before_save = [ 'silent! NvimTreeClose', 'sleep 100m' ]
 
 let g:startify_bookmarks = [
+						\ { 'st': '~/dox/school/University/DITA - Digitální technika/poznamnky.tex'},
+						\ { 'sp': '~/dox/school/University/ELPA - Elektronické prvky/poznamnky.tex'},
+						\ { 'sm': '~/dox/school/University/EMB - Elektrická měření/poznamnky.tex'},
+						\ { 'se': '~/dox/school/University/EMPA - Elektromagnetické pole/poznamnky.tex'},
+						\ { 'sk': '~/dox/school/University/KANA - Komplexní analýza/poznamnky.tex'},
+						\ { 'so': '~/dox/school/University/KEO - Konstrukce a realizace elektronických obvodů/poznamnky.tex'},
+						\ { 'sf': '~/dox/school/University/FY2 - Fyzika 2/poznamnky.tex'},
             \ { 'fi': '~/.config/fish/config.fish' },
             \ { 'fa': '~/.config/fish/abbreviations.fish' },
 						\ { 'lb': '~/dox/templates/basic.tex'},

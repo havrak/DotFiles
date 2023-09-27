@@ -7,7 +7,7 @@ In this repository are my personal dotfiles which I use on my arch system.
 - [ranger](.config/ranger/rc.conf)
 - [fish](.config/fish/config.fish)
 - [bspwm](.config/bspwm/bspwmrc)
-- [polybar](.config/polybar/config)
+- [polybar](.config/polybar/config.ini)
 - [dunst](.config/dunst/dunstrc)
 - [bash](.bashrc)
 - [fish](.config/fish/config.fish)
