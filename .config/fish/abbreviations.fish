@@ -19,10 +19,13 @@ alias ms  		 "mw -Y 2>/dev/null"
 alias ccmake 	 "cmake . && make"
 alias cmake 	 "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	 "rsync --info=progress2"
+
+# esp-idf
 alias idf-get  "source $HOME/bin/progs/esp-idf/export.fish"
 alias idf      "idf.py"
 alias idf-tool "idf_tools.py"
 alias idf-tsk  'find $HOME/prog/embedded/fw-esp32/ -name "*tasker_ids.h" | xargs grep "define TSID" --color=never --no-filename'
+alias idf-gdb  'TERM=linux idf gdbtui'
 
 # mount device/android
 abbr ud 			"udisksctl unmount -b /dev/sdb"
