@@ -42,7 +42,7 @@ if [ -z $1 ]; then
 					HDMI1_X=0 HDMI1_Y=0
 					DP1_X=50 DP1_Y=25 ;;
 				"4k")
-					EDP1_X=50 EDP1_Y=83
+					EDP1_X=48 EDP1_Y=83
 					HDMI1_X=0 HDMI1_Y=0
 					DP1_X=50 DP1_Y=31 ;;
 				"triple")

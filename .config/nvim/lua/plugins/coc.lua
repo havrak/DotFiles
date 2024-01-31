@@ -7,7 +7,6 @@ function M.config()
 	'coc-html',
 	'coc-css',
 	'coc-json',
-	'coc-vimlsp',
 	'coc-pyright',
 	'coc-spell-checker',
 	'coc-cspell-dicts',

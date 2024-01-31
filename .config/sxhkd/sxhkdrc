@@ -64,9 +64,6 @@ alt + s
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
 	sudo light {-A,-U} 5
 
-shift + {XF86MonBrightnessUp, XF86MonBrightnessDown}
-	sudo light {-A,-U} 1
-
 # Printscreen
 
 Print
