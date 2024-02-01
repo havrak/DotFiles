@@ -56,9 +56,9 @@ if [ -z $1 ]; then
 			esac
 
 			case "$(bspc query -M -m --names)" in
-				"eDP1")
+				"eDP1" | "eDP-1")
 					xdotool windowmove $pid $EDP1_X% $EDP1_Y% ;;
-				"HDMI1")
+				"HDMI1" | "HDMI-1")
 					xdotool windowmove $pid $HDMI1_X% $HDMI1_Y% ;;
 				*)
 					xdotool windowmove $pid $DP1_X% $DP1_Y% ;;

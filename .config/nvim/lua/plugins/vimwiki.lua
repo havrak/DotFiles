@@ -43,13 +43,13 @@ function M.config()
 
 	local vimwiki_group = vim.api.nvim_create_augroup("VimwikiRemaps", {clear = true})
 	--
-	vim.api.nvim_create_autocmd("FileType", {
+	vim.api.nvim_create_autocmd("BufEnter", {
 		group = vimwiki_group,
 		pattern = "vimwiki",
 		callback = function()
 			vim.keymap.set ('i',  '<M-n>', 'vimwiki#tbl#kbd_tab()' , {noremap = true,silent = true})
 			vim.keymap.set ('i',  '<M-p>', 'vimwiki#tbl#kbd_shift_tab()' , {noremap = true,silent = true})
-			vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<C-]><Esc>:VimwikiReturn 1 5<CR>"]], {noremap = true,silent = true, expr = true, replace_keycodes = true})
+			vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<C-]><Esc>:VimwikiReturn 1 5<CR>"]], {noremap = true,silent = true, expr = true})
 			vim.keymap.set("n", "<leader>c", ':Vimwiki2HTML<CR>', {silent = true, noremap = false})
 		end,
 	})

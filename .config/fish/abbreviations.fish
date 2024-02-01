@@ -47,7 +47,7 @@ abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.config/nvim/vimwiki havrak.xy
 
 # package manager
 switch (cat /etc/*-release 2>/dev/null | grep "^ID=" | awk -F '=' '{print $2}')
-	case arch
+	case arch manjaro
 		abbr p 				"yay"
 		abbr po 			"yay -S --overwrite \"*\""
 		abbr prm 			"sudo rm -rf /var/cache/pacman/"
