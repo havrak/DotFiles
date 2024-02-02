@@ -2,7 +2,7 @@
 
 # select outputs depending on laptop
 
-if [ $(arandr | grep HDMI- | wc -l) -eq 1 ]; then
+if [[ $(xrandr | grep HDMI- | wc -l) > ]0 ]]; then
 		INTERNAL="eDP-1"
 		DP="DP-1"
 		HDMI1="HDMI-1"
@@ -15,6 +15,7 @@ else
 fi
 
 choose=$(printf "laptop\\nultra\\n4k\\n1080p\\ntriple\\nmanual" | dmenu -i -p "Choose monitor setup")
+
 case "$choose" in
 	"laptop")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x0 --rotate normal --output $DP --off --output $HDMI1 --off --output $HDMI2 --off --output VIRTUAL1 --off
@@ -57,5 +58,3 @@ remap
 
 sleep 1
 polybarLaunch
-
-exit
