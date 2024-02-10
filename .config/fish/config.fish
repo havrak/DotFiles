@@ -37,6 +37,13 @@ set -x TEXINPUTS "::$HOME/dox/templates/::$HOME/dox/templates/bibliography::$HOM
 function fish_greeting
 end
 
+set -g __fish_git_prompt_show_informative_status  1
+set -g __fish_git_prompt_char_dirtystate ''
+set -g __fish_git_prompt_char_cleanstate  ''
+set -g __fish_git_prompt_char_invalidstate ''
+set -g __fish_git_prompt_char_stagedstate ''
+set -g __fish_git_prompt_char_stashstate '󰈻'
+
 function fish_prompt
   set -l last_status $status
 	set_color yellow
@@ -51,6 +58,7 @@ function fish_prompt
 		printf ":"
 	set_color blue
 		printf (basename $PWD)
+		printf (fish_git_prompt)
 	set_color red --bold
 		printf ">"
 	set_color normal
