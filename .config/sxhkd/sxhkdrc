@@ -40,10 +40,10 @@ alt + shift + x
 # Dmenu stuff
 
 alt + {d,w,t,q}
-	{dmenu_run -i, screenChooser,clipboardText,emojiPicker}
+	{dmenu_run -i, screen-chooser,clipboard-text,emoji-picker}
 
 super + {F1,F2,F3}
-	{pixelLock, powerMenu -l, powerMenu -p}
+	{pixel-lock, power-menu -l, power-menu -p}
 
 # Terminal
 
@@ -89,24 +89,6 @@ XF86AudioMute
 XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-# alt + ctrl + m
-# 	launchncmpcpp
-
-# alt + {comma,period}
-# 	mpc {prev,next}
-
-# alt + shift + {comma,period}
-# 	mpc seek {-15,+15}
-
-# alt + e
-# 	mpc toggle
-
-# alt + {bracketleft,bracketright}
-# 	mpc volume {-5,+5}
-
-# alt + shift + {bracketleft,bracketright}
-# 	mpc volume {0,100}
-
 # Launch programms
-super + {f,s}
-	startAndNotify {firefox,spotify}
+super + {f,s,p}
+	start-and-notify {firefox,spotify,pavucontrol}

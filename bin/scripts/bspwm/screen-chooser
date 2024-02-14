@@ -14,38 +14,43 @@ else
 		HDMI2="HDMI2"
 fi
 
-choose=$(printf "laptop\\nultra\\n4k\\n1080p\\ntriple\\nmanual" | dmenu -i -p "Choose monitor setup")
+# check if argument is passed, if not use dmenu to choose
+if [ -z "$1" ]; then
+	choose=$(printf "laptop\\nultra\\n4k\\n1080p\\ntriple\\nmanual" | dmenu -i -p "Choose monitor setup")
+else
+	choose=$1
+fi
 
 case "$choose" in
 	"laptop")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x0 --rotate normal --output $DP --off --output $HDMI1 --off --output $HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor $INTERNAL -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
-		echo "laptop" > $HOME/bin/scripts/files/screenlayout
+		echo "laptop" > /tmp/bspwm_screenlayout
 		;;
 	"ultra")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 320x1080 --rotate normal --output $HDMI1 --off --output $DP --mode 2560x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor $DP -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "ultra" > $HOME/bin/scripts/files/screenlayout
+		echo "ultra" > /tmp/bspwm_screenlayout
 		;;
 	"4k")
 		xrandr --output $INTERNAL --mode 1920x1080 --pos 876x2160 --rotate normal --output $DP --primary --mode 3840x2160 --pos 0x0 --rotate normal --output $HDMI1 --off --output $HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor $DP -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "4k" > $HOME/bin/scripts/files/screenlayout
+		echo "4k" > /tmp/bspwm_screenlayout
 		;;
 	"1080p")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $DP --off --output $HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output virtual1 --off
 		bspc monitor $HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "1080p" > $HOME/bin/scripts/files/screenlayout
+		echo "1080p" > /tmp/bspwm_screenlayout
 		;;
 	"triple")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $DP --mode 1920x1080 --pos 1920x0 --rotate normal --output $HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor $HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI'
 		bspc monitor $DP -d 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "triple" > $HOME/bin/scripts/files/screenlayout
+		echo "triple" > /tmp/bspwm_screenlayout
 		;;
 	"manual")
 		arandr
@@ -57,4 +62,4 @@ setbg
 remap
 
 sleep 1
-polybarLaunch
+polybar-launch

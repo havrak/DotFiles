@@ -1,20 +1,15 @@
 #!/bin/bash
 bspc rule -r "*"
 
-bspc monitor -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
-
 # Rules
 bspc rule -a Zathura state=tiled
-bspc rule -a Raycaster state=floating
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
-bspc rule -a notes hidden=on sticky=on state=floating hidden=on rectangle=1280x720+0+0
 
 # Autostart
 setbg &
 xrdb .Xresources
 rsw &
 remap &
-mpc volume 100 &
 
 
 # Global Settings
@@ -47,4 +42,9 @@ bspc config bottom_padding 20
 bspc config border_width 2
 bspc config window_gap 4
 
-[ ! `pidof polybar` ] && polybarLaunch &
+
+if [ ! -f /tmp/bspwm_starup ] ; then
+	screen-chooser laptop &
+	touch /tmp/bspwm_startup
+fi
+

@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.sum', '\\sum_{}^{<++>}<Space><++><Esc>12hi')
 		vim.keymap.set('i', '.n', '\\int_{}^{<++>}<Space><++><Space>d<++><Esc>18hi')
 		vim.keymap.set('i', '.ve', '\\vec{}<Esc>ha')
-		vim.keymap.set('i', '.t', '\\text{}<Esc>ha')
+		vim.keymap.set('i', '.t', '\\mathrm{}<Esc>ha')
 		vim.keymap.set('i', '.fr', '\\frac{}{<++>}<Space><++><Esc>12ha')
 		vim.keymap.set('i', '.i', '\\infty<Space>')
 		vim.keymap.set('i', '.d', '\\cdot<Space>')

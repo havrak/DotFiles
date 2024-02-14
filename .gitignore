@@ -7,9 +7,10 @@ dw
 med
 bin/scripts/files/wall.png
 bin/scripts/files/wall2.png
+bin/scripts/foreign
 bin/progs
 bin/isos/
-bin/scripts/files/cover.png
+stl/
 .Xauthority
 .abook/
 .android/
