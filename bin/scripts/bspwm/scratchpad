@@ -36,7 +36,7 @@ if [ -z $1 ]; then
 
 	for pid in $pids; do
 		if bspc query -N -n "$pid.hidden" > /dev/null; then
-			case $(cat /tmp/bswpm_screenlayout) in
+			case $(cat /tmp/bspwm_screenlayout) in
 				"ultra") # 2560x1080 connected to DP1
 					EDP1_X=50 EDP1_Y=75
 					HDMI1_X=0 HDMI1_Y=0
