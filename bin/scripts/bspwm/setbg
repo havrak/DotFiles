@@ -22,6 +22,9 @@ xwallpaper  \
 	--output eDP-1 --zoom ~/bin/scripts/files/wall.png \
 	--output DP-1  --zoom ~/bin/scripts/files/wall2.png \
 	--output HDMI-1  --zoom ~/bin/scripts/files/wall2.png \
+	--output HDMI-2  --zoom ~/bin/scripts/files/wall2.png \
 	--output eDP1 --zoom ~/bin/scripts/files/wall.png  \
 	--output DP1  --zoom ~/bin/scripts/files/wall2.png \
-	--output HDMI1  --zoom ~/bin/scripts/files/wall2.png 2> /dev/null
+	--output HDMI1  --zoom ~/bin/scripts/files/wall2.png \
+	--output HDMI2  --zoom ~/bin/scripts/files/wall2.png 2> /dev/null
+
