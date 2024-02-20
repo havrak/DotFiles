@@ -39,8 +39,6 @@ vim.o.history = 5000
 vim.o.updatetime = 250
 vim.o.timeoutlen = 1000
 vim.lsp.set_log_level(5) -- turn off
--- vim.opt.spell = true
--- vim.opt.spelllang = { 'en_us' , 'cs', 'de'}
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'

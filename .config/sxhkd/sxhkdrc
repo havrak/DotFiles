@@ -67,13 +67,10 @@ alt + s
 # Printscreen
 
 Print
-	scrot -e 'mv $f ~/tmp/screen/'
+	scrot -z -e 'mv $f ~/tmp/screen/'
 
 shift+Print
-	scrot -u -e 'mv $f ~/tmp/screen/'
-
-ctrl+Print
-	scrot -u -e 'mv $f ~/tmp/screen && pinta ~/tmp/screen/$f'
+	scrot -z -u -e 'mv $f ~/tmp/screen/'
 
 # Audio
 

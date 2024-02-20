@@ -16,6 +16,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', ',ctab', '\\begin{center}\\begin{longtable}{\\| m{4cm} \\| m{4cm} \\| m{4cm} \\| }<Enter>\\hline<Enter><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}\\begin{center}<Esc>5ki')
 		vim.keymap.set('i', ',ckod', '\\begin{center}\\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter><Enter>\\end{minted}\\begin{center}<Esc>3k$i')
 		vim.keymap.set('i', ',cimg', '\\begin{center}\\includegraphics[width=0.8\\textwidth]{}\\end{center}<Esc>ki')
+		vim.keymap.set('i', ',cen', '\\begin{center}<Enter><Enter>\\end{center}<Esc>ki')
+
 		vim.keymap.set('i', ',tab', '\\begin{longtable}{\\| m{4cm} \\| m{4cm} \\| m{4cm} \\| }<Enter>\\hline<Enter><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}<Esc>4ki')
 		vim.keymap.set('i', ',kod', '\\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter><Enter>\\end{minted}<Esc>2k$i')
 		vim.keymap.set('i', ',img', '\\includegraphics[width=0.8\\textwidth]{}<Esc>i')

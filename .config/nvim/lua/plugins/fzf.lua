@@ -32,6 +32,5 @@ function M.config()
 	vim.keymap.set("n", "<Leader>s", function() fzf.files({cwd = vim.api.nvim_buf_get_name(0):gsub("[^/]+$", "")}) end)
 	vim.keymap.set("n", "<Leader>f", fzf.files)
 	vim.keymap.set("n", "<Leader>d", fzf.lsp_workspace_diagnostics)
-	vim.keymap.set("n", "<Leader>t", fzf.highlights)
 end
 return M
