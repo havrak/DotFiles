@@ -62,7 +62,7 @@ alt + s
 # Brightness
 
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
-	sudo light {-A,-U} 5
+	brightnessctl set {+5%,5%-}
 
 # Printscreen
 
