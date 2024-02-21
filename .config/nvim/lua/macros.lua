@@ -5,64 +5,62 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = macros_group,
 	pattern = "tex",
 	callback = function()
-		vim.keymap.set('i', ',frames', '\\begin{frame}[fragile]<Enter>\\frametitle{}<Enter>\\begin{itemize}<Enter>\\item <++><Enter>\\end{itemize}<Enter>\\end{frame}<Enter><Enter><++><Esc>6kf}i')
-		vim.keymap.set('i', ',framei', '\\begin{frame}[fragile]<Enter>\\begin{figure}[!htb]<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[height=.8\\linewidth]{}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}\\hfill<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[height=.8\\linewidth]{<++>}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}<Enter>\\end{figure}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\end{frame}<Esc>11k$i')
-		vim.keymap.set('i', ',framed', '\\begin{frame}[fragile]<Enter>\\begin{minipage}{0.48\\textwidth}<Enter><Enter>\\end{minipage}\\hfill<Enter>\\begin{minipage}{0.48\\textwidth}<Enter><++><Enter>\\end{minipage}<Enter>\\end{frame}<Esc>5k$i')
+		vim.keymap.set('i', ',,', '\\')
+		vim.keymap.set('i', ',.', '$')
 
-		vim.keymap.set('i', ',fig', '\\begin{figure}[h]<Enter>\\centering<Enter><Enter>\\caption[]{}<Enter>\\label{fig:}<Enter>\\end{figure}<Esc>3k$i')
-		vim.keymap.set('i', ',dfig', '\\begin{figure}[htb]<Enter>\\begin{minipage}[t]{.45\\textwidth}<Enter>\\centering<Enter><Enter>\\caption[<++>]{<++>}<Enter>\\end{minipage}<Enter>\\hfill<Enter>\\begin{minipage}[t]{.45\\textwidth}<Enter>\\centering<Enter><++><Enter>\\caption[<++>]{<++>}<Enter>\\end{minipage}<Enter>\\end{figure}<Esc>9ki')
+
+		-- LaTeX Page layout
 		vim.keymap.set('i', ',min', '\\begin{minipage}[t]{.45\\textwidth}<Enter><Enter>\\end{minipage}<Esc>ki')
-
-		vim.keymap.set('i', ',ctab', '\\begin{center}\\begin{longtable}{\\| m{4cm} \\| m{4cm} \\| m{4cm} \\| }<Enter>\\hline<Enter><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}\\begin{center}<Esc>5ki')
-		vim.keymap.set('i', ',ckod', '\\begin{center}\\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter><Enter>\\end{minted}\\begin{center}<Esc>3k$i')
-		vim.keymap.set('i', ',cimg', '\\begin{center}\\includegraphics[width=0.8\\textwidth]{}\\end{center}<Esc>ki')
 		vim.keymap.set('i', ',cen', '\\begin{center}<Enter><Enter>\\end{center}<Esc>ki')
 
-		vim.keymap.set('i', ',tab', '\\begin{longtable}{\\| m{4cm} \\| m{4cm} \\| m{4cm} \\| }<Enter>\\hline<Enter><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}<Esc>4ki')
-		vim.keymap.set('i', ',kod', '\\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter><Enter>\\end{minted}<Esc>2k$i')
-		vim.keymap.set('i', ',img', '\\includegraphics[width=0.8\\textwidth]{}<Esc>i')
 
-		vim.keymap.set('i', ',ra', '$\\Rightarrow$<space>')
-		vim.keymap.set('i', ',la', '$\\Leftarrow$<space>')
+		-- LaTeX Figures
+		vim.keymap.set('i', ',fig', '\\begin{figure}[h]<Enter>\\centering<Enter><Enter>\\caption[]{}<Enter>\\label{fig:}<Enter>\\end{figure}<Esc>3k$i')
+		vim.keymap.set('i', ',tab', '\\begin{longtable}{| m{4cm} | m{4cm} | m{4cm} | }<Enter>\\hline<Enter><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}<Esc>4ki')
+		vim.keymap.set('i', ',cod', '\\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter><Enter>\\end{minted}<Esc>2k$i')
+		vim.keymap.set('i', ',img', '\\includegraphics[width=0.7\\textwidth]{}<Esc>i')
+
+		-- LaTeX Text Formatting
 		vim.keymap.set('i', ',em', '\\emph{}<Esc>T{i')
 		vim.keymap.set('i', ',bf', '\\textbf{}<Esc>T{i')
-		vim.keymap.set('i', ',ud', '\\underline{}<Esc>T{i')
-		vim.keymap.set('i', ',uv', '\\uv{}<Esc>T{i')
-		vim.keymap.set('i', ',fn', '\\footnote{}<Esc>T{i')
-		vim.keymap.set('i', ',fm', '\\footnotemark')
-		vim.keymap.set('i', ',ft', '\\footnotetext{}<Esc>T{i')
 		vim.keymap.set('i', ',it', '\\textit{}<Esc>T{i')
 		vim.keymap.set('i', ',nt', '\\textnormal{}<Esc>ha')
-		vim.keymap.set('i', ',ct', '\\textcite{}<Esc>T{i')
-		vim.keymap.set('i', ',ci', '\\fullbibentry{}<Esc>T{i')
-		vim.keymap.set('i', ',cf', '\\footnote{Ibid.<space>\\cite{<++>}:<space><++>}')
-		vim.keymap.set('i', ',ul', '\\begin{itemize}<Enter><Enter>\\end{itemize}<Esc>kA\\item<Space>')
-		vim.keymap.set('i', ',ol', '\\begin{enumerate}<Enter><Enter>\\end{enumerate}<Esc>kA\\item<Space>')
-		vim.keymap.set('i', ',ll', '\\begin{enumerate}[label=\\alph*)]<Enter><Enter>\\end{enumerate}<Esc>kA\\item<Space>')
-		vim.keymap.set('i', ',li', '<ESC>o\\item<Space>')
-		vim.keymap.set('i', ',ref', '\\ref{}<Esc>T{i')
+		vim.keymap.set('i', ',uv', '\\uv{}<Esc>T{i')
+		vim.keymap.set('i', ',ud', '\\underline{}<Esc>T{i')
+
+		-- LaTeX Sections
 		vim.keymap.set('i', ',chap', '\\chapter{}<Enter><Enter><++><Esc>2kf}i')
 		vim.keymap.set('i', ',sec', '\\section{}<Enter><Enter><++><Esc>2kf}i')
 		vim.keymap.set('i', ',ssec', '\\subsection{}<Enter><Enter><++><Esc>2kf}i')
 		vim.keymap.set('i', ',sssec', '\\subsubsection{}<Enter><Enter><++><Esc>2kf}i')
-		vim.keymap.set('i', ',col', '\\begin{multicols}{2}\\raggedcolumns<Enter><Enter>\\columnbreak<Enter><Enter>\\end{multicols}<Esc>3ki')
-		vim.keymap.set('i', ',head', '\\vspace{0.3cm}<Enter>\\noindent<Enter>\\textbf{\\large }<Enter><Enter><++><Esc>2kf}i')
-		vim.keymap.set('i', ',,', '\\')
-		vim.keymap.set('i', ',tl', '\\begin{lemma}<Enter><Enter>\\end{lemma}<Esc>ki')
-		vim.keymap.set('i', ',tt', '\\begin{tvrz}<Enter><Enter>\\end{tvrz}<Esc>ki')
-		vim.keymap.set('i', ',tv', '\\begin{veta}<Enter><Enter>\\end{veta}<Esc>ki')
-		vim.keymap.set('i', ',td', '\\begin{dusl}<enter><enter>\\end{dusl}<esc>ki')
-		vim.keymap.set('i', ',te', '\\begin{definice}<enter><enter>\\end{definice}<Esc>ki')
-		vim.keymap.set('i', ',tp', '\\begin{dukaz}<enter><enter>\\end{dukaz}<Esc>ki')
-	end
-})
 
--- LaTeX Math Mode
-vim.api.nvim_create_autocmd("FileType", {
-	group = macros_group,
-	pattern = {"tex", "vimwiki"},
-	callback = function()
-		vim.keymap.set('i', '.mm', '$$<Esc>ha')
+		-- LaTeX Citations, Footnotes, and References
+		vim.keymap.set('i', ',fn', '\\footnote{}<Esc>T{i')
+		vim.keymap.set('i', ',fm', '\\footnotemark')
+		vim.keymap.set('i', ',ft', '\\footnotetext{}<Esc>T{i')
+		vim.keymap.set('i', ',ct', '\\textcite{}<Esc>T{i')
+		vim.keymap.set('i', ',ci', '\\fullbibentry{}<Esc>T{i')
+		vim.keymap.set('i', ',cf', '\\footnote{Ibid.<space>\\cite{<++>}:<space><++>}')
+		vim.keymap.set('i', ',ref', '\\ref{}<Esc>T{i')
+
+		-- LaTeX Lists
+		vim.keymap.set('i', ',ul', '\\begin{itemize}<Enter><Enter>\\end{itemize}<Esc>kA\\item<Space>')
+		vim.keymap.set('i', ',ol', '\\begin{enumerate}<Enter><Enter>\\end{enumerate}<Esc>kA\\item<Space>')
+		vim.keymap.set('i', ',ll', '\\begin{enumerate}[label=\\alph*)]<Enter><Enter>\\end{enumerate}<Esc>kA\\item<Space>')
+		vim.keymap.set('i', ',li', '<ESC>o\\item<Space>')
+		vim.keymap.set('i', ',col', '\\begin{multicols}{2}\\raggedcolumns<Enter><Enter>\\columnbreak<Enter><Enter>\\end{multicols}<Esc>3ki')
+
+		-- LaTeX Theorems
+		vim.keymap.set('i', ',tl', '\\begin{lemma}[]<Enter><++><Enter>\\end{lemma}<Esc>2k$i')
+		vim.keymap.set('i', ',tv', '\\begin{veta}[]<Enter><++><Enter>\\end{veta}<Esc>2k$i')
+		vim.keymap.set('i', ',te', '\\begin{definice}[]<enter><++><enter>\\end{definice}<Esc>2k$i')
+		vim.keymap.set('i', ',tt', '\\begin{tvrz}<Enter><Enter>\\end{tvrz}<Esc>ki')
+		vim.keymap.set('i', ',td', '\\begin{dusl}<enter><enter>\\end{dusl}<esc>ki')
+		vim.keymap.set('i', ',tp', '\\begin{dukaz}<enter><enter>\\end{dukaz}<Esc>ki')
+
+		-- LaTeX Math Mode
+		vim.keymap.set('i', ',ra', '$\\Rightarrow$<space>')
+		vim.keymap.set('i', ',la', '$\\Leftarrow$<space>')
 		vim.keymap.set('i', '.pmat', '\\begin{pmatrix}<Enter>\\\\<Enter>\\end{pmatrix}<Esc>khhi')
 		vim.keymap.set('i', '.emat', '\\begin{matrix}<Enter>\\\\<Enter>\\end{matrix}<Esc>khhi')
 		vim.keymap.set('i', '.vmat', '\\begin{vmatrix}<Enter>\\\\<Enter>\\end{vmatrix}<Esc>khhi')
@@ -76,11 +74,18 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.fr', '\\frac{}{<++>}<Space><++><Esc>12ha')
 		vim.keymap.set('i', '.i', '\\infty<Space>')
 		vim.keymap.set('i', '.d', '\\cdot<Space>')
-		vim.keymap.set('i', '.cc', '\\lcom  \\rcom<Esc>5hi')
 		vim.keymap.set('i', '.[', '\\langle<Space>')
 		vim.keymap.set('i', '.]', '\\rangle<Space>')
 		vim.keymap.set('i', '.j', '\\left')
 		vim.keymap.set('i', '.k', '\\right')
+		vim.keymap.set('i', 'cf', '\\mathsrc{F}<Space>')
+		vim.keymap.set('i', 'cl', '\\mathsrc{L}<Space>')
+		vim.keymap.set('i', 'cz', '\\mathsrc{Z}<Space>')
+
+		-- LaTeX Beamer specific
+		vim.keymap.set('i', ',frames', '\\begin{frame}[fragile]<Enter>\\frametitle{}<Enter>\\begin{itemize}<Enter>\\item <++><Enter>\\end{itemize}<Enter>\\end{frame}<Enter><Enter><++><Esc>6kf}i')
+		vim.keymap.set('i', ',framed', '\\begin{frame}[fragile]<Enter>\\begin{figure}[!htb]<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[height=.8\\linewidth]{}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}\\hfill<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[height=.8\\linewidth]{<++>}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}<Enter>\\end{figure}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\end{frame}<Esc>11k$i')
+
 	end
 })
 
