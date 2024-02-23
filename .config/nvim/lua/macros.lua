@@ -14,7 +14,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', ',col', '\\begin{multicols}{2}\\raggedcolumns<Enter><Enter>\\columnbreak<Enter><Enter>\\end{multicols}<Esc>3ki') -- two column layout
 		vim.keymap.set('i', ',cen', '\\begin{center}<Enter><Enter>\\end{center}<Esc>ki') -- center align
 
-
 		-- LaTeX Figures
 		vim.keymap.set('i', ',fig', '\\begin{figure}[h]<Enter>\\centering<Enter><Enter>\\caption[]{}<Enter>\\label{fig:}<Enter>\\end{figure}<Esc>3k$i') -- figure (includes caption and label)
 		vim.keymap.set('i', ',tab', '\\begin{longtable}{|  |}<Enter>\\hline<Enter><++><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}<Esc>6k$hhi') -- table without any content
@@ -71,11 +70,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.n', '\\int_{}^{<++>}<Space><++><Space>d<++><Esc>18hi') -- integral
 		vim.keymap.set('i', '.ve', '\\vec{}<Esc>ha') -- vector
 		vim.keymap.set('i', '.t', '\\mathrm{}<Esc>ha') -- text in math mode without italics
+		vim.keymap.set('i', '.ca', '\\mathcal{}<Esc>ha') -- text with accents
 		vim.keymap.set('i', '.fr', '\\frac{}{<++>}<Space><++><Esc>12ha') -- fraction
 		vim.keymap.set('i', '.i', '\\infty<Space>') -- infinity
 		vim.keymap.set('i', '.d', '\\cdot<Space>') -- dot
-		vim.keymap.set('i', '.[', '\\langle<Space>') -- left angle bracket
-		vim.keymap.set('i', '.]', '\\rangle<Space>') -- right angle bracket
 		vim.keymap.set('i', '.j', '\\left') -- left
 		vim.keymap.set('i', '.k', '\\right') -- right
 		vim.keymap.set('i', '.cf', '\\mathscr{F}<Space>') -- Fourier transform
