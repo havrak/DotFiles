@@ -111,7 +111,7 @@ noIndentBlock:
 
 # remove trailing whitespace from all lines
 removeTrailingWhitespace:
-    beforeProcessing: 0
+    beforeProcessing: 1
     afterProcessing: 1
 
 # \begin{document} and \end{document} are treated differently
