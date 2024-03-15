@@ -76,12 +76,12 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.d', '\\cdot<Space>') -- dot
 		vim.keymap.set('i', '.j', '\\left') -- left
 		vim.keymap.set('i', '.k', '\\right') -- right
-		vim.keymap.set('i', '.cf', '\\mathscr{F}[](<++>)<Space><++><Esc>$F]i') -- Fourier transform
-		vim.keymap.set('i', '.cl', '\\mathscr{L}[](<++>)<Space><++><Esc>$F]i') -- Laplace transform
-		vim.keymap.set('i', '.cz', '\\mathscr{Z}[](<++>)<Space><++><Esc>$F]i') -- Z transform
-		vim.keymap.set('i', '.cF', '\\mathscr{F}^{-1}[](<++>)<Space><++><Esc>$F]i') -- Fourier transform
-		vim.keymap.set('i', '.cL', '\\mathscr{L}^{-1}[](<++>)<Space><++><Esc>$F]i') -- Laplace transform
-		vim.keymap.set('i', '.cZ', '\\mathscr{Z}^{-1}[](<++>)<Space><++><Esc>$F]i') -- Z transform
+		vim.keymap.set('i', '.cf', '\\mathscr{F}[](<++>)<Space><++><Esc>11hi') -- Fourier transform
+		vim.keymap.set('i', '.cl', '\\mathscr{L}[](<++>)<Space><++><Esc>11hi') -- Laplace transform
+		vim.keymap.set('i', '.cz', '\\mathscr{Z}[](<++>)<Space><++><Esc>11hi') -- Z transform
+		vim.keymap.set('i', '.cF', '\\mathscr{F}^{-1}[](<++>)<Space><++><Esc>11hi') -- Fourier transform
+		vim.keymap.set('i', '.cL', '\\mathscr{L}^{-1}[](<++>)<Space><++><Esc>11hi') -- Laplace transform
+		vim.keymap.set('i', '.cZ', '\\mathscr{Z}^{-1}[](<++>)<Space><++><Esc>11hi') -- Z transform
 		vim.keymap.set('i', '.ch', '\\mathbbm{1}') -- Heaviside function
 
 		-- LaTeX Beamer specific
