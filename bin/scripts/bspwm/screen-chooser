@@ -59,7 +59,6 @@ esac
 
 
 setbg
-remap
 
 sleep 1
 polybar-launch

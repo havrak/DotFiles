@@ -9,7 +9,6 @@ bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
 setbg &
 xrdb .Xresources
 rsw &
-remap &
 
 
 # Global Settings
