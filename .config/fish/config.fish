@@ -44,6 +44,7 @@ set -g __fish_git_prompt_char_invalidstate ''
 set -g __fish_git_prompt_char_stagedstate ''
 set -g __fish_git_prompt_char_stashstate '󰈻'
 
+
 function fish_prompt
   set -l last_status $status
 	set_color yellow
@@ -58,7 +59,9 @@ function fish_prompt
 		printf ":"
 	set_color blue
 		printf (basename $PWD)
-		printf (fish_git_prompt)
+		if test (tty) != /dev/tty1
+			printf (fish_git_prompt)
+		end
 	set_color red --bold
 		printf ">"
 	set_color normal
