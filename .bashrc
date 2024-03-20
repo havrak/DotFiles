@@ -2,11 +2,21 @@ stty -ixon
 
 [[ $- != *i* ]] && return
 
-if command -v bat &>/dev/null; then
-	export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# add directories to PATH only if they aren't already there
+TOADD=$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':')
+
+maplepath=$(find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin)
+if [ -n "$maplepath" ]; then
+	TOADD="$TOADD:$maplepath"
 fi
 
-export PATH="$PATH:$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':')"
+for dir in $(echo $TOADD | tr ':' '\n'); do
+	if [[ ":$PATH:" != *":$dir:"* ]]; then
+		export PATH="$PATH:$dir"
+	fi
+done
+
+
 export TERMINAL="st"
 export TERM="xterm-256color"
 export BROWSER="firefox"
@@ -79,11 +89,6 @@ alias spipu="sudo pip list --outdated --format=freeze | grep -v '^\-e' | cut -d 
 # navigation
 alias ..="cd .."
 alias ...="cd ../.."
-alias .3="cd ../../.."
-alias .4="cd ../../.."
-alias .5="cd ../../../..'"
-alias .6="cd ../../../../.."
-
 
 # ls -> exa
 if command -v exa &>/dev/null; then
@@ -118,5 +123,3 @@ alias status="git status"
 alias tag="git tag"
 alias newtag="git tag -a"
 alias push="git remote | xargs -L1 git push --all"
-
-export QSYS_ROOTDIR="/home/havra/.cache/yay/quartus-free/pkg/quartus-free-quartus/opt/intelFPGA/21.1/quartus/sopc_builder/bin"

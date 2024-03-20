@@ -24,8 +24,6 @@ return {
 		vim.g.formatdef_latexindent = '"latexindent --logfile=/dev/null --local=$HOME/.config/latexindent/config.yaml -"'
 	end},
 
-	{'dhruvasagar/vim-table-mode' , event="VeryLazy"},
-
 	{'aperezdc/vim-template' , event = "VeryLazy", config = function()
 		vim.g.email="krystof@havrak.xyz"
 		vim.g.username="Havránek Kryštof"

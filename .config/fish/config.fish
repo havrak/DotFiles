@@ -14,7 +14,13 @@ export MANPAGER="less"
 bind "[1;2D" backward-bigword
 bind "[1;2C" forward-bigword
 
-set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2)  $(dirname $(find $HOME/.arduino15/packages/esp32/tools/xtensa-esp32-elf-gcc/ -name 'xtensa-esp32-elf-addr2line' 2>/dev/null) 2>/dev/null)
+set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2)
+
+set maplepath (find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin)
+if test -n "$maplepath"
+	set toadd $toadd $maplepath
+end
+
 
 
 for entry in $toadd
