@@ -65,6 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.vmat', '\\begin{vmatrix}<Enter>\\\\<Enter>\\end{vmatrix}<Esc>khhi') -- matrix with vertical lines
 		vim.keymap.set('i', '.lim', '\\lim_{ \\rightarrow <++>}<Space><++><Space><Esc>23hi') -- limit
 		vim.keymap.set('i', '.lie', '\\frac{d }{d <++>}<Space><++><Esc>13hi') -- liebnitz style for derivative
+		vim.keymap.set('i', '.com', '\\frac{D }{D <++>}<Space><++><Esc>13hi') -- complete derivative for general theory of relativity
 		vim.keymap.set('i', '.par', '\\frac{\\partial }{\\partial <++>}<Space><++><Esc>20hi') -- partial derivative
 		vim.keymap.set('i', '.sum', '\\sum_{}^{<++>}<Space><++><Esc>12hi') -- sum
 		vim.keymap.set('i', '.n', '\\int_{}^{<++>}<Space><++><Space>d<++><Esc>18hi') -- integral

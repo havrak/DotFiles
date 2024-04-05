@@ -5,8 +5,8 @@
 if [[ $(xrandr | grep HDMI- | wc -l) > 0 ]]; then
 		INTERNAL="eDP-1"
 		DP="DP-1"
-		HDMI1="HDMI-2"
-		HDMI2="HDMI-1"
+		HDMI1="HDMI-1"
+		HDMI2="HDMI-2"
 else
 		INTERNAL="eDP1"
 		DP="DP1"

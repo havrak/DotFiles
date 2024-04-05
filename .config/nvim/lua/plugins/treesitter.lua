@@ -17,6 +17,7 @@ function M.config()
 			"html",
 			"java",
 			"json",
+			"javascript",
 			"latex",
 			"lua",
 			"markdown",
