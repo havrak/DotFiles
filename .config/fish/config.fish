@@ -65,8 +65,8 @@ function fish_prompt
 		printf ":"
 	set_color blue
 		printf (basename $PWD)
-		if test (tty) != /dev/tty1
-			printf (fish_git_prompt)
+		if test (tty) != /dev/tty1; and  test "--prefix--$(git rev-parse --show-toplevel 2>/dev/null)" != "--prefix--$HOME"
+				printf (fish_git_prompt)
 		end
 	set_color red --bold
 		printf ">"

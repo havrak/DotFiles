@@ -45,10 +45,54 @@ function M.config()
 			}
 		}
 	}
-	vim.fn.matchadd("Todo", "TODO")
-	vim.fn.matchadd("Todo", "NOTE")
-	vim.fn.matchadd("Todo", "WARN")
-	vim.fn.matchadd("Todo", "DELETE")
+	vim.cmd('hi WARN			term=standout guibg=white guifg=red		ctermbg=white ctermfg=red')
+	vim.cmd('hi NOTE				term=standout guifg=blue	guibg=white ctermbg=blue	ctermfg=white')
+	vim.cmd('hi INFO		term=bold			guibg=green guifg=white ctermbg=green ctermfg=white')
+
+	function setup_highlights()
+				vim.fn.matchadd("NOTE", "TODO")
+				vim.fn.matchadd("NOTE", "NOTE")
+				vim.fn.matchadd("WARN", "DELETE")
+				vim.fn.matchadd("WARN", "XXX")
+				vim.fn.matchadd("WARN", "WARN")
+				vim.fn.matchadd("INFO", "INFO")
+				vim.fn.matchadd("INFO", "OPTIONAL")
+	end
+
+	setup_highlights()
+
+	local highlight_group = vim.api.nvim_create_augroup("Highlights", {})
+
+	vim.api.nvim_create_autocmd("WinEnter", {
+		group = highlight_group,
+		callback = function()
+			setup_highlights()
+		end,
+	})
+
+
+	-- Folds
+	vim.o.foldmethod = 'expr'
+	vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+	vim.o.foldcolumn = '1'
+
+	vim.cmd("silent! loadview"); -- again command needs to be called outside of autogroup to affect first file
+
+	local fold_group = vim.api.nvim_create_augroup("Folds", {clear = true})
+
+	vim.api.nvim_create_autocmd("BufWinEnter", {
+		group = fold_group,
+		pattern = "*.*",
+		command = "silent! loadview",
+	})
+
+	vim.api.nvim_create_autocmd("BufWinLeave", {
+		group = fold_group,
+		pattern = "*.*",
+		command = "mkview",
+	})
+
 
 end
 return M
+

@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', ',cen', '\\begin{center}<Enter><Enter>\\end{center}<Esc>ki') -- center align
 
 		-- LaTeX Figures
-		vim.keymap.set('i', ',fig', '\\begin{figure}[h]<Enter>\\centering<Enter><Enter>\\caption[]{}<Enter>\\label{fig:}<Enter>\\end{figure}<Esc>3k$i') -- figure (includes caption and label)
+		vim.keymap.set('i', ',fig', '\\begin{figure}[h!]<Enter>\\centering<Enter><Enter>\\caption[]{}<Enter>\\label{fig:}<Enter>\\end{figure}<Esc>3k$i') -- figure (includes caption and label)
 		vim.keymap.set('i', ',tab', '\\begin{longtable}{|  |}<Enter>\\hline<Enter><++><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}<Esc>6k$hhi') -- table without any content
 		vim.keymap.set('i', ',cod', '\\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter><++><Enter>\\end{minted}<Esc>2k$i') -- code block
 		vim.keymap.set('i', ',img', '\\includegraphics[width=0.7\\textwidth]{}<Esc>i') -- includegraphics
@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.vmat', '\\begin{vmatrix}<Enter>\\\\<Enter>\\end{vmatrix}<Esc>khhi') -- matrix with vertical lines
 		vim.keymap.set('i', '.lim', '\\lim_{ \\rightarrow <++>}<Space><++><Space><Esc>23hi') -- limit
 		vim.keymap.set('i', '.lie', '\\frac{d }{d <++>}<Space><++><Esc>13hi') -- liebnitz style for derivative
-		vim.keymap.set('i', '.com', '\\frac{D }{D <++>}<Space><++><Esc>13hi') -- complete derivative for general theory of relativity
+		vim.keymap.set('i', '.com', '\\frac{D }{D <++>}<Space><++><Esc>13hi') -- liebnitz style for derivative
 		vim.keymap.set('i', '.par', '\\frac{\\partial }{\\partial <++>}<Space><++><Esc>20hi') -- partial derivative
 		vim.keymap.set('i', '.sum', '\\sum_{}^{<++>}<Space><++><Esc>12hi') -- sum
 		vim.keymap.set('i', '.n', '\\int_{}^{<++>}<Space><++><Space>d<++><Esc>18hi') -- integral

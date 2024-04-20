@@ -27,9 +27,8 @@ vim.o.linebreak = true
 vim.o.breakindent = true
 vim.o.hidden = true
 vim.o.autoindent = true
+
 vim.o.smartindent = true
-vim.o.foldmethod = 'syntax'
-vim.o.foldcolumn = '1'
 vim.o.incsearch = true
 vim.o.splitright = true
 vim.o.splitbelow = true
@@ -43,5 +42,4 @@ vim.opt.spelllang = { 'en_us' , 'cs', 'de'}
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-
 
