@@ -14,13 +14,19 @@ export MANPAGER="less"
 bind "[1;2D" backward-bigword
 bind "[1;2C" forward-bigword
 
-set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2)
+set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2) $(du --exclude='*git*' $HOME/.local/bin | cut -f2)
 
+# check existance of maple
 set maplepath (find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin)
 if test -n "$maplepath"
 	set toadd $toadd $maplepath
 end
 
+# check existance of mathlab
+set matlabpath $HOME/bin/progs/matlab/bin
+if test -n "$matlabpath"
+	set toadd $toadd $matlabpath
+end
 
 
 for entry in $toadd
@@ -85,3 +91,6 @@ end
 source "$HOME/.config/fish/abbreviations.fish"
 source "$HOME/.config/fish/startssh.fish"
 source "$HOME/.config/fish/colorscheme.fish"
+
+# Created by `pipx` on 2024-05-01 10:19:25
+set PATH $PATH /home/havra/.local/bin

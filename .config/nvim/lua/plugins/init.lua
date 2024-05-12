@@ -15,8 +15,8 @@ return {
 
 { 'preservim/tagbar', event = "VeryLazy"},
 
-{ 'github/copilot.vim', event = "VeryLazy", priority = -1, config = function()
-	vim.g.copilot_filetypes = {tex = true, cpp=true, javascript=true, arduino=true, lua=true, css=true}
+{ 'github/copilot.vim', event = "VeryLazy", config = function()
+	vim.g.copilot_enabled = 1
 	vim.g.copilot_assume_mapped = 1
 end},
 
