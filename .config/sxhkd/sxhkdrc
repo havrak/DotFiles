@@ -67,10 +67,10 @@ alt + s
 # Printscreen
 
 Print
-	scrot -z -e 'mv $f ~/tmp/screen/'
+	scrot --format jpg -z -e 'mv $f ~/tmp/screen/'
 
 shift+Print
-	scrot -z -u -e 'mv $f ~/tmp/screen/'
+	scrot --format jpg -z -u -e 'mv $f ~/tmp/screen/'
 
 # Audio
 
