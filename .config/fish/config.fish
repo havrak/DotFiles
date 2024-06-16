@@ -26,7 +26,7 @@ end
 set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2) $(du --exclude='*git*' $HOME/.local/bin | cut -f2)
 
 # check existance of maple and add it to path, in fish one cannot dump "No matches for wildcard" error so  double check is needed
-if test -n "$(ls bin/progs | grep maple)"
+if test -n "$(ls $HOME/bin/progs | grep maple)"
 	# if it exists then add it to path
 	set maplepath (find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin )
 	if test -n "$maplepath"
