@@ -14,12 +14,24 @@ export MANPAGER="less"
 bind "[1;2D" backward-bigword
 bind "[1;2C" forward-bigword
 
+# check if bin/progs and bin/scripts exist otherwise create them
+if not test -d $HOME/bin/progs
+	mkdir -p $HOME/bin/progs
+end
+
+if not test -d $HOME/bin/scripts
+	mkdir -p $HOME/bin/scripts
+end
+
 set toadd $(du --exclude='*git*' $HOME/bin/scripts | cut -f2) $(du --exclude='*git*' $HOME/.local/bin | cut -f2)
 
-# check existance of maple
-set maplepath (find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin)
-if test -n "$maplepath"
-	set toadd $toadd $maplepath
+# check existance of maple and add it to path, in fish one cannot dump "No matches for wildcard" error so  double check is needed
+if test -n "$(ls bin/progs | grep maple)"
+	# if it exists then add it to path
+	set maplepath (find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin )
+	if test -n "$maplepath"
+		set toadd $toadd $maplepath
+	end
 end
 
 # check existance of mathlab
@@ -35,9 +47,6 @@ for entry in $toadd
 	end
 end
 
-
-
-# /opt/esp-idf/export.fish
 
 # set -x PATH $default_fish_path:(du --exclude='*git*' $HOME/bin/scripts | cut -f2 | tr '\n' ':')
 set -x READER zathura

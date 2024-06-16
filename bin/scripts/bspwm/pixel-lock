@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 scrot /tmp/screen.png
-convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
-mpc pause
-setxkbmap us
-i3lock -i /tmp/screen.png
-setxkbmap -option 'grp:win_space_toggle' -layout us,cz -variant ,qwerty
-setxkbmap -option caps:escape
+magick /tmp/screen.png -scale 1% -scale 1000% /tmp/screen.png
+i3lock -i /tmp/screen.png -k -f -e
 rm /tmp/screen.png
