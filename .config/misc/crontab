@@ -1,0 +1,2 @@
+*/5 * * * * DISPLAY=:0 /usr/local/bin/mailsync
+
