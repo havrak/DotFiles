@@ -26,5 +26,6 @@
 *color7: #ebdbb2
 *color15: #a89984
 
-Xcursor.size:   24
+Xcursor.theme: Notwaita-Black
+Xcursor.size: 20
 Xft.dpi: 96
