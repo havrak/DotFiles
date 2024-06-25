@@ -49,13 +49,13 @@ abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.config/nvim/vimwiki havrak.xy
 # package manager
 switch (cat /etc/*-release 2>/dev/null | grep "^ID=" | awk -F '=' '{print $2}')
 	case arch manjaro
-		abbr p 				"yay"
-		abbr po 			"yay -S --overwrite \"*\""
+		abbr p 				"paru"
+		abbr po 			"paru -S --overwrite \"*\""
 		abbr prm 			"sudo rm -rf /var/cache/pacman/"
-		abbr orphans 	"yay -Qqtd"
-		abbr pr 			"yay -Rscn"
-		abbr pss 			"yay -Slq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -S"
-		abbr psr 			"yay -Qeq | fzf -m --preview 'yay -Si {1}'  --preview-window="wrap" | xargs -ro  yay -Rscn"
+		abbr orphans 	"paru -Qqtd"
+		abbr pr 			"paru -Rscn"
+		abbr pss 			"paru -Slq | fzf -m --preview 'paru -Si {1}'  --preview-window="wrap" | xargs -ro  paru -S"
+		abbr psr 			"paru -Qeq | fzf -m --preview 'paru -Si {1}'  --preview-window="wrap" | xargs -ro  paru -Rscn"
 	case debian raspbian
 		abbr p 				"sudo apt"
 		abbr pr 			"sudo apt autoremove"
