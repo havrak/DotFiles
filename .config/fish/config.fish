@@ -96,7 +96,11 @@ function fish_user_key_bindings
 	fzf_key_bindings
 end
 
-# starts ssh agent on loggin into tty
+# if status is-interactive
+#  dbus-update-activation-environment --systemd --all
+# end
+
+	# starts ssh agent on loggin into tty
 source "$HOME/.config/fish/abbreviations.fish"
 source "$HOME/.config/fish/startssh.fish"
 source "$HOME/.config/fish/colorscheme.fish"
