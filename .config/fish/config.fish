@@ -40,6 +40,11 @@ if test -n "$matlabpath"
 	set toadd $toadd $matlabpath
 end
 
+set stmcubepath $HOME/bin/progs/stmcube
+if test -n "$stmcubepath"
+	set toadd $toadd $stmcubepath
+end
+
 
 for entry in $toadd
 	if not contains $entry $PATH

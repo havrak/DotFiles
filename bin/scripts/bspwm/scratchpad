@@ -39,7 +39,7 @@ if [ -z $1 ]; then
 			case $(cat /tmp/bspwm_screenlayout) in
 				"ultra") # 2560x1080 connected to DP1
 					EDP1_X=50 EDP1_Y=75
-					HDMI1_X=0 HDMI1_Y=0
+					HDMI1_X=50 HDMI1_Y=25
 					DP1_X=50 DP1_Y=25 ;;
 				"4k") # 3840x2160 connected to DP1
 					EDP1_X=48 EDP1_Y=83
@@ -52,7 +52,7 @@ if [ -z $1 ]; then
 				"1080p") # 1920x1080 connected to HDMI1
 					EDP1_X=50 EDP1_Y=75
 					HDMI1_X=50 HDMI1_Y=25
-					DP_X=0 DP1_Y=0 ;;
+					DP1_X=50 DP1_Y=25 ;;
 				*)
 					EDP1_X=50 EDP1_Y=50
 					HDMI1_X=50 HDMI1_Y=50

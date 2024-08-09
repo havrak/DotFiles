@@ -5,8 +5,8 @@
 if [[ $(xrandr | grep HDMI- | wc -l) > 0 ]]; then
 		INTERNAL="eDP-1"
 		DP="DP-1"
-		HDMI1="HDMI-1"
-		HDMI2="HDMI-2"
+		HDMI1="HDMI-2"
+		HDMI2="HDMI-1"
 else
 		INTERNAL="eDP1"
 		DP="DP1"
@@ -16,7 +16,7 @@ fi
 
 # check if argument is passed, if not use dmenu to choose
 if [ -z "$1" ]; then
-	choose=$(printf "laptop\\nultra\\n4k\\n1080p\\ntriple\\nmanual" | dmenu -i -p "Choose monitor setup")
+	choose=$(printf "laptop\\nultra\\n4k\\nhdmi-1080\\ndp-1080p\\ntriple\\nmanual" | dmenu -i -p "Choose monitor setup")
 else
 	choose=$1
 fi
@@ -39,14 +39,20 @@ case "$choose" in
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
 		echo "4k" > /tmp/bspwm_screenlayout
 		;;
-	"1080p")
+	"hdmi-1080p")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $DP --off --output $HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output virtual1 --off
 		bspc monitor $HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
 		echo "1080p" > /tmp/bspwm_screenlayout
 		;;
+	"dp-1080p")
+		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $HDMI1 --off --output $DP --mode 1920x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output virtual1 --off
+		bspc monitor $DP -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
+		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
+		echo "1080p" > /tmp/bspwm_screenlayout
+		;;
 	"triple")
-		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $DP --mode 1920x1080 --pos 1920x0 --rotate normal --output $HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output VIRTUAL1 --off
+		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $DP --mode 1920x1080 --rate --pos 1920x0 --rotate normal --output $HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output VIRTUAL1 --off
 		bspc monitor $HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI'
 		bspc monitor $DP -d 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
