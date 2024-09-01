@@ -38,34 +38,34 @@ if [ -z $1 ]; then
 		if bspc query -N -n "$pid.hidden" > /dev/null; then
 			case $(cat /tmp/bspwm_screenlayout) in
 				"ultra") # 2560x1080 connected to DP1
-					EDP1_X=50 EDP1_Y=75
-					HDMI1_X=50 HDMI1_Y=25
-					DP1_X=50 DP1_Y=25 ;;
+					EDP_X=50 EDP_Y=75
+					HDMI_X=50 HDMI_Y=25
+					DP_X=50 DP_Y=25 ;;
 				"4k") # 3840x2160 connected to DP1
-					EDP1_X=48 EDP1_Y=83
-					HDMI1_X=0 HDMI1_Y=0
-					DP1_X=50 DP1_Y=31 ;;
+					EDP_X=48 EDP_Y=83
+					HDMI_X=0 HDMI_Y=0
+					DP_X=50 DP_Y=31 ;;
 				"triple") # 1920x1080 connected to HDMI1 and DP1
-					EDP1_X=25 EDP1_Y=75
-					HDMI1_X=25 HDMI1_Y=25
-					DP1_X=75 DP1_Y=25 ;;
+					EDP_X=25 EDP_Y=75
+					HDMI_X=25 HDMI_Y=25
+					DP_X=75 DP_Y=25 ;;
 				"1080p") # 1920x1080 connected to HDMI1
-					EDP1_X=50 EDP1_Y=75
-					HDMI1_X=50 HDMI1_Y=25
-					DP1_X=50 DP1_Y=25 ;;
+					EDP_X=50 EDP_Y=75
+					HDMI_X=50 HDMI_Y=25
+					DP_X=50 DP_Y=25 ;;
 				*)
-					EDP1_X=50 EDP1_Y=50
-					HDMI1_X=50 HDMI1_Y=50
-					DP1_X=50 DP1_Y=50 ;;
+					EDP_X=50 EDP_Y=50
+					HDMI_X=50 HDMI_Y=50
+					DP_X=50 DP_Y=50 ;;
 			esac
 
 			case "$(bspc query -M -m --names)" in
 				"eDP1" | "eDP-1")
-					xdotool windowmove $pid $EDP1_X% $EDP1_Y% ;;
+					xdotool windowmove $pid $EDP_X% $EDP_Y% ;;
 				"HDMI1" | "HDMI-1" | "HDMI2" | "HDMI-2")
-					xdotool windowmove $pid $HDMI1_X% $HDMI1_Y% ;;
+					xdotool windowmove $pid $HDMI_X% $HDMI_Y% ;;
 				*)
-					xdotool windowmove $pid $DP1_X% $DP1_Y% ;;
+					xdotool windowmove $pid $DP_X% $DP_Y% ;;
 			esac
 
 			width=$(($(xdotool getwindowgeometry --shell $pid | grep WIDTH | awk -F "=" '{print $2}')/2))
