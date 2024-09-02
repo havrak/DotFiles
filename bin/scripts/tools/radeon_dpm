@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <low|high>"
+    exit 1
+fi
+
+# Check if the argument is either "low" or "high"
+if [ "$1" != "low" ] && [ "$1" != "high" ]; then
+    echo "Argument must be either 'low' or 'high'"
+    exit 1
+fi
+
+# Update the value in the tlp.conf file
+sed -i "s/^\(RADEON_DPM_PERF_LEVEL_ON_AC=\).*/\1$1/" /etc/tlp.conf
+
+echo "Updated RADEON_DPM_PERF_LEVEL_ON_AC to $1"
+
+systemctl restart tlp
