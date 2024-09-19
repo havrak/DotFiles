@@ -46,16 +46,27 @@ abbr picamdw      "gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp, media
 abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  192.168.6.1:~/drone_software"
 abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.config/nvim/vimwiki havrak.xyz: --delete-after"
 
+
 # package manager
 switch (cat /etc/*-release 2>/dev/null | grep "^ID=" | awk -F '=' '{print $2}')
 	case arch manjaro
-		abbr p 				"paru"
-		abbr po 			"paru -S --overwrite \"*\""
+		if type -q paru
+			set package_manager "paru"
+		else
+			if type -q yay
+				set package_manager "yay"
+			else
+				set package_manager "pacman"
+			end
+		end
+
+		abbr p 				"$package_manager"
+		abbr po 			"$package_manager -S --overwrite \"*\""
 		abbr prm 			"sudo rm -rf /var/cache/pacman/"
-		abbr orphans 	"paru -Qqtd"
-		abbr pr 			"paru -Rscn"
-		abbr pss 			"paru -Slq | fzf -m --preview 'paru -Si {1}'  --preview-window="wrap" | xargs -ro  paru -S"
-		abbr psr 			"paru -Qeq | fzf -m --preview 'paru -Si {1}'  --preview-window="wrap" | xargs -ro  paru -Rscn"
+		abbr orphans 	"$package_manager -Qqtd"
+		abbr pr 			"$package_manager -Rscn"
+		abbr pss 			"$package_manager -Slq | fzf -m --preview '$package_manager -Si {1}'  --preview-window="wrap" | xargs -ro  $package_manager -S"
+		abbr psr 			"$package_manager -Qeq | fzf -m --preview '$package_manager -Si {1}'  --preview-window="wrap" | xargs -ro  $package_manager -Rscn"
 	case debian raspbian
 		abbr p 				"sudo apt"
 		abbr pr 			"sudo apt autoremove"

@@ -72,6 +72,7 @@ case "$choose" in
 	"mirror")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x0 --rotate normal --output $ACTIVE --mode 1920x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $INTERNAL -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
+		echo "laptop" > /tmp/bspwm_screenlayout
 		;;
 
 esac

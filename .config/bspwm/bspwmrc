@@ -4,7 +4,7 @@ bspc rule -r "*"
 # Rules
 bspc rule -a Zathura state=tiled
 bspc rule -a gpt sticky=on state=floating hidden=on rectangle=800x600+0+0
-
+bspc rule -a MATLABWindow state=floating
 # Autostart
 setbg &
 xrdb .Xresources
