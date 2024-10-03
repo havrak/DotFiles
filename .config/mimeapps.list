@@ -1,0 +1,6 @@
+
+[Default Applications]
+x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_opt_stm32cubeide_.desktop
+x-scheme-handler/adskidmgr=adskidmgr-opener.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/http=firefox.desktop

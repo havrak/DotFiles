@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "tex",
 	callback = function()
 		vim.keymap.set('i', ',,', '\\')
-		vim.keymap.set('i', ',.', '$')
+		vim.keymap.set('i', ',.', '$$<Esc>i')
 
 
 		-- LaTeX Page layout
