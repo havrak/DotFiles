@@ -21,7 +21,8 @@ textype() { \
 		basename=$(echo $basename | sed 's/\(^.*\sP\)[0-9]*$/\100/' )
 		base=$(echo $base | sed 's/\(^.*\sP\)[0-9]*$/\100/' )
 	fi
-	bibtex "$basename"
+
+	biber "$basename"
 	command="pdflatex -shell-escape -tikzImageCreate -file-line-error"
 	if [ $basename == "poster" ]; then
 		command="lualatex -shell-escape -tikzImageCreate -file-line-error"

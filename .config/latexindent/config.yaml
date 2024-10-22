@@ -82,13 +82,13 @@ maxNumberOfBackUps: 0
 cycleThroughBackUps: 0
 
 # preferences for information displayed in the log file
-logFilePreferences:
-    showEveryYamlRead: 1
-    showAmalgamatedSettings: 0
-    showDecorationStartCodeBlockTrace: 0
-    showDecorationFinishCodeBlockTrace: 0
-    endLogFileWith: '--------------'
-    showGitHubInfoFooter: 1
+# logFilePreferences:
+#    showEveryYamlRead: 1
+#    showAmalgamatedSettings: 0
+#    showDecorationStartCodeBlockTrace: 0
+#    showDecorationFinishCodeBlockTrace: 0
+#    endLogFileWith: '--------------'
+#    showGitHubInfoFooter: 1
 
 #  verbatim environments specified
 #  in this field will not be changed at all!

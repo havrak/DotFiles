@@ -8,7 +8,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', ',,', '\\')
 		vim.keymap.set('i', ',.', '$$<Esc>i')
 
-
 		-- LaTeX Page layout
 		vim.keymap.set('i', ',min', '\\begin{minipage}[t]{.45\\textwidth}<Enter><Enter>\\end{minipage}<Esc>ki') -- minipage
 		vim.keymap.set('i', ',col', '\\begin{multicols}{2}\\raggedcolumns<Enter><Enter>\\columnbreak<Enter><Enter>\\end{multicols}<Esc>3ki') -- two column layout
@@ -84,6 +83,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.cL', '\\mathscr{L}^{-1}[](<++>)<Space><++><Esc>11hi') -- Laplace transform
 		vim.keymap.set('i', '.cZ', '\\mathscr{Z}^{-1}[](<++>)<Space><++><Esc>11hi') -- Z transform
 		vim.keymap.set('i', '.ch', '\\mathbbm{1}') -- Heaviside function
+		vim.keymap.set('i', '.arr', '\\left\\{\\begin{array}{} <++> \\end{array} \\right.<Esc>25hi') -- to display multiple possibilities with given conditions
 
 		-- LaTeX Beamer specific
 		vim.keymap.set('i', ',frames', '\\begin{frame}[fragile]<Enter>\\frametitle{}<Enter>\\begin{itemize}<Enter>\\item <++><Enter>\\end{itemize}<Enter>\\end{frame}<Enter><Enter><++><Esc>6kf}i') -- frame
