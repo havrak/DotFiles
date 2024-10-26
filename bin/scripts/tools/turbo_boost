@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <off|on>"
+    exit 1
+fi
+
+# Check if the argument is either "off" or "on"
+if [ "$1" != "off" ] && [ "$1" != "on" ]; then
+    echo "Argument must be either 'off' or 'on'"
+    exit 1
+fi
+
+VALUE=1;
+if [ "$1" == "off" ]; then
+	VALUE=0
+fi
+
+
+
+# Update the value in the tlp.conf file
+sed -i "s/^\(CPU_BOOST_ON_AC=\).*/\1$1/" /etc/tlp.conf
+sed -i "s/^\(CPU_BOOST_ON_BAT=\).*/\1$1/" /etc/tlp.conf
+# sed -i "s/^\(CPU_HWP_DYN_BOOST_ON_AC=\).*/\1$1/" /etc/tlp.conf
+# sed -i "s/^\(CPU_HWP_DYN_BOOST_ON_BAT=\).*/\1$1/" /etc/tlp.conf
+
+echo "Updated CPU_BOOST and CPU_HWP_DYN_BOOST to $1"
+
+
+systemctl restart tlp

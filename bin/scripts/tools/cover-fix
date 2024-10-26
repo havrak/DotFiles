@@ -1,43 +1,63 @@
 #!/bin/bash
 
-#echo $PWD
+if [[ -z "$1" ]]; then
+    echo "Usage: $0 <directory> [--keep]"
+    exit 1
+fi
 
-music=$(find "$PWD" -regex ".*\.flac$")
-music="$music $(find "$PWD" -regex ".*\.mp3$")"
+directory="$1"
+delete_image=true
+if [[ "$2" == "--keep" ]]; then
+    delete_image=false
+fi
 
-#echo $music
+# Function to process MP3 files
+process_mp3() {
+	local file="$1"
+	local cover_image="${file%.*}.jpg"  #
 
-IFS=$'\n'
+	echo "Processing MP3: $file"
 
-for track in $music
-do
-	track=$(echo $track | xargs)
-	image_name="${track%.*}".png
-	ffmpeg -i "$track" "$image_name"
+		ffmpeg -i "$file" -an -vcodec copy "$cover_image" -y 2>/dev/null
+		ffmpeg -i "$cover_image" -vf "scale=500:500" "$cover_image" -y  2>/dev/null
+		ffmpeg -i "$file" -i "$cover_image" -map 0 -map 1 -c copy -id3v2_version 3 \
+			-metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "temp_$file" 2>/dev/null
 
-	if ! test -f "image_name"; then
-		if test -f "cover.jpg"; then
-			convert "cover.jpg" -resize 500x500 "cover.png"
-			image_name="cover.png"
-		elif test -f "cover.png"; then
-			convert "$image_name" -resize 500x500 "$image_name"
-			image_name="cover.png"
-		fi
-	else
-			convert $image_name -resize 500x500 $image_name
-	fi
+		mv "temp_$file" "$file"
 
-	if [[ $track == *.flac ]]; then
-		metaflac --remove-tag=COVERART  --dont-use-padding $track
-		metaflac --remove --block-type=PICTURE $track
-		metaflac --import-picture-from=$image_name $track
-	else
-		ffmpeg -i "$track" -map 0:a -c:a copy "$track cfix.mp3"
-		mv "$track cfix.mp3" "$track"
-		ffmpeg -y -i "$track" -i "$image_name" -c:a copy -c:v copy -map 0:0 -map 1:0 -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover \(front\)" "$track cfix.mp3"
-		mv "$track cfix.mp3" $track
-	fi
+		$delete_image && rm "$cover_image"
+	}
 
-	rm "$image_name"
-done
+# Function to process FLAC files
+process_flac() {
+	local file="$1"
+	local cover_image="${file%.*}.jpg"
+
+	echo "Processing FLAC: $file"
+
+	metaflac --export-picture-to="$cover_image" "$file"  2>/dev/null
+
+	ffmpeg -i "$cover_image" -vf "scale=500:500" "$cover_image" -y 2>/dev/null
+
+	metaflac --remove-tag=COVERART  --dont-use-padding "$file"
+	metaflac --remove --block-type=PICTURE "$file"
+	metaflac --import-picture-from="3|image/jpeg|||$cover_image" "$file"
+
+	$delete_image && rm "$cover_image"
+}
+
+find "$directory"  -type f \( -name "*.mp3" -o -name "*.flac" \) | sed 's/[[:space:]]*$//' | while read -r file; do
+
+echo "Processing file: $file"
+extension="${file##*.}"
+echo "Extension: $extension"
+
+		# Process based on file extension
+		case "$extension" in
+			mp3) process_mp3 "$file" ;;
+			flac) process_flac "$file" ;;
+		esac
+	done
+
+	echo "Processing complete."
 
