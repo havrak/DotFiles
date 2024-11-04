@@ -28,7 +28,7 @@ return {
 					enabled = true,
 					auto_refresh = true,
 						layout = {
-							position = "bottom"
+							position = "bottom",
 							ratio = 0.3
 						},
 					},
@@ -55,7 +55,8 @@ return {
 						enable = true,
 						inlineSuggest = {
 							enable = true,
-						}},
+						}
+					},
 					})
 				end,
 			},
