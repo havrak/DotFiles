@@ -1,14 +1,14 @@
 #!/bin/bash
 
 if [[ -z "$1" ]]; then
-    echo "Usage: $0 <directory> [--keep]"
-    exit 1
+	echo "Usage: $0 <directory> [--keep]"
+	exit 1
 fi
 
 directory="$1"
 delete_image=true
 if [[ "$2" == "--keep" ]]; then
-    delete_image=false
+	delete_image=false
 fi
 
 # Function to process MP3 files
@@ -18,15 +18,16 @@ process_mp3() {
 
 	echo "Processing MP3: $file"
 
-		ffmpeg -i "$file" -an -vcodec copy "$cover_image" -y 2>/dev/null
-		ffmpeg -i "$cover_image" -vf "scale=500:500" "$cover_image" -y  2>/dev/null
-		ffmpeg -i "$file" -i "$cover_image" -map 0 -map 1 -c copy -id3v2_version 3 \
-			-metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "temp_$file" 2>/dev/null
+	ffmpeg -i "$file" -an -vcodec copy "$cover_image" -y 2>/dev/null
+	ffmpeg -i "$cover_image" -vf "scale=500:500" "$cover_image" -y  2>/dev/null
+	ffmpeg -i "$file" -i "$cover_image" -map 0 -map 1 -c copy -id3v2_version 3 \
+		-metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "$file temp.mp3" 2>/dev/null
 
-		mv "temp_$file" "$file"
+	mv "$file temp.mp3" "$file"
 
-		$delete_image && rm "$cover_image"
-	}
+
+	$delete_image && rm "$cover_image"
+}
 
 # Function to process FLAC files
 process_flac() {
@@ -41,16 +42,13 @@ process_flac() {
 
 	metaflac --remove-tag=COVERART  --dont-use-padding "$file"
 	metaflac --remove --block-type=PICTURE "$file"
-	metaflac --import-picture-from="3|image/jpeg|||$cover_image" "$file"
-
+	metaflac --import-picture-from="$cover_image" "$file"
 	$delete_image && rm "$cover_image"
 }
 
 find "$directory"  -type f \( -name "*.mp3" -o -name "*.flac" \) | sed 's/[[:space:]]*$//' | while read -r file; do
 
-echo "Processing file: $file"
 extension="${file##*.}"
-echo "Extension: $extension"
 
 		# Process based on file extension
 		case "$extension" in

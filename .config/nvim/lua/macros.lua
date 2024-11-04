@@ -40,7 +40,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', ',ct', '\\textcite{}<Esc>T{i') -- textcite
 		vim.keymap.set('i', ',ci', '\\fullbibentry{}<Esc>T{i') -- fullbibentry
 		vim.keymap.set('i', ',cf', '\\footnote{Ibid.<space>\\cite{<++>}:<space><++>}') -- footnote with citation
-		vim.keymap.set('i', ',ref', '\\ref{}<Esc>T{i') -- reference
+		vim.keymap.set('i', ',r', '\\ref{}<Esc>T{i') -- reference to label
+		vim.keymap.set('i', ',er', '\\eqref{}<Esc>T{i') -- reference to equation
 
 		-- LaTeX Lists
 		vim.keymap.set('i', ',ul', '\\begin{itemize}<Enter><Enter>\\end{itemize}<Esc>kA\\item<Space>') -- unordered list
@@ -84,6 +85,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.cZ', '\\mathscr{Z}^{-1}[](<++>)<Space><++><Esc>11hi') -- Z transform
 		vim.keymap.set('i', '.ch', '\\mathbbm{1}') -- Heaviside function
 		vim.keymap.set('i', '.arr', '\\left\\{\\begin{array}{} <++> \\end{array} \\right.<Esc>25hi') -- to display multiple possibilities with given conditions
+		vim.keymap.set('i', '.eq', '\\begin{equation}<Enter><Enter>\\label{eq:<++>}<Enter>\\end{equation}<Esc>2k$i') -- equation
 
 		-- LaTeX Beamer specific
 		vim.keymap.set('i', ',frames', '\\begin{frame}[fragile]<Enter>\\frametitle{}<Enter>\\begin{itemize}<Enter>\\item <++><Enter>\\end{itemize}<Enter>\\end{frame}<Enter><Enter><++><Esc>6kf}i') -- frame
