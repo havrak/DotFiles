@@ -1,4 +1,4 @@
-local M = { 'notjedi/nvim-rooter.lua', lazy = false}
+local M = { 'notjedi/nvim-rooter.lua', lazy = false, priority=999}
 
 function M.config()
 require('nvim-rooter').setup {

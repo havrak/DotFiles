@@ -11,15 +11,7 @@ else
 fi
 
 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-	if [[ $(ip route | grep enp0s20f0u4u1c2) ]] ; then
-		WIRED_A=enp0s20f0u4u1c2
+		WIRED_A=$(ip route | grep enp | head -n 1 | awk -F' ' '{print $5}')
 		WIRELESS_A=wlp0s20f3
-	elif [[ $(ip route | grep enp0s20f0u4u2) ]] ; then
-		WIRED_A=enp0s20f0u4u2
-		WIRELESS_A=wlp0s20f3
-	else
-		WIRED_A=enp1s0
-		WIRELESS_A=wlp0s20f3
-	fi
 	BORDER=$BORDER_A WIRED=$WIRED_A WIRELESS=$WIRELESS_A MONITOR=$m polybar bar &
 done

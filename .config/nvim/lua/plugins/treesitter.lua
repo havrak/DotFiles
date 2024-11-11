@@ -57,6 +57,7 @@ function M.config()
 				vim.fn.matchadd("WARN", "WARN")
 				vim.fn.matchadd("INFO", "INFO")
 				vim.fn.matchadd("INFO", "OPTIONAL")
+				vim.fn.matchadd("INFO", "DONE")
 	end
 
 	setup_highlights()

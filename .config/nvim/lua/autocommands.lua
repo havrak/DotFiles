@@ -1,6 +1,6 @@
 
 local general_settings_group = vim.api.nvim_create_augroup('GeneralSettings', { clear = true })
-
+local copilot_group  =  vim.api.nvim_create_augroup("CopilotWorkspace", { clear = true });
 vim.api.nvim_create_autocmd("FileType", {
 	group = general_settings_group,
 	pattern = "*",
@@ -48,3 +48,15 @@ vim.api.nvim_create_autocmd("Filetype", {
 })
 
 
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   group = copilot_group,
+--   callback = function()
+--     -- Get the current git root directory using 'git rev-parse'
+--     local git_root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
+--
+--     -- If the git root directory is found, set it as the workspace folder for copilot
+--     if git_root ~= "" then
+--       vim.g.copilot_workspace_folders = { git_root }
+--     end
+--   end,
+-- })
