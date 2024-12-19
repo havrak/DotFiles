@@ -12,7 +12,7 @@ if [ "$1" != "off" ] && [ "$1" != "on" ]; then
     exit 1
 fi
 
-VALUE=1;
+VALUE=1
 if [ "$1" == "off" ]; then
 	VALUE=0
 fi
@@ -20,10 +20,10 @@ fi
 
 
 # Update the value in the tlp.conf file
-sed -i "s/^\(CPU_BOOST_ON_AC=\).*/\1$1/" /etc/tlp.conf
-sed -i "s/^\(CPU_BOOST_ON_BAT=\).*/\1$1/" /etc/tlp.conf
-# sed -i "s/^\(CPU_HWP_DYN_BOOST_ON_AC=\).*/\1$1/" /etc/tlp.conf
-# sed -i "s/^\(CPU_HWP_DYN_BOOST_ON_BAT=\).*/\1$1/" /etc/tlp.conf
+sed -i "s/^\(CPU_BOOST_ON_AC=\).*/\1$VALUE/" /etc/tlp.conf
+sed -i "s/^\(CPU_BOOST_ON_BAT=\).*/\1$VALUE/" /etc/tlp.conf
+sed -i "s/^\(CPU_HWP_DYN_BOOST_ON_AC=\).*/\1$VALUE/" /etc/tlp.conf
+sed -i "s/^\(CPU_HWP_DYN_BOOST_ON_BAT=\).*/\1$VALUE/" /etc/tlp.conf
 
 echo "Updated CPU_BOOST and CPU_HWP_DYN_BOOST to $1"
 

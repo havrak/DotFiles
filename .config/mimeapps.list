@@ -4,3 +4,4 @@ x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_opt_stm32cubeide_
 x-scheme-handler/adskidmgr=adskidmgr-opener.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/http=firefox.desktop
+x-scheme-handler/discord-1170028348756471908=discord-1170028348756471908.desktop

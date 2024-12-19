@@ -9,6 +9,13 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = general_settings_group,
+	pattern = "plaintex",
+	command = "set filetype=tex",
+})
+
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = general_settings_group,
 	pattern = "mail",
 	command = "setlocal textwidth=0",
 })

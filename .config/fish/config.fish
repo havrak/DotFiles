@@ -60,6 +60,14 @@ set -x BROWSER firefox
 set -x TERMINAL st
 set -x TEXINPUTS "::$HOME/dox/templates/::$HOME/dox/templates/bibliography::$HOME/dox/templates/images"
 
+set -x TEXMFDIST 	"/usr/share/texmf-dist"
+set -x TEXMFLOCAL 	"/usr/local/share/texmf:/usr/share/texmf"
+set -x TEXMFSYSVAR 	"/var/lib/texmf"
+set -x TEXMFSYSCONFIG 	"/etc/texmf"
+set -x TEXMFHOME 	"~/texmf"
+set -x TEXMFVAR 	"~/.texlive/texmf-var"
+set -x TEXMFCONFIG 	"~/.texlive/texmf-config"
+set -x TEXMFCACHE 	"$TEXMFSYSVAR;$TEXMFVAR"
 function fish_greeting
 end
 

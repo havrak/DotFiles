@@ -14,8 +14,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', ',cen', '\\begin{center}<Enter><Enter>\\end{center}<Esc>ki') -- center align
 
 		-- LaTeX Figures
-		vim.keymap.set('i', ',fig', '\\begin{figure}[h!]<Enter>\\centering<Enter><Enter>\\caption[]{}<Enter>\\label{fig:}<Enter>\\end{figure}<Esc>3k$i') -- figure (includes caption and label)
-		vim.keymap.set('i', ',tab', '\\begin{longtable}{|  |}<Enter>\\hline<Enter><++><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}<Esc>6k$hhi') -- table without any content
+		vim.keymap.set('i', ',fig', '\\begin{figure}[h!]<Enter>\\centering<Enter><Enter>\\caption[<++>]{<++>}<Enter>\\label{fig:<++>}<Enter>\\end{figure}<Esc>3k$i') -- figure (includes caption and label)
+		vim.keymap.set('i', ',ltab', '\\begin{longtable}{| }<Enter>\\hline<Enter><++><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{longtable}<Esc>6k$i') -- table without any content
+		vim.keymap.set('i', ',ftab', '\\begin{table}[h!]<Enter>\\centering<Enter>\\caption[]{<++>}<Enter><++><Enter>\\label{tab:<++>}<Enter>\\end{table}<Esc>3k$6hi') -- figure (includes caption and label)
+		vim.keymap.set('i', ',tab', '\\begin{tabular}{| }<Enter>\\hline<Enter><++><Enter>\\hline<Enter><++><Enter>\\hline<Enter>\\end{tabular}<Esc>6k$i') -- table without any content
+		vim.keymap.set('i', ',ctab', 'm{cm} | <++><Esc>9hi') -- table without any content
 		vim.keymap.set('i', ',cod', '\\begin{minted}[mathescape,escapeinside=@@,linenos,numbersep=5pt,frame=lines,breaklines,tabsize=3,framesep=2mm]{}<Enter><++><Enter>\\end{minted}<Esc>2k$i') -- code block
 		vim.keymap.set('i', ',img', '\\includegraphics[width=0.7\\textwidth]{}<Esc>i') -- includegraphics
 
