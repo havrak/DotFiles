@@ -35,7 +35,7 @@ if test -n "$(ls $HOME/bin/progs | grep maple)"
 end
 
 # check existance of mathlab
-set matlabpath $HOME/bin/progs/matlab/bin
+set matlabpath $HOME/bin/progs/matlab/bin/glnxa64
 if test -n "$matlabpath"
 	set toadd $toadd $matlabpath
 end
