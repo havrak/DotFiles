@@ -39,8 +39,8 @@ end
 },
 { 'Chiel92/vim-autoformat', event = "VeryLazy", config = function()
 	vim.g.formatdef_latexindent = '"latexindent --logfile=/dev/null --local=$HOME/.config/latexindent/config.yaml -"'
-end},
-
+end
+},
 {'aperezdc/vim-template' , event = "VeryLazy", config = function()
 	vim.g.email="krystof@havrak.xyz"
 	vim.g.username="Havránek Kryštof"

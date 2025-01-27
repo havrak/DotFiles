@@ -87,7 +87,7 @@ function M.config()
 	local opts = {silent = true, nowait = true}
 
 	-- -- Remap keys for apply code actions at the cursor position.
-	vim.keymap.set("n", "<leader>a", "<Plug>(coc-codeaction-cursor)", opts)
+	vim.keymap.set("n", "<leader>qa", "<Plug>(coc-codeaction-cursor)", opts)
 	vim.keymap.set("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
 
 	-- Remap keys for apply refactor code actions.

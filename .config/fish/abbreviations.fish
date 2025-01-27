@@ -27,6 +27,7 @@ alias idf      "idf.py"
 alias idf-tool "idf_tools.py"
 alias idf-tsk  'find $HOME/prog/embedded/fw-esp32/ -name "*tasker_ids.h" | xargs grep "define TSID" --color=never --no-filename'
 alias idf-gdb  'TERM=linux idf gdbtui'
+alias idf-dir  'ln -snf $PWD $PWD/../fw-os-esp32-active-project'
 
 # mount device/android
 abbr ud 			"udisksctl unmount -b /dev/sdb"
