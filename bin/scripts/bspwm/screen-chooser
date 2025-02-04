@@ -16,7 +16,7 @@ fi
 
 # check if argument is passed, if not use dmenu to choose
 if [ -z "$1" ]; then
-	choose=$(printf "laptop\\nultra\\n4k\\n4k-just\\n1080p\\nmirror\\ntriple\\nmanual" | dmenu -i -p "Choose monitor setup")
+	choose=$(printf "laptop\\nultra\\n4k\\n4k-just\\n1080p\\nmirror\\ntriple\\nsultra\\nmanual" | dmenu -i -p "Choose monitor setup")
 else
 	choose=$1
 fi
@@ -53,6 +53,12 @@ case "$choose" in
 		;;
 	"ultra")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 320x1080 --rotate normal --output $ACTIVE --mode 2560x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
+		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
+		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
+		echo "ultra" > /tmp/bspwm_screenlayout
+		;;
+	"sultra")
+		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 320x1080 --rotate normal --output $ACTIVE --mode 2840x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
 		echo "ultra" > /tmp/bspwm_screenlayout

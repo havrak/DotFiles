@@ -1,6 +1,6 @@
 # GNU/LINUX Dotfiles
 
-In this repository are my personal dotfiles which I use on my arch system.
+Collection of dotfiles I run on my Arch Linux Systems.
 
 # Contains
 - [nvim](.config/nvim//)
@@ -10,6 +10,7 @@ In this repository are my personal dotfiles which I use on my arch system.
 - [polybar](.config/polybar/config.ini)
 - [dunst](.config/dunst/dunstrc)
 - [bash](.bashrc)
+- [picom](.config/picom/picom.conf)
 - [fish](.config/fish/config.fish)
 - [zathura](.config/zathura/zathurarc)
 - [sxhkd](.config/sxhkd/sxhkdrc)
