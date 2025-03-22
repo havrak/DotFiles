@@ -73,25 +73,25 @@ function M.config()
 
 
 	-- Folds
-	vim.o.foldmethod = 'expr'
-	vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-	vim.o.foldcolumn = '1'
-
-	vim.cmd("silent! loadview"); -- again command needs to be called outside of autogroup to affect first file
-
-	local fold_group = vim.api.nvim_create_augroup("Folds", {clear = true})
-
-	vim.api.nvim_create_autocmd("BufWinEnter", {
-		group = fold_group,
-		pattern = "*.*",
-		command = "silent! loadview",
-	})
-
-	vim.api.nvim_create_autocmd("BufWinLeave", {
-		group = fold_group,
-		pattern = "*.*",
-		command = "mkview",
-	})
+	-- vim.o.foldmethod = 'indent'
+	-- -- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+	-- vim.o.foldcolumn = '1'
+	-- --
+	-- vim.cmd("silent! loadview"); -- again command needs to be called outside of autogroup to affect first file
+	--
+	-- local fold_group = vim.api.nvim_create_augroup("Folds", {clear = true})
+	-- --
+	-- vim.api.nvim_create_autocmd("BufWinEnter", {
+	-- 	group = fold_group,
+	-- 	pattern = "*.*",
+	-- 	command = "silent! loadview",
+	-- })
+	--
+	-- vim.api.nvim_create_autocmd("BufWinLeave", {
+	-- 	group = fold_group,
+	-- 	pattern = "*.*",
+	-- 	command = "mkview",
+	-- })
 
 
 end

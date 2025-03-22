@@ -14,7 +14,8 @@ fi
 
 # Update the value in the tlp.conf file
 sed -i "s/^\(RADEON_DPM_PERF_LEVEL_ON_AC=\).*/\1$1/" /etc/tlp.conf
+sed -i "s/^\(RADEON_DPM_PERF_LEVEL_ON_BAT=\).*/\1$1/" /etc/tlp.conf
 
-echo "Updated RADEON_DPM_PERF_LEVEL_ON_AC to $1"
+echo "Updated RADEON_DPM_PERF_LEVEL_ON to $1"
 
 systemctl restart tlp

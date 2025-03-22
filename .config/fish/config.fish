@@ -11,8 +11,8 @@ export MANPAGER="less"
 # end
 
 # while using fish over ssh shift+Left/Right don't work by default
-bind "[1;2D" backward-bigword
-bind "[1;2C" forward-bigword
+# bind "[1;2D" backward-bigword
+# bind "[1;2C" forward-bigword
 
 # check if bin/progs and bin/scripts exist otherwise create them
 if not test -d $HOME/bin/progs

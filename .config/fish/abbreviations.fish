@@ -20,6 +20,7 @@ alias ms  		 "mailsync 2>/dev/null"
 alias ccmake 	 "cmake . && make"
 alias cmake 	 "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	 "rsync --info=progress2"
+alias matlab   "export LD_PRELOAD=/usr/lib/libstdc++.so; export LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/; lockdev-redirect MATLAB -nosplash -nosoftwareopengl"
 
 # esp-idf
 alias idf-get  "source $HOME/bin/progs/esp-idf/export.fish"
