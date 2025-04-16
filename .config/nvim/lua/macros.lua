@@ -54,24 +54,26 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		-- LaTeX Theorems
 		vim.keymap.set('i', ',tl', '\\begin{lemma}[]<Enter><++><Enter>\\end{lemma}<Esc>2k$i') -- lemma
-		vim.keymap.set('i', ',tv', '\\begin{veta}[]<Enter><++><Enter>\\end{veta}<Esc>2k$i') -- theorem
-		vim.keymap.set('i', ',te', '\\begin{definice}[]<enter><++><enter>\\end{definice}<Esc>2k$i') -- definition
-		vim.keymap.set('i', ',tt', '\\begin{tvrz}<Enter><Enter>\\end{tvrz}<Esc>ki') -- statement
-		vim.keymap.set('i', ',td', '\\begin{dusl}<enter><enter>\\end{dusl}<esc>ki') -- consequence
-		vim.keymap.set('i', ',tp', '\\begin{dukaz}<enter><enter>\\end{dukaz}<Esc>ki') -- proof
+		vim.keymap.set('i', ',tv', '\\begin{thm}[]<Enter><++><Enter>\\end{thm}<Esc>2k$i') -- theorem
+		vim.keymap.set('i', ',td', '\\begin{defn}[]<enter><++><enter>\\end{defn}<Esc>2k$i') -- definition
+		vim.keymap.set('i', ',tt', '\\begin{claim}<Enter><Enter>\\end{claim}<Esc>ki') -- statement
+		vim.keymap.set('i', ',tc', '\\begin{cor}<enter><enter>\\end{cor}<esc>ki') -- consequence
+		vim.keymap.set('i', ',te', '\\begin{example}<enter><enter>\\end{example}<Esc>ki') -- example
 
 		-- LaTeX Math Mode
 		vim.keymap.set('i', ',ra', '$\\Rightarrow$<space>')
 		vim.keymap.set('i', ',la', '$\\Leftarrow$<space>')
+		vim.keymap.set('i', '.ra', '\\rightarrow<space>')
+		vim.keymap.set('i', '.la', '\\leftarrow<space>')
 		vim.keymap.set('i', '.pmat', '\\begin{pmatrix}<Enter>\\\\<Enter>\\end{pmatrix}<Esc>khhi') -- matrix with parentheses
 		vim.keymap.set('i', '.emat', '\\begin{matrix}<Enter>\\\\<Enter>\\end{matrix}<Esc>khhi') -- matrix
 		vim.keymap.set('i', '.vmat', '\\begin{vmatrix}<Enter>\\\\<Enter>\\end{vmatrix}<Esc>khhi') -- matrix with vertical lines
 		vim.keymap.set('i', '.lim', '\\lim_{ \\rightarrow <++>}<Space><++><Space><Esc>23hi') -- limit
-		vim.keymap.set('i', '.lie', '\\frac{d }{d <++>}<Space><++><Esc>13hi') -- liebnitz style for derivative
+		vim.keymap.set('i', '.lie', '\\frac{\\mathrm{d} }{\\mathrm{d} <++>}<Space><++><Esc>22hi') -- liebnitz style for derivative
 		vim.keymap.set('i', '.com', '\\frac{D }{D <++>}<Space><++><Esc>13hi') -- liebnitz style for derivative
 		vim.keymap.set('i', '.par', '\\frac{\\partial }{\\partial <++>}<Space><++><Esc>20hi') -- partial derivative
 		vim.keymap.set('i', '.sum', '\\sum_{}^{<++>}<Space><++><Esc>12hi') -- sum
-		vim.keymap.set('i', '.n', '\\int_{}^{<++>}<Space><++><Space>d<++><Esc>18hi') -- integral
+		vim.keymap.set('i', '.n', '\\int_{}^{<++>}<Space><++><Space>\\mathrm{d}<++><Esc>27hi') -- integral
 		vim.keymap.set('i', '.ve', '\\vec{}<Esc>ha') -- vector
 		vim.keymap.set('i', '.t', '\\mathrm{}<Esc>ha') -- text in math mode without italics
 		vim.keymap.set('i', '.ca', '\\mathcal{}<Esc>ha') -- text with accents
@@ -88,6 +90,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.cZ', '\\mathscr{Z}^{-1}[](<++>)<Space><++><Esc>11hi') -- Z transform
 		vim.keymap.set('i', '.ch', '\\mathbbm{1}') -- Heaviside function
 		vim.keymap.set('i', '.arr', '\\left\\{\\begin{array}{} <++> \\end{array} \\right.<Esc>25hi') -- to display multiple possibilities with given conditions
+		vim.keymap.set('i', '.sarr', '\\left|\\begin{array}{ccc}  &\\rightarrow& <++> \\end{array} \\right|<Esc>38hi') -- to display multiple possibilities with given conditions
 		vim.keymap.set('i', '.eq', '\\begin{equation}<Enter><Enter>\\label{eq:<++>}<Enter>\\end{equation}<Esc>2k$i') -- equation
 
 		-- LaTeX Beamer specific

@@ -23,7 +23,7 @@ textype() { \
 	fi
 
 	biber "$basename"
-	command="pdflatex -shell-escape -tikzImageCreate -file-line-error"
+	command="pdflatex -shell-escape -tikzImageCreate -file-line-error" # tikzImageCreate is no more
 	if [ $basename == "poster" ]; then
 		command="lualatex -shell-escape -tikzImageCreate -file-line-error"
 	fi

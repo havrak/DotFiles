@@ -25,11 +25,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "%s/\\s\\+$//e",
 })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = general_settings_group,
-	callback = function() require'vim.highlight'.on_yank {higroup = "Search", timeout = 50} end,
-})
-
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+-- 	group = general_settings_group,
+-- 	callback = function() require'vim.highlight'.on_yank {higroup = "Search", timeout = 50} end,
+-- })
 
 vim.api.nvim_create_autocmd("InsertEnter", {
 	group = general_settings_group,

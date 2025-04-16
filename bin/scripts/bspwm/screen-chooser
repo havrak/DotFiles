@@ -16,20 +16,13 @@ fi
 
 # check if argument is passed, if not use dmenu to choose
 if [ -z "$1" ]; then
-	choose=$(printf "laptop\\nultra\\n4k\\n4k-just\\n1080p\\nmirror\\ntriple\\nsultra\\nmanual" | dmenu -i -p "Choose monitor setup")
+	choose=$(printf "laptop\\nultra\\n4k\\n4k-just\\n1080p\\nmirror\\n4k-scaled\\nsultra\\nmanual" | dmenu -i -p "Choose monitor setup")
 else
 	choose=$1
 fi
 
 # handle all multimonitor cases
 case "$choose" in
-	"triple")
-		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $DP --mode 1920x1080 --rate --pos 1920x0 --rotate normal --output $HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output $HDMI2 --off --output VIRTUAL1 --off
-		bspc monitor $HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI'
-		bspc monitor $DP -d 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
-		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "triple" > /tmp/bspwm_screenlayout
-		;;
 	"manual")
 		arandr
 		;;
@@ -58,7 +51,7 @@ case "$choose" in
 		echo "ultra" > /tmp/bspwm_screenlayout
 		;;
 	"sultra")
-		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 320x1080 --rotate normal --output $ACTIVE --mode 2840x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
+		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 760x1440 --rotate normal --output $ACTIVE --mode 3440x1440 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
 		echo "ultra" > /tmp/bspwm_screenlayout
@@ -79,6 +72,13 @@ case "$choose" in
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
 		echo "1080p" > /tmp/bspwm_screenlayout
+		;;
+	"4k-scaled")
+		xrandr --output $INTERNAL --off --output $ACTIVE --primary --mode 3840x2160 --scale 0.5x0.5 --filter nearest --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
+		bspc monitor $HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI'
+		bspc monitor $DP -d 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
+		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
+		echo "triple" > /tmp/bspwm_screenlayout
 		;;
 	"mirror")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x0 --rotate normal --output $ACTIVE --mode 1920x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
