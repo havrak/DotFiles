@@ -22,6 +22,8 @@ vim.g.vimwiki_key_mappings = {
 	lists_return = 0 -- prevents <CR> from being handled by vimwiki
 }
 
+vim.g.vimwiki_conceallevel =0
+
 local M = {"vimwiki/vimwiki", lazy = false}
 function M.config()
 
@@ -42,14 +44,14 @@ function M.config()
 
 	local vimwiki_group = vim.api.nvim_create_augroup("VimwikiRemaps", {clear = true})
 	--
-	vim.api.nvim_create_autocmd("FileType", {
+	vim.api.nvim_create_autocmd("BufEnter", {
 		group = vimwiki_group,
 		pattern = "vimwiki",
 		callback = function()
 			vim.keymap.set ('i',  '<M-n>', 'vimwiki#tbl#kbd_tab()' , {noremap = true,silent = true})
 			vim.keymap.set ('i',  '<M-p>', 'vimwiki#tbl#kbd_shift_tab()' , {noremap = true,silent = true})
-			local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-			vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<C-]><Esc>:VimwikiReturn 1 5<CR>"]], opt)
+			-- local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+			-- vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<Esc>:VimwikiReturn 1 5<CR>"]], opt)
 		end,
 	})
 
