@@ -1,6 +1,8 @@
 local M = {"kyazdani42/nvim-tree.lua", event = "VeryLazy", dependencies = "kyazdani42/nvim-web-devicons"}
 
 function M.config()
+	vim.keymap.set("n", "<leader><F4>", "<Cmd>NvimTreeToggle<CR>", {silent = true})
+
 	local function on_attach(bufnr)
 		local api = require('nvim-tree.api')
 
@@ -132,6 +134,5 @@ function M.config()
 	if not view_status_ok then
 		return
 	end
-	vim.keymap.set("n", "<leader><F4>", "<Cmd>NvimTreeToggle<CR>", {silent = true})
 end
 return M

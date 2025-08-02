@@ -4,6 +4,4 @@ redshift &
 dbus-update-activation-environment --systemd --all &
 picom &
 sxhkd &
-ibus-daemon -drx &
-exec bspwm
-# exec herbstluftwm
+exec /home/havra/prog/bspwm/bspwm -d > ~/bspwm-debug.log

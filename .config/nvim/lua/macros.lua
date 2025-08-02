@@ -95,7 +95,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		-- LaTeX Beamer specific
 		vim.keymap.set('i', ',frames', '\\begin{frame}[fragile]<Enter>\\frametitle{}<Enter>\\begin{itemize}<Enter>\\item <++><Enter>\\end{itemize}<Enter>\\end{frame}<Enter><Enter><++><Esc>6kf}i') -- frame
-		vim.keymap.set('i', ',framed', '\\begin{frame}[fragile]<Enter>\\begin{figure}[!htb]<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[height=.8\\linewidth]{}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}\\hfill<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[height=.8\\linewidth]{<++>}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}<Enter>\\end{figure}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\end{frame}<Esc>11k$i') -- frame with two pictures with captions and footnotes that include source URLs
+		vim.keymap.set('i', ',framed', '\\begin{frame}[fragile]<Enter>\\begin{figure}[!htb]<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[width=.8\\linewidth]{}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}\\hfill<Enter>\\begin{minipage}{0.48\\textwidth}<Enter>\\centering<Enter>\\includegraphics[width=.8\\linewidth]{<++>}<Enter>\\caption{<++>\\footnotemark}<Enter>\\end{minipage}<Enter>\\end{figure}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\footnotetext[]{Obrázek z URL: \\url{<++>}}<Enter>\\end{frame}<Esc>11k$i') -- frame with two pictures with captions and footnotes that include source URLs
 
 	end
 })

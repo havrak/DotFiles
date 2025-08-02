@@ -1,6 +1,40 @@
 #!/bin/sh
 
-xrandr > /tmp/xrandr_out.txt
+CONF_PATH="$HOME/bin/scripts/files/monitors"
+
+function saveSetup (){
+	local layoutName=""
+	if [  -z "$1" ]; then
+		layoutName="laptop"
+	else
+		layoutName=$1
+	fi
+	echo $layoutName > $CONF_PATH
+	echo $(hwinfo --monitor | grep Unique | cut --delimiter ":" --fields 2 | tr -d ' '  | tr '\n' ' ') >> $CONF_PATH
+}
+
+function restoreSetup (){
+	local layout=$(sed '1q;d' $CONF_PATH)
+	local monitors=$(sed '2q;d' $CONF_PATH)
+	local connectedMonitors=$(hwinfo --monitor | grep Unique | cut --delimiter ":" --fields 2 | tr -d ' '  | tr '\n' ' ')
+	local match=true
+
+	read -a arr <<< "$monitors"
+
+	for element in "${arr[@]}"; do
+		if [[ ! "$connectedMonitors" == *"$element"* ]]; then
+			match=false
+		fi
+	done
+
+	if $match; then
+		screen-chooser $layout
+		echo "Restoring setup to $layout"
+	else
+		echo "Restoring setup to laptop"
+		screen-chooser "laptop"
+	fi
+}
 
 INTERNAL=$(grep "eDP" /tmp/xrandr_out.txt | cut --delimiter " " --fields 1)
 DP=$(grep "^DP"  /tmp/xrandr_out.txt | cut --delimiter " " --fields 1)
@@ -27,7 +61,7 @@ case "$choose" in
 		arandr
 		;;
 
-esac
+	esac
 
 # in following cases only one monitor is connected, that can be done either via DP1 or HDMI1
 if test -n "$(grep "^$DP connected"  /tmp/xrandr_out.txt)"; then
@@ -42,51 +76,60 @@ case "$choose" in
 	"laptop")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x0 --rotate normal --output $DP --off --output $HDMI1 --off --output $HDMI2 --off
 		bspc monitor $INTERNAL -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
-		echo "laptop" > /tmp/bspwm_screenlayout
+		saveSetup "laptop"
 		;;
 	"ultra")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 320x1080 --rotate normal --output $ACTIVE --mode 2560x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "ultra" > /tmp/bspwm_screenlayout
+		saveSetup "ultra"
 		;;
 	"sultra")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 760x1440 --rotate normal --output $ACTIVE --mode 3440x1440 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "ultra" > /tmp/bspwm_screenlayout
+		saveSetup "sultra"
 		;;
 	"4k")
 		xrandr --output $INTERNAL --mode 1920x1080 --pos 876x2160 --rotate normal --output $ACTIVE --primary --mode 3840x2160 --pos 0x0 --rotate normal   --scale 1   --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "4k" > /tmp/bspwm_screenlayout
+		saveSetup "4k"
 		;;
 	"4k-just")
 		xrandr --output $INTERNAL --off --output $ACTIVE --primary --mode 3840x2160 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
-		echo "4k-just" > /tmp/bspwm_screenlayout
+		saveSetup "4k-just"
 		;;
 	"1080p")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x1080 --rotate normal --output $ACTIVE --mode 1920x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "1080p" > /tmp/bspwm_screenlayout
+		saveSetup "1080p"
 		;;
 	"4k-scaled")
 		xrandr --output $INTERNAL --off --output $ACTIVE --primary --mode 3840x2160 --scale 0.5x0.5 --filter nearest --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $HDMI1 -d 'I' 'II' 'III' 'IV' 'V' 'VI'
 		bspc monitor $DP -d 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'A' 'B' 'C' 'D' 'E' 'F'
-		echo "triple" > /tmp/bspwm_screenlayout
+		saveSetup "triple"
 		;;
 	"mirror")
 		xrandr --output $INTERNAL --primary --mode 1920x1080 --pos 0x0 --rotate normal --output $ACTIVE --mode 1920x1080 --pos 0x0 --rotate normal --output $NONACTIVE --off --output $HDMI2 --off
 		bspc monitor $ACTIVE -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
 		bspc monitor $INTERNAL -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' 'XI' 'XII'
-		echo "laptop" > /tmp/bspwm_screenlayout
+		saveSetup "mirror"
 		;;
-
+	"restore" )
+		if [ -f $CONF_PATH ]; then
+			restoreSetup
+		else
+			screen-chooser latop
+		fi
+		;;
+	"*" )
+		screen-chooser latop
+		;;
 esac
 
 

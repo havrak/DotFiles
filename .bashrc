@@ -5,9 +5,12 @@ stty -ixon
 # add directories to PATH only if they aren't already there
 TOADD=$(du "$HOME/bin/scripts/" | cut -f2 | tr '\n' ':')
 
-maplepath=$(find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin)
-if [ -n "$maplepath" ]; then
+
+if [ -d $HOME/bin/progs/maple* ]; then
+	maplepath=$(find $HOME/bin/progs/maple* -maxdepth 1 -type d -name bin)
+	if [ -n "$maplepath" ]; then
 	TOADD="$TOADD:$maplepath"
+	fi
 fi
 
 for dir in $(echo $TOADD | tr ':' '\n'); do

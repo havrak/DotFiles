@@ -46,7 +46,7 @@ bspc config window_gap 4
 
 
 if [ ! -f /tmp/bspwm_starup ] ; then
-	screen-chooser laptop &
+	screen-chooser restore &
 	touch /tmp/bspwm_startup
 fi
 
