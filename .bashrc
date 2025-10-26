@@ -126,3 +126,5 @@ alias status="git status"
 alias tag="git tag"
 alias newtag="git tag -a"
 alias push="git remote | xargs -L1 git push --all"
+
+export QSYS_ROOTDIR="/home/havra/bin/progs/quartus/quartus/sopc_builder/bin"

@@ -23,6 +23,7 @@ alias rsync 	   "rsync --info=progress2"
 alias matlab     "export LD_PRELOAD=/usr/lib/libstdc++.so; export LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/; lockdev-redirect MATLAB -nosoftwareopengl"
 alias matlab-mex "$matlabpath/mex"
 alias jsonpretty "python -m json.tool"
+alias quartus    "$HOME/bin/progs/quartus/quartus/bin/quartus"
 
 # esp-idf
 alias idf-get  "source $HOME/bin/progs/esp-idf/export.fish"

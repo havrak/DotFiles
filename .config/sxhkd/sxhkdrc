@@ -87,5 +87,5 @@ XF86AudioMicMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Launch programms
-super + {f,s,p,k}
-	start-and-notify {firefox,spotify,pavucontrol,keepassxc}
+super + {f,s,p,k,q}
+	start-and-notify {firefox,spotify,pavucontrol,keepassxc,qalculate-qt}

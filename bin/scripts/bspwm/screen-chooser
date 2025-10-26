@@ -63,6 +63,7 @@ case "$choose" in
 
 	esac
 
+xrandr > /tmp/xrandr_out.txt
 # in following cases only one monitor is connected, that can be done either via DP1 or HDMI1
 if test -n "$(grep "^$DP connected"  /tmp/xrandr_out.txt)"; then
 	ACTIVE=$DP
