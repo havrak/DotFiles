@@ -19,7 +19,8 @@ require "autocommands"
 require "macros"
 require "keymappings"
 
-require'lazy'.setup("plugins", {
+require'lazy'.setup {
+	change_detection = { enabled = false },
 	defaults = {lazy = true},
 	lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
 	performance = {
@@ -36,6 +37,8 @@ require'lazy'.setup("plugins", {
 			},
 		},
 	},
-})
+	readme = { enabled = false },
+	spec = 'plugins',
+}
 
 

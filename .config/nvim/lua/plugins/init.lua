@@ -41,6 +41,25 @@ end
 	vim.g.formatdef_latexindent = '"latexindent --logfile=/dev/null --local=$HOME/.config/latexindent/config.yaml -"'
 end
 },
+	{
+		'neovim/nvim-lspconfig',
+		dependencies = {
+			'hrsh7th/cmp-nvim-lsp',
+			-- { 'j-hui/fidget.nvim', opts = {} },
+		},
+		event = 'VeryLazy',
+		config = function() require 'mylsp' end,
+	},
+	{
+		'folke/lazydev.nvim',
+		dependencies = 'nvim-lspconfig',
+		ft = 'lua',
+		config = function()
+			require('lazydev').setup {}
+			require('mylsp').setup 'lua_ls'
+		end,
+	},
+
 {'aperezdc/vim-template' , event = "VeryLazy", config = function()
 	vim.g.email="krystof@havrak.xyz"
 	vim.g.username="Havránek Kryštof"
