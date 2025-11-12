@@ -2,10 +2,7 @@ local M = {'neoclide/coc.nvim', branch = 'release', event = "VeryLazy"}
 
 function M.config()
 	vim.g.coc_global_extensions = {
-	'coc-pairs',
 	'coc-tsserver',
-	'coc-spell-checker',
-	'coc-cspell-dicts',
 	'coc-sh',
 	'coc-json',
 	'coc-clangd',
