@@ -9,6 +9,7 @@ local M = {
 		'hrsh7th/cmp-cmdline',
 		'hrsh7th/cmp-path',
 		'hrsh7th/cmp-calc',
+		'hrsh7th/cmp-buffer',
 	},
 }
 
@@ -191,13 +192,14 @@ function M.config()
 		sources = { src.calc, src.path, src.lsp, src.snip, src.copilot },
 	}
 
-	cmp.setup.filetype({ 'markdown', 'text' }, {
+	cmp.setup.filetype({ 'markdown', 'text', 'tex', 'vimwiki' }, {
 		sources = {
 			src.calc,
 			vim.tbl_extend('force', src.path, { trigger_characters = {}, keyword_length = 100 }),
 			src.snip,
 			src.font,
 			src.latex,
+			src.buf
 		},
 	})
 	cmp.setup.filetype(

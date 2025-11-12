@@ -70,7 +70,7 @@ setup("pyright")
 setup("jsonls")
 setup("clangd")
 setup("cspell_ls")
--- setup("lua_ls")
+setup("lua_ls")
 
 -- Lsp diagnostic
 vim.keymap.set("n", "<C-d>", vim.diagnostic.open_float)
@@ -95,7 +95,6 @@ end)
 vim.keymap.set({ "n", "i" }, "<C-i>", vim.lsp.buf.document_highlight)
 vim.keymap.set({ "n", "i" }, "<C-S-I>", vim.lsp.buf.clear_references)
 vim.keymap.set({ "n", "i" }, "<c-space>", vim.lsp.buf.code_action)
--- vim.keymap.set({ 'n', 'i' }, '<F2>', vim.lsp.buf.rename)
 vim.keymap.set({ "n", "i" }, "<C-r>", vim.lsp.buf.rename)
 
 return M
