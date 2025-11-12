@@ -73,7 +73,7 @@ setup("cspell_ls")
 -- setup("lua_ls")
 
 -- Lsp diagnostic
-vim.keymap.set("n", "<a-d>", vim.diagnostic.open_float)
+vim.keymap.set("n", "<C-d>", vim.diagnostic.open_float)
 vim.keymap.set("i", "<A-d>s", vim.diagnostic.open_float)
 vim.keymap.set("n", "[g", function()
 	vim.diagnostic.jump({ count = -1, float = true })
@@ -94,7 +94,7 @@ vim.keymap.set("i", "<A-I>", function()
 end)
 vim.keymap.set({ "n", "i" }, "<C-i>", vim.lsp.buf.document_highlight)
 vim.keymap.set({ "n", "i" }, "<C-S-I>", vim.lsp.buf.clear_references)
-vim.keymap.set({ "n", "i" }, "<A-c>", vim.lsp.buf.code_action)
+vim.keymap.set({ "n", "i" }, "<c-space>", vim.lsp.buf.code_action)
 -- vim.keymap.set({ 'n', 'i' }, '<F2>', vim.lsp.buf.rename)
 vim.keymap.set({ "n", "i" }, "<C-r>", vim.lsp.buf.rename)
 

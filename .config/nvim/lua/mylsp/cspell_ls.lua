@@ -1,17 +1,29 @@
 local M = {}
 
-M.cmd = { "cspell-lsp", "--stdio" }
+-- Get the HOME environment variable
+local home = os.getenv("HOME")
+
+-- Correctly build the path to your config file
+-- We must separate "--config" and the path into two separate strings in the table.
+M.cmd = {
+  "cspell-lsp",
+  "--config",
+  home .. "/.config/cspell/cspell.json",
+  "--stdio"
+}
+
 M.filetypes = {
   "lua",
   "python",
   "javascript",
   "typescript",
   "markdown",
+  "vimwiki",
   "gitcommit",
-	"c++",
-	"c",
-	"tex",
+  "cpp",
+  "c",
+  "tex",
 }
-M.root_markers = { ".git", "cspell.json" } -- It will look for a cspell.json config
+M.root_markers = { ".git" }
 
 return M

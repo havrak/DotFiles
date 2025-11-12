@@ -218,43 +218,4 @@ M = {
 	{ 'kdheepak/cmp-latex-symbols', ft = { 'markdown', 'text' }, dependencies = 'nvim-cmp' },
 	{ 'chrisgrieser/cmp-nerdfont', ft = { 'markdown', 'text', 'lua' }, dependencies = 'nvim-cmp' },
 }
-
--- add AI plugins when plugged in and on the main pc
-local f = io.open '/sys/class/power_supply/BAT0/status'
-local ok = f and f:read '*l' ~= 'Discharging'
-if f then f:close() end
-if ok and exists(os.getenv 'HOME' .. '/Documents/work') and os.getenv 'USER' ~= 'root' then
-	src.copilot = { name = 'copilot', group_index = 2, trigger_characters = {} }
-	M[#M + 1] = {
-		'zbirenbaum/copilot.lua',
-		dependencies = { { 'litoj/cmp-copilot', opts = { update_on_keypress = false } } },
-		event = 'LspAttach',
-		opts = {
-			panel = { enabled = false },
-			suggestion = {
-				enabled = true,
-				keymap = {
-					accept = false,
-					dismiss = false,
-					next = false,
-					prev = false,
-				},
-			},
-			filetypes = {
-				['*'] = false,
-				c = true,
-				cpp = true,
-				cs = true,
-				javascript = true,
-				javascriptreact = true,
-				lua = true,
-				python = true,
-				sh = true,
-				typescript = true,
-				typescriptreact = true,
-				vue = true,
-			},
-		},
-	}
-end
 return M
