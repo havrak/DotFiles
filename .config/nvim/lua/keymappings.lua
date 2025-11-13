@@ -17,6 +17,7 @@ vim.keymap.set('v', '>', '>gv', { silent = true })
 vim.keymap.set('v', '?', '<gv', { silent = true })
 vim.keymap.set('v', ':', '>gv', { silent = true })
 
+
 -- Binding to get to TERMINAL mode
 vim.keymap.set('n', ';', ':', { silent = true })
 vim.keymap.set('n', 'ů', ':', { silent = true })

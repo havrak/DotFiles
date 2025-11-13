@@ -66,7 +66,6 @@ M.setup = setup
 
 setup("bashls")
 setup("pyright")
--- setup('tsserver')
 setup("jsonls")
 setup("clangd")
 setup("cspell_ls")

@@ -1,6 +1,5 @@
-
-local general_settings_group = vim.api.nvim_create_augroup('GeneralSettings', { clear = true })
-local copilot_group  =  vim.api.nvim_create_augroup("CopilotWorkspace", { clear = true });
+local general_settings_group = vim.api.nvim_create_augroup("GeneralSettings", { clear = true })
+local copilot_group = vim.api.nvim_create_augroup("CopilotWorkspace", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	group = general_settings_group,
 	pattern = "*",
@@ -12,7 +11,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "plaintex",
 	command = "set filetype=tex",
 })
-
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = general_settings_group,
@@ -38,21 +36,29 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 vim.api.nvim_create_autocmd("VimLeave", {
 	group = general_settings_group,
 	pattern = "*.tex",
-	command =  "!texclear %"
+	command = "!texclear %",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = general_settings_group,
-	pattern = "*.wiki",
-	command =  "nnoremap <leader>c <Cmd>Vimwiki2HTML<CR>",
-})
+	pattern = { "wiki", "vimwiki" },
+	callback = function(args)
+		vim.g.copilot_enabled = false
 
-vim.api.nvim_create_autocmd("Filetype", {
-	group = general_settings_group,
-	pattern = "*.vimwiki",
-	command =  "let g:copilot_enabled = v:false",
-})
+		vim.keymap.set("n", "<leader>c", "<Cmd>Vimwiki2HTML<CR>", {
+			buffer = args.buf, -- Make this mapping buffer-local
+			noremap = true,
+			silent = true,
+			desc = "Vimwiki: Convert to HTML",
+		})
 
+		vim.keymap.set("v", "<leader>t", ":'<,'>! tr -s \" \" | column -t -s '|' -o '|'<CR>", {
+			noremap = true,
+			silent = true,
+			desc = "Format: Align table columns",
+		})
+	end,
+})
 
 -- vim.api.nvim_create_autocmd("VimEnter", {
 --   group = copilot_group,
