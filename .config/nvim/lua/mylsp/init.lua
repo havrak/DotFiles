@@ -94,6 +94,9 @@ end)
 vim.keymap.set({ "n", "i" }, "<C-i>", vim.lsp.buf.document_highlight)
 vim.keymap.set({ "n", "i" }, "<C-S-I>", vim.lsp.buf.clear_references)
 vim.keymap.set({ "n", "i" }, "<c-space>", vim.lsp.buf.code_action)
-vim.keymap.set({ "n", "i" }, "<C-r>", vim.lsp.buf.rename)
+vim.keymap.set({ "n", "i" }, "<C-a>", vim.lsp.buf.rename)
+
+
+
 
 return M

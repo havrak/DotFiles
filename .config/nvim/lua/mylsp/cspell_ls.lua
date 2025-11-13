@@ -24,6 +24,6 @@ M.filetypes = {
   "c",
   "tex",
 }
-M.root_markers = { ".git" }
+M.root_markers = { ".git" , "cspell.json"}
 
 return M
