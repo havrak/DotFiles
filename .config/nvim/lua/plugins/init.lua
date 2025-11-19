@@ -16,30 +16,34 @@ return {
 	{ "numToStr/Comment.nvim", event = "VeryLazy", opts = {} },
 
 	{ "preservim/tagbar", event = "VeryLazy" },
-
 	{
-		"github/copilot.vim",
-		event = "VeryLazy",
-		priority = 2,
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
 		config = function()
-			vim.g.copilot_enabled = 1
-			vim.g.copilot_assume_mapped = 1
+			require("copilot").setup({
+				-- IMPORTANT: Disable ghost text suggestions
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+				filetypes = {
+					-- Disable copilot for filetypes you don't want
+					markdown = true,
+					latex = true,
+					tex = true,
 
-			vim.g.copilot_no_tab_map = 1
-			vim.keymap.set("i", "<S-CR>", 'copilot#Accept("\\<CR>")', {
-				expr = true,
-				replace_keycodes = false,
+					-- ...
+				},
 			})
-			local function loadGitRoot()
-				local git_root = vim.fn.trim(vim.fn.system("git rev-parse --show-toplevel"))
-
-				-- If the git root directory is found, set it as the workspace folder for copilot
-				if git_root ~= "" then
-					vim.g.copilot_workspace_folders = { git_root }
-				end
-			end
-			local timer = vim.loop.new_timer()
-			timer:start(3000, 0, vim.schedule_wrap(loadGitRoot)) -- this could be probably done with autogroup (after vim-rooter runs)
+		end,
+	},
+	{
+		-- This plugin provides the nvim-cmp source
+		"zbirenbaum/copilot-cmp",
+		dependencies = { "copilot.lua" },
+		event = "VeryLazy",
+		config = function()
+			-- This just needs to be setup
+			require("copilot_cmp").setup()
 		end,
 	},
 	{

@@ -3,29 +3,20 @@
   "loadDefaultConfiguration": false,
   "import": [
     "https://cdn.jsdelivr.net/npm/@cspell/dict-de-de/cspell-ext.json",
+    "https://cdn.jsdelivr.net/npm/@cspell/dict-latex/cspell-ext.json",
     "@cspell/dict-cs-cz/cspell-ext.json"
   ],
   "language": "de, de_DE, cs, en, en-US",
   "dictionaries": [
     "english",
     "czech",
-    "german",
-    "global-user-words"
-  ],
-  "dictionaryDefinitions": [
-    {
-      "name": "global-user-words",
-      "path": "./global-words.txt",
-      "addWords": false
-    }
+    "german"
   ],
   "enabledLanguageIds": [
     "arduino",
     "c",
     "cpp",
     "csharp",
-    "cz",
-    "en",
     "go",
     "h",
     "html",
@@ -41,6 +32,20 @@
     "tex",
     "text",
     "vimwiki"
+  ],
+  "overrides": [
+    {
+      "languageId": [
+        "latex",
+        "tex"
+      ],
+      "dictionaries": [
+        "english",
+        "czech",
+        "german",
+        "latex"
+      ]
+    }
   ],
   "userWords": [
     "AWGN",
@@ -218,6 +223,16 @@
     "Hammingovská",
     "adaptivita",
     "multidimensionální",
-    "jednodimensionální"
+    "jednodimensionální",
+    "Gaussovský",
+    "zapouzdřovacího",
+    "Nyquistova",
+    "samokmitající",
+    "kapacitory",
+    "intermodulačních",
+    "dvoupásmový",
+    "dvoupásmové",
+    "dvoupásmovým",
+    "nízkošumovým"
   ]
 }

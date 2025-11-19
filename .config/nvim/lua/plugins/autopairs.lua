@@ -21,7 +21,7 @@ function M.config()
 			use_virt_lines = false,
 			check_ts = true,
 		},
-		ignored_next_char = '[^ .,)%]}]',
+		ignored_next_char = '[^ .,)%]}$]',
 	}
 
 	local on_confirm_done = require('nvim-autopairs.completion.cmp').on_confirm_done
