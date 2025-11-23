@@ -65,6 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', ',la', '$\\Leftarrow$<space>')
 		vim.keymap.set('i', '.ra', '\\rightarrow<space>')
 		vim.keymap.set('i', '.la', '\\leftarrow<space>')
+		vim.keymap.set('i', '.bmat', '\\begin{bmatrix}<Enter>\\\\<Enter>\\end{bmatrix}<Esc>khhi') -- matrix with parentheses
 		vim.keymap.set('i', '.pmat', '\\begin{pmatrix}<Enter>\\\\<Enter>\\end{pmatrix}<Esc>khhi') -- matrix with parentheses
 		vim.keymap.set('i', '.emat', '\\begin{matrix}<Enter>\\\\<Enter>\\end{matrix}<Esc>khhi') -- matrix
 		vim.keymap.set('i', '.vmat', '\\begin{vmatrix}<Enter>\\\\<Enter>\\end{vmatrix}<Esc>khhi') -- matrix with vertical lines

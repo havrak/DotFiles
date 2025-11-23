@@ -9,16 +9,18 @@ local M = {
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-nvim-lsp-signature-help",
 	},
 }
 
 local src = {
 	font = { name = "nerdfont", group_index = 1, trigger_characters = {}, keyword_length = 3 },
-	latex = { name = "latex_symbols", group_index = 1, trigger_characters = {}, keyword_length = 3 },
-	path = { name = "path", group_index = 2},
+	latex = { name = "latex_symbols", group_index = 1, trigger_characters = {}, keyword_length = 3, option = { strategy = 2 }},
+	path = { name = "path", group_index = 2, keyword_length = 1},
 	lsp = { name = "nvim_lsp", group_index = 2, max_item_count = 30, priority = 2 },
 	snip = { name = "luasnip", group_index = 2, keyword_length = 3, max_item_count = 5 },
 	buf = { name = "buffer", group_index = 3, max_item_count = 20 },
+	signature = { name = 'nvim_lsp_signature_help' },
 	copilot = { name = "copilot", group_index = 3, priority = 1 },
 }
 
@@ -101,7 +103,7 @@ local status_ok, copilot_cmp = pcall(require, "cmp_copilot.comparators")
 				end
 			end, { "i", "c" }),
 			["<CR>"] = cmp.mapping({
-				i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+				i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
 			}),
 			["<C-Space>"] = cmp.mapping(function(_)
 				if cmp.visible() then
@@ -204,7 +206,7 @@ local status_ok, copilot_cmp = pcall(require, "cmp_copilot.comparators")
 		},
 		experimental = { ghost_text = { hl_group = "DiagnosticVirtualTextHint" } },
 		sorting = { comparators = comparators },
-		sources = { src.path, src.lsp, src.snip, src.buf, src.copilot },
+		sources = { src.path, src.lsp, src.snip, src.signature, src.buf, src.copilot },
 	})
 
 	cmp.setup.filetype({ "markdown", "text", "tex", "vimwiki" }, {

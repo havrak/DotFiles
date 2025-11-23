@@ -1,0 +1,3 @@
+SemanticTokens:
+  DisabledKinds: [InactiveCode]
+
