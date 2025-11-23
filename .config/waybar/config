@@ -1,0 +1,68 @@
+{
+	"layer": "bottom",
+		"position": "bottom",
+		"height": 16, // Matched to Polybar
+    // 4px offset from edges
+    "margin-bottom": 4,
+    "margin-left": 4,
+    "margin-right": 4,
+
+		"modules-left": ["hyprland/workspaces", "hyprland/window"],
+		"modules-center": ["clock"],
+		"modules-right": ["custom/mail", "pulseaudio", "backlight", "battery", "hyprland/language", "network", "tray"],
+
+		"include": ["~/.config/waybar/active-workspaces.jsonc"],
+
+		"clock": {
+			"format": " {:%H:%M  %d.%m.}",
+			"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
+		},
+
+		"pulseaudio": {
+			"format": "󰕾 {volume}%",
+			"format-muted": "󰕾 Muted",
+			"on-click": "pavucontrol"
+		},
+
+		"backlight": {
+			"format": " {percent}%"
+		},
+
+		"battery": {
+			"states": {
+				"warning": 30,
+				"critical": 15
+			},
+			"format": "󰁹 {capacity}%",
+			"format-charging": "󱐋 {capacity}%"
+		},
+
+		"network": {
+			"format-wifi": "  {essid} {ipaddr}",
+			"format-ethernet": "  {ipaddr}",
+			"format-disconnected": "  Disconnected",
+			"interval": 10
+		},
+
+		"cpu": {
+			"format": " {usage}%"
+		},
+
+		"memory": {
+			"format": " {used:0.1f}G"
+		},
+
+		"hyprland/language": {
+			"format": "󰌌 {}"
+		},
+
+		"custom/mail": {
+			"exec": "~/bin/scripts/bspwm/polybar-email",
+			"interval": 30,
+			"format": "{}"
+		},
+
+		"tray": {
+			"spacing": 10
+		}
+}

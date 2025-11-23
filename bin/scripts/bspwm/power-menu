@@ -26,6 +26,7 @@ case "$1" in
 			"logoff")
 				if [ $(printf "no\\nyes" | dmenu -i -p "confirm") == "yes" ]; then
 					bspc quit
+					hyprctl dispatch exit
 				fi
 				;;
 		esac

@@ -1,0 +1,86 @@
+* {
+    font-family: "Mononoki Nerd Font";
+    font-size: 14px; /* Matches Polybar font size */
+    border: none;
+    border-radius: 0;
+    min-height: 0; /* Important for small bars */
+}
+
+/* The bar itself - transparent to allow gaps to show, or dark if you prefer */
+window#waybar {
+    background-color: #1f1f1f;
+    color: #1f1f1f;
+}
+
+/* --- WORKSPACES --- */
+
+#workspaces {
+    background-color: #ffffd7; /* The modulebg color */
+    margin: 0;
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: #ffffd7; /* Default (Occupied/Empty) background */
+    color: #1f1f1f; /* Default text color */
+    margin: 0;
+}
+
+/* EMPTY: Matches Polybar label-empty-foreground = #999999 */
+#workspaces button.empty {
+    color: #999999;
+}
+
+/* OCCUPIED: Matches Polybar label-occupied */
+#workspaces button.occupied {
+    background-color: #ffffd7;
+    color: #1f1f1f;
+}
+
+/* ACTIVE: Matches Polybar label-focused (Inverted colors) */
+#workspaces button.active {
+    background-color: #1f1f1f; /* Dark background */
+    color: #ffffd7; /* Yellow text */
+}
+
+#workspaces button.urgent {
+    background-color: #cc241d;
+    color: #ffffd7;
+}
+
+/* --- MODULES --- */
+/* Matches Polybar logic: Background #ffffd7, Foreground #1f1f1f */
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#backlight,
+#network,
+#pulseaudio,
+#tray,
+#custom-mail,
+#language {
+    padding: 0 10px;
+    background-color: #ffffd7;
+    color: #1f1f1f;
+    margin-left: 5px; /* Matches module-margin in Polybar */
+}
+
+#clock {
+    margin-right: 5px; /* Center module spacing */
+    margin-left: 5px;
+}
+
+/* Tray usually needs specific handling to match background */
+#tray {
+    background-color: #ffffd7;
+}
+#tray > .passive {
+    -gtk-icon-effect: none;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: none;
+    background-color: #cc241d;
+}

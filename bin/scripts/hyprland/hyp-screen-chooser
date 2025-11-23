@@ -1,0 +1,121 @@
+#!/bin/bash
+
+CONF_PATH="$HOME/bin/scripts/files/monitors"
+WAYBAR_CONF_DIR="$HOME/.config/waybar"
+
+# Arrays for mapping Keys to Workspace Names
+KEYS=("F1" "F2" "F3" "F4" "F5" "F6")
+NAMES=("A" "B" "C" "D" "E" "F")
+
+# Function to enable A-F keys and bindings
+enable_extra_workspaces() {
+    local mon_char=$1
+
+    # 1. Assign Workspaces to the Monitor
+    for i in "${!KEYS[@]}"; do
+        key="${KEYS[$i]}"
+        name="${NAMES[$i]}"
+
+        # Bind workspace to monitor
+        hyprctl keyword workspace "name:$name, monitor:$mon_char"
+
+        # Enable Keybindings (Alt + F1..F6)
+        hyprctl keyword bind "ALT, $key, workspace, name:$name"
+        hyprctl keyword bind "ALT SHIFT, $key, movetoworkspace, name:$name"
+    done
+
+    # 2. Swap Waybar to Full Mode
+    cp "$WAYBAR_CONF_DIR/workspaces-full.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
+}
+
+# Function to disable A-F keys and hiding them
+disable_extra_workspaces() {
+    # 1. Unbind the keys so you can't switch to them
+    for i in "${!KEYS[@]}"; do
+        key="${KEYS[$i]}"
+
+        # Unbind Alt + F1..F6
+        hyprctl keyword unbind "ALT, $key"
+        hyprctl keyword unbind "ALT SHIFT, $key"
+    done
+
+    # 2. Swap Waybar to Laptop Mode (Hides A-F from bar)
+    cp "$WAYBAR_CONF_DIR/workspaces-laptop.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
+}
+
+# Helper to bind standard 1-12
+assign_standard_workspaces() {
+    local mon_num=$1
+    for i in {1..12}; do
+        hyprctl keyword workspace "${i}, monitor:${mon_num}"
+    done
+}
+
+function saveSetup (){
+    echo "$1" > $CONF_PATH
+}
+
+# --- Detection ---
+INTERNAL="eDP-1"
+DP=$(hyprctl monitors | grep "DP-" | grep -v "eDP" | awk '{print $2}' | head -n1)
+HDMI=$(hyprctl monitors | grep "HDMI-" | awk '{print $2}' | head -n1)
+
+[ -z "$DP" ] && DP="DP-1"
+[ -z "$HDMI" ] && HDMI="HDMI-A-1"
+
+if [ -z "$1" ]; then
+    choose=$(printf "laptop\\nultra\\n4k\\nmirror" | dmenu -i -p "Choose monitor setup" -fn 'Mononoki Nerd Font-12' -nb '#1f1f1f' -nf '#ffffd7' -sb '#ffffd7' -sf '#1f1f1f')
+else
+    choose=$1
+fi
+
+case "$choose" in
+    "laptop")
+        # 1. Monitor Setup
+        hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1"
+        hyprctl keyword monitor "$DP,disable"
+        hyprctl keyword monitor "$HDMI,disable"
+
+        # 2. Workspace Setup
+        assign_standard_workspaces $INTERNAL
+        disable_extra_workspaces # <--- Disables Keys & Waybar for A-F
+
+        saveSetup "laptop"
+        ;;
+
+    "ultra")
+        hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1"
+        hyprctl keyword monitor "$DP,2560x1080@60,1920x0,1"
+        hyprctl keyword monitor "$HDMI,disable"
+
+        assign_standard_workspaces $DP
+        enable_extra_workspaces $INTERNAL # <--- Enables Keys & Waybar for A-F
+
+        saveSetup "ultra"
+        ;;
+
+    "4k")
+        hyprctl keyword monitor "$DP,3840x2160@60,0x0,1"
+        hyprctl keyword monitor "$INTERNAL,disable"
+        hyprctl keyword monitor "$HDMI,disable"
+
+        assign_standard_workspaces $DP
+        disable_extra_workspaces # Assuming you only want 1-12 on 4K?
+
+        saveSetup "4k"
+        ;;
+
+    "mirror")
+        hyprctl keyword monitor "$DP,1920x1080@60,0x0,1"
+        hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1,mirror,$DP"
+
+        assign_standard_workspaces $DP
+        disable_extra_workspaces
+
+        saveSetup "mirror"
+        ;;
+esac
+
+# Refresh
+~/bin/scripts/hyprland/hyp-setbg restore &
+~/bin/scripts/hyprland/waybar-launch &
