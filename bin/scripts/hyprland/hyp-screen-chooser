@@ -257,6 +257,6 @@ case "$choose" in
 		;;
 esac
 
-~/bin/scripts/hyprland/hyp-setbg restore &
+~/bin/scripts/wm-agnostic/setbg &
 ~/bin/scripts/hyprland/waybar-launch &
 
