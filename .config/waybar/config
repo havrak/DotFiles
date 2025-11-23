@@ -9,7 +9,7 @@
 
 		"modules-left": ["hyprland/workspaces", "hyprland/window"],
 		"modules-center": ["clock"],
-		"modules-right": ["custom/mail", "pulseaudio", "backlight", "battery", "hyprland/language", "network#wifi", "network#eth", "tray"],
+		"modules-right": ["custom/mail", "pulseaudio", "backlight", "battery", "hyprland/language", "network#wifi", "custom#eth", "tray"],
 
 		"include": ["~/.config/waybar/active-workspaces.jsonc"],
 
@@ -37,13 +37,13 @@
 			"format-charging": "󱐋 {capacity}%"
 		},
 
-		"network#eth": {
-			"interface": "en*",
-			"format-ethernet": "  {ipaddr}",
-			"format-disconnected": "",
-			"tooltip-format": "Ethernet: {ifname}",
-			"interval": 10
-		},
+"network#eth": {
+		"interface": "enp0s20f0u2u2",
+		"format-ethernet": "  {ipaddr}",
+		"format-disconnected": "",
+		"tooltip-format": "Ethernet: {ifname}",
+		"interval": 10
+	},
 
 		"network#wifi": {
 			"interface": "wl*",

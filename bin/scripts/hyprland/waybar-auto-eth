@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+    echo '{"text": "jq missing", "tooltip": "Please install jq", "class": "error"}'
+    exit 0
+fi
+
+# 1. Get all IPv4 interfaces
+# 2. Filter for names starting with "en" or "eth"
+# 3. Filter for interfaces that have an IP address (.addr_info is not empty)
+# 4. Select the first match
+MATCH=$(ip -j -4 addr show | jq -r '[.[] | select(.ifname | test("^(en|eth)")) | select(.addr_info | length > 0)] | .[0]')
+
+if [ "$MATCH" == "null" ] || [ -z "$MATCH" ]; then
+    # No active ethernet found -> Output empty text to hide module
+    echo '{"text": "", "alt": "disconnected", "class": "disconnected"}'
+else
+    # Parse details
+    IP=$(echo "$MATCH" | jq -r '.addr_info[0].local')
+    IFNAME=$(echo "$MATCH" | jq -r '.ifname')
+
+    # Output JSON for Waybar
+    # text: Icon + IP
+    # tooltip: Interface Name
+    # class: "connected" (useful for styling)
+    printf '{"text": "  %s", "tooltip": "Ethernet: %s", "class": "connected", "alt": "connected"}\n' "$IP" "$IFNAME"
+fi
