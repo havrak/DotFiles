@@ -1,121 +1,262 @@
 #!/bin/bash
 
-CONF_PATH="$HOME/bin/scripts/files/monitors"
+CONF_PATH="$HOME/bin/scripts/files/hyp-monitors"
 WAYBAR_CONF_DIR="$HOME/.config/waybar"
 
 # Arrays for mapping Keys to Workspace Names
 KEYS=("F1" "F2" "F3" "F4" "F5" "F6")
-NAMES=("A" "B" "C" "D" "E" "F")
+NAMES=(21 22 23 24 25 26)
 
-# Function to enable A-F keys and bindings
+get_monitor_signature() {
+	hyprctl monitors | grep "Serial" | sort | tr -d ' \n\t'
+}
+
+saveSetup() {
+	local layout_name=$1
+	echo "$layout_name" > "$CONF_PATH"
+	get_monitor_signature >> "$CONF_PATH"
+}
+
+restoreSetup() {
+	if [ ! -f "$CONF_PATH" ]; then
+		echo "No saved config found. Defaulting to laptop."
+		exec "$0" "laptop"
+		return
+	fi
+
+	local saved_layout=$(sed '1q;d' "$CONF_PATH")
+	local saved_signature=$(sed '2q;d' "$CONF_PATH")
+	local current_signature=$(get_monitor_signature)
+
+	if [ "$saved_signature" == "$current_signature" ]; then
+		echo "Monitors match saved state. Restoring '$saved_layout'..."
+		exec "$0" "$saved_layout"
+	else
+		echo "Monitor mismatch (Saved: $saved_signature vs Current: $current_signature). Defaulting to laptop."
+		exec "$0" "laptop"
+	fi
+}
+
+safe_move_workspace() {
+	local ws=$1
+	local mon=$2
+	# Check if workspace exists in Hyprland's active list
+	if hyprctl workspaces | grep -q "workspace ID $ws"; then
+		hyprctl dispatch moveworkspacetomonitor "$ws $mon"
+	elif hyprctl workspaces | grep -q "workspace $ws "; then
+		# Fallback for named workspaces or different versions
+		hyprctl dispatch moveworkspacetomonitor "$ws $mon"
+	fi
+}
+
+# Enable A-F keys and set Waybar to Full
 enable_extra_workspaces() {
-    local mon_char=$1
+	local mon_char=$1
+	for i in "${!KEYS[@]}"; do
+		key="${KEYS[$i]}"
+		name="${NAMES[$i]}"
+		hyprctl keyword workspace "$name, monitor:$mon_char"
+		# echo "Set workspace name:$name to monitor:$mon_char"
+		safe_move_workspace "$name" "$mon_char"
 
-    # 1. Assign Workspaces to the Monitor
-    for i in "${!KEYS[@]}"; do
-        key="${KEYS[$i]}"
-        name="${NAMES[$i]}"
-
-        # Bind workspace to monitor
-        hyprctl keyword workspace "name:$name, monitor:$mon_char"
-
-        # Enable Keybindings (Alt + F1..F6)
-        hyprctl keyword bind "ALT, $key, workspace, name:$name"
-        hyprctl keyword bind "ALT SHIFT, $key, movetoworkspace, name:$name"
-    done
-
-    # 2. Swap Waybar to Full Mode
-    cp "$WAYBAR_CONF_DIR/workspaces-full.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
+		hyprctl keyword bind "ALT, $key, workspace, $name"
+		hyprctl keyword bind "ALT SHIFT, $key, movetoworkspace, $name"
+	done
+	# cp "$WAYBAR_CONF_DIR/workspaces-full.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
 }
 
-# Function to disable A-F keys and hiding them
+# Disable A-F keys and set Waybar to Laptop
 disable_extra_workspaces() {
-    # 1. Unbind the keys so you can't switch to them
-    for i in "${!KEYS[@]}"; do
-        key="${KEYS[$i]}"
-
-        # Unbind Alt + F1..F6
-        hyprctl keyword unbind "ALT, $key"
-        hyprctl keyword unbind "ALT SHIFT, $key"
-    done
-
-    # 2. Swap Waybar to Laptop Mode (Hides A-F from bar)
-    cp "$WAYBAR_CONF_DIR/workspaces-laptop.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
+	for i in "${!KEYS[@]}"; do
+		key="${KEYS[$i]}"
+		hyprctl keyword unbind "ALT, $key"
+		hyprctl keyword unbind "ALT SHIFT, $key"
+	done
+	# cp "$WAYBAR_CONF_DIR/workspaces-laptop.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
 }
 
-# Helper to bind standard 1-12
+# Assign all 1-12 to one monitor
 assign_standard_workspaces() {
-    local mon_num=$1
-    for i in {1..12}; do
-        hyprctl keyword workspace "${i}, monitor:${mon_num}"
-    done
+	local mon_num=$1
+	for i in {1..12}; do
+		hyprctl keyword workspace "${i}, monitor:${mon_num}"
+		# echo "Set workspace name:${i} to monitor:${mon_num}"
+		safe_move_workspace "${i}" "${mon_num}"
+	done
 }
 
-function saveSetup (){
-    echo "$1" > $CONF_PATH
+# --- GENERATE WAYBAR CONFIG (The Fix) ---
+generate_waybar_config() {
+	local primary_mon=$1   # Monitor for 1-12
+	local secondary_mon=$2 # Monitor for A-F
+	local output_file="$WAYBAR_CONF_DIR/active-workspaces.jsonc"
+
+	# Start JSON
+	echo '{' > "$output_file"
+	echo '  "hyprland/workspaces": {' >> "$output_file"
+	echo '    "disable-scroll": true,' >> "$output_file"
+	echo '    "all-outputs": false,' >> "$output_file"
+	echo '    "format": "{icon}",' >> "$output_file"
+	echo '    "format-icons": {' >> $output_file
+	echo '      "1": "I",' >> $output_file
+	echo '      "2": "II",' >> $output_file
+	echo '      "3": "III",' >> $output_file
+	echo '      "4": "IV",' >> $output_file
+	echo '      "5": "V",' >> $output_file
+	echo '      "6": "VI",' >> $output_file
+	echo '      "7": "VII",' >> $output_file
+	echo '      "8": "VIII",' >> $output_file
+	echo '      "9": "IX",' >> $output_file
+	echo '      "10": "X",' >> $output_file
+	echo '      "11": "XI",' >> $output_file
+	echo '      "12": "XII",' >> $output_file
+	echo '      "21" : "A",' >> $output_file
+	echo '      "22" : "B",' >> $output_file
+	echo '      "23" : "C",' >> $output_file
+	echo '      "24" : "D",' >> $output_file
+	echo '      "25" : "E",' >> $output_file
+	echo '      "26" : "F"' >> $output_file
+	echo '    },' >> $output_file
+
+	echo '    "persistent-workspaces": {' >> "$output_file"
+
+	# 1. Primary Monitor (Workspaces 1-12)
+	# Output format: "DP-1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+	echo -n "            \"$primary_mon\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" >> "$output_file"
+
+	# 2. Secondary Monitor (Workspaces A-F) - Only if it exists
+	# Output format: , "eDP-1": ["name:A", "name:B", ...]
+	if [ -n "$secondary_mon" ]; then
+		echo "," >> "$output_file"
+		echo -n "            \"$secondary_mon\": [21, 22, 23, 24, 25, 26]" >> "$output_file"
+	fi
+
+	echo "" >> "$output_file"
+	echo '    }' >> "$output_file"
+	echo '  }' >> "$output_file"
+	echo '}' >> "$output_file"
 }
 
 # --- Detection ---
 INTERNAL="eDP-1"
-DP=$(hyprctl monitors | grep "DP-" | grep -v "eDP" | awk '{print $2}' | head -n1)
-HDMI=$(hyprctl monitors | grep "HDMI-" | awk '{print $2}' | head -n1)
 
-[ -z "$DP" ] && DP="DP-1"
-[ -z "$HDMI" ] && HDMI="HDMI-A-1"
+# 1. Get ALL monitor names (including disabled ones)
+# This fixes the issue where disabled monitors weren't detected
+ALL_MONITORS=$(hyprctl monitors all | grep "^Monitor" | awk '{print $2}')
+
+# 2. Identify Interfaces
+DP_CONNECTED=$(echo "$ALL_MONITORS" | grep "DP-" | grep -v "eDP" | head -n1)
+HDMI_CONNECTED=$(echo "$ALL_MONITORS" | grep "HDMI-" | head -n1)
+
+# Default names for fallback (so variables are never empty)
+DEFAULT_DP="DP-1"
+DEFAULT_HDMI="HDMI-A-1"
+
+# 3. Prioritize DP over HDMI
+if [ -n "$DP_CONNECTED" ]; then
+	ACTIVE="$DP_CONNECTED"
+	# If HDMI is also connected, mark it as the NONACTIVE one to disable it
+	if [ -n "$HDMI_CONNECTED" ]; then
+		NONACTIVE="$HDMI_CONNECTED"
+	else
+		NONACTIVE="$DEFAULT_HDMI"
+	fi
+elif [ -n "$HDMI_CONNECTED" ]; then
+	ACTIVE="$HDMI_CONNECTED"
+	NONACTIVE="$DEFAULT_DP"
+else
+	# No external monitors found
+	ACTIVE="$DEFAULT_DP"
+	NONACTIVE="$DEFAULT_HDMI"
+fi
+
+# Debug output (Optional, visible if run from terminal)
+echo "Detected: Active=$ACTIVE, NonActive=$NONACTIVE"
 
 if [ -z "$1" ]; then
-    choose=$(printf "laptop\\nultra\\n4k\\nmirror" | dmenu -i -p "Choose monitor setup" -fn 'Mononoki Nerd Font-12' -nb '#1f1f1f' -nf '#ffffd7' -sb '#ffffd7' -sf '#1f1f1f')
+	choose=$(printf "laptop\\nultra\\n4k\\n4k-just\\n1080p\\nmirror\\nsultra\\nmanual" | dmenu -i -p "Choose monitor setup")
 else
-    choose=$1
+	choose=$1
 fi
 
 case "$choose" in
-    "laptop")
-        # 1. Monitor Setup
-        hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1"
-        hyprctl keyword monitor "$DP,disable"
-        hyprctl keyword monitor "$HDMI,disable"
-
-        # 2. Workspace Setup
-        assign_standard_workspaces $INTERNAL
-        disable_extra_workspaces # <--- Disables Keys & Waybar for A-F
-
-        saveSetup "laptop"
-        ;;
-
-    "ultra")
-        hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1"
-        hyprctl keyword monitor "$DP,2560x1080@60,1920x0,1"
-        hyprctl keyword monitor "$HDMI,disable"
-
-        assign_standard_workspaces $DP
-        enable_extra_workspaces $INTERNAL # <--- Enables Keys & Waybar for A-F
-
-        saveSetup "ultra"
-        ;;
-
-    "4k")
-        hyprctl keyword monitor "$DP,3840x2160@60,0x0,1"
-        hyprctl keyword monitor "$INTERNAL,disable"
-        hyprctl keyword monitor "$HDMI,disable"
-
-        assign_standard_workspaces $DP
-        disable_extra_workspaces # Assuming you only want 1-12 on 4K?
-
-        saveSetup "4k"
-        ;;
-
-    "mirror")
-        hyprctl keyword monitor "$DP,1920x1080@60,0x0,1"
-        hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1,mirror,$DP"
-
-        assign_standard_workspaces $DP
-        disable_extra_workspaces
-
-        saveSetup "mirror"
-        ;;
+	"restore")
+		restoreSetup
+		exit 0 ;;
+	"manual")
+		if command -v wdisplays &> /dev/null; then wdisplays & else notify-send "Error" "Install wdisplays"; fi
+		exit 0 ;;
+	"laptop")
+		hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1"
+		hyprctl keyword monitor "$ACTIVE,disable"
+		hyprctl keyword monitor "$NONACTIVE,disable"
+		assign_standard_workspaces $INTERNAL
+		disable_extra_workspaces
+		generate_waybar_config "$INTERNAL" ""
+		saveSetup "laptop"
+		;;
+	"ultra")
+		hyprctl keyword monitor "$INTERNAL,1920x1080@60,320x1080,1"
+		hyprctl keyword monitor "$ACTIVE,2560x1080@60,0x0,1"
+		hyprctl keyword monitor "$NONACTIVE,disable"
+		assign_standard_workspaces $ACTIVE
+		enable_extra_workspaces $INTERNAL
+		generate_waybar_config "$ACTIVE" "$INTERNAL"
+		saveSetup "ultra"
+		;;
+	"sultra")
+		hyprctl keyword monitor "$INTERNAL,1920x1080@60,760x1440,1"
+		hyprctl keyword monitor "$ACTIVE,3440x1440@60,0x0,1"
+		hyprctl keyword monitor "$NONACTIVE,disable"
+		assign_standard_workspaces $ACTIVE
+		enable_extra_workspaces $INTERNAL
+		generate_waybar_config "$ACTIVE" "$INTERNAL"
+		saveSetup "sultra"
+		;;
+	"4k")
+		hyprctl keyword monitor "$ACTIVE,3840x2160@60,0x0,1"
+		hyprctl keyword monitor "$INTERNAL,1920x1080@60,876x2160,1"
+		hyprctl keyword monitor "$NONACTIVE,disable"
+		assign_standard_workspaces $ACTIVE
+		enable_extra_workspaces $INTERNAL
+		generate_waybar_config "$ACTIVE" "$INTERNAL"
+		saveSetup "4k"
+		;;
+	"4k-just")
+		hyprctl keyword monitor "$ACTIVE,3840x2160@60,0x0,1"
+		hyprctl keyword monitor "$INTERNAL,disable"
+		hyprctl keyword monitor "$NONACTIVE,disable"
+		assign_standard_workspaces $ACTIVE
+		disable_extra_workspaces
+		generate_waybar_config "$ACTIVE" ""
+		saveSetup "4k-just"
+		;;
+	"1080p")
+		hyprctl keyword monitor "$ACTIVE,1920x1080@60,0x0,1"
+		hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x1080,1"
+		hyprctl keyword monitor "$NONACTIVE,disable"
+		assign_standard_workspaces $ACTIVE
+		enable_extra_workspaces $INTERNAL
+		generate_waybar_config "$ACTIVE" "$INTERNAL"
+		saveSetup "1080p"
+		;;
+	"mirror")
+		hyprctl keyword monitor "$ACTIVE,1920x1080@60,0x0,1"
+		hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1,mirror,$ACTIVE"
+		assign_standard_workspaces $ACTIVE
+		disable_extra_workspaces
+		generate_waybar_config "$ACTIVE" ""
+		saveSetup "mirror"
+		;;
+	"*")
+		notify-send "Error" "Unknown option: $choose"
+		exit 1
+		;;
+	"")
+		exit 1
+		;;
 esac
 
-# Refresh
 ~/bin/scripts/hyprland/hyp-setbg restore &
 ~/bin/scripts/hyprland/waybar-launch &
+

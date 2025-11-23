@@ -1,6 +1,6 @@
 * {
     font-family: "Mononoki Nerd Font";
-    font-size: 14px; /* Matches Polybar font size */
+    font-size: 12px; /* Matches Polybar font size */
     border: none;
     border-radius: 0;
     min-height: 0; /* Important for small bars */

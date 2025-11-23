@@ -1,0 +1,227 @@
+#!/usr/bin/env bash
+
+# Dependency check
+if ! command -v jq &> /dev/null; then
+    notify-send "Error" "jq is missing. Please install it."
+    exit 1
+fi
+
+# Function to print usage
+usage() {
+    echo "Usage: $0 [options] <class_name>"
+    echo "Options:"
+    echo "  -t, --toggle <class> : Toggles the window (Default behavior)."
+    echo "  -r, --reload <class> : Kills (if exists) and re-launches the window."
+    echo "  -h, --hide <class>   : Hides specified windows."
+    exit 1
+}
+
+# --- ARGUMENT PARSING ---
+MODE="toggle"
+CLASS_NAME=""
+ARGS=()
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -r|--reload)
+            MODE="reload"
+            shift
+            ;;
+        -t|--toggle)
+            MODE="toggle"
+            shift
+            ;;
+        -h|--hide)
+            MODE="hide"
+            shift
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            usage
+            ;;
+        *)
+            ARGS+=("$1")
+            shift
+            ;;
+    esac
+done
+
+if [ ${#ARGS[@]} -eq 0 ]; then
+    usage
+fi
+
+CLASS_NAME="${ARGS[0]}"
+
+# --- INTERNAL FUNCTIONS ---
+
+get_address() {
+    # Returns address of the FIRST matching window
+    hyprctl clients -j | jq -r "[.[] | select(.class == \"$1\")] | .[0].address"
+}
+
+launch_app() {
+    local cls="$1"
+    case "$cls" in
+        "gpt")
+            st -c gpt &
+            ;;
+        *)
+            if command -v "$cls" &> /dev/null; then
+                "$cls" &
+            else
+                notify-send "Scratchpad Error" "Could not launch '$cls'. Command not found."
+            fi
+            ;;
+    esac
+}
+
+manual_center() {
+    local addr="$1"
+
+    # 1. Get Focused Monitor Geometry (Logical position + Physical Size + Scale)
+    local mon_geom=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | "\(.x) \(.y) \(.width) \(.height) \(.scale)"')
+    read mon_x mon_y mon_w mon_h mon_scale <<< "$mon_geom"
+
+    # 2. Get Window Dimensions
+    local win_geom=$(hyprctl clients -j | jq -r "[.[] | select(.address == \"$addr\")] | .[0] | \"\(.size[0]) \(.size[1])\"")
+    read win_w win_h <<< "$win_geom"
+
+    # 3. Calculate Center (Using awk for floating point math)
+    # Formula: Target = MonitorPos + (MonitorLogicalSize - WindowSize) / 2
+    local target_coords=$(awk -v mx="$mon_x" -v my="$mon_y" -v mw="$mon_w" -v mh="$mon_h" -v ms="$mon_scale" -v ww="$win_w" -v wh="$win_h" 'BEGIN {
+        mon_logical_w = mw / ms;
+        mon_logical_h = mh / ms;
+        tx = mx + (mon_logical_w - ww) / 2;
+        ty = my + (mon_logical_h - wh) / 2;
+        printf "%.0f %.0f", tx, ty;
+    }')
+
+    # 4. Move Window
+    hyprctl dispatch movewindowpixel exact $target_coords,address:$addr
+}
+
+# --- LOGIC HANDLERS ---
+
+hide_window() {
+    local cls="$1"
+    local addr=$(get_address "$cls")
+    if [ ! -z "$addr" ] && [ "$addr" != "null" ]; then
+        hyprctl dispatch movetoworkspacesilent "special:scratch_${cls},address:${addr}"
+    fi
+}
+
+launch_and_center() {
+    local cls="$1"
+    launch_app "$cls"
+
+    # Wait for window to appear
+    local max_retries=50 # 5 seconds max
+    local count=0
+    local addr="null"
+    local is_floating=""
+
+    while [ "$addr" == "null" ] || [ -z "$addr" ]; do
+        if [ "$count" -ge "$max_retries" ]; then
+            notify-send "Scratchpad Error" "Timed out waiting for $cls"
+            return 1
+        fi
+        sleep 0.1
+
+        # Get full object to check floating status immediately
+        local window_json=$(hyprctl clients -j | jq -r "[.[] | select(.class == \"$cls\")] | .[0]")
+        if [ "$window_json" != "null" ]; then
+            addr=$(echo "$window_json" | jq -r ".address")
+            is_floating=$(echo "$window_json" | jq -r ".floating")
+        fi
+        ((count++))
+    done
+
+    # Setup the new window
+    # 1. Ensure Floating (Only toggle if currently false)
+    if [ "$is_floating" == "false" ]; then
+        hyprctl dispatch togglefloating "address:${addr}"
+    fi
+
+    # 2. Center Manually (Replaces native centerwindow)
+    manual_center "$addr"
+
+    # 3. Focus (Without warping cursor, relying on 'no_warps = true' in config)
+    hyprctl dispatch focuswindow "address:${addr}"
+}
+
+toggle_window() {
+    local cls="$1"
+
+    # Fetch all info for the specific window as a single JSON object
+    local window_json=$(hyprctl clients -j | jq -r "[.[] | select(.class == \"$cls\")] | .[0]")
+
+    # 1. Check if window exists
+    if [ "$window_json" == "null" ] || [ -z "$window_json" ]; then
+        launch_and_center "$cls"
+        return
+    fi
+
+    # Extract details from the JSON object
+    local addr=$(echo "$window_json" | jq -r ".address")
+    local window_ws=$(echo "$window_json" | jq -r ".workspace.id")
+    local is_floating=$(echo "$window_json" | jq -r ".floating")
+    local active_ws=$(hyprctl activeworkspace -j | jq -r ".id")
+
+    # 2. Check multiple instances (warn only)
+    local count=$(hyprctl clients -j | jq "[.[] | select(.class == \"$cls\")] | length")
+    if [ "$count" -gt 1 ]; then
+        notify-send -t 800 " multiple same $cls's open"
+    fi
+
+    # 3. Toggle Logic
+    if [ "$window_ws" -eq "$active_ws" ]; then
+        # On current workspace -> HIDE
+        hyprctl dispatch movetoworkspacesilent "special:scratch_${cls},address:${addr}"
+    else
+        # Hidden or elsewhere -> SHOW
+
+        # Move to active workspace
+        hyprctl dispatch movetoworkspacesilent "${active_ws},address:${addr}"
+
+        # Ensure it is floating
+        if [ "$is_floating" == "false" ]; then
+            hyprctl dispatch togglefloating "address:${addr}"
+        fi
+
+        # Use Manual Centering
+        manual_center "$addr"
+        hyprctl dispatch focuswindow "address:${addr}"
+    fi
+}
+
+reload_window() {
+    local cls="$1"
+    # Kill all instances
+    while true; do
+        local addr=$(get_address "$cls")
+        if [ -z "$addr" ] || [ "$addr" == "null" ]; then
+            break
+        fi
+        hyprctl dispatch closewindow "address:$addr"
+        sleep 0.2
+    done
+
+    # Re-launch
+    launch_and_center "$cls"
+}
+
+# --- EXECUTION ---
+
+case "$MODE" in
+    hide)
+        for cls in "${ARGS[@]}"; do
+            hide_window "$cls"
+        done
+        ;;
+    reload)
+        reload_window "$CLASS_NAME"
+        ;;
+    toggle)
+        toggle_window "$CLASS_NAME"
+        ;;
+esac

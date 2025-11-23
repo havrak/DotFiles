@@ -2,14 +2,14 @@
 	"layer": "bottom",
 		"position": "bottom",
 		"height": 16, // Matched to Polybar
-    // 4px offset from edges
-    "margin-bottom": 4,
-    "margin-left": 4,
-    "margin-right": 4,
+									// 4px offset from edges
+		"margin-bottom": 4,
+		"margin-left": 4,
+		"margin-right": 4,
 
 		"modules-left": ["hyprland/workspaces", "hyprland/window"],
 		"modules-center": ["clock"],
-		"modules-right": ["custom/mail", "pulseaudio", "backlight", "battery", "hyprland/language", "network", "tray"],
+		"modules-right": ["custom/mail", "pulseaudio", "backlight", "battery", "hyprland/language", "network#wifi", "network#eth", "tray"],
 
 		"include": ["~/.config/waybar/active-workspaces.jsonc"],
 
@@ -37,10 +37,19 @@
 			"format-charging": "󱐋 {capacity}%"
 		},
 
-		"network": {
-			"format-wifi": "  {essid} {ipaddr}",
+		"network#eth": {
+			"interface": "en*",
 			"format-ethernet": "  {ipaddr}",
-			"format-disconnected": "  Disconnected",
+			"format-disconnected": "",
+			"tooltip-format": "Ethernet: {ifname}",
+			"interval": 10
+		},
+
+		"network#wifi": {
+			"interface": "wl*",
+			"format-wifi": "  {essid} {ipaddr}",
+			"format-disconnected": "",
+			"tooltip-format": "WiFi: {ifname}",
 			"interval": 10
 		},
 
@@ -53,7 +62,7 @@
 		},
 
 		"hyprland/language": {
-			"format": "󰌌 {}"
+			"format": "󰌌 {short}",
 		},
 
 		"custom/mail": {

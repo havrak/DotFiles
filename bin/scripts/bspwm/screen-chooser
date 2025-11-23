@@ -50,7 +50,7 @@ fi
 
 # check if argument is passed, if not use dmenu to choose
 if [ -z "$1" ]; then
-	choose=$(printf "laptop\\nultra\\n4k\\n4k-just\\n1080p\\nmirror\\n4k-scaled\\nsultra\\nmanual" | dmenu -i -p "Choose monitor setup")
+	choose=$(printf "laptop\\nultra\\nsultra\\n4k\\n4k-just\\n1080p\\n4k-scaled\\nmirror\\nmanual" | dmenu -i -p "Choose monitor setup" )
 else
 	choose=$1
 fi
