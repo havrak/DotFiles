@@ -66,7 +66,7 @@
 		},
 
 		"custom/mail": {
-			"exec": "~/bin/scripts/bspwm/polybar-email",
+			"exec": "~/bin/scripts/wm-agnostic/systembar-email",
 			"interval": 30,
 			"format": "{}"
 		},

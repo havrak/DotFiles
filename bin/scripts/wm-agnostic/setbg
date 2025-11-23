@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+WALL1="$HOME/bin/scripts/files/wall1.png"
+WALL2="$HOME/bin/scripts/files/wall2.png"
+
+if [ ! -z "$1" ]; then
+	if [ $(xrandr | grep " connected" | wc -l) -gt "1" ]; then
+		case "$(printf "both\\n1st\\n2nd" | dmenu -i -p "Select monitor for wallpaper")" in
+			"both")
+				cp "$1" $WALL1 && cp "$1" $WALL2 && notify-send -i "$WALL1" "1st wallpaper changed."
+				;;
+			"1st")
+				cp "$1" $WALL1 && notify-send -i "$WALL1" "1st wallpaper changed."
+				;;
+			"2nd")
+				cp "$1" $WALL2 && notify-send -i "$WALL2" "2nd wallpaper changed."
+				;;
+		esac
+	else
+		cp "$1" $WALL1 && notify-send -i "$WALL1" "Wallpaper changed."
+	fi
+fi
+
+if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+	killall swaybg 2>/dev/null
+	swaybg -o eDP-1 -i "$WALL1" \
+		-o DP-1 -i "$WALL2" \
+		-o HDMI1-1 -i "$WALL2" \
+		-o HDMI1-2 -i "$WALL2" \
+		-m fill &
+else
+	xwallpaper  \
+		--output eDP-1 --zoom $WALL1 \
+		--output DP-1  --zoom $WALL2 \
+		--output HDMI-1  --zoom $WALL2 \
+		--output HDMI-2  --zoom $WALL2 \
+		--output eDP1 --zoom $WALL1  \
+		--output DP1  --zoom $WALL2 \
+		--output HDMI1  --zoom $WALL2 \
+		--output HDMI2  --zoom $WALL2 2> /dev/null
+fi

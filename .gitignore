@@ -5,9 +5,11 @@ tmp
 mt
 dw
 med
-bin/scripts/files/wall.png
+bin/scripts/files/wall1.png
 bin/scripts/files/wall2.png
 bin/scripts/foreign
+bin/scripts/files/hyp-monitors
+bin/scripts/files/wall1.png
 bin/progs
 bin/isos/
 stl/
