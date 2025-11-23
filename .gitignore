@@ -11,6 +11,7 @@ bin/scripts/foreign
 bin/scripts/files/hyp-monitors
 bin/scripts/files/wall1.png
 bin/progs
+waybar/active-workspaces.jsonc
 bin/isos/
 stl/
 .Xauthority
