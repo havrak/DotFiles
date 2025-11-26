@@ -65,7 +65,7 @@ window#waybar {
     padding: 0 10px;
     background-color: #ffffd7;
     color: #1f1f1f;
-    margin-left: 5px; /* Matches module-margin in Polybar */
+    margin-left: 10px; /* Matches module-margin in Polybar */
 }
 
 #clock {

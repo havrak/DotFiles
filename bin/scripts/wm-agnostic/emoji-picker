@@ -1,19 +1,33 @@
 #!/bin/sh
 
-# The famous "get a menu of emojis to copy" script.
+# Detect Session
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    # Wayland/Hyprland Settings
+    menu_cmd="dmenu -i -l 30"
+    copy_cmd="wl-copy"
+    # Using hyprctl for typing is more native/stable on Hyprland than wtype
+    type_cmd() { hyprctl dispatch sendtext "$1"; }
+else
+    # X11 Settings
+    menu_cmd="dmenu -i -l 30"
+    copy_cmd="xclip -selection clipboard"
+    # Secondary xclip command for primary selection (middle click)
+    copy_cmd_primary="xclip -selection primary"
+    type_cmd() { xdotool type "$1"; }
+fi
 
-# Get user selection via dmenu from emoji file.
-chosen=$(cut -d ';' -f1 ~/bin/scripts/files/emoji | dmenu -i -l 30 | sed "s/ .*//")
+chosen=$(cut -d ';' -f1 ~/bin/scripts/files/emoji | $menu_cmd | sed "s/ .*//")
 
-# Exit if none chosen.
 [ -z "$chosen" ] && exit
 
-# If you run this command with an argument, it will automatically insert the
-# character. Otherwise, show a message that the emoji has been copied.
 if [ -n "$1" ]; then
-	xdotool type "$chosen"
+    type_cmd "$chosen"
 else
-	echo "$chosen" | tr -d '\n' | xclip -selection clipboard
-	echo "$chosen" | tr -d '\n' | xclip -selection primary
-	notify-send "'$chosen' copied to clipboard." &
+    echo "$chosen" | tr -d '\n' | $copy_cmd
+    if [ "$XDG_SESSION_TYPE" != "wayland" ]; then
+        echo "$chosen" | tr -d '\n' | $copy_cmd_primary
+    fi
+
+    notify-send "'$chosen' copied to clipboard." &
 fi
+

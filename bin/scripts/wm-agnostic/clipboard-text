@@ -1,6 +1,19 @@
 #!/bin/sh
 
-text=$(cat $HOME/bin/scripts/files/clipboardText | dmenu -l 20 | awk -F " " '{for (i=2; i<=NF; i++) print $i}' )
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    menu_cmd="dmenu -l 20"
+    copy_cmd="wl-copy"
+else
+    menu_cmd="dmenu -l 20"
+    copy_cmd="xclip -selection clipboard"
+    copy_cmd_primary="xclip -selection primary"
+fi
 
-echo $text | xclip -selection clipboard
-echo $text | xclip -selection primary
+text=$(cat $HOME/bin/scripts/files/clipboardText | $menu_cmd | awk -F " " '{for (i=2; i<=NF; i++) print $i}' )
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    echo "$text" | $copy_cmd
+else
+    echo "$text" | $copy_cmd
+    echo "$text" | $copy_cmd_primary
+fi

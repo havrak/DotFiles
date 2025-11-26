@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PID=$(pgrep -x -n "Hyprland" || pgrep -x -n "sway" || pgrep -x -n "i3" || pgrep -x -n "Xorg")
+PID=$(pgrep -x -n "Hyprland" || pgrep -x -n "sway" || pgrep -x -n "Xorg")
 
 if [ -z "$PID" ]; then
     echo "No supported compositor found."
@@ -38,7 +38,6 @@ run_as_user() {
 
 IMAGE="/tmp/screen_locked.png"
 
-# 1. Detect Session and Take Screenshot
 if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
     run_as_user grim "$IMAGE"
 else
