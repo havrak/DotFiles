@@ -1,262 +1,399 @@
-#!/bin/bash
+#!/usr/bin/env python3
+import json
+import subprocess
+import os
+import sys
+import math
+from pathlib import Path
 
-CONF_PATH="$HOME/bin/scripts/files/hyp-monitors"
-WAYBAR_CONF_DIR="$HOME/.config/waybar"
+# --- Configuration ---
+CONF_PATH = Path(os.path.expanduser("~/bin/scripts/files/hyp-monitors"))
+WAYBAR_CONF_DIR = Path(os.path.expanduser("~/.config/waybar"))
+WAYBAR_OUTPUT_FILE = WAYBAR_CONF_DIR / "active-workspaces.jsonc"
 
-# Arrays for mapping Keys to Workspace Names
-KEYS=("F1" "F2" "F3" "F4" "F5" "F6")
-NAMES=(21 22 23 24 25 26)
+# Keys for extra workspace management (F1-F6)
+EXTRA_KEYS = ["F1", "F2", "F3", "F4", "F5", "F6"]
+EXTRA_NAMES = [21, 22, 23, 24, 25, 26]
 
-get_monitor_signature() {
-	hyprctl monitors | grep "Serial" | sort | tr -d ' \n\t'
-}
+# --- Helpers ---
 
-saveSetup() {
-	local layout_name=$1
-	echo "$layout_name" > "$CONF_PATH"
-	get_monitor_signature >> "$CONF_PATH"
-}
+def run_cmd(cmd):
+    """Run a shell command."""
+    subprocess.run(cmd, shell=True)
 
-restoreSetup() {
-	if [ ! -f "$CONF_PATH" ]; then
-		echo "No saved config found. Defaulting to laptop."
-		exec "$0" "laptop"
-		return
-	fi
+def hyprctl(command):
+    """Run hyprctl command and return output."""
+    try:
+        output = subprocess.check_output(f"hyprctl {command}", shell=True)
+        return output.decode("utf-8").strip()
+    except subprocess.CalledProcessError:
+        return ""
 
-	local saved_layout=$(sed '1q;d' "$CONF_PATH")
-	local saved_signature=$(sed '2q;d' "$CONF_PATH")
-	local current_signature=$(get_monitor_signature)
+def hyprctl_json(command):
+    """Run hyprctl command and return parsed JSON."""
+    try:
+        output = subprocess.check_output(f"hyprctl -j {command}", shell=True)
+        return json.loads(output)
+    except (subprocess.CalledProcessError, json.JSONDecodeError):
+        return []
 
-	if [ "$saved_signature" == "$current_signature" ]; then
-		echo "Monitors match saved state. Restoring '$saved_layout'..."
-		exec "$0" "$saved_layout"
-	else
-		echo "Monitor mismatch (Saved: $saved_signature vs Current: $current_signature). Defaulting to laptop."
-		exec "$0" "laptop"
-	fi
-}
+def notify(title, message):
+    run_cmd(f'notify-send "{title}" "{message}"')
 
-safe_move_workspace() {
-	local ws=$1
-	local mon=$2
-	# Check if workspace exists in Hyprland's active list
-	if hyprctl workspaces | grep -q "workspace ID $ws"; then
-		hyprctl dispatch moveworkspacetomonitor "$ws $mon"
-	elif hyprctl workspaces | grep -q "workspace $ws "; then
-		# Fallback for named workspaces or different versions
-		hyprctl dispatch moveworkspacetomonitor "$ws $mon"
-	fi
-}
+# --- Monitor Logic ---
 
-# Enable A-F keys and set Waybar to Full
-enable_extra_workspaces() {
-	local mon_char=$1
-	for i in "${!KEYS[@]}"; do
-		key="${KEYS[$i]}"
-		name="${NAMES[$i]}"
-		hyprctl keyword workspace "$name, monitor:$mon_char"
-		# echo "Set workspace name:$name to monitor:$mon_char"
-		safe_move_workspace "$name" "$mon_char"
+class MonitorManager:
+    def __init__(self):
+        self.monitors_all = hyprctl_json("monitors all")
+        self.internal = None
+        self.external = None
+        self.other_externals = []
 
-		hyprctl keyword bind "ALT, $key, workspace, $name"
-		hyprctl keyword bind "ALT SHIFT, $key, movetoworkspace, $name"
-	done
-	# cp "$WAYBAR_CONF_DIR/workspaces-full.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
-}
+        self._detect_monitors()
 
-# Disable A-F keys and set Waybar to Laptop
-disable_extra_workspaces() {
-	for i in "${!KEYS[@]}"; do
-		key="${KEYS[$i]}"
-		hyprctl keyword unbind "ALT, $key"
-		hyprctl keyword unbind "ALT SHIFT, $key"
-	done
-	# cp "$WAYBAR_CONF_DIR/workspaces-laptop.jsonc" "$WAYBAR_CONF_DIR/active-workspaces.jsonc"
-}
+    def _detect_monitors(self):
+        # 1. Find Internal (starts with eDP)
+        for mon in self.monitors_all:
+            if mon["name"].startswith("eDP"):
+                self.internal = mon
+                break
 
-# Assign all 1-12 to one monitor
-assign_standard_workspaces() {
-	local mon_num=$1
-	for i in {1..12}; do
-		hyprctl keyword workspace "${i}, monitor:${mon_num}"
-		# echo "Set workspace name:${i} to monitor:${mon_num}"
-		safe_move_workspace "${i}" "${mon_num}"
-	done
-}
+        # 2. Find External (Prioritize DP > HDMI)
+        candidates = [m for m in self.monitors_all if m != self.internal and len(m.get("availableModes", [])) > 0]
 
-# --- GENERATE WAYBAR CONFIG (The Fix) ---
-generate_waybar_config() {
-	local primary_mon=$1   # Monitor for 1-12
-	local secondary_mon=$2 # Monitor for A-F
-	local output_file="$WAYBAR_CONF_DIR/active-workspaces.jsonc"
+        dp_mons = [m for m in candidates if "DP-" in m["name"]]
+        hdmi_mons = [m for m in candidates if "HDMI-" in m["name"]]
 
-	# Start JSON
-	echo '{' > "$output_file"
-	echo '  "hyprland/workspaces": {' >> "$output_file"
-	echo '    "disable-scroll": true,' >> "$output_file"
-	echo '    "all-outputs": false,' >> "$output_file"
-	echo '    "format": "{icon}",' >> "$output_file"
-	echo '    "format-icons": {' >> $output_file
-	echo '      "1": "I",' >> $output_file
-	echo '      "2": "II",' >> $output_file
-	echo '      "3": "III",' >> $output_file
-	echo '      "4": "IV",' >> $output_file
-	echo '      "5": "V",' >> $output_file
-	echo '      "6": "VI",' >> $output_file
-	echo '      "7": "VII",' >> $output_file
-	echo '      "8": "VIII",' >> $output_file
-	echo '      "9": "IX",' >> $output_file
-	echo '      "10": "X",' >> $output_file
-	echo '      "11": "XI",' >> $output_file
-	echo '      "12": "XII",' >> $output_file
-	echo '      "21" : "A",' >> $output_file
-	echo '      "22" : "B",' >> $output_file
-	echo '      "23" : "C",' >> $output_file
-	echo '      "24" : "D",' >> $output_file
-	echo '      "25" : "E",' >> $output_file
-	echo '      "26" : "F"' >> $output_file
-	echo '    },' >> $output_file
+        if dp_mons:
+            self.external = dp_mons[0]
+            self.other_externals = dp_mons[1:] + hdmi_mons
+        elif hdmi_mons:
+            self.external = hdmi_mons[0]
+            self.other_externals = hdmi_mons[1:]
 
-	echo '    "persistent-workspaces": {' >> "$output_file"
+    def get_auto_scale(self, width_px, height_px, width_mm, height_mm):
+        """Calculates scaling factor based on resolution and physical size."""
+        if width_mm == 0 or height_mm == 0:
+            return 1.0
 
-	# 1. Primary Monitor (Workspaces 1-12)
-	# Output format: "DP-1": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-	echo -n "            \"$primary_mon\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" >> "$output_file"
+        # Calculate diagonal in inches
+        diag_mm = math.sqrt(width_mm**2 + height_mm**2)
+        diag_inch = diag_mm / 25.4
 
-	# 2. Secondary Monitor (Workspaces A-F) - Only if it exists
-	# Output format: , "eDP-1": ["name:A", "name:B", ...]
-	if [ -n "$secondary_mon" ]; then
-		echo "," >> "$output_file"
-		echo -n "            \"$secondary_mon\": [21, 22, 23, 24, 25, 26]" >> "$output_file"
-	fi
+        # Rule: If diagonal is small (laptop size < 17") and resolution > 1080p
+        if diag_inch < 17.0 and height_px > 1080:
+            return 1.2
 
-	echo "" >> "$output_file"
-	echo '    }' >> "$output_file"
-	echo '  }' >> "$output_file"
-	echo '}' >> "$output_file"
-}
+        return 1.0
 
-# --- Detection ---
-INTERNAL="eDP-1"
+    def get_preferred_mode(self, monitor_data):
+        """Returns (width, height, refresh_rate, scale)."""
+        modes = monitor_data.get("availableModes", [])
+        if not modes:
+            return (1920, 1080, 60.0, 1.0)
 
-# 1. Get ALL monitor names (including disabled ones)
-# This fixes the issue where disabled monitors weren't detected
-ALL_MONITORS=$(hyprctl monitors all | grep "^Monitor" | awk '{print $2}')
+        # Parse "1920x1080@60.00Hz"
+        parsed_modes = []
+        for m in modes:
+            parts = m.split("@")
+            res = parts[0].split("x")
+            w, h = int(res[0]), int(res[1])
+            refresh = float(parts[1].replace("Hz", ""))
+            parsed_modes.append((w, h, refresh))
 
-# 2. Identify Interfaces
-DP_CONNECTED=$(echo "$ALL_MONITORS" | grep "DP-" | grep -v "eDP" | head -n1)
-HDMI_CONNECTED=$(echo "$ALL_MONITORS" | grep "HDMI-" | head -n1)
+        # Sort by Width, then Height, then Refresh
+        parsed_modes.sort(key=lambda x: (x[0], x[1], x[2]), reverse=True)
+        best = parsed_modes[0] # (w, h, refresh)
 
-# Default names for fallback (so variables are never empty)
-DEFAULT_DP="DP-1"
-DEFAULT_HDMI="HDMI-A-1"
+        # Get physical dimensions from hyprctl data
+        # Note: monitor_data is the dict from 'hyprctl -j monitors all'
+        w_mm = monitor_data.get("widthMM", 0)
+        h_mm = monitor_data.get("heightMM", 0)
 
-# 3. Prioritize DP over HDMI
-if [ -n "$DP_CONNECTED" ]; then
-	ACTIVE="$DP_CONNECTED"
-	# If HDMI is also connected, mark it as the NONACTIVE one to disable it
-	if [ -n "$HDMI_CONNECTED" ]; then
-		NONACTIVE="$HDMI_CONNECTED"
-	else
-		NONACTIVE="$DEFAULT_HDMI"
-	fi
-elif [ -n "$HDMI_CONNECTED" ]; then
-	ACTIVE="$HDMI_CONNECTED"
-	NONACTIVE="$DEFAULT_DP"
-else
-	# No external monitors found
-	ACTIVE="$DEFAULT_DP"
-	NONACTIVE="$DEFAULT_HDMI"
-fi
+        scale = self.get_auto_scale(best[0], best[1], w_mm, h_mm)
 
-# Debug output (Optional, visible if run from terminal)
-echo "Detected: Active=$ACTIVE, NonActive=$NONACTIVE"
+        return (*best, scale)
 
-if [ -z "$1" ]; then
-	choose=$(printf "laptop\\nultra\\n4k\\n4k-just\\n1080p\\nmirror\\nsultra\\nmanual" | dmenu -i -p "Choose monitor setup")
-else
-	choose=$1
-fi
+    def get_common_mirror_mode(self):
+        """Finds the best resolution supported by both internal and external."""
+        if not self.internal or not self.external:
+            return None
 
-case "$choose" in
-	"restore")
-		restoreSetup
-		exit 0 ;;
-	"manual")
-		if command -v wdisplays &> /dev/null; then wdisplays & else notify-send "Error" "Install wdisplays"; fi
-		exit 0 ;;
-	"laptop")
-		hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1"
-		hyprctl keyword monitor "$ACTIVE,disable"
-		hyprctl keyword monitor "$NONACTIVE,disable"
-		assign_standard_workspaces $INTERNAL
-		disable_extra_workspaces
-		generate_waybar_config "$INTERNAL" ""
-		saveSetup "laptop"
-		;;
-	"ultra")
-		hyprctl keyword monitor "$INTERNAL,1920x1080@60,320x1080,1"
-		hyprctl keyword monitor "$ACTIVE,2560x1080@60,0x0,1"
-		hyprctl keyword monitor "$NONACTIVE,disable"
-		assign_standard_workspaces $ACTIVE
-		enable_extra_workspaces $INTERNAL
-		generate_waybar_config "$ACTIVE" "$INTERNAL"
-		saveSetup "ultra"
-		;;
-	"sultra")
-		hyprctl keyword monitor "$INTERNAL,1920x1080@60,760x1440,1"
-		hyprctl keyword monitor "$ACTIVE,3440x1440@60,0x0,1"
-		hyprctl keyword monitor "$NONACTIVE,disable"
-		assign_standard_workspaces $ACTIVE
-		enable_extra_workspaces $INTERNAL
-		generate_waybar_config "$ACTIVE" "$INTERNAL"
-		saveSetup "sultra"
-		;;
-	"4k")
-		hyprctl keyword monitor "$ACTIVE,3840x2160@60,0x0,1"
-		hyprctl keyword monitor "$INTERNAL,1920x1080@60,876x2160,1"
-		hyprctl keyword monitor "$NONACTIVE,disable"
-		assign_standard_workspaces $ACTIVE
-		enable_extra_workspaces $INTERNAL
-		generate_waybar_config "$ACTIVE" "$INTERNAL"
-		saveSetup "4k"
-		;;
-	"4k-just")
-		hyprctl keyword monitor "$ACTIVE,3840x2160@60,0x0,1"
-		hyprctl keyword monitor "$INTERNAL,disable"
-		hyprctl keyword monitor "$NONACTIVE,disable"
-		assign_standard_workspaces $ACTIVE
-		disable_extra_workspaces
-		generate_waybar_config "$ACTIVE" ""
-		saveSetup "4k-just"
-		;;
-	"1080p")
-		hyprctl keyword monitor "$ACTIVE,1920x1080@60,0x0,1"
-		hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x1080,1"
-		hyprctl keyword monitor "$NONACTIVE,disable"
-		assign_standard_workspaces $ACTIVE
-		enable_extra_workspaces $INTERNAL
-		generate_waybar_config "$ACTIVE" "$INTERNAL"
-		saveSetup "1080p"
-		;;
-	"mirror")
-		hyprctl keyword monitor "$ACTIVE,1920x1080@60,0x0,1"
-		hyprctl keyword monitor "$INTERNAL,1920x1080@60,0x0,1,mirror,$ACTIVE"
-		assign_standard_workspaces $ACTIVE
-		disable_extra_workspaces
-		generate_waybar_config "$ACTIVE" ""
-		saveSetup "mirror"
-		;;
-	"*")
-		notify-send "Error" "Unknown option: $choose"
-		exit 1
-		;;
-	"")
-		exit 1
-		;;
-esac
+        int_modes = set(m.split("@")[0] for m in self.internal.get("availableModes", []))
+        ext_modes = set(m.split("@")[0] for m in self.external.get("availableModes", []))
 
-~/bin/scripts/wm-agnostic/setbg &
-~/bin/scripts/hyprland/waybar-launch &
+        common = int_modes.intersection(ext_modes)
+        if not common:
+            return None
 
+        # Parse and find max
+        parsed = []
+        for m in common:
+            w, h = map(int, m.split("x"))
+            parsed.append((w, h))
+
+        parsed.sort(reverse=True)
+        best_res = parsed[0] # (w, h)
+
+        # Find refresh rate for this res on both
+        return (best_res[0], best_res[1], 60.0, 1.0)
+
+    def get_monitor_signature(self):
+        """Returns a string representing the currently connected hardware serials."""
+        serials = []
+        connected = [m for m in self.monitors_all if len(m.get("availableModes", [])) > 0]
+        for m in connected:
+            s = m.get("serial", "")
+            if not s:
+                s = m.get("description", "")
+            serials.append(s)
+        return "".join(sorted(serials)).replace(" ", "")
+
+# --- Workspace Management ---
+
+def safe_move_workspace(ws_id, monitor_name):
+    # Check if workspace exists
+    workspaces = hyprctl_json("workspaces")
+    exists = any(w["id"] == ws_id for w in workspaces) or \
+             any(w["name"] == str(ws_id) for w in workspaces)
+
+    if exists:
+        run_cmd(f"hyprctl dispatch moveworkspacetomonitor {ws_id} {monitor_name}")
+
+def setup_workspaces(primary_mon, secondary_mon=None):
+    # 1. Assign 1-12 to Primary
+    for i in range(1, 13):
+        run_cmd(f"hyprctl keyword workspace {i}, monitor:{primary_mon}")
+        safe_move_workspace(i, primary_mon)
+
+    # 2. Handle Extra Keys (A-F / F1-F6)
+    if secondary_mon:
+        # Enable extra workspaces on secondary
+        for i, key in enumerate(EXTRA_KEYS):
+            ws_name = EXTRA_NAMES[i]
+            run_cmd(f"hyprctl keyword workspace {ws_name}, monitor:{secondary_mon}")
+            safe_move_workspace(ws_name, secondary_mon)
+            run_cmd(f"hyprctl keyword bind ALT, {key}, workspace, {ws_name}")
+            run_cmd(f"hyprctl keyword bind ALT SHIFT, {key}, movetoworkspace, {ws_name}")
+    else:
+        # Disable extra bindings if no secondary
+        for key in EXTRA_KEYS:
+            run_cmd(f"hyprctl keyword unbind ALT, {key}")
+            run_cmd(f"hyprctl keyword unbind ALT SHIFT, {key}")
+
+def generate_waybar_config(primary_mon, secondary_mon=None):
+    config = {
+        "hyprland/workspaces": {
+            "disable-scroll": True,
+            "all-outputs": False,
+            "format": "{icon}",
+            "format-icons": {
+                "1": "I", "2": "II", "3": "III", "4": "IV", "5": "V", "6": "VI",
+                "7": "VII", "8": "VIII", "9": "IX", "10": "X", "11": "XI", "12": "XII",
+                "21": "A", "22": "B", "23": "C", "24": "D", "25": "E", "26": "F"
+            },
+            "persistent-workspaces": {
+                primary_mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            }
+        }
+    }
+
+    if secondary_mon:
+        config["hyprland/workspaces"]["persistent-workspaces"][secondary_mon] = [21, 22, 23, 24, 25, 26]
+
+    with open(WAYBAR_OUTPUT_FILE, "w") as f:
+        json.dump(config, f, indent=4)
+
+# --- Layout Application ---
+
+def apply_layout(layout_type, mgr):
+    """
+    layout_type: 'laptop', 'top_bottom', 'left_right', 'right_left', 'mirror', 'external_only'
+    """
+
+    # 1. Laptop Only
+    if layout_type == "laptop":
+        if not mgr.internal:
+            notify("Error", "No internal monitor detected")
+            return
+
+        w, h, r, s = mgr.get_preferred_mode(mgr.internal)
+        run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{w}x{h}@{r},0x0,{s}")
+
+        # Disable all externals
+        if mgr.external:
+            run_cmd(f"hyprctl keyword monitor {mgr.external['name']},disable")
+        for m in mgr.other_externals:
+            run_cmd(f"hyprctl keyword monitor {m['name']},disable")
+
+        setup_workspaces(mgr.internal['name'])
+        generate_waybar_config(mgr.internal['name'])
+
+    # 2. Dual Monitor Setups
+    elif layout_type in ["top_bottom", "left_right", "right_left", "external_only"]:
+        if not mgr.external:
+            notify("Error", "No external monitor detected")
+            # Fallback to laptop
+            apply_layout("laptop", mgr)
+            return
+
+        # Get External Props
+        ew, eh, er, es = mgr.get_preferred_mode(mgr.external)
+
+        # If External Only
+        if layout_type == "external_only":
+            run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{ew}x{eh}@{er},0x0,{es}")
+            if mgr.internal:
+                run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},disable")
+
+            run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{ew}x{eh}@{er},{ext_pos},{es}")
+            run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{iw}x{ih}@{ir},{int_pos},{_is}")
+            setup_workspaces(mgr.external['name'])
+            generate_waybar_config(mgr.external['name'])
+            return
+
+        # Dual Logic
+        if not mgr.internal:
+            return
+
+        iw, ih, ir, _is = mgr.get_preferred_mode(mgr.internal)
+
+        # Calculate Logical Dimensions (Hyprland positioning uses logical pixels: pixels / scale)
+        ext_log_w = ew / es
+        ext_log_h = eh / es
+        int_log_w = iw / _is
+        int_log_h = ih / _is
+
+        ext_pos = "0x0"
+        int_pos = "0x0"
+
+        if layout_type == "top_bottom":
+            offset_x = (ext_log_w - int_log_w) / 2
+
+            # If internal is wider than external, external needs offset
+            if offset_x < 0:
+                ext_x = abs(offset_x)
+                int_x = 0
+                ext_pos = f"{ext_x}x0"
+                int_pos = f"{int_x}x{ext_log_h}"
+            else:
+                ext_pos = "0x0"
+                int_pos = f"{offset_x}x{ext_log_h}"
+
+        elif layout_type == "left_right":
+            # External Left (0,0), Internal Right
+            ext_pos = "0x0"
+            int_pos = f"{ext_log_w}x0"
+
+        elif layout_type == "right_left":
+            # Internal Left, External Right
+            int_pos = "0x0"
+            ext_pos = f"{int_log_w}x0"
+
+        # Apply
+        run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{ew}x{eh}@{er},{ext_pos},{es}")
+        run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{iw}x{ih}@{ir},{int_pos},{_is}")
+
+        # Disable unused
+        for m in mgr.other_externals:
+            run_cmd(f"hyprctl keyword monitor {m['name']},disable")
+
+        setup_workspaces(mgr.external['name'], mgr.internal['name'])
+        generate_waybar_config(mgr.external['name'], mgr.internal['name'])
+
+    # 3. Mirror
+    elif layout_type == "mirror":
+        if not mgr.external or not mgr.internal:
+            notify("Error", "Need two monitors to mirror")
+            return
+
+        common = mgr.get_common_mirror_mode()
+        if not common:
+            # Fallback
+            common = (1920, 1080, 60.0, 1.0)
+
+        w, h, r, s = common
+
+        # External gets standard placement
+        run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{w}x{h}@{r},0x0,1")
+        # Internal mirrors external
+        run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{w}x{h}@{r},0x0,1,mirror,{mgr.external['name']}")
+
+        setup_workspaces(mgr.external['name']) # Assign all to external
+        generate_waybar_config(mgr.external['name'])
+
+    # Save State
+    save_state(layout_type, mgr)
+
+    # Reload background/waybar
+    run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
+    run_cmd(os.path.expanduser("~/bin/scripts/hyprland/waybar-launch &"))
+
+# --- Persistence ---
+
+def save_state(layout, mgr):
+    print("Saving layout:", layout)
+    signature = mgr.get_monitor_signature()
+    CONF_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(CONF_PATH, "w") as f:
+        f.write(f"{layout}\n{signature}")
+
+def restore_state(mgr):
+    if not CONF_PATH.exists():
+        notify("Config", "No saved config. Defaulting to Laptop.")
+        apply_layout("laptop", mgr)
+        return
+
+    with open(CONF_PATH, "r") as f:
+        lines = f.readlines()
+        if len(lines) < 2:
+            apply_layout("laptop", mgr)
+            return
+
+        saved_layout = lines[0].strip()
+        saved_signature = lines[1].strip()
+
+    current_signature = mgr.get_monitor_signature()
+
+    if saved_signature == current_signature:
+        notify("Config", f"Restoring {saved_layout}...")
+        apply_layout(saved_layout, mgr)
+    else:
+        notify("Config", "Hardware change detected. Defaulting to Laptop.")
+        apply_layout("laptop", mgr)
+
+# --- Main ---
+
+def main():
+    mgr = MonitorManager()
+
+    if len(sys.argv) > 1:
+        choice = sys.argv[1]
+    else:
+        # Dmenu / Rofi Selector
+        options = "laptop\ntop_bottom\nleft_right\nright_left\nexternal_only\nmirror\nrestore"
+        try:
+            # Check for wofi or dmenu
+            menu_cmd = "dmenu -i -p 'Monitor Setup'"
+            # If you prefer wofi: menu_cmd = "wofi --dmenu --prompt 'Monitor Setup'"
+
+            result = subprocess.run(
+                f"echo '{options}' | {menu_cmd}",
+                shell=True, stdout=subprocess.PIPE
+            )
+            choice = result.stdout.decode("utf-8").strip()
+        except Exception:
+            choice = ""
+
+    if not choice:
+        return
+
+    if choice == "restore":
+        restore_state(mgr)
+    elif choice in ["laptop", "top_bottom", "left_right", "right_left", "external_only", "mirror"]:
+        apply_layout(choice, mgr)
+    else:
+        notify("Error", f"Unknown layout: {choice}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if lspci -k | grep -A 2 -E "(VGA|3D)" | grep -i "nvidia"; then
+
+    # --- NVIDIA DETECTED ---
+    export LIBVA_DRIVER_NAME=nvidia
+    export XDG_SESSION_TYPE=wayland
+    export GBM_BACKEND=nvidia-drm
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export NVD_BACKEND=direct
+
+    # 2. Generate Nvidia-specific Config
+    # We write these settings to a file that hyprland.conf sources
+    # echo 'cursor {
+    #     no_hardware_cursors = true
+    # }' > ~/.config/hypr/gpu.conf
+    #
+    # echo 'render {
+    #     explicit_sync = 1
+    #     direct_scanout = false
+    # }' >> ~/.config/hypr/gpu.conf
+    echo "" > ~/.config/hypr/gpu.conf
+
+else
+		# --- AMD/INTEL DETECTED ---
+    echo "" > ~/.config/hypr/gpu.conf
+
+fi
+
+# Start Hyprland
+exec Hyprland
