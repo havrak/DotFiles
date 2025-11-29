@@ -1,0 +1,39 @@
+anchor = top
+width = 0
+height = 20
+horizontal = true
+
+margin-top = 4
+margin-left = 4
+margin-right = 4
+margin-bottom = 0
+
+font = "Mononoki Nerd Font Mono"
+font-size = 10
+
+text-color = #121212
+background-color = #ffffd7
+
+selection-color = #ffffd7
+selection-background = #121212
+
+prompt-color = #121212
+input-color = #121212
+
+outline-width = 0
+border-width = 0
+min-input-width = 0
+result-spacing = 10
+padding-top = 0
+padding-bottom = 0
+padding-left = 4
+padding-right = 4
+selection-background-padding = 2, 4, 2, 4
+
+prompt-text = ""
+hide-cursor = true
+corner-radius = 4
+
+prompt-padding = 10
+
+fuzzy-match=true

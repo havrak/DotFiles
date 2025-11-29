@@ -107,8 +107,8 @@ class MonitorManager:
 
         # Get physical dimensions from hyprctl data
         # Note: monitor_data is the dict from 'hyprctl -j monitors all'
-        w_mm = monitor_data.get("widthMM", 0)
-        h_mm = monitor_data.get("heightMM", 0)
+        w_mm = monitor_data.get("physicalWidth", 0)
+        h_mm = monitor_data.get("physicalHeight", 0)
 
         scale = self.get_auto_scale(best[0], best[1], w_mm, h_mm)
 
@@ -375,7 +375,7 @@ def main():
         options = "laptop\ntop_bottom\nleft_right\nright_left\nexternal_only\nmirror\nrestore"
         try:
             # Check for wofi or dmenu
-            menu_cmd = "dmenu -i -p 'Monitor Setup'"
+            menu_cmd = "tofi --prompt-text 'Monitor Setup'"
             # If you prefer wofi: menu_cmd = "wofi --dmenu --prompt 'Monitor Setup'"
 
             result = subprocess.run(

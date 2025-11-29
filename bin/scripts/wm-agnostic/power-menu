@@ -3,14 +3,27 @@ if [ $# != 1 ]; then
 	echo "Must enter one flag"
 	exit
 fi
+
+
+
 case "$1" in
 	"-l")
-		if [ $(printf "no\\nyes" | dmenu -i -p "Do you wish to lock and suspend") == "yes" ]; then
+		if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+			menu_cmd="tofi  --prompt-text=Suspend"
+		else
+			menu_cmd="dmenu -p 'Suspend'"
+		fi
+		if [ $(printf "no\\nyes" | $menu_cmd) == "yes" ]; then
 			systemctl suspend
 		fi
 		;;
 	"-p")
-		choose=$(printf "poweroff\\nreboot\\nlogoff" | dmenu -i -p "What do you wish to do?")
+		if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+			menu_cmd="tofi  --prompt-text=Action"
+		else
+			menu_cmd="dmenu -p 'What do you wish to do?'"
+		fi
+		choose=$(printf "poweroff\\nreboot\\nlogoff" | $menu_cmd )
 		echo $choose
 		case "$choose" in
 			"poweroff")
