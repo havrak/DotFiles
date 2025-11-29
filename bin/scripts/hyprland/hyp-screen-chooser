@@ -82,7 +82,7 @@ class MonitorManager:
 
         # Rule: If diagonal is small (laptop size < 17") and resolution > 1080p
         if diag_inch < 17.0 and height_px > 1080:
-            return 1.2
+            return 1.25
 
         return 1.0
 
@@ -182,6 +182,7 @@ def setup_workspaces(primary_mon, secondary_mon=None):
             run_cmd(f"hyprctl keyword unbind ALT SHIFT, {key}")
 
 def generate_waybar_config(primary_mon, secondary_mon=None):
+    print("Primary monitor: ", primary_mon, "secondary monitor: ", secondary_mon);
     config = {
         "hyprland/workspaces": {
             "disable-scroll": True,
@@ -246,10 +247,10 @@ def apply_layout(layout_type, mgr):
             if mgr.internal:
                 run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},disable")
 
-            run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{ew}x{eh}@{er},{ext_pos},{es}")
-            run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{iw}x{ih}@{ir},{int_pos},{_is}")
             setup_workspaces(mgr.external['name'])
             generate_waybar_config(mgr.external['name'])
+            run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
+            run_cmd(os.path.expanduser("~/bin/scripts/hyprland/waybar-launch &"))
             return
 
         # Dual Logic
