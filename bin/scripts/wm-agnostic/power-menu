@@ -20,24 +20,26 @@ case "$1" in
 	"-p")
 		if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 			menu_cmd="tofi  --prompt-text=Action"
+			confirm_cmd="tofi  --prompt-text=Confirm"
 		else
 			menu_cmd="dmenu -p 'What do you wish to do?'"
+			confirm_cmd="dmenu  -i -p "confirm""
 		fi
 		choose=$(printf "poweroff\\nreboot\\nlogoff" | $menu_cmd )
 		echo $choose
 		case "$choose" in
 			"poweroff")
-				if [ $(printf "no\\nyes" | dmenu  -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | $confirm_cmd) == "yes" ]; then
 					poweroff
 				fi
 				;;
 			"reboot")
-				if [ $(printf "no\\nyes" | dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | $confirm_cmd) == "yes" ]; then
 					reboot
 				fi
 				;;
 			"logoff")
-				if [ $(printf "no\\nyes" | dmenu -i -p "confirm") == "yes" ]; then
+				if [ $(printf "no\\nyes" | $confirm_cmd) == "yes" ]; then
 					bspc quit
 					hyprctl dispatch exit
 				fi
