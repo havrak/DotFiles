@@ -63,7 +63,7 @@ launch_app() {
     local cls="$1"
     case "$cls" in
         "gpt")
-            st -c gpt &
+            kitty --app-id gpt &
             ;;
         *)
             if command -v "$cls" &> /dev/null; then
