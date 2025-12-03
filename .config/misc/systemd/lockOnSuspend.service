@@ -3,7 +3,7 @@ Description=pixelLock
 Before=sleep.target
 
 [Service]
-User=havra
+User=havrak
 Type=forking
 Environment=DISPLAY=:0
 ExecStart=/usr/bin/pixel-lock
