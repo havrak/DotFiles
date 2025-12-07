@@ -79,6 +79,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set('i', '.t', '\\mathrm{}<Esc>ha') -- text in math mode without italics
 		vim.keymap.set('i', '.cA', '\\mathcal{}<Esc>ha') -- text with accents
 		vim.keymap.set('i', '.ca', '\\mathscr{}<Esc>ha') -- calligraphic text
+		vim.keymap.set('i', '.bs', '\\boldsymbol{}<Esc>ha') -- boldsymbol text
 		vim.keymap.set('i', '.fr', '\\frac{}{<++>}<Space><++><Esc>12ha') -- fraction
 		vim.keymap.set('i', '.i', '\\infty<Space>') -- infinity
 		vim.keymap.set('i', '.d', '\\cdot<Space>') -- dot

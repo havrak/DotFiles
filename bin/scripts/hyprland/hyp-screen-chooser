@@ -19,6 +19,7 @@ EXTRA_NAMES = [21, 22, 23, 24, 25, 26]
 
 def run_cmd(cmd):
     """Run a shell command."""
+    print(cmd)
     subprocess.run(cmd, shell=True)
 
 def hyprctl(command):
@@ -171,6 +172,7 @@ def setup_workspaces(primary_mon, secondary_mon=None):
         # Enable extra workspaces on secondary
         for i, key in enumerate(EXTRA_KEYS):
             ws_name = EXTRA_NAMES[i]
+            print(f"Attaching workspace {ws_name} to monitor {secondary_mon}")
             run_cmd(f"hyprctl keyword workspace {ws_name}, monitor:{secondary_mon}")
             safe_move_workspace(ws_name, secondary_mon)
             run_cmd(f"hyprctl keyword bind ALT, {key}, workspace, {ws_name}")
@@ -327,7 +329,7 @@ def apply_layout(layout_type, mgr):
     save_state(layout_type, mgr)
 
     # Reload background/waybar
-    run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
+    # run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
     run_cmd(os.path.expanduser("~/bin/scripts/hyprland/waybar-launch &"))
 
 # --- Persistence ---
@@ -392,6 +394,7 @@ def main():
     if choice == "restore":
         restore_state(mgr)
     elif choice in ["laptop", "top_bottom", "left_right", "right_left", "external_only", "mirror"]:
+        run_cmd("hyprctl reload")
         apply_layout(choice, mgr)
     else:
         notify("Error", f"Unknown layout: {choice}")
