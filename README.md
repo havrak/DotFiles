@@ -1,8 +1,12 @@
-# GNU/LINUX Dotfiles
+# Personal linux Dotfiles
 
-Collection of dotfiles I run on my Arch Linux Systems. I've run bspwm for years, but due to long standing bugs - floating windows spawning behind tiled windows and other have recently moved to hyprland over at wayland. However the desktop is designed to look and be controlled roughly the same. Main exception is that behavior relying on the binary tree structure of bspwm just doesn't and cannot work on hyprland.
+In this repo is a collection of dotfiles I run on my linux systems. For years I've been an bspwm user however due to long standing bugs - especially one when floating windows would fall behind tiled ones I've switched to hyprland, where I've copied my bspwm workflow essentially 1:1. Screenshot is from my bspwm days, but I've styled wayland to look exactly the same
 
-As for neovim I've recently moved to relying on vim's own lsp integration instead of CoC.
+ I would especially point out hyp-screen-chooser script which is helps me managed two monitors - one laptop one and one secondary with ease. As opposed to standard hyprland's anarchic behavior, workspaces now are tied to their respective monitors and waybar shows all workspaces available to that monitor.
+
+Aside from window manager configuration here's also my neovim config. It's nothing special, optimized for my needs of writing LaTeX documents and C++, C, nodejs development.
+
+
 
 # Contains
 - [nvim](.config/nvim//)
@@ -15,6 +19,7 @@ As for neovim I've recently moved to relying on vim's own lsp integration instea
 - [dunst](.config/dunst/dunstrc)
 - [bash](.bashrc)
 - [picom](.config/picom/picom.conf)
+- [tofi](.config/tofi/config)
 - [fish](.config/fish/config.fish)
 - [zathura](.config/zathura/zathurarc)
 - [sxhkd](.config/sxhkd/sxhkdrc)
