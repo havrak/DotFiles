@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# Check if running as root. If not, use pkexec to request graphical auth.
+if [ "$EUID" -ne 0 ]; then
+    if command -v pkexec >/dev/null 2>&1; then
+        exec pkexec "$0" "$@"
+    else
+        echo "Error: This script requires root. 'pkexec' not found. Please run with sudo."
+        exit 1
+    fi
+fi
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <off|on>"
+    exit 1
+fi
+
+if [ "$1" != "off" ] && [ "$1" != "on" ]; then
+    echo "Argument must be either 'off' or 'on'"
+    exit 1
+fi
+
+# Helper: Safely write to a file only if it exists
+set_val() {
+    if [ -f "$1" ]; then
+        echo "$2" > "$1"
+    fi
+}
+
+# Detect Power Source
+# Loops through power supplies to find one that is "online" (plugged in)
+ON_AC=0
+for ps in /sys/class/power_supply/A*/online; do
+    if [ -f "$ps" ] && [ "$(cat "$ps")" -eq 1 ]; then
+        ON_AC=1
+        break
+    fi
+done
+
+STATUS_TEXT="Battery"
+if [ "$ON_AC" -eq 1 ]; then
+    STATUS_TEXT="AC Power"
+fi
+
+# --- 4. Logic Selection ---
+
+# Defaults
+GOVERNOR=""
+EPP=""
+PLATFORM_PROFILE=""
+PSTATE_NO_TURBO="" # Intel logic (1=Disable, 0=Enable)
+GENERIC_BOOST=""   # AMD/Generic logic (0=Disable, 1=Enable)
+
+if [ "$1" == "on" ]; then
+    echo "Mode: ON | Power Source: $STATUS_TEXT"
+    echo "Applying: Performance Governor, EPP, Profile, and Turbo Boost."
+
+    GOVERNOR="performance"
+    EPP="performance"
+    PLATFORM_PROFILE="performance"
+
+    # Enable Boost
+    PSTATE_NO_TURBO="0"  # Enable Turbo (Intel)
+    GENERIC_BOOST="1"    # Enable Boost (AMD/Generic)
+
+else
+    echo "Mode: OFF | Power Source: $STATUS_TEXT"
+
+    if [ "$ON_AC" -eq 1 ]; then
+        # -- Wall Power Settings --
+        echo "Applying: Balanced settings (Powersave Gov + Balance Perf EPP)"
+        GOVERNOR="powersave"
+        EPP="balance_performance"
+        PLATFORM_PROFILE="balanced"
+				PSTATE_NO_TURBO="1"  # Disable Turbo (Intel)
+				GENERIC_BOOST="1"    # Keep Boost Enabled vAMD/Generic)
+    else
+        # -- Battery Settings --
+        echo "Applying: Max Battery settings (Powersave Gov + Power EPP)"
+        GOVERNOR="powersave"
+        EPP="power"
+        PLATFORM_PROFILE="low-power"
+				PSTATE_NO_TURBO="1"  # Disable Turbo (Intel)
+				GENERIC_BOOST="0"    # Disable Boost (AMD/Generic)
+    fi
+fi
+
+# --- 5. Apply Settings ---
+
+echo "Writing configuration..."
+
+set_val "/sys/firmware/acpi/platform_profile" "$PLATFORM_PROFILE"
+
+set_val "/sys/devices/system/cpu/intel_pstate/no_turbo" "$PSTATE_NO_TURBO"
+set_val "/sys/devices/system/cpu/cpufreq/boost" "$GENERIC_BOOST"
+
+for cpu in /sys/devices/system/cpu/cpu*/cpufreq; do
+    [ -d "$cpu" ] || continue
+
+    set_val "$cpu/scaling_governor" "$GOVERNOR"
+    set_val "$cpu/energy_performance_preference" "$EPP"
+done
+
+echo "Done."
