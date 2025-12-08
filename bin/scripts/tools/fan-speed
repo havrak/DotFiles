@@ -1,0 +1,152 @@
+#!/bin/bash
+
+FAN_MODE_NODE="/sys/devices/platform/aorus_laptop/fan_mode"
+FAN_SPEED_NODE="/sys/devices/platform/aorus_laptop/fan_custom_speed"
+
+# ==========================================
+# PHASE 1: Argument Parsing & Interactive Wrapper
+# ==========================================
+
+# Variables
+MODE=""
+VALUE=""
+INTERACTIVE=0
+
+# Parse Arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -a) INTERACTIVE=1 ;;
+        -s) MODE="$2"; shift ;;
+        -v) VALUE="$2"; shift ;;
+        *) echo "Unknown parameter: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+# --- Interactive Logic (-a) ---
+if [ "$INTERACTIVE" -eq 1 ]; then
+    MENU_CMD=""
+    if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+            MENU_CMD="tofi --prompt-text 'Fan Mode: '"
+    else
+            MENU_CMD="dmenu -i -p 'Fan Mode: '"
+    fi
+
+    CHOICE=$(echo -e "Normal\nSilent\nAuto\nFixed" | eval "$MENU_CMD")
+
+    if [ -z "$CHOICE" ]; then
+        exit 0
+    fi
+
+    TARGET_MODE=$(echo "$CHOICE" | tr '[:upper:]' '[:lower:]')
+    EXTRA_ARGS=""
+
+    if [ "$TARGET_MODE" == "fixed" ]; then
+        # Generate valid speeds: 25 to 100, step 5 (Required by driver)
+        # We prompt the user to select one
+        SPEED_CMD="$MENU_CMD"
+        # Adjust prompt text if possible, otherwise reuse cmd
+        if [[ "$MENU_CMD" == *"dmenu"* ]]; then SPEED_CMD="dmenu -i -p 'Fan Speed %: '"; fi
+        if [[ "$MENU_CMD" == *"tofi"* ]]; then SPEED_CMD="tofi --prompt-text 'Fan Speed %: '"; fi
+
+        SPEED=$(seq 25 5 100 | eval "$SPEED_CMD")
+
+        if [ -z "$SPEED" ]; then
+            exit 0
+        fi
+        EXTRA_ARGS="-v $SPEED"
+    fi
+
+    # Re-run script as root with direct arguments
+    OUTPUT=$(pkexec "$0" -s "$TARGET_MODE" $EXTRA_ARGS 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 0 ]; then
+        notify-send -i fan -u normal "Fan Settings Applied" "$OUTPUT"
+    else
+        notify-send -i dialog-error -u critical "Fan Script Failed" "$OUTPUT"
+    fi
+
+    exit 0
+fi
+
+# ==========================================
+# PHASE 2: Root Logic & Validation
+# ==========================================
+
+# 1. Root Check
+if [ "$EUID" -ne 0 ]; then
+    echo "Error: Root required for hardware access."
+    exit 1
+fi
+
+# 2. Check for Driver Existence
+if [ ! -d "/sys/devices/platform/aorus_laptop" ]; then
+    echo "Error: Aorus/Gigabyte driver not loaded."
+    echo "Path /sys/devices/platform/aorus_laptop not found."
+    exit 1
+fi
+
+# 3. Input Validation & Mapping
+# Mapping text to integers based on USAGE.md
+MODE_INT=""
+DISPLAY_TEXT=""
+
+case "$MODE" in
+    normal)
+        MODE_INT="0" #
+        DISPLAY_TEXT="Normal"
+        ;;
+    silent)
+        MODE_INT="1" #
+        DISPLAY_TEXT="Silent"
+        ;;
+    auto)
+        MODE_INT="4" #
+        DISPLAY_TEXT="Auto"
+        ;;
+    fixed)
+        MODE_INT="5" #
+        DISPLAY_TEXT="Fixed"
+
+        # Validation for Fixed Mode
+        if [ -z "$VALUE" ]; then
+            echo "Error: Fixed mode requires a value (-v)."
+            exit 1
+        fi
+
+        # Check integer range 25-100
+        if (( VALUE < 25 || VALUE > 100 )); then
+            echo "Error: Fan speed must be between 25 and 100."
+            exit 1
+        fi
+
+        # Check divisibility by 5
+        if (( VALUE % 5 != 0 )); then
+            echo "Error: Fan speed must be a multiple of 5 (25, 30, ... 100)."
+            exit 1
+        fi
+        ;;
+    *)
+        echo "Usage: $0 -s <normal|silent|auto|fixed> [-v speed]"
+        exit 1
+        ;;
+esac
+
+# ==========================================
+# PHASE 3: Apply Settings
+# ==========================================
+
+set_val() {
+    echo "$2" > "$1"
+}
+
+if [ "$MODE" == "fixed" ]; then
+    set_val "$FAN_SPEED_NODE" "$VALUE"
+    DISPLAY_TEXT="Fixed @ ${VALUE}%"
+fi
+
+set_val "$FAN_MODE_NODE" "$MODE_INT"
+
+echo "Mode: $DISPLAY_TEXT"
+echo "Driver: aorus_laptop"

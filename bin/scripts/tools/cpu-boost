@@ -1,104 +1,146 @@
 #!/bin/bash
 
-# Check if running as root. If not, use pkexec to request graphical auth.
+# ==========================================
+# PHASE 1: Interactive Wrapper (-a)
+# ==========================================
+# This section runs as your NORMAL USER.
+# It handles the menu and the notification.
+
+if [ "$1" == "-a" ]; then
+	MENU_CMD=""
+	if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+		MENU_CMD="tofi --prompt-text 'CPU Mode: '"
+	else
+		MENU_CMD="dmenu -i -p 'CPU Mode: '"
+	fi
+
+		CHOICE=$(echo -e "Performance (Turbo ON)\nSmart Saver (Turbo OFF)" | eval "$MENU_CMD")
+
+		if [ -z "$CHOICE" ]; then
+			exit 0
+		fi
+
+		MODE="off"
+		if [[ "$CHOICE" == *"Turbo ON"* ]]; then
+			MODE="on"
+		fi
+
+		# We use pkexec to run THIS script ($0) in silent mode (-s) as root.
+		# We capture standard output (stdout) into a variable for the notification.
+		OUTPUT=$(pkexec "$0" -s "$MODE" 2>&1)
+		EXIT_CODE=$?
+
+		if [ $EXIT_CODE -eq 0 ]; then
+			notify-send -i cpu -u normal "CPU Optimizations Applied" "$OUTPUT"
+		else
+			notify-send -i dialog-error -u critical "CPU Script Failed" "Authentication failed or script error.\n$OUTPUT"
+		fi
+
+		# Exit cleanly so the user wrapper doesn't run the root logic below
+		exit 0
+fi
+
+# ==========================================
+# PHASE 2: Direct Mode & Elevation (-s)
+# ==========================================
+# This section ensures we are Root for the actual hardware work.
+
+TARGET_MODE=""
+
+if [ "$1" == "-s" ]; then
+	if [ -z "$2" ]; then
+		echo "Usage: $0 -s <on|off>"
+		exit 1
+	fi
+	TARGET_MODE="$2"
+else
+	# Fallback if user ran ./script.sh on (without -s)
+	if [ "$1" == "on" ] || [ "$1" == "off" ]; then
+		TARGET_MODE="$1"
+	else
+		echo "Usage: $0 -a (Menu) OR $0 -s <on|off>"
+		exit 1
+	fi
+fi
+
+# Self-Elevation for -s mode
+# If not root, re-run with pkexec
 if [ "$EUID" -ne 0 ]; then
-    if command -v pkexec >/dev/null 2>&1; then
-        exec pkexec "$0" "$@"
-    else
-        echo "Error: This script requires root. 'pkexec' not found. Please run with sudo."
-        exit 1
-    fi
+	if command -v pkexec >/dev/null 2>&1; then
+		exec pkexec "$0" -s "$TARGET_MODE"
+	else
+		echo "Error: Root required. Run with sudo."
+		exit 1
+	fi
 fi
 
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <off|on>"
-    exit 1
-fi
+# ==========================================
+# PHASE 3: Hardware Logic (Root Only)
+# ==========================================
 
-if [ "$1" != "off" ] && [ "$1" != "on" ]; then
-    echo "Argument must be either 'off' or 'on'"
-    exit 1
-fi
-
-# Helper: Safely write to a file only if it exists
+# Helper function
 set_val() {
-    if [ -f "$1" ]; then
-        echo "$2" > "$1"
-    fi
+	if [ -f "$1" ]; then
+		echo "$2" > "$1"
+	fi
 }
 
-# Detect Power Source
-# Loops through power supplies to find one that is "online" (plugged in)
+# Detect Power
 ON_AC=0
 for ps in /sys/class/power_supply/A*/online; do
-    if [ -f "$ps" ] && [ "$(cat "$ps")" -eq 1 ]; then
-        ON_AC=1
-        break
-    fi
+	if [ -f "$ps" ] && [ "$(cat "$ps")" -eq 1 ]; then
+		ON_AC=1
+		break
+	fi
 done
 
 STATUS_TEXT="Battery"
-if [ "$ON_AC" -eq 1 ]; then
-    STATUS_TEXT="AC Power"
-fi
+[ "$ON_AC" -eq 1 ] && STATUS_TEXT="AC Power"
 
-# --- 4. Logic Selection ---
-
-# Defaults
+# Logic Vars
 GOVERNOR=""
 EPP=""
-PLATFORM_PROFILE=""
-PSTATE_NO_TURBO="" # Intel logic (1=Disable, 0=Enable)
-GENERIC_BOOST=""   # AMD/Generic logic (0=Disable, 1=Enable)
+PROFILE=""
+NO_TURBO="" # Intel (1=Off)
+BOOST=""    # AMD (0=Off)
 
-if [ "$1" == "on" ]; then
-    echo "Mode: ON | Power Source: $STATUS_TEXT"
-    echo "Applying: Performance Governor, EPP, Profile, and Turbo Boost."
+SUMMARY=""
 
-    GOVERNOR="performance"
-    EPP="performance"
-    PLATFORM_PROFILE="performance"
-
-    # Enable Boost
-    PSTATE_NO_TURBO="0"  # Enable Turbo (Intel)
-    GENERIC_BOOST="1"    # Enable Boost (AMD/Generic)
-
+if [ "$TARGET_MODE" == "on" ]; then
+	SUMMARY="Mode: PERFORMANCE (Turbo ON)\nSource: $STATUS_TEXT"
+	GOVERNOR="performance"
+	EPP="performance"
+	PROFILE="performance"
+	NO_TURBO="0"
+	BOOST="1"
 else
-    echo "Mode: OFF | Power Source: $STATUS_TEXT"
+	SUMMARY="Mode: SMART SAVER (Turbo OFF)\nSource: $STATUS_TEXT"
+	NO_TURBO="1"
+	BOOST="0"
 
-    if [ "$ON_AC" -eq 1 ]; then
-        # -- Wall Power Settings --
-        echo "Applying: Balanced settings (Powersave Gov + Balance Perf EPP)"
-        GOVERNOR="powersave"
-        EPP="balance_performance"
-        PLATFORM_PROFILE="balanced"
-				PSTATE_NO_TURBO="1"  # Disable Turbo (Intel)
-				GENERIC_BOOST="1"    # Keep Boost Enabled vAMD/Generic)
-    else
-        # -- Battery Settings --
-        echo "Applying: Max Battery settings (Powersave Gov + Power EPP)"
-        GOVERNOR="powersave"
-        EPP="power"
-        PLATFORM_PROFILE="low-power"
-				PSTATE_NO_TURBO="1"  # Disable Turbo (Intel)
-				GENERIC_BOOST="0"    # Disable Boost (AMD/Generic)
-    fi
+	if [ "$ON_AC" -eq 1 ]; then
+		GOVERNOR="powersave"
+		EPP="balance_performance"
+		PROFILE="balanced"
+	else
+		GOVERNOR="powersave"
+		EPP="power"
+		PROFILE="low-power"
+	fi
 fi
 
-# --- 5. Apply Settings ---
-
-echo "Writing configuration..."
-
-set_val "/sys/firmware/acpi/platform_profile" "$PLATFORM_PROFILE"
-
-set_val "/sys/devices/system/cpu/intel_pstate/no_turbo" "$PSTATE_NO_TURBO"
-set_val "/sys/devices/system/cpu/cpufreq/boost" "$GENERIC_BOOST"
+# Apply Settings
+set_val "/sys/firmware/acpi/platform_profile" "$PROFILE"
+set_val "/sys/devices/system/cpu/intel_pstate/no_turbo" "$NO_TURBO"
+set_val "/sys/devices/system/cpu/cpufreq/boost" "$BOOST"
 
 for cpu in /sys/devices/system/cpu/cpu*/cpufreq; do
-    [ -d "$cpu" ] || continue
-
-    set_val "$cpu/scaling_governor" "$GOVERNOR"
-    set_val "$cpu/energy_performance_preference" "$EPP"
+	[ -d "$cpu" ] || continue
+	set_val "$cpu/scaling_governor" "$GOVERNOR"
+	set_val "$cpu/energy_performance_preference" "$EPP"
 done
 
-echo "Done."
+# This text is captured by the Phase 1 block
+echo "$SUMMARY"
+echo "Profile: $PROFILE"
+echo "Governor: $GOVERNOR"
