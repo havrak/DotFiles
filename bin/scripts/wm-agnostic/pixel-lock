@@ -1,55 +1,107 @@
 #!/usr/bin/env bash
+exec >/tmp/pixel-lock.log 2>&1
+set -x
+
+echo "Starting lock script at $(date)"
 
 PID=$(pgrep -x -n "Hyprland" || pgrep -x -n "sway" || pgrep -x -n "Xorg")
-
 if [ -z "$PID" ]; then
     echo "No supported compositor found."
     exit 1
 fi
 
-# Get the user and User ID associated with that PID
 DETECTED_USER=$(ps -o user= -p "$PID")
 DETECTED_UID=$(id -u "$DETECTED_USER")
+echo "Detected user: $DETECTED_USER ($DETECTED_UID)"
 
-# Detect the session type based on the process name
-if pgrep -x "Hyprland" > /dev/null || pgrep -x "sway" > /dev/null; then
+export XDG_RUNTIME_DIR="/run/user/$DETECTED_UID"
+WAYLAND_SOCKET=$(ls -t "$XDG_RUNTIME_DIR"/wayland-* 2>/dev/null | head -n 1)
+
+if [ -n "$WAYLAND_SOCKET" ]; then
     SESSION_TYPE="wayland"
-    XDG_SESSION_TYPE="wayland"
-    export XDG_RUNTIME_DIR="/run/user/$DETECTED_UID"
-    W_DISPLAY=$(find "$XDG_RUNTIME_DIR" -maxdepth 1 -name "wayland-*" -printf "%f\n" | head -n 1)
-    export WAYLAND_DISPLAY="${W_DISPLAY:-wayland-1}"
+    export XDG_SESSION_TYPE="wayland"
+    export WAYLAND_DISPLAY=$(basename "$WAYLAND_SOCKET")
+    echo "Wayland socket found: $WAYLAND_DISPLAY"
 else
     SESSION_TYPE="x11"
-    export DISPLAY=":0" # Safe default for X11
+    export DISPLAY=":0"
+    echo "Fallback to X11"
 fi
-
 
 run_as_user() {
     if [ "$(id -u)" -eq 0 ]; then
-        sudo -u "$DETECTED_USER" \
+        sudo -u "$DETECTED_USER" env \
         XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" \
         WAYLAND_DISPLAY="$WAYLAND_DISPLAY" \
         DISPLAY="$DISPLAY" \
+        XDG_SESSION_TYPE="$XDG_SESSION_TYPE" \
         "$@"
     else
         "$@"
     fi
 }
 
-IMAGE="/tmp/screen_locked.png"
 
-if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-    run_as_user grim "$IMAGE"
+# Define the static file path
+# We use the $DETECTED_USER variable to find the correct home directory dynamically
+STATIC_IMAGE="/home/$DETECTED_USER/bin/scripts/files/wall1.png"
+TEMP_IMAGE="/tmp/screen_locked.png"
+LOCK_IMAGE=""
+
+# Decision Logic:
+# 1. If Nvidia detected AND static file exists -> Use static file (Fastest, Safest)
+# 2. If Nvidia detected BUT no file -> Use solid color (Fallback safety)
+# 3. If NO Nvidia -> Try screenshot (Standard behavior)
+if lspci -k | grep -A 2 -E "(VGA|3D)" | grep -i "nvidia"; then
+    if [ -f "$STATIC_IMAGE" ]; then
+        echo "Nvidia mode: Using static image: $STATIC_IMAGE"
+        LOCK_IMAGE="$STATIC_IMAGE"
+    else
+        echo "Nvidia mode: Static image not found at $STATIC_IMAGE. Using black screen fallback."
+        LOCK_IMAGE=""
+    fi
 else
-    run_as_user scrot "$IMAGE"
+    echo "Non-Nvidia mode: Attempting screenshot..."
+    SCREENSHOT_SUCCESS=false
+    if [ "$SESSION_TYPE" == "wayland" ]; then
+        if run_as_user timeout 2s grim "$TEMP_IMAGE"; then
+            SCREENSHOT_SUCCESS=true
+        fi
+    else
+        if run_as_user timeout 2s scrot "$TEMP_IMAGE"; then
+            SCREENSHOT_SUCCESS=true
+        fi
+    fi
+
+    if [ "$SCREENSHOT_SUCCESS" = true ]; then
+        echo "Screenshot success. Blurring..."
+        run_as_user magick "$TEMP_IMAGE" -scale 5% -scale 2000% "$TEMP_IMAGE"
+        LOCK_IMAGE="$TEMP_IMAGE"
+    else
+        echo "Screenshot failed or timed out. Using fallback color."
+        LOCK_IMAGE=""
+    fi
 fi
 
-run_as_user magick "$IMAGE" -scale 10% -scale 1000% "$IMAGE"
-
-if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-    run_as_user swaylock -f -i "$IMAGE"
+# --- 4. LOCK THE SCREEN ---
+echo "Locking screen..."
+if [ "$SESSION_TYPE" == "wayland" ]; then
+    if [ -n "$LOCK_IMAGE" ]; then
+        run_as_user swaylock -f -i "$LOCK_IMAGE"
+    else
+        run_as_user swaylock -f -c 000000
+    fi
 else
-    run_as_user i3lock -i "$IMAGE" -k -f -e
+    if [ -n "$LOCK_IMAGE" ]; then
+        run_as_user i3lock -i "$LOCK_IMAGE" -k -f -e
+    else
+        run_as_user i3lock -c 000000 -k -f -e
+    fi
 fi
 
-rm "$IMAGE"
+if [ "$LOCK_IMAGE" == "$TEMP_IMAGE" ]; then
+    rm -f "$TEMP_IMAGE"
+fi
+
+echo "Lock command sent. Exiting."
+exit 0

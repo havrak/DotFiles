@@ -329,7 +329,7 @@ def apply_layout(layout_type, mgr):
     save_state(layout_type, mgr)
 
     # Reload background/waybar
-    # run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
+    run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
     run_cmd(os.path.expanduser("~/bin/scripts/hyprland/waybar-launch &"))
 
 # --- Persistence ---

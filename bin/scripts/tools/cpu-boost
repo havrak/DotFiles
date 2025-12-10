@@ -118,15 +118,15 @@ else
 	NO_TURBO="1"
 	BOOST="0"
 
-	if [ "$ON_AC" -eq 1 ]; then
-		GOVERNOR="powersave"
-		EPP="balance_performance"
-		PROFILE="balanced"
-	else
+	# if [ "$ON_AC" -eq 1 ]; then
+	# 	GOVERNOR="powersave"
+	# 	EPP="balance_performance"
+	# 	PROFILE="balanced"
+	# else
 		GOVERNOR="powersave"
 		EPP="power"
 		PROFILE="low-power"
-	fi
+	# fi
 fi
 
 # Apply Settings

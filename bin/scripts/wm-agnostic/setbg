@@ -37,6 +37,7 @@ if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
     echo "Setting wallpaper"
 
     swaybg -o eDP-1 -m fill -i "$WALL1" \
+           -o eDP-2 -m fill -i "$WALL1" \
            -o DP-1 -m fill -i "$WALL2" \
            -o DP-2 -m fill -i "$WALL2" \
            -o HDMI-A-1 -m fill -i "$WALL2" \
