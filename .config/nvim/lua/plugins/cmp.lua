@@ -9,7 +9,7 @@ local M = {
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-nvim-lsp-signature-help",
+		"hrsh7th/cmp-nvim-lsp-signature-help"
 	},
 }
 
@@ -21,7 +21,6 @@ local src = {
 	snip = { name = "luasnip", group_index = 2, keyword_length = 3, max_item_count = 5 },
 	buf = { name = "buffer", group_index = 3, max_item_count = 20 },
 	signature = { name = 'nvim_lsp_signature_help' },
-	copilot = { name = "copilot", group_index = 3, priority = 1 },
 }
 
 function M.config()
@@ -83,10 +82,6 @@ function M.config()
 		cmp.config.compare.kind,
 		cmp.config.compare.length,
 	}
-local status_ok, copilot_cmp = pcall(require, "cmp_copilot.comparators")
-	if src.copilot and status_ok then
-		comparators[2] = copilot_cmp.score
-	end
 
 	cmp.setup({
 		snippet = {
@@ -206,7 +201,7 @@ local status_ok, copilot_cmp = pcall(require, "cmp_copilot.comparators")
 		},
 		experimental = { ghost_text = { hl_group = "DiagnosticVirtualTextHint" } },
 		sorting = { comparators = comparators },
-		sources = { src.path, src.lsp, src.snip, src.signature, src.buf, src.copilot },
+		sources = { src.path, src.lsp, src.snip, src.signature, src.buf },
 	})
 
 	cmp.setup.filetype({ "markdown", "text", "tex", "vimwiki" }, {
@@ -214,11 +209,10 @@ local status_ok, copilot_cmp = pcall(require, "cmp_copilot.comparators")
 			src.path,
 			src.font,
 			src.latex,
-			src.buf,
-			src.copilot
+			src.buf
 		},
 	})
-	cmp.setup.filetype({ "lua" }, { sources = { src.path, src.lsp, src.font, src.copilot } })
+	cmp.setup.filetype({ "lua" }, { sources = { src.path, src.lsp, src.font } })
 
 	cmp.setup.cmdline(":", { sources = { { name = "cmdline", group_index = 0 }, src.path, src.latex, src.buf } })
 	cmp.setup.cmdline("/", { sources = { src.latex, src.buf } })

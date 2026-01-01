@@ -1,5 +1,4 @@
 return {
-
 	{
 		"havrak/gruvbox",
 		lazy = false,
@@ -10,42 +9,9 @@ return {
 			vim.g.gruvbox_contrast_dark = "hard"
 		end,
 	},
-
 	{ "rbgrouleff/bclose.vim", event = "VeryLazy" },
-
 	{ "numToStr/Comment.nvim", event = "VeryLazy", opts = {} },
-
 	{ "preservim/tagbar", event = "VeryLazy" },
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				-- IMPORTANT: Disable ghost text suggestions
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-				filetypes = {
-					-- Disable copilot for filetypes you don't want
-					markdown = true,
-					latex = true,
-					tex = true,
-
-					-- ...
-				},
-			})
-		end,
-	},
-	{
-		-- This plugin provides the nvim-cmp source
-		"zbirenbaum/copilot-cmp",
-		dependencies = { "copilot.lua" },
-		event = "VeryLazy",
-		config = function()
-			-- This just needs to be setup
-			require("copilot_cmp").setup()
-		end,
-	},
 	{
 		"Chiel92/vim-autoformat",
 		event = "VeryLazy",

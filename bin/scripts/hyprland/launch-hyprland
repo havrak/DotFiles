@@ -28,4 +28,4 @@ else
 fi
 
 # Start Hyprland
-exec Hyprland
+exec start-hyprland

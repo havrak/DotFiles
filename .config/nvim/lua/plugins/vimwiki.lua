@@ -1,15 +1,15 @@
 vim.g.vimwiki_list = {
 	{
-		path = '$HOME/.config/nvim/vimwiki/',
-		path_html =  '~/.config/nvim/vimwiki/html',
-		syntax = 'default',
-		ext = '.wiki',
+		path = "$HOME/.config/nvim/vimwiki/",
+		path_html = "~/.config/nvim/vimwiki/html",
+		syntax = "default",
+		ext = ".wiki",
 		auto_diary_index = 1,
-	}
+	},
 }
 
 vim.g.vimwiki_key_mappings = {
-	all_maps =  1,
+	all_maps = 1,
 	global = 1,
 	headers = 1,
 	text_objs = 1,
@@ -19,42 +19,40 @@ vim.g.vimwiki_key_mappings = {
 	links = 1,
 	html = 1,
 	mouse = 0,
-	lists_return = 0 -- prevents <CR> from being handled by vimwiki
+	lists_return = 0, -- prevents <CR> from being handled by vimwiki
 }
 
-vim.g.vimwiki_conceallevel =0
+vim.g.vimwiki_conceallevel = 0
 
-local M = {"vimwiki/vimwiki", lazy = false}
+local M = { "vimwiki/vimwiki", lazy = false }
 function M.config()
-
-	vim.g.vimwiki_listsyms = '✗✓'
+	vim.g.vimwiki_listsyms = "✗✓"
 	vim.g.vimwiki_conceallevel = 2
-	vim.g.vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,pre,script,div'
+	vim.g.vimwiki_valid_html_tags = "b,i,s,u,sub,sup,kbd,br,hr,pre,script,div"
 
-	vim.keymap.set('n', '<leader><F8>', ':VimwikiIndex<CR>' , {silent = true, noremap = false})
-	vim.keymap.set('n', 'łws', '<Plug>VimwikiSplitLink' , {noremap = true,silent = true})
-	vim.keymap.set('n', 'łwv', '<Plug>VimwikiVSplitLink' , {noremap = true,silent = true})
-	vim.keymap.set('n', 'łwt', '<Plug>VimwikiTabnewLink' , {noremap = true,silent = true})
-	vim.keymap.set('v', 'łwn', '<Plug>VimwikiNormalizeLinkVisualCR' , {noremap = true,silent = true})
-	vim.keymap.set('n', 'łwn', 'VimwikiReturn' , {noremap = true,silent = true})
-	vim.keymap.set('i', 'łwn', 'VimwikiReturn' , {noremap = true,silent = true})
-	vim.keymap.set('n', '<S-CR>', '<Plug>VimwikiFollowLink'  , {noremap = true,silent = true})
-	vim.keymap.set('v', '<C-d>', '<Plug>VimwikiToggleListItem', {noremap = true,silent = true})
-	vim.keymap.set('n', '<C-d>', '<Plug>VimwikiToggleListItem', {noremap = true,silent = true})
+	vim.keymap.set("n", "<leader><F8>", ":VimwikiIndex<CR>", { silent = true, noremap = false })
+	vim.keymap.set("n", "łws", "<Plug>VimwikiSplitLink", { noremap = true, silent = true })
+	vim.keymap.set("n", "łwv", "<Plug>VimwikiVSplitLink", { noremap = true, silent = true })
+	vim.keymap.set("n", "łwt", "<Plug>VimwikiTabnewLink", { noremap = true, silent = true })
+	vim.keymap.set("v", "łwn", "<Plug>VimwikiNormalizeLinkVisualCR", { noremap = true, silent = true })
+	vim.keymap.set("n", "łwn", "VimwikiReturn", { noremap = true, silent = true })
+	vim.keymap.set("i", "łwn", "VimwikiReturn", { noremap = true, silent = true })
+	vim.keymap.set("n", "<S-CR>", "<Plug>VimwikiFollowLink", { noremap = true, silent = true })
+	vim.keymap.set("v", "<C-d>", "<Plug>VimwikiToggleListItem", { noremap = true, silent = true })
+	vim.keymap.set("n", "<C-d>", "<Plug>VimwikiToggleListItem", { noremap = true, silent = true })
 
-	local vimwiki_group = vim.api.nvim_create_augroup("VimwikiRemaps", {clear = true})
+	local vimwiki_group = vim.api.nvim_create_augroup("VimwikiRemaps", { clear = true })
 	--
 	vim.api.nvim_create_autocmd("BufEnter", {
 		group = vimwiki_group,
 		pattern = "vimwiki",
 		callback = function()
-			vim.keymap.set ('i',  '<M-n>', 'vimwiki#tbl#kbd_tab()' , {noremap = true,silent = true})
-			vim.keymap.set ('i',  '<M-p>', 'vimwiki#tbl#kbd_shift_tab()' , {noremap = true,silent = true})
+			vim.keymap.set("i", "<M-n>", "vimwiki#tbl#kbd_tab()", { noremap = true, silent = true })
+			vim.keymap.set("i", "<M-p>", "vimwiki#tbl#kbd_shift_tab()", { noremap = true, silent = true })
 			-- local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
 			-- vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "<Esc>:VimwikiReturn 1 5<CR>"]], opt)
 		end,
 	})
-
 end
 
 return M

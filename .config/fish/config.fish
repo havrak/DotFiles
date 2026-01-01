@@ -104,15 +104,6 @@ function fish_prompt
 	printf '\033[?1h\033=' >/dev/tty
 end
 
-
-function fish_user_key_bindings
-	fzf_key_bindings
-end
-
-# if status is-interactive
-#  dbus-update-activation-environment --systemd --all
-# end
-
 	# starts ssh agent on loggin into tty
 source "$HOME/.config/fish/abbreviations.fish"
 source "$HOME/.config/fish/startssh.fish"
