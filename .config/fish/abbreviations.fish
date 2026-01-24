@@ -16,6 +16,7 @@ abbr mv 			   "mv -i"
 abbr espd        "xtensa-esp32-elf-addr2line -pfiaC -e"
 abbr jctl 		   "journalctl -p 3 -xb"
 abbr pngstrip	   "find ./ -type f -name \"*.png\" -mtime 0 | xargs optipng -strip all"
+abbr npm-token   'npm config set "//registry.npmjs.org/:_authToken"'
 alias ms  		   "mailsync 2>/dev/null"
 alias ccmake 	   "cmake . && make"
 alias cmake 	   "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
@@ -24,7 +25,6 @@ alias matlab     "export CUDA_VISIBLE_DEVICES=-1; lockdev-redirect MATLAB"
 alias matlab-gpu "export LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/; lockdev-redirect MATLAB"
 alias matlab-mex "$matlabpath/mex"
 alias jsonpretty "python -m json.tool"
-alias quartus    "$HOME/bin/progs/quartus/quartus/bin/quartus"
 
 # esp-idf
 alias idf-get  "source $HOME/bin/progs/esp-idf/export.fish"

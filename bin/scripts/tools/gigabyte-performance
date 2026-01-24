@@ -7,12 +7,12 @@ FAN_SPEED_NODE="/sys/devices/platform/aorus_laptop/fan_custom_speed"
 # PHASE 1: Argument Parsing & Interactive Wrapper
 # ==========================================
 
-# Variables
+# Variable
 MODE=""
 VALUE=""
 INTERACTIVE=0
 
-# Parse Arguments
+# Parse Argument
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -a) INTERACTIVE=1 ;;
@@ -32,7 +32,7 @@ if [ "$INTERACTIVE" -eq 1 ]; then
             MENU_CMD="dmenu -i -p 'Fan Mode: '"
     fi
 
-    CHOICE=$(echo -e "Normal\nSilent\nAuto\nFixed" | eval "$MENU_CMD")
+    CHOICE=$(echo -e "Normal\nSilent\nGaming\nAuto\nFixed" | eval "$MENU_CMD")
 
     if [ -z "$CHOICE" ]; then
         exit 0
@@ -57,7 +57,7 @@ if [ "$INTERACTIVE" -eq 1 ]; then
         EXTRA_ARGS="-v $SPEED"
     fi
 
-    # Re-run script as root with direct arguments
+    # Re-run script as root with direct argument
     OUTPUT=$(pkexec "$0" -s "$TARGET_MODE" $EXTRA_ARGS 2>&1)
     EXIT_CODE=$?
 
@@ -101,6 +101,10 @@ case "$MODE" in
         MODE_INT="1" #
         DISPLAY_TEXT="Silent"
         ;;
+    gaming)
+        MODE_INT="2" #
+        DISPLAY_TEXT="Gaming"
+        ;;
     auto)
         MODE_INT="4" #
         DISPLAY_TEXT="Auto"
@@ -134,7 +138,7 @@ case "$MODE" in
 esac
 
 # ==========================================
-# PHASE 3: Apply Settings
+# PHASE 3: Apply Setting
 # ==========================================
 
 set_val() {

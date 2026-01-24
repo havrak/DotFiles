@@ -55,7 +55,10 @@ local function setup(server, opts)
 	end
 
 	if opts.root_markers then
-		vim.list_extend(opts.root_markers, vim.lsp.config[server].root_markers)
+		local default_config = vim.lsp.config[server]
+		if default_config and default_config.root_markers then
+			vim.list_extend(opts.root_markers, default_config.root_markers)
+		end
 	end
 	opts = vim.tbl_deep_extend("keep", opts, vim.lsp.config[server])
 	vim.lsp.config(server, opts)
@@ -70,6 +73,7 @@ setup("jsonls")
 setup("clangd")
 setup("cspell_ls")
 setup("lua_ls")
+setup("ts_ls")
 
 -- Lsp diagnostic
 vim.keymap.set("n", "<C-d>", vim.diagnostic.open_float)
@@ -95,8 +99,5 @@ vim.keymap.set({ "n", "i" }, "<C-i>", vim.lsp.buf.document_highlight)
 vim.keymap.set({ "n", "i" }, "<C-S-I>", vim.lsp.buf.clear_references)
 vim.keymap.set({ "n", "i" }, "<c-space>", vim.lsp.buf.code_action)
 vim.keymap.set({ "n", "i" }, "<C-a>", vim.lsp.buf.rename)
-
-
-
 
 return M

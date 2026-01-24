@@ -10,6 +10,7 @@ vim.o.encoding = 'utf-8'
 vim.g.termencoding = 'utf-8'
 vim.o.fileencoding = 'utf-8'
 vim.o.clipboard = 'unnamedplus'
+-- vim.opt_local.fileformat = 'unix'
 vim.wo.signcolumn = 'yes'
 vim.o.hlsearch = false
 vim.wo.number = true
