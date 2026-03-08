@@ -1,4 +1,5 @@
-#!/bin/sh
+
+!/bin/sh
 
 # tex files: Compiles to pdf, including bibliography if necessary
 # md files: Compiles to pdf via pandoc

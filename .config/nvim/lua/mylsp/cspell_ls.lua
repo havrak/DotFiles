@@ -23,6 +23,7 @@ M.filetypes = {
   "cpp",
   "c",
   "tex",
+	"typst",
 }
 M.root_markers = { ".git" , "cspell.json"}
 

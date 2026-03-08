@@ -60,6 +60,29 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	group = general_settings_group,
+	pattern = { "typst" },
+	callback = function(args)
+		local opts = { buffer = args.buf, noremap = true, silent = true }
+		vim.keymap.set(
+			"n",
+			"<leader>p",
+			"<Cmd>TypstPreview<CR>",
+			vim.tbl_extend("force", opts, { desc = "Typst: Live Preview" })
+		)
+
+		vim.keymap.set("n", "<leader>c", function()
+			vim.cmd("w!")
+			vim.cmd("!tinymist compile %")
+		end, vim.tbl_extend("force", opts, { desc = "Typst: Compile PDF" }))
+
+		vim.keymap.set("n", "F", function()
+			vim.lsp.buf.format({ async = true })
+		end, vim.tbl_extend("force", opts, { desc = "LSP: Format Typst" }))
+	end,
+})
+
 -- vim.api.nvim_create_autocmd("VimEnter", {
 --   group = copilot_group,
 --   callback = function()

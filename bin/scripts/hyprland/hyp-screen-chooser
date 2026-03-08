@@ -85,7 +85,7 @@ class MonitorManager:
         if diag_inch < 17.0 and height_px > 1080:
             return 1.25
 
-        return 1.0
+        return 1.
 
     def get_preferred_mode(self, monitor_data):
         """Returns (width, height, refresh_rate, scale)."""

@@ -9,7 +9,7 @@
 
 		"modules-left": ["hyprland/workspaces", "hyprland/window"],
 		"modules-center": ["clock"],
-		"modules-right": ["custom/mail", "pulseaudio", "backlight", "battery", "hyprland/language", "network#wifi", "custom#eth", "tray"],
+		"modules-right": ["custom/mail", "pulseaudio", "backlight", "battery", "hyprland/language", "network#wifi", "tray"],
 
 		"include": ["~/.config/waybar/active-workspaces.jsonc"],
 

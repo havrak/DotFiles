@@ -74,6 +74,7 @@ setup("clangd")
 setup("cspell_ls")
 setup("lua_ls")
 setup("ts_ls")
+setup("tinymist")
 
 -- Lsp diagnostic
 vim.keymap.set("n", "<C-d>", vim.diagnostic.open_float)

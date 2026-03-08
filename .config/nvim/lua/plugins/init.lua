@@ -50,4 +50,11 @@ return {
 			vim.g.templates_no_autocmd = 0
 		end,
 	},
+	{
+		'chomosuke/typst-preview.nvim',
+		event = "VeryLazy",
+		ft = 'typst',
+		version = '1.*',
+		build = function() require 'typst-preview'.update() end,
+	}
 }
