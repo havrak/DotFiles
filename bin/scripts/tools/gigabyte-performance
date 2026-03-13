@@ -3,10 +3,6 @@
 FAN_MODE_NODE="/sys/devices/platform/aorus_laptop/fan_mode"
 FAN_SPEED_NODE="/sys/devices/platform/aorus_laptop/fan_custom_speed"
 
-# ==========================================
-# PHASE 1: Argument Parsing & Interactive Wrapper
-# ==========================================
-
 # Variable
 MODE=""
 VALUE=""

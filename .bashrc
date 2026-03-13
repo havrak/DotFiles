@@ -120,3 +120,16 @@ alias newtag="git tag -a"
 alias push="git remote | xargs -L1 git push --all"
 
 export QSYS_ROOTDIR="/home/havra/bin/progs/quartus/quartus/sopc_builder/bin"
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE='/home/havrak/.local/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/home/havrak/bin/progs/micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
