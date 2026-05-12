@@ -28,4 +28,4 @@ Aside from window manager configuration here's also my neovim config. It's nothi
 - [sxiv](.config/sxiv/exec/key-handler)
 - [useful scripts](bin/scripts/)
 
-![screenshot](bin/scripts/files/screenshot.png)
+![screenshot](bin/scripts/files/screenshot.jpg)

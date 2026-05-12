@@ -21,10 +21,13 @@ alias ms  		   "mailsync 2>/dev/null"
 alias ccmake 	   "cmake . && make"
 alias cmake 	   "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	   "rsync --info=progress2"
-alias matlab     "export CUDA_VISIBLE_DEVICES=-1; lockdev-redirect MATLAB"
+# alias matlab     "export CUDA_VISIBLE_DEVICES=-1; lockdev-redirect MATLAB"
+alias matlab     "export __GLX_VENDOR_LIBRARY_NAME=mesa; export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json; lockdev-redirect MATLAB"
 alias matlab-gpu "export LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/; lockdev-redirect MATLAB"
 alias matlab-mex "$matlabpath/mex"
 alias jsonpretty "python -m json.tool"
+alias eznec      'env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.json DRI_PRIME=0 gamescope --backend wayland -W 1080 -H 1920 -S stretch -- wine "/home/havrak/.wine/drive_c/Program Files (x86)/EZNEC 7.0/EZWpro2+.exe"'
+alias 4nec2      'env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.json DRI_PRIME=0 gamescope --backend wayland -W 1080 -H 1920 -S stretch -- wine "/home/havrak/.wine/drive_c/4nec2/exe/4nec2.exe"'
 
 # esp-idf
 alias idf-get  "source $HOME/bin/progs/esp-idf/export.fish"

@@ -78,7 +78,6 @@ bin/scripts/tools/matlab_gnutls_fix
 .config/libreoffice/
 .config/ltspice/
 .config/msmtp/
-.config/mutt/
 .config/nvim/coc-settings.json
 .config/nvim/session/
 .config/nvim/vimwiki/
