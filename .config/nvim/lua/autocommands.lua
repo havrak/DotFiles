@@ -83,6 +83,29 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+local format_group = vim.api.nvim_create_augroup("SchemaFormatter", { clear = true })
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = format_group,
+  pattern = "*/parsing-schemas/*.json",
+  callback = function()
+    local current_file_dir = vim.fn.expand("<afile>:p:h")
+    local formatter_script = current_file_dir .. "/format_schema.py"
+
+    vim.keymap.set("n", "F", function()
+      if vim.fn.executable(formatter_script) == 1 then
+        local cursor_pos = vim.api.nvim_win_get_cursor(0)
+
+        vim.cmd("%!" .. vim.fn.shellescape(formatter_script))
+
+        pcall(vim.api.nvim_win_set_cursor, 0, cursor_pos)
+      else
+        vim.notify("Formatter script not found or not executable at: " .. formatter_script, vim.log.levels.ERROR)
+      end
+    end, { buffer = true, silent = true, desc = "Format custom parsing schema JSON" })
+  end,
+})
+
 -- vim.api.nvim_create_autocmd("VimEnter", {
 --   group = copilot_group,
 --   callback = function()
