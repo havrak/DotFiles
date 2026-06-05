@@ -85,9 +85,9 @@ class MonitorManager:
         if diag_inch < 17.0 and height_px > 1080:
             return 1.25
 
-        return 1.
+        return 1.0
 
-    def get_preferred_mode(self, monitor_data):
+    def get_preferred_mode(self, monitor_data, max_refresh=None):
         """Returns (width, height, refresh_rate, scale)."""
         modes = monitor_data.get("availableModes", [])
         if not modes:
@@ -102,12 +102,18 @@ class MonitorManager:
             refresh = float(parts[1].replace("Hz", ""))
             parsed_modes.append((w, h, refresh))
 
+        # Filter out refresh rates higher than max_refresh if specified
+        if max_refresh is not None:
+            filtered_modes = [m for m in parsed_modes if m[2] <= max_refresh]
+            # Only apply filter if it leaves at least one valid mode
+            if filtered_modes:
+                parsed_modes = filtered_modes
+
         # Sort by Width, then Height, then Refresh
         parsed_modes.sort(key=lambda x: (x[0], x[1], x[2]), reverse=True)
         best = parsed_modes[0] # (w, h, refresh)
 
         # Get physical dimensions from hyprctl data
-        # Note: monitor_data is the dict from 'hyprctl -j monitors all'
         w_mm = monitor_data.get("physicalWidth", 0)
         h_mm = monitor_data.get("physicalHeight", 0)
 
@@ -184,7 +190,7 @@ def setup_workspaces(primary_mon, secondary_mon=None):
             run_cmd(f"hyprctl keyword unbind ALT SHIFT, {key}")
 
 def generate_waybar_config(primary_mon, secondary_mon=None):
-    print("Primary monitor: ", primary_mon, "secondary monitor: ", secondary_mon);
+    print("Primary monitor: ", primary_mon, "secondary monitor: ", secondary_mon)
     config = {
         "hyprland/workspaces": {
             "disable-scroll": True,
@@ -220,7 +226,7 @@ def apply_layout(layout_type, mgr):
             notify("Error", "No internal monitor detected")
             return
 
-        w, h, r, s = mgr.get_preferred_mode(mgr.internal)
+        w, h, r, s = mgr.get_preferred_mode(mgr.internal, max_refresh=61.0)
         run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{w}x{h}@{r},0x0,{s}")
 
         # Disable all externals
@@ -240,7 +246,7 @@ def apply_layout(layout_type, mgr):
             apply_layout("laptop", mgr)
             return
 
-        # Get External Props
+        # Get External Props (No max refresh limit)
         ew, eh, er, es = mgr.get_preferred_mode(mgr.external)
 
         # If External Only
@@ -259,7 +265,7 @@ def apply_layout(layout_type, mgr):
         if not mgr.internal:
             return
 
-        iw, ih, ir, _is = mgr.get_preferred_mode(mgr.internal)
+        iw, ih, ir, _is = mgr.get_preferred_mode(mgr.internal, max_refresh=61.0)
 
         # Calculate Logical Dimensions (Hyprland positioning uses logical pixels: pixels / scale)
         ext_log_w = ew / es
