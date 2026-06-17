@@ -1,7 +1,9 @@
 #!/bin/sh
 
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    menu_cmd="tofi --height=10% --prompt-text=Clipboard --horizontal=false --result-spacing=0 --num-results=20"
+		monitor_scale=$(hyprctl monitors -j | jq '.[] | select(.focused == true) | .scale')
+    base_height=120
+    menu_cmd="tofi --height=${base_height} --prompt-text=Clipboard --horizontal=false --result-spacing=0 --num-results=20"
     copy_cmd="wl-copy"
 else
     menu_cmd="dmenu -l 20"

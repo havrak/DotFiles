@@ -21,7 +21,6 @@ alias ms  		   "mailsync 2>/dev/null"
 alias ccmake 	   "cmake . && make"
 alias cmake 	   "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 alias rsync 	   "rsync --info=progress2"
-# alias matlab     "export CUDA_VISIBLE_DEVICES=-1; lockdev-redirect MATLAB"
 alias matlab     "export __GLX_VENDOR_LIBRARY_NAME=mesa; export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json; lockdev-redirect MATLAB"
 alias matlab-gpu "export LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/; lockdev-redirect MATLAB"
 alias matlab-mex "$matlabpath/mex"
@@ -47,9 +46,6 @@ abbr ua 			"sudo umount ~/tmp/android --lazy"
 abbr sshschool 		"ssh dk-301@db.gyarab.cz"
 abbr sshsql 			"ssh -L 3306:localhost:3306 havrak.xyz"
 abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
-
-abbr picamup      "gst-launch-1.0 -v v4l2src device=/dev/video0 ! videoconvert ! video/x-raw,format=YUY2,width=640,height=480,framerate=30/1 ! jpegenc ! rtpjpegpay ! udpsink host=192.168.6.11 port=5000"
-abbr picamdw      "gst-launch-1.0 -v udpsrc port=5000 ! application/x-rtp, media=video, clock-rate=90000, payload=96 ! rtpjpegdepay ! jpegdec ! videoconvert ! autovideosink"
 
 # rsync commands
 abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  192.168.6.1:~/drone_software"

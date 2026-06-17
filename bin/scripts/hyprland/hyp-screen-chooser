@@ -226,7 +226,7 @@ def apply_layout(layout_type, mgr):
             notify("Error", "No internal monitor detected")
             return
 
-        w, h, r, s = mgr.get_preferred_mode(mgr.internal, max_refresh=61.0)
+        w, h, r, s = mgr.get_preferred_mode(mgr.internal, max_refresh=60.9)
         run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{w}x{h}@{r},0x0,{s}")
 
         # Disable all externals

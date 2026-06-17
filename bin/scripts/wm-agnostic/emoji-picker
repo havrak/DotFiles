@@ -2,10 +2,10 @@
 
 # Detect Session
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    # Wayland/Hyprland Settings
-    menu_cmd="tofi --height=20% --prompt-text=Clipboard --horizontal=false --result-spacing=0 --num-results=20"
+		monitor_scale=$(hyprctl monitors -j | jq '.[] | select(.focused == true) | .scale')
+    base_height=360
+    menu_cmd="tofi --height=${base_height} --prompt-text=Clipboard --horizontal=false --result-spacing=0 --num-results=20"
     copy_cmd="wl-copy"
-    # Using hyprctl for typing is more native/stable on Hyprland than wtype
     type_cmd() { hyprctl dispatch sendtext "$1"; }
 else
     # X11 Settings
