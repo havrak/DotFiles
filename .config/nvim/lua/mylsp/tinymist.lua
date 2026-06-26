@@ -4,7 +4,7 @@ return {
     settings = {
         -- The modern setting for Tinymist as of 2026
         exportPdf = "onSave",
-        outputPath = "$dir/$name.pdf", -- Explicit path can help
+        outputPath = "$dir/$name", -- Explicit path can help
         formatterMode = "typstyle",
     },
     root_markers = { "main.typ", ".git" },

@@ -1,1 +1,4 @@
+# 1. Graphical browser option (interactive execution)
 text/html; firefox %s; test=test -n "$DISPLAY"
+text/html; pandoc -f html -t markdown --wrap=none; copiousoutput
+# text/html; elinks -dump -dump-color-mode 1 %s; copiousoutput
