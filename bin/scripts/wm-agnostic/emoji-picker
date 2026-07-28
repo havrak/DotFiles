@@ -6,14 +6,12 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     base_height=360
     menu_cmd="tofi --height=${base_height} --prompt-text=Clipboard --horizontal=false --result-spacing=0 --num-results=20"
     copy_cmd="wl-copy"
-    type_cmd() { hyprctl dispatch sendtext "$1"; }
 else
     # X11 Settings
     menu_cmd="dmenu -i -l 30"
     copy_cmd="xclip -selection clipboard"
     # Secondary xclip command for primary selection (middle click)
     copy_cmd_primary="xclip -selection primary"
-    type_cmd() { xdotool type "$1"; }
 fi
 
 chosen=$(cut -d ';' -f1 ~/bin/scripts/files/emoji | $menu_cmd | sed "s/ .*//")

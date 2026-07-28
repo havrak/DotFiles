@@ -165,12 +165,12 @@ def safe_move_workspace(ws_id, monitor_name):
              any(w["name"] == str(ws_id) for w in workspaces)
 
     if exists:
-        run_cmd(f"hyprctl dispatch moveworkspacetomonitor {ws_id} {monitor_name}")
+        run_cmd(f"hyprctl eval \"hl.dispatch(hl.dsp.workspace.move({{ workspace = '{ws_id}', monitor = '{monitor_name}' }}))\"")
 
 def setup_workspaces(primary_mon, secondary_mon=None):
     # 1. Assign 1-12 to Primary
     for i in range(1, 13):
-        run_cmd(f"hyprctl keyword workspace {i}, monitor:{primary_mon}")
+        run_cmd(f"hyprctl eval \"hl.workspace_rule({{ workspace = '{i}', monitor = '{primary_mon}' }})\"")
         safe_move_workspace(i, primary_mon)
 
     # 2. Handle Extra Keys (A-F / F1-F6)
@@ -179,15 +179,15 @@ def setup_workspaces(primary_mon, secondary_mon=None):
         for i, key in enumerate(EXTRA_KEYS):
             ws_name = EXTRA_NAMES[i]
             print(f"Attaching workspace {ws_name} to monitor {secondary_mon}")
-            run_cmd(f"hyprctl keyword workspace {ws_name}, monitor:{secondary_mon}")
+            run_cmd(f"hyprctl eval \"hl.workspace_rule({{ workspace = '{ws_name}', monitor = '{secondary_mon}' }})\"")
             safe_move_workspace(ws_name, secondary_mon)
-            run_cmd(f"hyprctl keyword bind ALT, {key}, workspace, {ws_name}")
-            run_cmd(f"hyprctl keyword bind ALT SHIFT, {key}, movetoworkspace, {ws_name}")
+            run_cmd(f"hyprctl eval \"hl.bind('ALT + {key}', hl.dsp.focus({{ workspace = '{ws_name}' }}))\"")
+            run_cmd(f"hyprctl eval \"hl.bind('ALT + SHIFT + {key}', hl.dsp.window.move({{ workspace = '{ws_name}' }}))\"")
     else:
         # Disable extra bindings if no secondary
         for key in EXTRA_KEYS:
-            run_cmd(f"hyprctl keyword unbind ALT, {key}")
-            run_cmd(f"hyprctl keyword unbind ALT SHIFT, {key}")
+            run_cmd(f"hyprctl eval \"hl.unbind('ALT + {key}')\"")
+            run_cmd(f"hyprctl eval \"hl.unbind('ALT + SHIFT + {key}')\"")
 
 def generate_waybar_config(primary_mon, secondary_mon=None):
     print("Primary monitor: ", primary_mon, "secondary monitor: ", secondary_mon)
@@ -227,13 +227,13 @@ def apply_layout(layout_type, mgr):
             return
 
         w, h, r, s = mgr.get_preferred_mode(mgr.internal, max_refresh=60.9)
-        run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{w}x{h}@{r},0x0,{s}")
+        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', mode = '{w}x{h}@{r}', position = '0x0', scale = {s} }})\"")
 
         # Disable all externals
         if mgr.external:
-            run_cmd(f"hyprctl keyword monitor {mgr.external['name']},disable")
+            run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', disabled = true }})\"")
         for m in mgr.other_externals:
-            run_cmd(f"hyprctl keyword monitor {m['name']},disable")
+            run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{m['name']}', disabled = true }})\"")
 
         setup_workspaces(mgr.internal['name'])
         generate_waybar_config(mgr.internal['name'])
@@ -251,9 +251,9 @@ def apply_layout(layout_type, mgr):
 
         # If External Only
         if layout_type == "external_only":
-            run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{ew}x{eh}@{er},0x0,{es}")
+            run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', mode = '{ew}x{eh}@{er}', position = '0x0', scale = {es} }})\"")
             if mgr.internal:
-                run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},disable")
+                run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', disabled = true }})\"")
 
             setup_workspaces(mgr.external['name'])
             generate_waybar_config(mgr.external['name'])
@@ -300,12 +300,12 @@ def apply_layout(layout_type, mgr):
             ext_pos = f"{int_log_w}x0"
 
         # Apply
-        run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{ew}x{eh}@{er},{ext_pos},{es}")
-        run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{iw}x{ih}@{ir},{int_pos},{_is}")
+        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', mode = '{ew}x{eh}@{er}', position = '{ext_pos}', scale = {es} }})\"")
+        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', mode = '{iw}x{ih}@{ir}', position = '{int_pos}', scale = {_is} }})\"")
 
         # Disable unused
         for m in mgr.other_externals:
-            run_cmd(f"hyprctl keyword monitor {m['name']},disable")
+            run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{m['name']}', disabled = true }})\"")
 
         setup_workspaces(mgr.external['name'], mgr.internal['name'])
         generate_waybar_config(mgr.external['name'], mgr.internal['name'])
@@ -324,9 +324,9 @@ def apply_layout(layout_type, mgr):
         w, h, r, s = common
 
         # External gets standard placement
-        run_cmd(f"hyprctl keyword monitor {mgr.external['name']},{w}x{h}@{r},0x0,1")
+        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', mode = '{w}x{h}@{r}', position = '0x0', scale = 1 }})\"")
         # Internal mirrors external
-        run_cmd(f"hyprctl keyword monitor {mgr.internal['name']},{w}x{h}@{r},0x0,1,mirror,{mgr.external['name']}")
+        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', mode = '{w}x{h}@{r}', position = '0x0', scale = 1, mirror = '{mgr.external['name']}' }})\"")
 
         setup_workspaces(mgr.external['name']) # Assign all to external
         generate_waybar_config(mgr.external['name'])

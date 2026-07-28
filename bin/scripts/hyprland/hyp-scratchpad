@@ -77,7 +77,7 @@ launch_app() {
 
 manual_center() {
     local addr="$1"
-		hyprctl dispatch resizewindowpixel exact 800 600,address:$addr
+    hyprctl eval "hl.dispatch(hl.dsp.window.resize({ x = 800, y = 600, relative = false, window = 'address:$addr' }))"
 
     # 1. Get Focused Monitor Geometry (Logical position + Physical Size + Scale)
     local mon_geom=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | "\(.x) \(.y) \(.width) \(.height) \(.scale)"')
@@ -97,8 +97,10 @@ manual_center() {
         printf "%.0f %.0f", tx, ty;
     }')
 
+    read tx ty <<< "$target_coords"
+
     # 4. Move Window
-    hyprctl dispatch movewindowpixel exact $target_coords,address:$addr
+    hyprctl eval "hl.dispatch(hl.dsp.window.move({ x = $tx, y = $ty, relative = false, window = 'address:$addr' }))"
 }
 
 # --- LOGIC HANDLERS ---
@@ -107,7 +109,7 @@ hide_window() {
     local cls="$1"
     local addr=$(get_address "$cls")
     if [ ! -z "$addr" ] && [ "$addr" != "null" ]; then
-        hyprctl dispatch movetoworkspacesilent "special:scratch_${cls},address:${addr}"
+        hyprctl eval "hl.dispatch(hl.dsp.window.move({ workspace = 'special:scratch_${cls}', follow = false, window = 'address:${addr}' }))"
     fi
 }
 
@@ -140,14 +142,14 @@ launch_and_center() {
     # Setup the new window
     # 1. Ensure Floating (Only toggle if currently false)
     if [ "$is_floating" == "false" ]; then
-        hyprctl dispatch togglefloating "address:${addr}"
+        hyprctl eval "hl.dispatch(hl.dsp.window.float({ action = 'toggle', window = 'address:${addr}' }))"
     fi
 
     # 2. Center Manually (Replaces native centerwindow)
     manual_center "$addr"
 
     # 3. Focus (Without warping cursor, relying on 'no_warps = true' in config)
-    hyprctl dispatch focuswindow "address:${addr}"
+    hyprctl eval "hl.dispatch(hl.dsp.focus({ window = 'address:${addr}' }))"
 }
 
 toggle_window() {
@@ -177,21 +179,21 @@ toggle_window() {
     # 3. Toggle Logic
     if [ "$window_ws" -eq "$active_ws" ]; then
         # On current workspace -> HIDE
-        hyprctl dispatch movetoworkspacesilent "special:scratch_${cls},address:${addr}"
+        hyprctl eval "hl.dispatch(hl.dsp.window.move({ workspace = 'special:scratch_${cls}', follow = false, window = 'address:${addr}' }))"
     else
         # Hidden or elsewhere -> SHOW
 
         # Move to active workspace
-        hyprctl dispatch movetoworkspacesilent "${active_ws},address:${addr}"
+        hyprctl eval "hl.dispatch(hl.dsp.window.move({ workspace = '${active_ws}', follow = false, window = 'address:${addr}' }))"
 
         # Ensure it is floating
         if [ "$is_floating" == "false" ]; then
-            hyprctl dispatch togglefloating "address:${addr}"
+            hyprctl eval "hl.dispatch(hl.dsp.window.float({ action = 'toggle', window = 'address:${addr}' }))"
         fi
 
         # Use Manual Centering
         manual_center "$addr"
-        hyprctl dispatch focuswindow "address:${addr}"
+        hyprctl eval "hl.dispatch(hl.dsp.focus({ window = 'address:${addr}' }))"
     fi
 }
 
@@ -203,7 +205,7 @@ reload_window() {
         if [ -z "$addr" ] || [ "$addr" == "null" ]; then
             break
         fi
-        hyprctl dispatch closewindow "address:$addr"
+        hyprctl eval "hl.dispatch(hl.dsp.window.close({ window = 'address:$addr' }))"
         sleep 0.2
     done
 
