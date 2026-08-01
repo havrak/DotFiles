@@ -20,7 +20,6 @@ function M.config()
 	vim.g['airline#extensions#wordcount#filetypes'] = '\vasciidoc|help|mail|markdown|markdown.pandoc|org|rst|tex|text|wiki'
 	vim.g['airline#extensions#wordcount#enabled'] = 1
 	vim.g['airline#extensions#whitespace#enabled'] = 0
-	vim.g['airline#extensions#coc#enabled'] = 1
 
 
 

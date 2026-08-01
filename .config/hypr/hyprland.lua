@@ -46,7 +46,7 @@ hl.on("hyprland.start", function()
 	-- hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 
 	hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser restore")
-	hl.exec_cmd("hypridle")
+	-- hl.exec_cmd("hypridle")
 end)
 
 -- Execute on every reload
