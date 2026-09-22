@@ -11,7 +11,6 @@ return {
 	},
 	{ "rbgrouleff/bclose.vim", event = "VeryLazy" },
 	{ "numToStr/Comment.nvim", event = "VeryLazy", opts = {} },
-	{ "preservim/tagbar", event = "VeryLazy" },
 	{
 		"Chiel92/vim-autoformat",
 		event = "VeryLazy",
@@ -51,10 +50,12 @@ return {
 		end,
 	},
 	{
-		'chomosuke/typst-preview.nvim',
+		"chomosuke/typst-preview.nvim",
 		event = "VeryLazy",
-		ft = 'typst',
-		version = '1.*',
-		build = function() require 'typst-preview'.update() end,
-	}
+		ft = "typst",
+		version = "1.*",
+		build = function()
+			require("typst-preview").update()
+		end,
+	},
 }

@@ -134,4 +134,4 @@ source "$HOME/.config/fish/startssh.fish"
 source "$HOME/.config/fish/colorscheme.fish"
 
 # Created by `pipx` on 2024-05-01 10:19:25
-set PATH $PATH /home/havra/.local/bin
+set PATH $PATH /home/havrak/.local/bin

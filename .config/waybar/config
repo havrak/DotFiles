@@ -14,7 +14,7 @@
 	"include": ["~/.config/waybar/active-workspaces.jsonc"],
 
 	"clock": {
-		"format": " {:%H:%M  %d.%m.}",
+		"format": " {:%H:%M  %m.%d.}",
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
 	},
 

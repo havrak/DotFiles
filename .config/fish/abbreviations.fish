@@ -27,6 +27,7 @@ alias matlab-mex "$matlabpath/mex"
 alias jsonpretty "python -m json.tool"
 alias eznec      'env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.json DRI_PRIME=0 gamescope --backend wayland -W 1080 -H 1920 -S stretch -- wine "/home/havrak/.wine/drive_c/Program Files (x86)/EZNEC 7.0/EZWpro2+.exe"'
 alias 4nec2      'env VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.json DRI_PRIME=0 gamescope --backend wayland -W 1080 -H 1920 -S stretch -- wine "/home/havrak/.wine/drive_c/4nec2/exe/4nec2.exe"'
+alias python_cv   'source $HOME/.virtualenvs/cv_env/bin/activate.fish'
 
 # esp-idf
 alias idf-get  "source $HOME/bin/progs/esp-idf/export.fish"

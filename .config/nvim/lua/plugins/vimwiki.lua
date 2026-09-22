@@ -2,8 +2,8 @@ vim.g.vimwiki_list = {
 	{
 		path = "$HOME/.config/nvim/vimwiki/",
 		path_html = "~/.config/nvim/vimwiki/html",
-		syntax = "default",
-		ext = ".wiki",
+		syntax = "markdown",
+		ext = "md",
 		auto_diary_index = 1,
 	},
 }

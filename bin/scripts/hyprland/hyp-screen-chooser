@@ -77,13 +77,22 @@ class MonitorManager:
         if width_mm == 0 or height_mm == 0:
             return 1.0
 
-        # Calculate diagonal in inches
-        diag_mm = math.sqrt(width_mm**2 + height_mm**2)
-        diag_inch = diag_mm / 25.4
+        # Convert physical dimensions to inches
+        diag_px = math.sqrt(width_px**2 + height_px**2)
+        diag_in = math.sqrt(width_mm**2 + height_mm**2) / 25.4
 
-        # Rule: If diagonal is small (laptop size < 17") and resolution > 1080p
-        if diag_inch < 17.0 and height_px > 1080:
+        if diag_in == 0:
+            return 1.0
+
+        ppi = diag_px / diag_in
+
+        # High-DPI screens (e.g. 16" 2K/QHD+ laptop at ~180+ PPI)
+        if diag_in < 17.0 and ppi >= 160:
             return 1.25
+
+        # Low-DPI screens (e.g. 27" 1080p at ~82 PPI, or any display < 90 PPI)
+        if diag_in >= 24.0 and ppi < 90:
+            return 0.83
 
         return 1.0
 

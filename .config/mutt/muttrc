@@ -76,7 +76,7 @@ bind editor <Tab> complete-query
 #set pgp_default_key  = 'your@gpgemailaddre.ss'
 
 macro index,pager a "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode<return><pipe-message>abook --add-email<return><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<return>" "add the sender address to abook"
-macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages asread"
 macro index O "<shell-escape>mw -Y<enter>" "run mw -Y to sync all mail"
 macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>printf 'Enter a search term to find with notmuch: '; read x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "show only messages matching a notmuch pattern"
 macro index A "<limit>all\n" "show all messages (undo limit)"
@@ -168,9 +168,11 @@ mono body bold "^gpg: BAD signature from.*"
 color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
 
 source /home/havrak/.config/mutt/accounts/krystof@havrak.xyz.muttrc
+source /usr/share/mutt-wizard/mutt-wizard.muttrc
 
 
 macro index,pager i1 '<sync-mailbox><enter-command>source /home/havrak/.config/mutt/accounts/krystof@havrak.xyz.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to krystof@havrak.xyz"
 macro index,pager i2 '<sync-mailbox><enter-command>source /home/havrak/.config/mutt/accounts/havranek.krystof@seznam.cz.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to havranek.krystof@seznam.cz"
 macro index,pager i3 '<sync-mailbox><enter-command>source /home/havrak/.config/mutt/accounts/havranek.krystof@gmail.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to havranek.krystof@gmail.com"
 macro index,pager i4 '<sync-mailbox><enter-command>source /home/havrak/.config/mutt/accounts/havrakry@fel.cvut.cz.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to havrakry@fel.cvut.cz"
+macro index,pager i5 '<sync-mailbox><enter-command>source /home/havrak/.config/mutt/accounts/m11502814@mail.ntust.edu.tw.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to m11502814@mail.ntust.edu.tw"
