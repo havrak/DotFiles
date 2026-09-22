@@ -6,7 +6,7 @@ local M = {
 }
 
 function M.config()
-	require'nvim-treesitter.configs'.setup {
+	require("nvim-treesitter.configs").setup({
 		ensure_installed = {
 			"bash",
 			"bibtex",
@@ -29,35 +29,37 @@ function M.config()
 			"yaml",
 		},
 		highlight = {
-			enable = true,              -- false will disable the whole extension
+			enable = true, -- false will disable the whole extension
 		},
 		playground = {
 			enable = true,
 			disable = {},
 			updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-			persist_queries = false -- Whether the query persists across vim sessions
+			persist_queries = false, -- Whether the query persists across vim sessions
 		},
-		autotag = {enable = true},
-		rainbow = {enable = true},
+		autotag = { enable = true },
+		rainbow = { enable = true },
 		refactor = {
 			highlight_definitions = {
-				enable = true
-			}
-		}
-	}
-	vim.cmd('hi WARN			term=standout guibg=white guifg=red		ctermbg=white ctermfg=red')
-	vim.cmd('hi NOTE				term=standout guifg=blue	guibg=white ctermbg=blue	ctermfg=white')
-	vim.cmd('hi INFO		term=bold			guibg=green guifg=white ctermbg=green ctermfg=white')
+				enable = true,
+			},
+		},
+	})
+	vim.cmd("hi WARN	term=bold guibg=#B71C1C guifg=white		ctermbg=red ctermfg=white")
+	vim.cmd("hi TODO	term=bold guibg=#283593 guifg=white  ctermbg=blue	ctermfg=white")
+	vim.cmd("hi INFO	term=bold	guibg=#33691E guifg=white ctermbg=green ctermfg=white")
+	vim.cmd("hi COOL	term=bold guibg=#2196F3 guifg=white  ctermbg=blue	ctermfg=white")
+	vim.cmd("hi FAV		term=bold	guibg=#EC407A guifg=white ctermbg=red ctermfg=white")
 
 	function setup_highlights()
-				vim.fn.matchadd("NOTE", "TODO")
-				vim.fn.matchadd("NOTE", "NOTE")
-				vim.fn.matchadd("WARN", "DELETE")
-				vim.fn.matchadd("WARN", "XXX")
-				vim.fn.matchadd("WARN", "WARN")
-				vim.fn.matchadd("INFO", "INFO")
-				vim.fn.matchadd("INFO", "OPTIONAL")
-				vim.fn.matchadd("INFO", "DONE")
+		vim.fn.matchadd("TODO", "TODO")
+		vim.fn.matchadd("WARN", "DELETE")
+		vim.fn.matchadd("WARN", "WARN")
+		vim.fn.matchadd("INFO", "INFO")
+		vim.fn.matchadd("INFO", "OPTIONAL")
+		vim.fn.matchadd("INFO", "DONE")
+		vim.fn.matchadd("COOL", "COOL")
+		vim.fn.matchadd("FAV", "FAV")
 	end
 
 	setup_highlights()
@@ -70,7 +72,6 @@ function M.config()
 			setup_highlights()
 		end,
 	})
-
 
 	-- Folds
 	-- vim.o.foldmethod = 'indent'
@@ -92,8 +93,5 @@ function M.config()
 	-- 	pattern = "*.*",
 	-- 	command = "mkview",
 	-- })
-
-
 end
 return M
-
