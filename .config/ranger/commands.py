@@ -15,38 +15,45 @@ import os
 # You always need to import ranger.api.commands here to get the Command class:
 from ranger.api.commands import Command
 from ranger.core.loader import CommandLoader
-
-class fzf_locate(Command):
+class fzf_locate_book(Command):
     def execute(self):
         import subprocess
-        if self.quantifier:
-            command = "locate home media | fzf -e -i"
-        else:
-            command = "locate home media | fzf -e -i"
-        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
-        stdout, stderr = fzf.communicate()
-        if fzf.returncode == 0:
-            fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
-            if os.path.isdir(fzf_file):
-                self.fm.cd(fzf_file)
-            else:
-                self.fm.select_file(fzf_file)
+        root = os.path.expanduser("~/dox/bookshelf")
+        if not os.path.exists(root):
+            self.fm.notify(f"Directory not found: {root}", bad=True)
+            return
 
-class fzf_locate_whole(Command):
+        # -E excludes specific patterns; omitting -H disables hidden file search
+        command = f"fd . --base-directory '{root}' -E '# Calibre #' | fzf -e -i"
+        fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
+        stdout, _ = fzf.communicate()
+
+        if fzf.returncode == 0:
+            rel_path = stdout.decode('utf-8').rstrip('\n')
+            if rel_path:
+                full_path = os.path.normpath(os.path.join(root, rel_path))
+                if os.path.isdir(full_path):
+                    self.fm.cd(full_path)
+                else:
+                    self.fm.select_file(full_path)
+
+
+class fzf_locate_home(Command):
     def execute(self):
         import subprocess
-        if self.quantifier:
-            command = "locate / | fzf -e -i"
-        else:
-            command = "locate / | fzf -e -i"
+        root = os.path.expanduser("~")
+        command = f"fd . --base-directory '{root}' -H -E '.git' | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
-        stdout, stderr = fzf.communicate()
+        stdout, _ = fzf.communicate()
+
         if fzf.returncode == 0:
-            fzf_file = os.path.abspath(stdout.decode('utf-8').rstrip('\n'))
-            if os.path.isdir(fzf_file):
-                self.fm.cd(fzf_file)
-            else:
-                self.fm.select_file(fzf_file)
+            rel_path = stdout.decode('utf-8').rstrip('\n')
+            if rel_path:
+                full_path = os.path.normpath(os.path.join(root, rel_path))
+                if os.path.isdir(full_path):
+                    self.fm.cd(full_path)
+                else:
+                    self.fm.select_file(full_path)
 
 class extract(Command):
     def execute(self):
