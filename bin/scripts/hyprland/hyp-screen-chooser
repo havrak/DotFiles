@@ -87,7 +87,7 @@ class MonitorManager:
         ppi = diag_px / diag_in
 
         # High-DPI screens (e.g. 16" 2K/QHD+ laptop at ~180+ PPI)
-        if diag_in < 17.0 and ppi >= 160:
+        if diag_in < 17.0 and ppi >= 170:
             return 1.25
 
         # Low-DPI screens (e.g. 27" 1080p at ~82 PPI, or any display < 90 PPI)

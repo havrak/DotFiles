@@ -1,13 +1,7 @@
-#main-window[tabsintitlebar="true"]:not([extradragspace="true"])
-  #TabsToolbar
-  > .toolbar-items {
-  opacity: 0;
-  pointer-events: none;
-}
 #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
   visibility: collapse !important;
 }
-#sidebar-header {
+#sidebar-panel-header {
   display: none;
 }
 #statuspanel #statuspanel-label,
@@ -17,3 +11,92 @@ statuspanel[type="status"] .statuspanel-label {
 #webrtcIndicator {
   display: none;
 }
+
+
+#tabbrowser-tabs[orient="vertical"] {
+  --tab-min-height: 26px !important;
+  margin-inline: 2px !important;
+
+  .tabbrowser-tab {
+    height: 26px !important;
+    min-height: 26px !important;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+    padding-left: 2px !important;
+  }
+
+  .tab-background {
+    margin-block: 0px !important;
+  }
+
+  .tab-content {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+		padding: 0 calc(var(--tab-inline-padding)/2) !important;
+  }
+}
+
+#tabbrowser-tabs[orient="vertical"] {
+  .tabbrowser-tab[selected] {
+    --tab-selected-bg: var(--toolbar-bgcolor, #424242) !important;
+
+    /* Remove outline rings */
+    outline: none !important;
+
+    /* Target the container stack */
+    .tab-stack {
+      border-radius: 0px !important;
+    }
+
+    /* Target the background layer holding the gradient/border graphics */
+    .tab-background {
+      border-radius: 0px !important;
+      background: var(--tab-selected-bg) !important;
+      background-image: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    /* Target any active indicator lines */
+    .tab-line {
+      display: none !important;
+    }
+  }
+}
+
+#tabbrowser-tabs[orient="vertical"] {
+  margin-inline: 0px !important;
+  padding-inline: 0px !important;
+}
+
+#tabbrowser-arrowscrollbox[orient="vertical"] {
+  padding-inline: 4px !important; /* Adjust this value (e.g., 2px to 6px) to control side margins */
+}
+
+#tabbrowser-tabs[orient="vertical"] {
+  /* Force individual tabs to fill available container width minus minimal padding */
+  .tabbrowser-tab {
+    width: auto !important;
+    margin-inline: 2px !important;
+  }
+}
+
+#tabbrowser-arrowscrollbox[orient="vertical"] {
+  padding-inline: 0px !important;
+}
+
+/* Force individual tabs to occupy 100% width without side margins */
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+  margin-inline: 0px !important;
+  padding-inline: 0px !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Ensure background layer also fills the entire horizontal span */
+#tabbrowser-tabs[orient="vertical"] .tab-background {
+  margin-inline: 0px !important;
+  border-radius: 0px !important;
+}
+
+

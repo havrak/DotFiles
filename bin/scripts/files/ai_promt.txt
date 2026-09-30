@@ -28,10 +28,6 @@ format_directives:\\n
             - "Do not insert an empty line between sentences in the same paragraph."\\n
             - "Insert an empty line only when a new paragraph starts."\\n
             - "Cite in language appropriate style" \\n
-
-user_instruction_formatting: \\n
-    - keep_instruction_in_yaml: true \\n
-		- dont_reformat_instructions: true \\n
 system_directives:\\n
     - rule_id: "language_and_interaction_style"\\n
         description: "Defines language restrictions and interaction tone."\\n
