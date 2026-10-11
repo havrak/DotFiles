@@ -312,7 +312,9 @@
     "metaantennas",
     "permittivities",
     "unsintered",
-    "NTUST"
+    "NTUST",
+    "parasitics",
+    "printability"
   ],
   "words": [
     "vlnkovou"

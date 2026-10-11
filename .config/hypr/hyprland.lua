@@ -20,6 +20,8 @@ local cursorSize = "24"
 hl.env("XCURSOR_THEME", cursorTheme)
 hl.env("XCURSOR_SIZE", cursorSize)
 -- hl.env("AQ_DRM_DEVICES", "/dev/dri/amd-igpu")
+-- hl.env("AQ_NO_MODIFIERS", "1")
+
 hl.env("HYPRCURSOR_THEME", cursorTheme)
 hl.env("HYPRCURSOR_SIZE", cursorSize)
 hl.env("_JAVA_AWT_WM_NONREPARENTING", "1")
@@ -46,13 +48,11 @@ hl.on("hyprland.start", function()
 	-- hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 
 	hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser restore")
-	-- hl.exec_cmd("hypridle")
+	hl.exec_cmd("hypridle")
 end)
 
 -- Execute on every reload
 hl.exec_cmd("xrdb ~/.Xresources")
-
--- source = ~/.config/hypr/gpu.conf
 
 -- ==========================================
 -- Core Configuration
@@ -112,7 +112,6 @@ hl.config({
 		force_split = 2,
 	},
 })
-
 -- ==========================================
 -- Gestures
 -- ==========================================

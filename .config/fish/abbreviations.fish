@@ -52,6 +52,12 @@ abbr sshfit       "ssh -oHostKeyAlgorithms=+ssh-rsa  ar_013@fray1.fit.cvut.cz"
 abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --exclude '.cache' --exclude '.git' $HOME/prog/uav\ project/drone\ software/  192.168.6.1:~/drone_software"
 abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.config/nvim/vimwiki havrak.xyz: --delete-after"
 
+function sync-thesis
+    rsync -aL --delete $HOME/prog/projects/diploma-thesis/knowledge_base/ $HOME/prog/projects/diploma-thesis/.knowledge_base_resolved/
+    and oikb sync $HOME/prog/projects/diploma-thesis/.knowledge_base_resolved/ --kb-id bb18293f-37cb-4e62-89f4-7a1fb822e770
+end
+
+funcsave sync-thesis >/dev/null
 
 # package manager
 switch (cat /etc/*-release 2>/dev/null | grep "^ID=" | awk -F '=' '{print $2}')

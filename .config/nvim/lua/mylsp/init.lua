@@ -3,7 +3,7 @@ vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,
 	underline = true,
-	update_in_insert = true,
+	update_in_insert = false,
 	severity_sort = true,
 	float = { focusable = false, border = "rounded", source = "if_many" },
 })
@@ -34,6 +34,11 @@ local function setup(server, opts)
 	opts.on_attach = function(client, bufnr)
 		vim.bo.formatoptions = "tcqjl1"
 		-- custom settings for dynamic capability override
+
+		-- if client.name == "tinymist" then
+		-- 		vim.diagnostic.config({ update_in_insert = false }, bufnr)
+		-- end
+
 		if client.server_capabilities.documentFormattingProvider then
 			client.server_capabilities.documentFormattingProvider = opts.format ~= false
 		end
