@@ -54,7 +54,7 @@ end
 
 
 # set -x PATH $default_fish_path:(du --exclude='*git*' $HOME/bin/scripts | cut -f2 | tr '\n' ':')
-set -x READER zathura
+set -x READER sioyek
 set -x EDITOR nvim
 set -x BROWSER firefox
 set -x TERMINAL st
