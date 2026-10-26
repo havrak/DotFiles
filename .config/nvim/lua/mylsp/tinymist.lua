@@ -11,7 +11,7 @@ return {
         semanticTokens = "disable",
 
         -- Disables memory compilation on typing; compiles only on file save
-        compileStatus = "onSave",
+        compileStatus = "enable",
 
         -- Preview configuration
         preview = {

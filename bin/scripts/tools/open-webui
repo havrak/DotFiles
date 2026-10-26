@@ -1,0 +1,33 @@
+#!/bin/sh
+DATA_DIR="${DATA_DIR:-${HOME}/.config/open-webui/data}"
+KEY_FILE="${DATA_DIR}/secret_key"
+
+mkdir -p "$DATA_DIR"
+
+if [ ! -f "$KEY_FILE" ]; then
+    SECRET=$(head -c 32 /dev/urandom | base64 | tr -d "\n=")
+    printf '%s\n' "$SECRET" > "$KEY_FILE"
+    chmod 600 "$KEY_FILE"
+    echo "open-webui: generated new WEBUI_SECRET_KEY, saved to $KEY_FILE"
+fi
+
+echo "open-webui: WEBUI_SECRET_KEY loaded from $KEY_FILE"
+export WEBUI_SECRET_KEY="$(cat "$KEY_FILE")"
+export DATA_DIR
+
+# Determine action: default to 'serve' if no argument is provided
+ACTION="${1:-serve}"
+
+case "$ACTION" in
+    update)
+        echo "open-webui: Updating and launching the latest version..."
+        exec uvx --python 3.11 --with pip --with httpx --with beautifulsoup4 open-webui@latest serve
+        ;;
+    serve)
+        exec uvx --python 3.11 --with pip --with httpx --with beautifulsoup4 open-webui serve
+        ;;
+    *)
+        echo "Usage: $0 [serve|update]"
+        exit 1
+        ;;
+esac

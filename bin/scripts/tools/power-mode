@@ -1,0 +1,104 @@
+#!/bin/bash
+if [ "$1" == "-a" ]; then
+    MENU_CMD=""
+    if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+        MENU_CMD="tofi --prompt-text 'Mode: '"
+    else
+        MENU_CMD="dmenu -i -p 'CPU Mode: '"
+    fi
+
+    # Added TLP Reapply to the menu options
+    CHOICE=$(echo -e "Performance (Turbo ON)\nSmart Saver (Turbo OFF)\nTLP Reapply" | eval "$MENU_CMD")
+
+    if [ -z "$CHOICE" ]; then
+        exit 0
+    fi
+
+    # Map menu choices to internal mode keys
+    MODE="off"
+    [[ "$CHOICE" == *"Turbo ON"* ]] && MODE="on"
+    [[ "$CHOICE" == *"TLP"* ]] && MODE="tlp"
+
+    # Capture output for notifications [cite: 5]
+    OUTPUT=$(pkexec "$0" -s "$MODE" 2>&1)
+    EXIT_CODE=$?
+
+    if [ $EXIT_CODE -eq 0 ]; then
+        notify-send -i cpu -u normal "CPU Optimization" "$OUTPUT"
+    else
+        notify-send -i dialog-error -u critical "CPU Script Failed" "$OUTPUT"
+    fi
+    exit 0
+fi
+
+if [ "$1" == "-s" ] && [ -n "$2" ]; then
+    TARGET_MODE="$2"
+else
+    echo "Usage: $0 -a (Menu) OR $0 -s <on|off|tlp>"
+    exit 1
+fi
+
+if [ "$EUID" -ne 0 ]; then
+    if command -v pkexec >/dev/null 2>&1; then
+        exec pkexec "$0" -s "$TARGET_MODE"
+    else
+        echo "Error: Root required."
+        exit 1
+    fi
+fi
+
+set_val() {
+    [ -f "$1" ] && echo "$2" > "$1"
+}
+
+# Apply global CPU scaling/EPP settings [cite: 16]
+apply_cpu_tuning() {
+    local gov=$1
+    local epp=$2
+    for cpu in /sys/devices/system/cpu/cpu*/cpufreq; do
+        [ -d "$cpu" ] || continue
+        set_val "$cpu/scaling_governor" "$gov"
+        set_val "$cpu/energy_performance_preference" "$epp"
+    done
+}
+
+mode_performance() {
+    set_val "/sys/firmware/acpi/platform_profile" "performance"
+    set_val "/sys/devices/system/cpu/intel_pstate/no_turbo" "0"
+    set_val "/sys/devices/system/cpu/cpufreq/boost" "1"
+    apply_cpu_tuning "performance" "performance"
+    echo -e "Mode: PERFORMANCE\nTurbo: Enabled\nACPI: performance"
+}
+
+mode_powersave() {
+    set_val "/sys/firmware/acpi/platform_profile" "low-power"
+    set_val "/sys/devices/system/cpu/intel_pstate/no_turbo" "1"
+    set_val "/sys/devices/system/cpu/cpufreq/boost" "0"
+    apply_cpu_tuning "powersave" "power"
+    echo -e "Mode: SMART SAVER\nTurbo: Disabled\nACPI: low-power"
+}
+
+mode_tlp_restart() {
+    if systemctl restart tlp.service 2>/dev/null; then
+        echo "TLP Service Restarted\nSettings reapplied from /etc/tlp.conf"
+    else
+        echo "Error: TLP service not found or failed to restart."
+        exit 1
+    fi
+}
+
+case "$TARGET_MODE" in
+    "on")
+        mode_performance
+        ;;
+    "off")
+        mode_powersave
+        ;;
+    "tlp")
+        mode_tlp_restart
+        ;;
+    *)
+        echo "Unknown mode: $TARGET_MODE"
+        exit 1
+        ;;
+esac

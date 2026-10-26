@@ -4,44 +4,39 @@ import subprocess
 import os
 import sys
 import math
+import csv
+import re
 from pathlib import Path
 
-# --- Configuration ---
 CONF_PATH = Path(os.path.expanduser("~/bin/scripts/files/hyp-monitors"))
+LAYOUTS_DIR = Path(os.path.expanduser("~/bin/scripts/files/monitor-layouts"))
 WAYBAR_CONF_DIR = Path(os.path.expanduser("~/.config/waybar"))
 WAYBAR_OUTPUT_FILE = WAYBAR_CONF_DIR / "active-workspaces.jsonc"
 
-# Keys for extra workspace management (F1-F6)
-EXTRA_KEYS = ["F1", "F2", "F3", "F4", "F5", "F6"]
-EXTRA_NAMES = [21, 22, 23, 24, 25, 26]
-
-# --- Helpers ---
+EXTRA_WS = {"A": (21, "F1"), "B": (22, "F2"), "C": (23, "F3"), "D": (24, "F4"), "E": (25, "F5"), "F": (26, "F6")}
+WS_MAPPING = {}
+for i in range(1, 13):
+    WS_MAPPING[str(i)] = {"id": i, "key": None}
+for k, (wid, key) in EXTRA_WS.items():
+    WS_MAPPING[k] = {"id": wid, "key": key}
 
 def run_cmd(cmd):
-    """Run a shell command."""
-    print(cmd)
     subprocess.run(cmd, shell=True)
 
 def hyprctl(command):
-    """Run hyprctl command and return output."""
     try:
-        output = subprocess.check_output(f"hyprctl {command}", shell=True)
-        return output.decode("utf-8").strip()
+        return subprocess.check_output(f"hyprctl {command}", shell=True).decode("utf-8").strip()
     except subprocess.CalledProcessError:
         return ""
 
 def hyprctl_json(command):
-    """Run hyprctl command and return parsed JSON."""
     try:
-        output = subprocess.check_output(f"hyprctl -j {command}", shell=True)
-        return json.loads(output)
+        return json.loads(subprocess.check_output(f"hyprctl -j {command}", shell=True))
     except (subprocess.CalledProcessError, json.JSONDecodeError):
         return []
 
 def notify(title, message):
     run_cmd(f'notify-send "{title}" "{message}"')
-
-# --- Monitor Logic ---
 
 class MonitorManager:
     def __init__(self):
@@ -49,22 +44,16 @@ class MonitorManager:
         self.internal = None
         self.external = None
         self.other_externals = []
-
         self._detect_monitors()
 
     def _detect_monitors(self):
-        # 1. Find Internal (starts with eDP)
         for mon in self.monitors_all:
             if mon["name"].startswith("eDP"):
                 self.internal = mon
                 break
-
-        # 2. Find External (Prioritize DP > HDMI)
         candidates = [m for m in self.monitors_all if m != self.internal and len(m.get("availableModes", [])) > 0]
-
         dp_mons = [m for m in candidates if "DP-" in m["name"]]
         hdmi_mons = [m for m in candidates if "HDMI-" in m["name"]]
-
         if dp_mons:
             self.external = dp_mons[0]
             self.other_externals = dp_mons[1:] + hdmi_mons
@@ -73,133 +62,62 @@ class MonitorManager:
             self.other_externals = hdmi_mons[1:]
 
     def get_auto_scale(self, width_px, height_px, width_mm, height_mm):
-        """Calculates scaling factor based on resolution and physical size."""
-        if width_mm == 0 or height_mm == 0:
-            return 1.0
-
-        # Convert physical dimensions to inches
+        if width_mm == 0 or height_mm == 0: return 1.0
         diag_px = math.sqrt(width_px**2 + height_px**2)
         diag_in = math.sqrt(width_mm**2 + height_mm**2) / 25.4
-
-        if diag_in == 0:
-            return 1.0
-
+        if diag_in == 0: return 1.0
         ppi = diag_px / diag_in
-
-        # High-DPI screens (e.g. 16" 2K/QHD+ laptop at ~180+ PPI)
-        if diag_in < 17.0 and ppi >= 170:
-            return 1.25
-
-        # Low-DPI screens (e.g. 27" 1080p at ~82 PPI, or any display < 90 PPI)
-        if diag_in >= 24.0 and ppi < 90:
-            return 0.83
-
+        if diag_in < 17.0 and ppi >= 170: return 1.25
+        if diag_in >= 24.0 and ppi < 90: return 0.83
         return 1.0
 
-    def get_preferred_mode(self, monitor_data, max_refresh=None):
-        """Returns (width, height, refresh_rate, scale)."""
-        modes = monitor_data.get("availableModes", [])
-        if not modes:
-            return (1920, 1080, 60.0, 1.0)
-
-        # Parse "1920x1080@60.00Hz"
-        parsed_modes = []
-        for m in modes:
-            parts = m.split("@")
-            res = parts[0].split("x")
-            w, h = int(res[0]), int(res[1])
-            refresh = float(parts[1].replace("Hz", ""))
-            parsed_modes.append((w, h, refresh))
-
-        # Filter out refresh rates higher than max_refresh if specified
-        if max_refresh is not None:
-            filtered_modes = [m for m in parsed_modes if m[2] <= max_refresh]
-            # Only apply filter if it leaves at least one valid mode
-            if filtered_modes:
-                parsed_modes = filtered_modes
-
-        # Sort by Width, then Height, then Refresh
-        parsed_modes.sort(key=lambda x: (x[0], x[1], x[2]), reverse=True)
-        best = parsed_modes[0] # (w, h, refresh)
-
-        # Get physical dimensions from hyprctl data
-        w_mm = monitor_data.get("physicalWidth", 0)
-        h_mm = monitor_data.get("physicalHeight", 0)
-
-        scale = self.get_auto_scale(best[0], best[1], w_mm, h_mm)
-
-        return (*best, scale)
-
-    def get_common_mirror_mode(self):
-        """Finds the best resolution supported by both internal and external."""
-        if not self.internal or not self.external:
-            return None
-
-        int_modes = set(m.split("@")[0] for m in self.internal.get("availableModes", []))
-        ext_modes = set(m.split("@")[0] for m in self.external.get("availableModes", []))
-
-        common = int_modes.intersection(ext_modes)
-        if not common:
-            return None
-
-        # Parse and find max
-        parsed = []
-        for m in common:
-            w, h = map(int, m.split("x"))
-            parsed.append((w, h))
-
-        parsed.sort(reverse=True)
-        best_res = parsed[0] # (w, h)
-
-        # Find refresh rate for this res on both
-        return (best_res[0], best_res[1], 60.0, 1.0)
-
     def get_monitor_signature(self):
-        """Returns a string representing the currently connected hardware serials."""
         serials = []
         connected = [m for m in self.monitors_all if len(m.get("availableModes", [])) > 0]
         for m in connected:
-            s = m.get("serial", "")
-            if not s:
-                s = m.get("description", "")
-            serials.append(s)
+            serials.append(m.get("serial", m.get("description", "")))
         return "".join(sorted(serials)).replace(" ", "")
 
-# --- Workspace Management ---
-
 def safe_move_workspace(ws_id, monitor_name):
-    # Check if workspace exists
     workspaces = hyprctl_json("workspaces")
-    exists = any(w["id"] == ws_id for w in workspaces) or \
-             any(w["name"] == str(ws_id) for w in workspaces)
-
-    if exists:
+    if any(w["id"] == ws_id or w["name"] == str(ws_id) for w in workspaces):
         run_cmd(f"hyprctl eval \"hl.dispatch(hl.dsp.workspace.move({{ workspace = '{ws_id}', monitor = '{monitor_name}' }}))\"")
 
-def setup_workspaces(primary_mon, secondary_mon=None):
-    # 1. Assign 1-12 to Primary
-    for i in range(1, 13):
-        run_cmd(f"hyprctl eval \"hl.workspace_rule({{ workspace = '{i}', monitor = '{primary_mon}' }})\"")
-        safe_move_workspace(i, primary_mon)
+def parse_ws_string(ws_str):
+    if not ws_str or ws_str.lower() in ["none", ""]: return []
+    ws_str = ws_str.replace(" ", "")
+    result = []
+    for part in ws_str.split(","):
+        if "-" in part:
+            start, end = part.split("-")
+            if start.isdigit() and end.isdigit():
+                result.extend([str(i) for i in range(int(start), int(end)+1)])
+            elif start in EXTRA_WS and end in EXTRA_WS:
+                keys = list(EXTRA_WS.keys())
+                try:
+                    result.extend(keys[keys.index(start):keys.index(end)+1])
+                except ValueError: pass
+        else:
+            result.append(part)
+    return result
 
-    # 2. Handle Extra Keys (A-F / F1-F6)
-    if secondary_mon:
-        # Enable extra workspaces on secondary
-        for i, key in enumerate(EXTRA_KEYS):
-            ws_name = EXTRA_NAMES[i]
-            print(f"Attaching workspace {ws_name} to monitor {secondary_mon}")
-            run_cmd(f"hyprctl eval \"hl.workspace_rule({{ workspace = '{ws_name}', monitor = '{secondary_mon}' }})\"")
-            safe_move_workspace(ws_name, secondary_mon)
-            run_cmd(f"hyprctl eval \"hl.bind('ALT + {key}', hl.dsp.focus({{ workspace = '{ws_name}' }}))\"")
-            run_cmd(f"hyprctl eval \"hl.bind('ALT + SHIFT + {key}', hl.dsp.window.move({{ workspace = '{ws_name}' }}))\"")
-    else:
-        # Disable extra bindings if no secondary
-        for key in EXTRA_KEYS:
-            run_cmd(f"hyprctl eval \"hl.unbind('ALT + {key}')\"")
-            run_cmd(f"hyprctl eval \"hl.unbind('ALT + SHIFT + {key}')\"")
+def setup_workspaces(monitor_ws_map):
+    for key in [v[1] for v in EXTRA_WS.values()]:
+        run_cmd(f"hyprctl eval \"hl.unbind('ALT + {key}')\"")
+        run_cmd(f"hyprctl eval \"hl.unbind('ALT + SHIFT + {key}')\"")
 
-def generate_waybar_config(primary_mon, secondary_mon=None):
-    print("Primary monitor: ", primary_mon, "secondary monitor: ", secondary_mon)
+    for mon, ws_list in monitor_ws_map.items():
+        for ws_label in ws_list:
+            if ws_label in WS_MAPPING:
+                wid = WS_MAPPING[ws_label]["id"]
+                key = WS_MAPPING[ws_label]["key"]
+                run_cmd(f"hyprctl eval \"hl.workspace_rule({{ workspace = '{wid}', monitor = '{mon}' }})\"")
+                safe_move_workspace(wid, mon)
+                if key:
+                    run_cmd(f"hyprctl eval \"hl.bind('ALT + {key}', hl.dsp.focus({{ workspace = '{wid}' }}))\"")
+                    run_cmd(f"hyprctl eval \"hl.bind('ALT + SHIFT + {key}', hl.dsp.window.move({{ workspace = '{wid}' }}))\"")
+
+def generate_waybar_config(monitor_ws_map):
     config = {
         "hyprland/workspaces": {
             "disable-scroll": True,
@@ -210,209 +128,184 @@ def generate_waybar_config(primary_mon, secondary_mon=None):
                 "7": "VII", "8": "VIII", "9": "IX", "10": "X", "11": "XI", "12": "XII",
                 "21": "A", "22": "B", "23": "C", "24": "D", "25": "E", "26": "F"
             },
-            "persistent-workspaces": {
-                primary_mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-            }
+            "persistent-workspaces": {}
         }
     }
+    for mon, ws_list in monitor_ws_map.items():
+        ids = []
+        for w in ws_list:
+            if w in WS_MAPPING: ids.append(WS_MAPPING[w]["id"])
+        if ids:
+            config["hyprland/workspaces"]["persistent-workspaces"][mon] = ids
 
-    if secondary_mon:
-        config["hyprland/workspaces"]["persistent-workspaces"][secondary_mon] = [21, 22, 23, 24, 25, 26]
-
+    WAYBAR_CONF_DIR.mkdir(parents=True, exist_ok=True)
     with open(WAYBAR_OUTPUT_FILE, "w") as f:
         json.dump(config, f, indent=4)
 
-# --- Layout Application ---
+def apply_layout(layout_name, mgr):
+    layout_path = LAYOUTS_DIR / f"{layout_name}.csv"
+    if not layout_path.exists():
+        notify("Error", f"Layout {layout_name} not found")
+        return
 
-def apply_layout(layout_type, mgr):
-    """
-    layout_type: 'laptop', 'top_bottom', 'left_right', 'right_left', 'mirror', 'external_only'
-    """
+    with open(layout_path, mode='r') as f:
+        rules = list(csv.DictReader(f))
 
-    # 1. Laptop Only
-    if layout_type == "laptop":
-        if not mgr.internal:
-            notify("Error", "No internal monitor detected")
-            return
+    matched = {}
+    master_mon = None
 
-        w, h, r, s = mgr.get_preferred_mode(mgr.internal, max_refresh=60.9)
-        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', mode = '{w}x{h}@{r}', position = '0x0', scale = {s} }})\"")
+    for rule in rules:
+        target = rule.get("monitor", "").strip()
+        obj = None
+        if target == "lab:internal": obj = mgr.internal
+        elif target == "lab:external": obj = mgr.external
+        elif target.startswith("mod:"):
+            model = target.replace("mod:", "").strip()
+            for m in mgr.monitors_all:
+                if model in m.get("description", "") or model in m.get("make", "") or model in m.get("model", ""):
+                    obj = m
+                    break
+        if obj:
+            matched[obj["name"]] = {"rule": rule, "data": obj}
+            if rule.get("mode") == "master":
+                master_mon = obj["name"]
 
-        # Disable all externals
-        if mgr.external:
-            run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', disabled = true }})\"")
-        for m in mgr.other_externals:
+    if not master_mon and matched:
+        master_mon = list(matched.keys())[0]
+
+    configs = {}
+    for name, info in matched.items():
+        r = info["rule"]
+        d = info["data"]
+
+
+        rfr = r.get("refresh_rate", 60);
+        max_rf = 1000
+
+        if rfr != "default":
+            max_rf = float(rfr)
+
+        modes = []
+        for m in d.get("availableModes", []):
+            p = m.split("@")
+            res = p[0].split("x")
+            modes.append((int(res[0]), int(res[1]), float(p[1].replace("Hz", ""))))
+
+        req_res = r.get("resolution", "default").strip()
+        if req_res != "default":
+            try:
+                tw, th = map(int, req_res.split("x"))
+                modes = [m for m in modes if m[0] == tw and m[1] == th]
+            except ValueError:
+                pass
+
+        modes = [m for m in modes if m[2] <= max_rf + 1.0]
+        modes.sort(key=lambda x: (x[0], x[1], x[2]), reverse=True)
+        w, h, rf = modes[0] if modes else (1920, 1080, 60.0)
+
+        scale_rule = str(r.get("scale", "default")).strip().lower()
+        if scale_rule == "default":
+            scale = mgr.get_auto_scale(w, h, d.get("physicalWidth", 0), d.get("physicalHeight", 0))
+        elif scale_rule == "none":
+            scale = 1.0
+        else:
+            try:
+                scale = float(scale_rule)
+            except ValueError:
+                scale = 1.0
+
+        configs[name] = {
+            "rule": r, "w": w, "h": h, "rf": rf, "scale": scale,
+            "log_w": w / scale, "log_h": h / scale,
+            "x": 0, "y": 0, "mirror": None
+        }
+
+    if master_mon in configs:
+        mc = configs[master_mon]
+        for name, c in configs.items():
+            if name == master_mon: continue
+            pos = c["rule"].get("position", "master").strip().lower()
+            mode = c["rule"].get("mode", "default").strip().lower()
+            if mode == "mirror":
+                c["mirror"] = master_mon
+            elif pos == "west":
+                c["x"] = mc["x"] - c["log_w"]
+                c["y"] = mc["y"]
+            elif pos == "east":
+                c["x"] = mc["x"] + mc["log_w"]
+                c["y"] = mc["y"]
+            elif pos == "north":
+                c["x"] = mc["x"]
+                c["y"] = mc["y"] - c["log_h"]
+            elif pos == "south":
+                c["x"] = mc["x"]
+                c["y"] = mc["y"] + mc["log_h"]
+
+    min_x = min([c["x"] for c in configs.values()], default=0)
+    min_y = min([c["y"] for c in configs.values()], default=0)
+
+    for c in configs.values():
+        c["x"] = int(c["x"] - min_x)
+        c["y"] = int(c["y"] - min_y)
+
+    for m in mgr.monitors_all:
+        if m["name"] not in configs:
             run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{m['name']}', disabled = true }})\"")
-
-        setup_workspaces(mgr.internal['name'])
-        generate_waybar_config(mgr.internal['name'])
-
-    # 2. Dual Monitor Setups
-    elif layout_type in ["top_bottom", "left_right", "right_left", "external_only"]:
-        if not mgr.external:
-            notify("Error", "No external monitor detected")
-            # Fallback to laptop
-            apply_layout("laptop", mgr)
-            return
-
-        # Get External Props (No max refresh limit)
-        ew, eh, er, es = mgr.get_preferred_mode(mgr.external)
-
-        # If External Only
-        if layout_type == "external_only":
-            run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', mode = '{ew}x{eh}@{er}', position = '0x0', scale = {es} }})\"")
-            if mgr.internal:
-                run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', disabled = true }})\"")
-
-            setup_workspaces(mgr.external['name'])
-            generate_waybar_config(mgr.external['name'])
-            run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
-            run_cmd(os.path.expanduser("~/bin/scripts/hyprland/waybar-launch &"))
-            return
-
-        # Dual Logic
-        if not mgr.internal:
-            return
-
-        iw, ih, ir, _is = mgr.get_preferred_mode(mgr.internal, max_refresh=61.0)
-
-        # Calculate Logical Dimensions (Hyprland positioning uses logical pixels: pixels / scale)
-        ext_log_w = ew / es
-        ext_log_h = eh / es
-        int_log_w = iw / _is
-        int_log_h = ih / _is
-
-        ext_pos = "0x0"
-        int_pos = "0x0"
-
-        if layout_type == "top_bottom":
-            offset_x = (ext_log_w - int_log_w) / 2
-
-            # If internal is wider than external, external needs offset
-            if offset_x < 0:
-                ext_x = abs(offset_x)
-                int_x = 0
-                ext_pos = f"{ext_x}x0"
-                int_pos = f"{int_x}x{ext_log_h}"
+        else:
+            c = configs[m["name"]]
+            if c["mirror"]:
+                run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{m['name']}', mode = '{c['w']}x{c['h']}@{c['rf']}', position = '{c['x']}x{c['y']}', scale = {c['scale']}, mirror = '{c['mirror']}' }})\"")
             else:
-                ext_pos = "0x0"
-                int_pos = f"{offset_x}x{ext_log_h}"
+                run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{m['name']}', mode = '{c['w']}x{c['h']}@{c['rf']}', position = '{c['x']}x{c['y']}', scale = {c['scale']} }})\"")
 
-        elif layout_type == "left_right":
-            # External Left (0,0), Internal Right
-            ext_pos = "0x0"
-            int_pos = f"{ext_log_w}x0"
+    monitor_ws_map = {}
+    for name, c in configs.items():
+        if not c["mirror"]:
+            ws_str = c["rule"].get("workspaces", "")
+            monitor_ws_map[name] = parse_ws_string(ws_str)
 
-        elif layout_type == "right_left":
-            # Internal Left, External Right
-            int_pos = "0x0"
-            ext_pos = f"{int_log_w}x0"
+    setup_workspaces(monitor_ws_map)
+    generate_waybar_config(monitor_ws_map)
 
-        # Apply
-        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', mode = '{ew}x{eh}@{er}', position = '{ext_pos}', scale = {es} }})\"")
-        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', mode = '{iw}x{ih}@{ir}', position = '{int_pos}', scale = {_is} }})\"")
-
-        # Disable unused
-        for m in mgr.other_externals:
-            run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{m['name']}', disabled = true }})\"")
-
-        setup_workspaces(mgr.external['name'], mgr.internal['name'])
-        generate_waybar_config(mgr.external['name'], mgr.internal['name'])
-
-    # 3. Mirror
-    elif layout_type == "mirror":
-        if not mgr.external or not mgr.internal:
-            notify("Error", "Need two monitors to mirror")
-            return
-
-        common = mgr.get_common_mirror_mode()
-        if not common:
-            # Fallback
-            common = (1920, 1080, 60.0, 1.0)
-
-        w, h, r, s = common
-
-        # External gets standard placement
-        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.external['name']}', mode = '{w}x{h}@{r}', position = '0x0', scale = 1 }})\"")
-        # Internal mirrors external
-        run_cmd(f"hyprctl eval \"hl.monitor({{ output = '{mgr.internal['name']}', mode = '{w}x{h}@{r}', position = '0x0', scale = 1, mirror = '{mgr.external['name']}' }})\"")
-
-        setup_workspaces(mgr.external['name']) # Assign all to external
-        generate_waybar_config(mgr.external['name'])
-
-    # Save State
-    save_state(layout_type, mgr)
-
-    # Reload background/waybar
+    save_state(layout_name, mgr)
     run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
     run_cmd(os.path.expanduser("~/bin/scripts/hyprland/waybar-launch &"))
 
-# --- Persistence ---
-
 def save_state(layout, mgr):
-    print("Saving layout:", layout)
-    signature = mgr.get_monitor_signature()
     CONF_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(CONF_PATH, "w") as f:
-        f.write(f"{layout}\n{signature}")
+        f.write(f"{layout}\n{mgr.get_monitor_signature()}")
 
 def restore_state(mgr):
-    if not CONF_PATH.exists():
-        notify("Config", "No saved config. Defaulting to Laptop.")
-        apply_layout("laptop", mgr)
-        return
-
+    if not CONF_PATH.exists(): return
     with open(CONF_PATH, "r") as f:
         lines = f.readlines()
-        if len(lines) < 2:
-            apply_layout("laptop", mgr)
-            return
-
-        saved_layout = lines[0].strip()
-        saved_signature = lines[1].strip()
-
-    current_signature = mgr.get_monitor_signature()
-
-    if saved_signature == current_signature:
-        notify("Config", f"Restoring {saved_layout}...")
-        apply_layout(saved_layout, mgr)
-    else:
-        notify("Config", "Hardware change detected. Defaulting to Laptop.")
-        apply_layout("laptop", mgr)
-
-# --- Main ---
+        if len(lines) < 2: return
+        if lines[1].strip() == mgr.get_monitor_signature():
+            apply_layout(lines[0].strip(), mgr)
 
 def main():
     mgr = MonitorManager()
+    LAYOUTS_DIR.mkdir(parents=True, exist_ok=True)
+    layouts = [f.stem for f in LAYOUTS_DIR.glob("*.csv")]
 
-    if len(sys.argv) > 1:
-        choice = sys.argv[1]
-    else:
-        # Dmenu / Rofi Selector
-        options = "laptop\ntop_bottom\nleft_right\nright_left\nexternal_only\nmirror\nrestore"
+    def layout_sort_key(name):
+        match = re.match(r'^\|(\d+)', name)
+        if match:
+            return (0, int(match.group(1)), name)
+        return (1, 0, name)
+
+    layouts.sort(key=layout_sort_key)
+
+    choice = sys.argv[1] if len(sys.argv) > 1 else ""
+    if not choice and layouts:
         try:
-            # Check for wofi or dmenu
-            menu_cmd = "tofi --prompt-text 'Monitor Setup'"
-            # If you prefer wofi: menu_cmd = "wofi --dmenu --prompt 'Monitor Setup'"
-
-            result = subprocess.run(
-                f"echo '{options}' | {menu_cmd}",
-                shell=True, stdout=subprocess.PIPE
-            )
-            choice = result.stdout.decode("utf-8").strip()
-        except Exception:
-            choice = ""
-
-    if not choice:
-        return
-
-    if choice == "restore":
-        restore_state(mgr)
-    elif choice in ["laptop", "top_bottom", "left_right", "right_left", "external_only", "mirror"]:
+            res = subprocess.run("echo '" + "\n".join(layouts + ['restore']) + "' | tofi --prompt-text 'Monitor Setup'", shell=True, stdout=subprocess.PIPE)
+            choice = res.stdout.decode("utf-8").strip()
+        except Exception: pass
+    if choice == "restore": restore_state(mgr)
+    elif choice in layouts:
         run_cmd("hyprctl reload")
         apply_layout(choice, mgr)
-    else:
-        notify("Error", f"Unknown layout: {choice}")
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": main()

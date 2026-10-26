@@ -1,0 +1,265 @@
+#!/usr/bin/env python3
+import tkinter as tk
+from tkinter import ttk, messagebox
+import subprocess
+import json
+import csv
+import os
+from pathlib import Path
+
+LAYOUTS_DIR = Path(os.path.expanduser("~/bin/scripts/files/monitor-layouts"))
+
+def get_monitors():
+    try:
+        output = subprocess.check_output("hyprctl -j monitors all", shell=True)
+        return json.loads(output)
+    except Exception:
+        return []
+
+def compute_valid_scales(w, h):
+    # Comprehensive curated list of empirically supported Hyprland scales
+    known_good_scales = [
+        0.83333, 1.0, 1.15, 1.2, 1.25, 1.33333,
+        1.4, 1.5, 1.6, 1.6667, 1.75, 2.0, 2.25, 2.5, 3.0
+    ]
+
+    if w == 0 or h == 0:
+        return [str(s) for s in known_good_scales]
+
+    valid_scales = []
+    for scale in known_good_scales:
+        # Hyprland divides the physical resolution by the scale.
+        # It strongly prefers cases where this division yields a whole number.
+        lw = w / scale
+        lh = h / scale
+
+        # Check if it results in clean integer logical pixels
+        if abs(lw - round(lw)) < 1e-2 and abs(lh - round(lh)) < 1e-2:
+            if scale in [1.333333, 1.666667]:
+                valid_scales.append(str(scale))
+            else:
+                valid_scales.append(str(round(scale, 2)).rstrip('0').rstrip('.'))
+
+    return valid_scales
+
+class LayoutCreatorApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Monitor Layout Creator")
+        self.geometry("900x500")
+
+        self.monitors_data = get_monitors()
+        self.rules = []
+
+        # Fallback scales if resolution parsing fails
+        self.fallback_scales = [
+            "default", "none", "0.83", "1.0", "1.15", "1.2", "1.25",
+            "1.333333", "1.4", "1.5", "1.6", "1.666667", "1.75",
+            "2.0", "2.25", "2.5", "3.0"
+        ]
+
+        self.setup_ui()
+        self.populate_monitor_dropdown()
+
+    def setup_ui(self):
+        input_frame = tk.LabelFrame(self, text="Define Monitor Rule")
+        input_frame.pack(fill=tk.X, padx=10, pady=5)
+
+        ttk.Label(input_frame, text="Monitor:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
+        self.cb_monitor = ttk.Combobox(input_frame, width=25)
+        self.cb_monitor.grid(row=0, column=1, padx=5, pady=5)
+        self.cb_monitor.bind("<<ComboboxSelected>>", self.on_monitor_select)
+
+        ttk.Label(input_frame, text="Workspaces:").grid(row=0, column=2, padx=5, pady=5, sticky=tk.W)
+        self.entry_ws = ttk.Entry(input_frame, width=15)
+        self.entry_ws.grid(row=0, column=3, padx=5, pady=5)
+        self.entry_ws.insert(0, "1-12")
+
+        ttk.Label(input_frame, text="Scale:").grid(row=0, column=4, padx=5, pady=5, sticky=tk.W)
+        self.cb_scale = ttk.Combobox(input_frame, width=10, values=self.fallback_scales)
+        self.cb_scale.grid(row=0, column=5, padx=5, pady=5)
+        self.cb_scale.set("default")
+
+        ttk.Label(input_frame, text="Refresh Rate:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
+        self.cb_refresh = ttk.Combobox(input_frame, width=15)
+        self.cb_refresh.grid(row=1, column=1, padx=5, pady=5)
+        self.cb_refresh.set("default")
+
+        ttk.Label(input_frame, text="Resolution:").grid(row=1, column=2, padx=5, pady=5, sticky=tk.W)
+        self.cb_res = ttk.Combobox(input_frame, width=15)
+        self.cb_res.grid(row=1, column=3, padx=5, pady=5)
+        self.cb_res.bind("<<ComboboxSelected>>", self.on_res_select)
+        self.cb_res.set("default")
+
+        ttk.Label(input_frame, text="Mode:").grid(row=1, column=4, padx=5, pady=5, sticky=tk.W)
+        self.cb_mode = ttk.Combobox(input_frame, width=10, values=["master", "default", "mirror"])
+        self.cb_mode.grid(row=1, column=5, padx=5, pady=5)
+        self.cb_mode.set("default")
+
+        ttk.Label(input_frame, text="Position:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
+        self.cb_position = ttk.Combobox(input_frame, width=15, values=["master", "south", "east", "north", "west"])
+        self.cb_position.grid(row=2, column=1, padx=5, pady=5)
+        self.cb_position.set("east")
+
+        self.btn_add = ttk.Button(input_frame, text="Add Rule", command=self.add_rule)
+        self.btn_add.grid(row=2, column=5, padx=5, pady=5, sticky=tk.E)
+
+        list_frame = tk.LabelFrame(self, text="Current Rules")
+        list_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+
+        columns = ("monitor", "workspaces", "scale", "refresh_rate", "resolution", "mode", "position")
+        self.tree = ttk.Treeview(list_frame, columns=columns, show="headings")
+        for col in columns:
+            self.tree.heading(col, text=col)
+            self.tree.column(col, width=100)
+        self.tree.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        self.btn_remove = ttk.Button(list_frame, text="Remove Selected", command=self.remove_rule)
+        self.btn_remove.pack(pady=5)
+
+        save_frame = tk.Frame(self)
+        save_frame.pack(fill=tk.X, padx=10, pady=10)
+
+        ttk.Label(save_frame, text="Layout Filename:").pack(side=tk.LEFT, padx=5)
+        self.entry_filename = ttk.Entry(save_frame, width=30)
+        self.entry_filename.pack(side=tk.LEFT, padx=5)
+        self.entry_filename.insert(0, "")
+
+        ttk.Label(save_frame, text=".csv").pack(side=tk.LEFT)
+
+        self.btn_save = ttk.Button(save_frame, text="Save CSV", command=self.save_csv)
+        self.btn_save.pack(side=tk.RIGHT, padx=5)
+
+    def populate_monitor_dropdown(self):
+        options = ["lab:internal", "lab:external"]
+        for m in self.monitors_data:
+            desc = m.get("description", "")
+            make = m.get("make", "")
+            model = m.get("model", "")
+            mod_str = model if model else (desc.split()[0] if desc else m["name"])
+            options.append(f"mod:{mod_str}")
+
+        self.cb_monitor["values"] = options
+        if options:
+            self.cb_monitor.set(options[0])
+        self.on_monitor_select(None)
+
+    def on_monitor_select(self, event):
+        selection = self.cb_monitor.get()
+        resolutions = set(["default"])
+        refresh_rates = set(["default"])
+
+        self.current_target_mon = None
+
+        if selection.startswith("mod:"):
+            mod = selection.replace("mod:", "").strip()
+            for m in self.monitors_data:
+                if mod in m.get("model", "") or mod in m.get("description", "") or mod in m.get("make", ""):
+                    self.current_target_mon = m
+                    break
+
+            if self.current_target_mon:
+                for mode in self.current_target_mon.get("availableModes", []):
+                    parts = mode.split("@")
+                    if len(parts) == 2:
+                        resolutions.add(parts[0])
+                        refresh_rates.add(parts[1].replace("Hz", ""))
+
+        self.cb_res["values"] = sorted(list(resolutions), reverse=True)
+        self.cb_refresh["values"] = sorted(list(refresh_rates), key=lambda x: float(x) if x != "default" else float('inf'), reverse=True)
+        self.cb_res.set("default")
+        self.update_scales()
+
+    def on_res_select(self, event):
+        self.update_scales()
+
+    def update_scales(self):
+        res = self.cb_res.get()
+        if res == "default" and self.current_target_mon:
+            modes = self.current_target_mon.get("availableModes", [])
+            if modes:
+                parsed_modes = []
+                for m in modes:
+                    try:
+                        w, h = map(int, m.split("@")[0].split("x"))
+                        parsed_modes.append((w, h))
+                    except: pass
+                if parsed_modes:
+                    parsed_modes.sort(key=lambda x: x[0]*x[1], reverse=True)
+                    res = f"{parsed_modes[0][0]}x{parsed_modes[0][1]}"
+
+        if res and res != "default":
+            try:
+                w, h = map(int, res.split("x"))
+                valid = compute_valid_scales(w, h)
+                new_values = ["default", "none"] + valid
+                self.cb_scale["values"] = new_values
+                if self.cb_scale.get() not in new_values:
+                    self.cb_scale.set("default")
+                return
+            except Exception:
+                pass
+
+        # If no specific resolution is targeted, offer the full fallback array
+        self.cb_scale["values"] = self.fallback_scales
+        if self.cb_scale.get() not in self.fallback_scales:
+            self.cb_scale.set("default")
+
+    def add_rule(self):
+        mon = self.cb_monitor.get().strip()
+        ws = self.entry_ws.get().strip()
+        scale = self.cb_scale.get().strip()
+        ref = self.cb_refresh.get().strip()
+        res = self.cb_res.get().strip()
+        mode = self.cb_mode.get().strip()
+        pos = self.cb_position.get().strip()
+
+        if not mon:
+            messagebox.showerror("Error", "Monitor field cannot be empty.")
+            return
+
+        rule = (mon, ws, scale, ref, res, mode, pos)
+        self.tree.insert("", tk.END, values=rule)
+
+    def remove_rule(self):
+        selected = self.tree.selection()
+        for item in selected:
+            self.tree.delete(item)
+
+    def save_csv(self):
+        filename = self.entry_filename.get().strip()
+        if not filename:
+            messagebox.showerror("Error", "Filename cannot be empty.")
+            return
+
+        if not filename.startswith("|"):
+            filename = "|" + filename
+
+        if not filename.endswith("|"):
+            filename = filename + "|"
+
+
+        if not filename.endswith(".csv"):
+            filename += ".csv"
+
+        LAYOUTS_DIR.mkdir(parents=True, exist_ok=True)
+        filepath = LAYOUTS_DIR / filename
+
+        items = self.tree.get_children()
+        if not items:
+            messagebox.showerror("Error", "No rules to save.")
+            return
+
+        try:
+            with open(filepath, "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(["monitor", "workspaces", "scale", "refresh_rate", "resolution", "mode", "position"])
+                for item in items:
+                    writer.writerow(self.tree.item(item)["values"])
+            messagebox.showinfo("Success", f"Saved successfully to {filepath}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to save file:\n{str(e)}")
+
+if __name__ == "__main__":
+    app = LayoutCreatorApp()
+    app.mainloop()

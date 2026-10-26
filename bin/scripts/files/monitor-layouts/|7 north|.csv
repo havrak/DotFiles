@@ -1,0 +1,3 @@
+monitor,workspaces,scale,refresh_rate,resolution,mode,position
+lab:external,1-12,default,144,default,master,master
+lab:internal,A-F,default,60,default,default,north

@@ -1,0 +1,3 @@
+monitor,workspaces,scale,refresh_rate,resolution,mode,position
+mod:SA273 P1,1-12,0.833333,144,default,master,master
+mod:NE160QDM-NYJ,A-F,1.33,60,default,default,west
