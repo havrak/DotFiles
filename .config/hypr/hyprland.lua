@@ -48,9 +48,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hypridle")
 end)
 
--- Execute on every reload
-hl.exec_cmd("xrdb ~/.Xresources")
-hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser '|restore|'")
 
 -- ==========================================
 -- Core Configuration
@@ -153,4 +150,7 @@ hl.window_rule({ name = "ueberzugpp-noanim", match = { class = "^(ueberzugpp.*)$
 
 require("keybindings")
 
+-- Execute on every reload
+hl.exec_cmd("xrdb ~/.Xresources")
+hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser '|restore|'")
 

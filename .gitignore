@@ -170,3 +170,4 @@ bin/scripts/tools/matlab_gnutls_fix
 .vscode/
 .webui_secret_key
 .wine/
+.config/hypr/gpu.conf

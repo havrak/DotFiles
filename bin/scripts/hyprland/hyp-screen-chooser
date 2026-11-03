@@ -283,7 +283,7 @@ def restore_state(mgr):
         return
     with open(CONF_PATH, "r") as f:
         lines = f.readlines()
-        if len(lines) < 2 and lines[1].strip() == mgr.get_monitor_signature():
+        if len(lines) > 1 and lines[1].strip() == mgr.get_monitor_signature():
             apply_layout(lines[0].strip(), mgr)
         else:
             apply_layout("|1 laptop|", mgr)
