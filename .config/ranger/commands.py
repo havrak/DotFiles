@@ -41,8 +41,8 @@ class fzf_locate_book(Command):
 class fzf_locate_home(Command):
     def execute(self):
         import subprocess
-        root = os.path.expanduser("~")
-        command = f"fd . --base-directory '{root}' -H -E '.git' | fzf -e -i"
+        root = os.path.expanduser("~/dox")
+        command = f"fd . --base-directory '{root}' -E '.git' | fzf -e -i"
         fzf = self.fm.execute_command(command, stdout=subprocess.PIPE)
         stdout, _ = fzf.communicate()
 

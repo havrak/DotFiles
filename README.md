@@ -1,6 +1,6 @@
 # Linux Dotfiles
 
-Collection of configuration files and scripts I use on Linux. I run hyprland+tofi and use neovim as my editor. The config files are nothing special, and especially lately it's all vibecoded anyway. I need system that works, and work exactly the same way it did for the last 10 years.
+Collection of configuration files and scripts I use on Linux. I run hyprland+tofi and use neovim as my editor. The config files are nothing special, and especially lately it's all vibecoded anyway. I need system that works, and one that works exactly the same way it did for the last 10 years.
 
 
 # Contains

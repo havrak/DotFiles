@@ -41,6 +41,7 @@ def notify(title, message):
 class MonitorManager:
     def __init__(self):
         self.monitors_all = hyprctl_json("monitors all")
+        self.monitors_all.sort(key=lambda x: x.get("name", ""))
         self.internal = None
         self.external = None
         self.other_externals = []
@@ -73,14 +74,14 @@ class MonitorManager:
 
     def get_monitor_signature(self):
         serials = []
-        connected = [m for m in self.monitors_all if len(m.get("availableModes", [])) > 0]
-        for m in connected:
-            serials.append(m.get("serial", m.get("description", "")))
+        for m in self.monitors_all:
+            s = str(m.get("serial", "")) + str(m.get("description", "")) + str(m.get("name", ""))
+            serials.append(s)
         return "".join(sorted(serials)).replace(" ", "")
 
 def safe_move_workspace(ws_id, monitor_name):
     workspaces = hyprctl_json("workspaces")
-    if any(w["id"] == ws_id or w["name"] == str(ws_id) for w in workspaces):
+    if any(str(w.get("id", "")) == str(ws_id) or str(w.get("name", "")) == str(ws_id) for w in workspaces):
         run_cmd(f"hyprctl eval \"hl.dispatch(hl.dsp.workspace.move({{ workspace = '{ws_id}', monitor = '{monitor_name}' }}))\"")
 
 def parse_ws_string(ws_str):
@@ -119,18 +120,18 @@ def setup_workspaces(monitor_ws_map):
 
 def generate_waybar_config(monitor_ws_map):
     config = {
-        "hyprland/workspaces": {
-            "disable-scroll": True,
-            "all-outputs": False,
-            "format": "{icon}",
-            "format-icons": {
-                "1": "I", "2": "II", "3": "III", "4": "IV", "5": "V", "6": "VI",
-                "7": "VII", "8": "VIII", "9": "IX", "10": "X", "11": "XI", "12": "XII",
-                "21": "A", "22": "B", "23": "C", "24": "D", "25": "E", "26": "F"
-            },
-            "persistent-workspaces": {}
-        }
-    }
+            "hyprland/workspaces": {
+                "disable-scroll": True,
+                "all-outputs": False,
+                "format": "{icon}",
+                "format-icons": {
+                    "1": "I", "2": "II", "3": "III", "4": "IV", "5": "V", "6": "VI",
+                    "7": "VII", "8": "VIII", "9": "IX", "10": "X", "11": "XI", "12": "XII",
+                    "21": "A", "22": "B", "23": "C", "24": "D", "25": "E", "26": "F"
+                    },
+                "persistent-workspaces": {}
+                }
+            }
     for mon, ws_list in monitor_ws_map.items():
         ids = []
         for w in ws_list:
@@ -215,10 +216,10 @@ def apply_layout(layout_name, mgr):
                 scale = 1.0
 
         configs[name] = {
-            "rule": r, "w": w, "h": h, "rf": rf, "scale": scale,
-            "log_w": w / scale, "log_h": h / scale,
-            "x": 0, "y": 0, "mirror": None
-        }
+                "rule": r, "w": w, "h": h, "rf": rf, "scale": scale,
+                "log_w": w / scale, "log_h": h / scale,
+                "x": 0, "y": 0, "mirror": None
+                }
 
     if master_mon in configs:
         mc = configs[master_mon]
@@ -277,12 +278,16 @@ def save_state(layout, mgr):
         f.write(f"{layout}\n{mgr.get_monitor_signature()}")
 
 def restore_state(mgr):
-    if not CONF_PATH.exists(): return
+    if not CONF_PATH.exists():
+        apply_layout("|1 laptop|", mgr)
+        return
     with open(CONF_PATH, "r") as f:
         lines = f.readlines()
-        if len(lines) < 2: return
-        if lines[1].strip() == mgr.get_monitor_signature():
+        if len(lines) < 2 and lines[1].strip() == mgr.get_monitor_signature():
             apply_layout(lines[0].strip(), mgr)
+        else:
+            apply_layout("|1 laptop|", mgr)
+
 
 def main():
     mgr = MonitorManager()
@@ -300,10 +305,10 @@ def main():
     choice = sys.argv[1] if len(sys.argv) > 1 else ""
     if not choice and layouts:
         try:
-            res = subprocess.run("echo '" + "\n".join(layouts + ['restore']) + "' | tofi --prompt-text 'Monitor Setup'", shell=True, stdout=subprocess.PIPE)
+            res = subprocess.run("echo '" + "\n".join(layouts + ['|restore|']) + "' | tofi --prompt-text 'Monitor Setup'", shell=True, stdout=subprocess.PIPE)
             choice = res.stdout.decode("utf-8").strip()
         except Exception: pass
-    if choice == "restore": restore_state(mgr)
+    if choice == "|restore|": restore_state(mgr)
     elif choice in layouts:
         run_cmd("hyprctl reload")
         apply_layout(choice, mgr)

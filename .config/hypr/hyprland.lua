@@ -33,6 +33,7 @@ hl.env("_JAVA_AWT_WM_NONREPARENTING", "1")
 hl.on("hyprland.start", function()
 	hl.exec_cmd("dunst")
 	hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+	hl.exec_cmd("dbus-update-activation-environment --systemd")
 
 	-- polkit agent is usually needed for graphical sudo prompts
 	hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
@@ -44,15 +45,12 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size 24")
 
-	-- hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-	-- hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-
-	hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser restore")
 	hl.exec_cmd("hypridle")
 end)
 
 -- Execute on every reload
 hl.exec_cmd("xrdb ~/.Xresources")
+hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser '|restore|'")
 
 -- ==========================================
 -- Core Configuration
@@ -144,9 +142,6 @@ hl.window_rule({ name = "matlab-class-float", match = { class = "^(MATLABWindow)
 hl.window_rule({ name = "matlab-title-float", match = { title = "^(.*)(MATLAB)(.*)$" }, float = true })
 hl.window_rule({ name = "matlab-figure-float", match = { title = "^(.*)(Figure)(.*)$" }, float = true })
 hl.window_rule({ name = "matlab-class-title-float", match = { class = "^(MATLAB)$", title = "^(.*)$" }, float = true })
--- hl.window_rule({ name = "matlab-no-focus",       match = { class = "^(MATLAB)$" }, no_initial_focus = true })
--- hl.window_rule({ name = "matlab-no-shadow",      match = { class = "^(MATLAB)$" }, no_shadow = true })
--- hl.window_rule({ name = "matlab-move",           match = { class = "^(MATLAB)$", title = "^()$" }, move = "0 0" })
 
 hl.window_rule({ name = "zathura-tile", match = { class = "^(Zathura)$" }, tile = true })
 hl.window_rule({ name = "sxiv-tile", match = { class = "^(Sxiv)$" }, tile = true })
@@ -157,3 +152,5 @@ hl.window_rule({ name = "ueberzugpp-noanim", match = { class = "^(ueberzugpp.*)$
 -- ==========================================
 
 require("keybindings")
+
+
