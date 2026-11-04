@@ -46,6 +46,9 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size 24")
 
 	hl.exec_cmd("hypridle")
+
+	hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser '|restore|'")
+
 end)
 
 
@@ -152,5 +155,4 @@ require("keybindings")
 
 -- Execute on every reload
 hl.exec_cmd("xrdb ~/.Xresources")
-hl.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser '|restore|'")
 
