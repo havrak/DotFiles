@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if pgrep -f "open-webui" > /dev/null; then
+    echo "ERROR: Open WebUI process is still running. Terminate it before syncing."
+    exit 1
+fi
+
+LOCAL_DATA="$HOME/.config/open-webui/data/"
+STAGING_DATA="$HOME/gd/open-webui-data/"
+REMOTE_NAME="gdrive:open-webui-data"
+
+# 1. Pull latest state from Google Drive into staging
+mkdir -p "$STAGING_DATA"
+rclone sync "$REMOTE_NAME" "$STAGING_DATA" --fast-list --progress
+
+# 2. Rsync staging data into the active config directory
+mkdir -p "$LOCAL_DATA"
+rsync -a --delete "$STAGING_DATA" "$LOCAL_DATA"
+
+echo "Linux pull completed successfully."

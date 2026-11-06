@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-export LC_ALL=C.UTF-8
-__NV_PRIME_RENDER_OFFLOAD=0 __GLX_VENDOR_LIBRARY_NAME=mesa exec sioyek "$@"

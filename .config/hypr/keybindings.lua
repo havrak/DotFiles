@@ -65,14 +65,14 @@ end
 -- Dmenu / Scripts (Ensure these are executable and in PATH)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("tofi-drun --drun-launch=true"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/bin/scripts/hyprland/hyp-screen-chooser"))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("~/bin/scripts/wm-agnostic/clipboard-text"))
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("~/bin/scripts/wm-agnostic/emoji-picker"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("~/bin/scripts/hyprland/clipboard-text"))
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("~/bin/scripts/hyprland/emoji-picker"))
 
 -- Power / Lock (Super + F1/F2/F3/F4)
 -- IMPORTANT: pixel-lock is X11. Use swaylock for Wayland.
 hl.bind(superMod .. " + F1", hl.dsp.exec_cmd("loginctl lock-session"))
-hl.bind(superMod .. " + F2", hl.dsp.exec_cmd("~/bin/scripts/wm-agnostic/power-menu -l"))
-hl.bind(superMod .. " + F3", hl.dsp.exec_cmd("~/bin/scripts/wm-agnostic/power-menu -p"))
+hl.bind(superMod .. " + F2", hl.dsp.exec_cmd("~/bin/scripts/hyprland/power-menu -l"))
+hl.bind(superMod .. " + F3", hl.dsp.exec_cmd("~/bin/scripts/hyprland/power-menu -p"))
 hl.bind(superMod .. " + F4", hl.dsp.exec_cmd("~/bin/scripts/tools/power-mode -a"))
 
 -- ==========================================
