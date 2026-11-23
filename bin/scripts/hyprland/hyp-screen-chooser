@@ -269,7 +269,7 @@ def apply_layout(layout_name, mgr):
     generate_waybar_config(monitor_ws_map)
 
     save_state(layout_name, mgr)
-    run_cmd(os.path.expanduser("~/bin/scripts/wm-agnostic/setbg &"))
+    run_cmd(os.path.expanduser("~/bin/scripts/hyprland/setbg &"))
     run_cmd(os.path.expanduser("~/bin/scripts/hyprland/waybar-launch &"))
 
 def save_state(layout, mgr):

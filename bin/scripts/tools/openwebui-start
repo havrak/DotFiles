@@ -20,11 +20,13 @@ ACTION="${1:-serve}"
 
 case "$ACTION" in
     update)
-        echo "open-webui: Updating and launching the latest version..."
-        exec uvx --python 3.11 --with pip --with httpx --with beautifulsoup4 open-webui@latest serve
+        echo "open-webui: Updating and launching..."
+				# uv venv ~/.local/share/open-webui-venv --python 3.11
+        uv pip install --python ~/.local/share/open-webui-venv --upgrade open-webui
+        exec ~/.local/share/open-webui-venv/bin/open-webui serve
         ;;
     serve)
-        exec uvx --python 3.11 --with pip --with httpx --with beautifulsoup4 open-webui serve
+        exec ~/.local/share/open-webui-venv/bin/open-webui serve
         ;;
     *)
         echo "Usage: $0 [serve|update]"

@@ -133,3 +133,6 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+
+# Open WebUI project tools
+export OWUI_PROJECT_ROOT="./"

@@ -1,21 +1,53 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if pgrep -f "open-webui" > /dev/null; then
-    echo "ERROR: Open WebUI process is still running. Terminate it before syncing."
-    exit 1
-fi
+REMOTE_TARGET="gdrive:open-webui-data"
+OS_TYPE="$(uname -s)"
 
-LOCAL_DATA="$HOME/.config/open-webui/data/"
-STAGING_DATA="$HOME/gd/open-webui-data/"
-REMOTE_NAME="gdrive:open-webui-data"
+case "$OS_TYPE" in
+    Linux*)
+        LOCAL_DATA="$HOME/.config/open-webui/data/"
+        STAGING_DATA="$HOME/gd/open-webui-data/"
 
-# 1. Pull latest state from Google Drive into staging
-mkdir -p "$STAGING_DATA"
-rclone sync "$REMOTE_NAME" "$STAGING_DATA" --fast-list --progress
+        if pgrep -f "[o]pen-webui" > /dev/null; then
+            echo "ERROR: Open WebUI process is still running. Terminate it before syncing."
+            exit 1
+        fi
 
-# 2. Rsync staging data into the active config directory
-mkdir -p "$LOCAL_DATA"
-rsync -a --delete "$STAGING_DATA" "$LOCAL_DATA"
+        read -r -p "[Linux] Pull $REMOTE_TARGET to staging and overwrite $LOCAL_DATA? [y/N] " response
+        if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            echo "Pull cancelled."
+            exit 0
+        fi
 
-echo "Linux pull completed successfully."
+        mkdir -p "$STAGING_DATA"
+        rclone sync "$REMOTE_TARGET" "$STAGING_DATA" --fast-list --progress
+        mkdir -p "$LOCAL_DATA"
+        rsync -a --delete "$STAGING_DATA" "$LOCAL_DATA"
+        ;;
+
+    MINGW*|MSYS*|CYGWIN*)
+        LOCAL_DATA="$HOME/AppData/Roaming/open-webui/data"
+
+        if powershell.exe -NoProfile -Command "Get-Process -Name 'python','open-webui' -ErrorAction SilentlyContinue | Where-Object { \$_.CommandLine -like '*open-webui*' }" | grep -q .; then
+            echo "ERROR: Open WebUI is currently running. Stop the process before syncing."
+            exit 1
+        fi
+
+        read -r -p "[Windows] Pull $REMOTE_TARGET and overwrite $LOCAL_DATA? [y/N] " response
+        if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            echo "Pull cancelled."
+            exit 0
+        fi
+
+        mkdir -p "$LOCAL_DATA"
+        rclone sync "$REMOTE_TARGET" "$LOCAL_DATA" --fast-list --progress
+        ;;
+
+    *)
+        echo "ERROR: Unsupported operating system: $OS_TYPE"
+        exit 1
+        ;;
+esac
+
+echo "Pull completed successfully."

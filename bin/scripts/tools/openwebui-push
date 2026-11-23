@@ -1,21 +1,51 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# 1. Enforce process termination
-if pgrep -f "open-webui" > /dev/null; then
-    echo "ERROR: Open WebUI process is still running. Terminate it before syncing."
-    exit 1
-fi
+REMOTE_TARGET="gdrive:open-webui-data"
+OS_TYPE="$(uname -s)"
 
-LOCAL_DATA="$HOME/.config/open-webui/data/"
-STAGING_DATA="$HOME/gd/open-webui-data/"
-REMOTE_NAME="gdrive:open-webui-data" # Adjust remote name if different
+case "$OS_TYPE" in
+    Linux*)
+        LOCAL_DATA="$HOME/.config/open-webui/data/"
+        STAGING_DATA="$HOME/gd/open-webui-data/"
 
-# 2. Rsync local state to ~/gd staging directory
-mkdir -p "$STAGING_DATA"
-rsync -a --delete "$LOCAL_DATA" "$STAGING_DATA"
+        if pgrep -f "[o]pen-webui" > /dev/null; then
+            echo "ERROR: Open WebUI process is still running. Terminate it before syncing."
+            exit 1
+        fi
 
-# 3. Synchronize staging directory to Google Drive
-rclone sync "$STAGING_DATA" "$REMOTE_NAME" --fast-list --progress
+        read -r -p "[Linux] Push $LOCAL_DATA to staging and $REMOTE_TARGET (overwrites remote)? [y/N] " response
+        if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            echo "Push cancelled."
+            exit 0
+        fi
 
-echo "Linux push completed successfully."
+        mkdir -p "$STAGING_DATA"
+        rsync -a --delete "$LOCAL_DATA" "$STAGING_DATA"
+        rclone sync "$STAGING_DATA" "$REMOTE_TARGET" --fast-list --progress
+        ;;
+
+    MINGW*|MSYS*|CYGWIN*)
+        LOCAL_DATA="$HOME/AppData/Roaming/open-webui/data"
+
+        if powershell.exe -NoProfile -Command "Get-Process -Name 'python','open-webui' -ErrorAction SilentlyContinue | Where-Object { \$_.CommandLine -like '*open-webui*' }" | grep -q .; then
+            echo "ERROR: Open WebUI is currently running. Stop the process before syncing."
+            exit 1
+        fi
+
+        read -r -p "[Windows] Push $LOCAL_DATA to $REMOTE_TARGET (overwrites remote)? [y/N] " response
+        if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            echo "Push cancelled."
+            exit 0
+        fi
+
+        rclone sync "$LOCAL_DATA" "$REMOTE_TARGET" --fast-list --progress
+        ;;
+
+    *)
+        echo "ERROR: Unsupported operating system: $OS_TYPE"
+        exit 1
+        ;;
+esac
+
+echo "Push completed successfully."

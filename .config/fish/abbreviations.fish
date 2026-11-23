@@ -53,7 +53,7 @@ abbr syd 					"rsync -vrh --exclude 'CMakeFiles' --exclude 'CMakeCache.txt' --ex
 abbr syw 					"rsync -vrhL --exclude '.git' $HOME/.config/nvim/vimwiki havrak.xyz: --delete-after"
 
 function sync-thesis
-    rsync -aL --delete $HOME/prog/projects/diploma-thesis/knowledge_base/ $HOME/prog/projects/diploma-thesis/.knowledge_base_resolved/
+    rsync -aL --delete $HOME/prog/projects/diploma-thesis/knowledge-base/ $HOME/prog/projects/diploma-thesis/.knowledge_base_resolved/
     and oikb sync $HOME/prog/projects/diploma-thesis/.knowledge_base_resolved/ --kb-id bb18293f-37cb-4e62-89f4-7a1fb822e770
 end
 
